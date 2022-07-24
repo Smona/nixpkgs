@@ -8,41 +8,45 @@ in { config, pkgs, ... }:
   home.homeDirectory = "/home/smona";
   fonts.fontconfig.enable = true;
 
-  home.packages = [
+  home.packages = with pkgs; [
     # Programming languages
 
     ## NodeJS
-    pkgs.nodejs
-    pkgs.yarn
+    nodejs
+    yarn
 
     # Code Formatters (used by emacs)
-    pkgs.nodePackages.prettier
-    pkgs.shfmt
-    pkgs.nixfmt
+    nodePackages.prettier
+    shfmt
+    nixfmt
 
     # Shell utilities
-    pkgs.bpytop
-    pkgs.curl
+    bpytop
+    curl
     ## cooler rust versions of basic GNU utilities
-    pkgs.fd # Better find
-    pkgs.ripgrep # Better grep
-    pkgs.exa # Better ls
-    pkgs.bat # Better 🐱
+    fd # Better find
+    ripgrep # Better grep
+    exa # Better ls
+    bat # Better 🐱
 
     # Universal dev tools
-    pkgs.hub
+    hub
 
     # Graphical applications
-    pkgs.signal-desktop
-    pkgs.spotify
+    signal-desktop
+    spotify
 
     # Fonts
-    # Fonts I like, in order of preference: FiraCode, Cascadia Code, Dank Mono, JetBrains Mono
+    # Fonts I like, in order of preference: Cascadia Code, FiraCode, Dank Mono, JetBrains Mono
     # Fonts to try: FantasqueSansMono, Inconsolata, Victor Mono
     #
     # Required by Emacs:
-    pkgs.cascadia-code
-    (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; })
+    cascadia-code
+    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+
+    # Fun
+    cowsay
+    ponysay
   ];
 
   home.language = { base = "en_US.UTF-8"; };
