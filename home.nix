@@ -18,15 +18,16 @@ in { config, pkgs, ... }:
     # Code Formatters (used by emacs)
     pkgs.nodePackages.prettier
     pkgs.shfmt
+    pkgs.nixfmt
 
     # Shell utilities
     pkgs.bpytop
     pkgs.curl
     ## cooler rust versions of basic GNU utilities
-    pkgs.fd        # Better find
-    pkgs.ripgrep   # Better grep
-    pkgs.exa       # Better ls
-    pkgs.bat       # Better 🐱
+    pkgs.fd # Better find
+    pkgs.ripgrep # Better grep
+    pkgs.exa # Better ls
+    pkgs.bat # Better 🐱
 
     # Universal dev tools
     pkgs.hub
@@ -41,21 +42,18 @@ in { config, pkgs, ... }:
     #
     # Required by Emacs:
     pkgs.cascadia-code
-    (pkgs.nerdfonts.override { fonts = ["FiraCode"]; })
+    (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
 
-  home.language = {
-    base = "en_US.UTF-8";
-  };
+  home.language = { base = "en_US.UTF-8"; };
 
-  home.sessionVariables =
-    let editor = "emacs";
-    in {
-      RIPGREP_CONFIG_PATH = "${xdg_config_home}/.rg.conf";
-      VISUAL = editor;
-      EDITOR = editor;
-      GIT_EDITOR = editor;
-    };
+  home.sessionVariables = let editor = "emacs";
+  in {
+    RIPGREP_CONFIG_PATH = "${xdg_config_home}/.rg.conf";
+    VISUAL = editor;
+    EDITOR = editor;
+    GIT_EDITOR = editor;
+  };
 
   home.shellAliases = {
     # Natural language commands
@@ -129,19 +127,17 @@ in { config, pkgs, ... }:
       ## Source local extra (private) settings specific to machine if it exists
       [ -f ~/.zsh.local ] && source ~/.zsh.local
     '';
-      plugins = [
-        {
-          # Use zsh for nix-shell
-          name = "zsh-nix-shell";
-          file = "nix-shell.plugin.zsh";
-          src = pkgs.fetchFromGitHub {
-            owner = "chisui";
-            repo = "zsh-nix-shell";
-            rev = "v0.5.0";
-            sha256 = "0za4aiwwrlawnia4f29msk822rj9bgcygw6a8a6iikiwzjjz0g91";
-          };
-        }
-      ];
+    plugins = [{
+      # Use zsh for nix-shell
+      name = "zsh-nix-shell";
+      file = "nix-shell.plugin.zsh";
+      src = pkgs.fetchFromGitHub {
+        owner = "chisui";
+        repo = "zsh-nix-shell";
+        rev = "v0.5.0";
+        sha256 = "0za4aiwwrlawnia4f29msk822rj9bgcygw6a8a6iikiwzjjz0g91";
+      };
+    }];
   };
   programs.zsh.prezto = {
     enable = true;
@@ -164,9 +160,7 @@ in { config, pkgs, ... }:
       # Expand ... -> ../.. recursively
       dotExpansion = true;
     };
-    prompt = {
-      theme = "powerlevel10k";
-    };
+    prompt = { theme = "powerlevel10k"; };
   };
 
   programs.git = {
@@ -185,13 +179,14 @@ in { config, pkgs, ... }:
       enable = true;
       # NB: adding line-numbers feature breaks magit-delta
       # https://github.com/dandavison/magit-delta/issues/13
-      options = { features = "side-by-side decorations"; syntax-theme = "Sublime Snazzy"; };
+      options = {
+        features = "side-by-side decorations";
+        syntax-theme = "Sublime Snazzy";
+      };
     };
     extraConfig = {
       core = { autocrlf = "input"; };
-      init = {
-        defaultBranch = "main";
-      };
+      init = { defaultBranch = "main"; };
       pull = { rebase = true; };
       fetch = { prune = true; };
       # Correct typos
@@ -203,7 +198,7 @@ in { config, pkgs, ... }:
     };
     ignores = [
       ".gitconfig.local" # Local config file
-      "private"          # General-purpose private directories
+      "private" # General-purpose private directories
       # Folder view configuration files
       ".DS_Store"
       "Desktop.ini"
@@ -298,7 +293,6 @@ in { config, pkgs, ... }:
 
   programs.firefox.enable = true;
   programs.chromium.enable = true;
-
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
