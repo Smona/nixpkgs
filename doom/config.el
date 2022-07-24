@@ -41,10 +41,12 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
+;; Set file paths
 (setq org-directory "~/org/")
 (setq org-roam-directory (file-truename "~/org"))
+; Make doom/goto-private-config-file et al point to the source rather than the
+; built nix store object
+(setq doom-private-dir "~/.config/nixpkgs/doom/")
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
