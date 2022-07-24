@@ -98,6 +98,7 @@ in { config, pkgs, ... }:
   };
   xdg.configFile.".curlrc".source = ./curlrc;
   xdg.configFile.".rg.conf".source = ./rg.conf;
+  home.file.".doom.d".source = ./doom.d;
 
   programs.zsh = {
     enable = true;
