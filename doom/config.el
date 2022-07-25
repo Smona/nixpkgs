@@ -133,6 +133,31 @@
         ;; Automatically display inline images
         (add-hook 'org-mode-hook 'org-display-inline-images)
 
+        ;; Render youtube links as clickable inline images in emacs, and youtube embeds
+        ;; in HTML exports. Source: http://endlessparentheses.com/embedding-youtube-videos-with-org-mode-links.html
+        ;; TODO: extract to function
+
+        (defvar yt-iframe-format
+        ;; You may want to change your width and height.
+        (concat "<iframe width=\"440\""
+                " height=\"335\""
+                " src=\"https://www.youtube.com/embed/%s\""
+                " frameborder=\"0\""
+                " allowfullscreen>%s</iframe>"))
+
+        (org-add-link-type
+        "yt"
+        (lambda (handle)
+        (browse-url
+        (concat "https://www.youtube.com/embed/"
+                handle)))
+        (lambda (path desc backend)
+        (cl-case backend
+        (html (format yt-iframe-format
+                        path (or desc "")))
+        (latex (format "\href{%s}{%s}"
+                        path (or desc "video"))))))
+
         ;; Log state changes into a collapsible drawer
         (setq org-log-into-drawer t)
 
@@ -237,26 +262,3 @@
   (setq doom-themes-treemacs-theme "doom-colors")
   (setq treemacs-width-is-initially-locked nil))
 
-;; Render youtube links as clickable inline images in emacs, and youtube embeds
-;; in HTML exports. Source: http://endlessparentheses.com/embedding-youtube-videos-with-org-mode-links.html
-
-(defvar yt-iframe-format
-  ;; You may want to change your width and height.
-  (concat "<iframe width=\"440\""
-          " height=\"335\""
-          " src=\"https://www.youtube.com/embed/%s\""
-          " frameborder=\"0\""
-          " allowfullscreen>%s</iframe>"))
-
-(org-add-link-type
- "yt"
- (lambda (handle)
-   (browse-url
-    (concat "https://www.youtube.com/embed/"
-            handle)))
- (lambda (path desc backend)
-   (cl-case backend
-     (html (format yt-iframe-format
-                   path (or desc "")))
-     (latex (format "\href{%s}{%s}"
-                    path (or desc "video"))))))
