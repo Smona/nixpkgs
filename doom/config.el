@@ -23,8 +23,11 @@
 ;;
 ;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
 ;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
-(setq! doom-font (font-spec :family "FuraCode NF" :size 13.0 :weight 'normal :width 'normal))
-(setq! doom-unicode-font (font-spec :family "FuraCode NF" :size 13.0 :weight 'normal :width 'normal))
+(setq! doom-font (font-spec :family "Cascadia Code" :size 13.0 :weight 'normal :width 'normal))
+;; Nerd fonts break italics rendering within emacs for many fonts, so we use
+;; the NF variant only for unicode glyphs. It appears that glyphs from other
+;; languages will still use the default doom-font.
+(setq! doom-unicode-font (font-spec :family "FuraCode Nerd Font" :size 13.0 :weight 'normal :width 'normal))
 
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
