@@ -1,4 +1,4 @@
-#+title: Readme
+#+title: Smona's Home Configuration
 
 * Installation
 *WARNING:* The install script will delete your existing dotfiles if they would
