@@ -136,7 +136,7 @@ in { config, pkgs, ... }:
     '';
     initExtra = ''
       # Set up nix paths
-      if [ -e /home/smona/.nix-profile/etc/profile.d/nix.sh ]; then . /home/smona/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+      if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
       # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
       [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
