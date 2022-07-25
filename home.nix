@@ -20,6 +20,8 @@ in { config, pkgs, ... }:
     shfmt
     nixfmt
 
+    # Assort Emacs dependencies
+    python310Packages.debugpy # Required by dap-mode
     # Shell utilities
     bpytop
     curl
