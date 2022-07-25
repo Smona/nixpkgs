@@ -12,6 +12,15 @@ before installing.
 
 Have fun!
 
+** Recommended manual steps
+*** Set up syncthing shared folders
+home-manager will install syncthing and enable its systemd service on machines
+that have systemd enabled.
+
+Ensure syncthing is started, then go to http://localhost:8384 to add a GUI
+password, link it to remote devices, and set up shared folders (such as ~/org in
+my case). Who needs dropbox?
+
 * Local Configuration
 Several tools are set up to include local configuration files, to allow
 overriding the reproducible configuration with arbitrary machine-specific
