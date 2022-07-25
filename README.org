@@ -12,6 +12,11 @@ before installing.
 
 Have fun!
 
+** Recommended manual steps
+- Add your user to the docker group to run docker commands without ~sudo~:
+
+    $ sudo usermod -aG docker $USER
+
 * Local Configuration
 Several tools are set up to include local configuration files, to allow
 overriding the reproducible configuration with arbitrary machine-specific
