@@ -9,12 +9,10 @@ set -e
 
 sh <(curl -L https://nixos.org/nix/install) --no-daemon
 
-
 # Add the home-manager channel
 
 nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
 nix-channel --update
-
 
 # Clean up dotfiles that have already been migrated to home-manager
 #
@@ -30,3 +28,6 @@ rm -f ~/.ackrc ~/.curlrc ~/.gemrc ~/.screenrc ~/.doom.d ~/.zpreztorc ~/.zshrc \
 
 export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
 nix-shell '<home-manager>' -A install
+
+echo 'Adding you to the "docker" group...'
+sudo usermod -aG docker $USER
