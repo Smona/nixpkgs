@@ -112,6 +112,11 @@
 (after! magit
         (add-hook 'magit-mode-hook (lambda () (magit-delta-mode +1))))
 
+; Don't require saving a file to update the git gutters.
+; NOTE: keep an eye on the performance of this convenience feature.
+(after! git-gutter
+        (setq git-gutter:update-interval 2))
+
 ;; track habits
 (add-to-list 'org-modules 'org-habit)
 
