@@ -94,6 +94,7 @@ in { config, pkgs, ... }:
     gss = "git status -s";
     gst = "git stash";
     gstp = "git stash pop";
+    gstl = "git stash list";
 
     # Docker aliases
     dcu = "docker compose up";
