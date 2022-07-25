@@ -17,7 +17,7 @@ Have fun!
 home-manager will install syncthing and enable its systemd service on machines
 that have systemd enabled.
 
-Ensure syncthing is started, then go to http://localhost:8384 to add a GUI
+Ensure syncthing is started, then go to [[http://localhost:8384][http://localhost:8384]] to add a GUI
 password, link it to remote devices, and set up shared folders (such as ~/org in
 my case). Who needs dropbox?
 
