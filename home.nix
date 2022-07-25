@@ -30,6 +30,8 @@ in { config, pkgs, ... }:
     bat # Better 🐱
 
     # Universal dev tools
+    docker
+    docker-compose
     hub
 
     # Graphical applications
