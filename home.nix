@@ -95,13 +95,13 @@ in { config, pkgs, ... }:
 
   # Dotfiles
   xdg = {
-    configHome = xdg_config_home;
     enable = true;
+    configHome = xdg_config_home;
   };
-  xdg.configFile.".curlrc".source = ./curlrc;
-  xdg.configFile.".rg.conf".source = ./rg.conf;
+  xdg.configFile.".curlrc".source = ./dotfiles/curlrc;
+  xdg.configFile.".rg.conf".source = ./dotfiles/rg.conf;
   xdg.configFile."doom".source = ./doom;
-  home.file.".inputrc".source = ./inputrc;
+  home.file.".inputrc".source = ./dotfiles/inputrc;
 
   programs.zsh = {
     enable = true;
