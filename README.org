@@ -6,7 +6,9 @@ conflict with the installation process. Make sure to backup those dotfiles
 before installing.
 
 1. Clone this repository into ~~/.config~.
-2. ~.cd ~~/.config/nixpkgs && ./install.sh~.
+2. Update the ~home.username~ and ~home.homeDirectory~ in home.nix (working on a way
+   to automate this).
+3. ~./install.sh~.
 
 Have fun!
 
