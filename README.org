@@ -1,0 +1,24 @@
+#+title: Readme
+
+* Installation
+1. Clone this repository into ~~/.config~.
+2. ~.cd ~~/.config/nixpkgs && ./install.sh~.
+
+Have fun!
+
+* Local Configuration
+Several tools are set up to include local configuration files, to allow
+overriding the reproducible configuration with arbitrary machine-specific
+options.
+
+- ~~/.zsh.local~
+- ~~/.gitconfig.local~
+
+I may one day decide to do this in a nix-ey way, but this is how my old
+configuration worked, and it's a good setup.
+
+* Backlog
+** TODO note about previous repo for finding git history
+** TODO refresh doom env on startup or disable
+It leads to time wasted debugging problems caused by the environment not being
+up to date when rapidly iterating on nix stuff.
