@@ -75,6 +75,7 @@ in { config, pkgs, ... }:
     "-- -" = "cd -";
 
     # Better ls
+    l = "ls -1a";
     ls = "exa -gFHh --git --group-directories-first";
     la = "ls -a";
     ll = "ls -l --icons"; # icons mess up alignment in grid view
