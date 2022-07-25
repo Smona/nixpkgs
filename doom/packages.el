@@ -56,3 +56,5 @@
 (package! wakatime-mode)
 
 (package! ox-slack)
+
+(package! magit-delta)

@@ -109,6 +109,9 @@
 (after! vterm
         (setq vterm-timer-delay 0.01))
 
+(after! magit
+        (add-hook 'magit-mode-hook (lambda () (magit-delta-mode +1))))
+
 ;; track habits
 (add-to-list 'org-modules 'org-habit)
 
