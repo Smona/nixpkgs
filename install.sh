@@ -19,9 +19,8 @@ nix-channel --update
 # TODO: make this safer for anyone who stumbles across it. It's safe
 # for me because all these paths are just symbolic links to another repo.
 
-rm -f ~/.ackrc ~/.curlrc ~/.gemrc ~/.screenrc ~/.doom.d ~/.zpreztorc ~/.zshrc \
-      ~/.gitignore ~/.gitattributes ~/.gitconfig
-
+rm -rf ~/.ackrc ~/.curlrc ~/.gemrc ~/.screenrc ~/.doom.d ~/.zpreztorc ~/.zshrc \
+      ~/.gitignore ~/.gitattributes ~/.gitconfig ~/.tmux.conf
 
 # Make sure the installer picks up nix in either single- or multi-user installations.
 # This causes a warning when running nix commands, so we only set it temporarily here.
