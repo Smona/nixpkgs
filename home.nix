@@ -74,6 +74,13 @@ in { config, pkgs, ... }:
     # Navigation
     "-- -" = "cd -";
 
+    # Better ls
+    ls = "exa -gFHh --git --group-directories-first";
+    la = "ls -a";
+    ll = "ls -l --icons"; # icons mess up alignment in grid view
+    lla = "ll -a";
+    lal = "ll -a";
+
     # Git aliases
     git = "hub";
     gb = "git branch";
@@ -84,6 +91,8 @@ in { config, pkgs, ... }:
     gpu = "git pull --prune";
     gs = "git status";
     gss = "git status -s";
+    gst = "git stash";
+    gstp = "git stash pop";
 
     # Docker aliases
     dcu = "docker compose up";
