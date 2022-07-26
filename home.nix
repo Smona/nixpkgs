@@ -7,6 +7,7 @@ in { config, pkgs, ... }:
   home.username = "smona";
   home.homeDirectory = "/home/smona";
   fonts.fontconfig.enable = true;
+  targets.genericLinux.enable = true;
 
   home.packages = with pkgs; [
     # Programming languages
