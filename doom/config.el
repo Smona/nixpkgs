@@ -97,6 +97,9 @@
 ;; MX Master 3 forward/back buttons
 (map! "<mouse-8>" #'previous-buffer)
 (map! "<mouse-9>" #'next-buffer)
+;; Enable horizontal scrolling
+(setq mouse-wheel-tilt-scroll t)
+(setq mouse-wheel-flip-direction t)
 
 
 (after! auth-source
