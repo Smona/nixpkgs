@@ -64,6 +64,10 @@ in { config, pkgs, ... }:
     VISUAL = editor;
     EDITOR = editor;
     GIT_EDITOR = editor;
+    # Enable smooth scrolling and zooming in firefox.
+    # Source: https://www.reddit.com/r/firefox/comments/l5a9ez/comment/gktzijc/
+    MOZ_ENABLE_WAYLAND = 1;
+    MOZ_USE_XINPUT2 = 1;
   };
 
   home.shellAliases = {
