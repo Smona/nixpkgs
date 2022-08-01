@@ -394,6 +394,9 @@ in { config, pkgs, ... }:
   programs.fzf.enable = true;
   programs.zoxide.enable = true;
   programs.less.enable = true;
+  programs.direnv.enable = true;
+  # https://github.com/nix-community/nix-direnv
+  programs.direnv.nix-direnv.enable = true;
 
   programs.firefox.enable = true;
   programs.chromium.enable = true;
