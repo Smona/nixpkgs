@@ -8,6 +8,7 @@ set -e
 # See: https://nixos.org/manual/nix/stable/installation/installing-binary.html#single-user-installation
 
 sh <(curl -L https://nixos.org/nix/install) --no-daemon
+. $HOME/.nix-profile/etc/profile.d/nix.sh
 
 # Add the home-manager channel
 
@@ -24,7 +25,6 @@ rm -rf ~/.ackrc ~/.curlrc ~/.gemrc ~/.screenrc ~/.doom.d ~/.zpreztorc ~/.zshrc \
 
 # Make sure the installer picks up nix in either single- or multi-user installations.
 # This causes a warning when running nix commands, so we only set it temporarily here.
-
 export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
 nix-shell '<home-manager>' -A install
 
