@@ -273,6 +273,10 @@
   (setq doom-themes-treemacs-theme "doom-colors")
   (setq treemacs-width-is-initially-locked nil))
 
-
 (after! dap-mode
   (setq dap-python-debugger 'debugpy))
+
+;; Disable web-mode's default prettify symbols since they conflict with native ligatures
+(after! web-mode
+        (setq web-mode-prettify-symbols-alist '()))
+
