@@ -58,3 +58,6 @@
 (package! ox-slack)
 
 (package! magit-delta)
+
+(package! polymode)
+(package! poly-markdown)

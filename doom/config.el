@@ -253,12 +253,12 @@
 ; have an init system, such as WSL.
 
 (defun syncthing-start ()
-        "Start syncthing background process"
+        "Start a syncthing process in the background."
         (interactive)
         (start-process "syncthing" "*syncthing*" "syncthing" "-no-browser"))
 
 (defun syncthing-stop ()
-        "Stop syncthing background process"
+        "Stop the syncthing background process if it exists."
         (interactive)
         (kill-process "syncthing"))
 
@@ -280,3 +280,6 @@
 (after! web-mode
         (setq web-mode-prettify-symbols-alist '()))
 
+;; Use language major mode, syntax highlihting, and configuration in markdown code blocks.
+(use-package! polymode)
+(use-package! poly-markdown)
