@@ -28,6 +28,9 @@
 ;; the NF variant only for unicode glyphs. It appears that glyphs from other
 ;; languages will still use the default doom-font.
 (setq! doom-unicode-font (font-spec :family "FuraCode Nerd Font" :size 13.0 :weight 'normal :width 'normal))
+;; Give lines more space, while keeping text centered.
+;; Source: https://github.com/syl20bnr/spacemacs/issues/10502#issuecomment-404453194
+(setq-default default-text-properties '(line-spacing 0.15 line-height 1.15))
 
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
