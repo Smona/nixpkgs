@@ -74,6 +74,8 @@ in { config, pkgs, ... }:
     # Natural language commands
     diskspace = "df -P -kHl";
     fonts = "fc-list";
+    # Pretty-print and colorize piped-in json
+    pretty = "python -m json.tool | pygmentize -l json";
 
     # Shortcuts
     c = "bat";
