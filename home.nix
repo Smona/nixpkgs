@@ -16,9 +16,6 @@ in { config, pkgs, ... }:
     nodejs
     yarn
 
-    ## Python
-    python310Full
-
     # Code Formatters (used by emacs)
     nodePackages.prettier
     shfmt
@@ -31,7 +28,7 @@ in { config, pkgs, ... }:
     # Shell utilities
     bpytop
     curl
-    python310Packages.pygments # Required by `pretty` alias above
+    jq # Format, slice and dice json on the command line. Also used by restclient.el
     ## cooler rust versions of basic GNU utilities
     fd # Better find
     ripgrep # Better grep
@@ -78,8 +75,6 @@ in { config, pkgs, ... }:
     # Natural language commands
     diskspace = "df -P -kHl";
     fonts = "fc-list";
-    # Pretty-print and colorize piped-in json
-    pretty = "python -m json.tool | pygmentize -l json";
 
     # Shortcuts
     c = "bat";
