@@ -16,6 +16,9 @@ in { config, pkgs, ... }:
     nodejs
     yarn
 
+    ## Python
+    python310Full
+
     # Code Formatters (used by emacs)
     nodePackages.prettier
     shfmt
@@ -28,6 +31,7 @@ in { config, pkgs, ... }:
     # Shell utilities
     bpytop
     curl
+    python310Packages.pygments # Required by `pretty` alias above
     ## cooler rust versions of basic GNU utilities
     fd # Better find
     ripgrep # Better grep
