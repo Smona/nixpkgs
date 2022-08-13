@@ -80,6 +80,7 @@ in { config, pkgs, ... }:
     c = "bat";
     g = "git";
     e = "$EDITOR";
+    doom = "~/.emacs.d/bin/doom";
 
     # Navigation
     "-- -" = "cd -";
