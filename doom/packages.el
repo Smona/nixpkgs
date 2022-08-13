@@ -50,12 +50,13 @@
 ;(unpin! t)
 (unpin! org-roam)
 (package! org-roam-ui)
+(package! org-super-agenda)
+
+(package! ox-slack)
 
 (package! auto-rename-tag)
 
 (package! wakatime-mode)
-
-(package! ox-slack)
 
 (package! magit-delta)
 

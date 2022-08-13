@@ -234,6 +234,18 @@
 (use-package! ox-slack
         :after org)
 
+(use-package! org-super-agenda
+  :after org
+  :config
+  (org-super-agenda-mode)
+  (setq org-super-agenda-header-map (make-sparse-keymap)) ;; Prevent conflicts with doom keybinds
+  (setq org-super-agenda-groups '(
+        (:name "Habits" :habit t)
+        (:name "Important" :priority>= "B")
+        (:name "Today" :time-grid t :scheduled today)
+        (:name "Cobalt" :tag "cobalt")
+)))
+
 ;; Various editor enhancements
 
 ;; Auto-update matching HTML tag
