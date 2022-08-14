@@ -218,6 +218,7 @@ in { config, pkgs, ... }:
       options = {
         features = "side-by-side decorations";
         syntax-theme = "Sublime Snazzy";
+        hyperlinks = true;
       };
     };
     extraConfig = {
