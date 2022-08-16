@@ -129,6 +129,187 @@
 (after! org
         ;; Use non-monospace font by default in org mode
         ;; (add-hook 'org-mode-hook 'variable-pitch-mode)
+        ;;
+        ;; TODO: add author & date in preamble: https://emacs.stackexchange.com/questions/45191/how-to-place-author-and-date-under-title
+        (setq org-html-postamble "
+        <footer>
+                <a href=\"https://github.com/Smona\">
+                        <svg class=\"logo\" viewBox=\"0 0 1024 1024\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">
+                                <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z\" transform=\"scale(64)\" fill=\"#1B1F23\"/>
+                        </svg>
+                </a>
+                <a href=\"https://www.linkedin.com/in/m3ourgeois/\">
+                        <svg class=\"logo\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">
+                                <path xmlns=\"http://www.w3.org/2000/svg\" d=\"M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2 16h-2v-6h2v6zm-1-6.891c-.607 0-1.1-.496-1.1-1.109 0-.612.492-1.109 1.1-1.109s1.1.497 1.1 1.109c0 .613-.493 1.109-1.1 1.109zm8 6.891h-1.998v-2.861c0-1.881-2.002-1.722-2.002 0v2.861h-2v-6h2v1.093c.872-1.616 4-1.736 4 1.548v3.359z\"/>
+                        </svg>
+                </a>
+        </footer>
+        ")
+        ;; TODO: extract to separate file:
+        ;; https://stackoverflow.com/questions/19614104/how-to-tell-org-mode-to-embed-my-css-file-on-html-export
+        ;; https://emacs.stackexchange.com/questions/3374/set-the-background-of-org-exported-code-blocks-according-to-theme
+        (setq org-html-style "
+        <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css\" integrity=\"sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw==\" crossorigin=\"anonymous\" referrerpolicy=\"no-referrer\" />
+        <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">
+        <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>
+        <link href=\"https://fonts.googleapis.com/css2?family=Fira+Code&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap\" rel=\"stylesheet\">
+        <style type=\"text/css\">
+
+                body {
+                        --background: #1d1a2a;
+                        --background-dark: #0e0c17;
+                        --background-light: #38344b;
+                        --rounding: 12px;
+                        --font-family-monospace: 'Fira Code', monospace;
+                        font-family: 'Noto Sans', sans-serif;
+                        line-height: 1.5;
+                        background-color: var(--background);
+                        color: #e0e0e0;
+                        padding: 0;
+                        margin: 0;
+                }
+
+                img {
+                        max-width: 100%;
+                }
+
+                strong, b {
+                        font-weight: bold;
+                }
+
+                em, i {
+                        font-style: italic;
+                }
+
+                p {
+                        margin: 0.7em 0;
+                        line-height: inherit;
+                }
+
+                pre, code {
+                        font-family: var(--font-family-monospace);
+                        font-size: 0.9em;
+                }
+                .org-src-container {
+                        position: relative;
+                }
+                pre.src {
+                        background-color: var(--background-dark);
+                        padding: 0.7em;
+                        margin: 1.4em 0;
+                        border: none;
+                        border-radius: var(--rounding);
+                        /* Pin language tag to container rather than scroll area */
+                        position: unset;
+                }
+                pre.src::before {
+                        top: -1em;
+                        right: 0;
+                        background-color: var(--background-dark);
+                        padding: 3px 6px;
+                        border-top-right-radius: var(--rounding);
+                }
+                code {
+                        background: var(--background-dark);
+                        padding: 0.1em 0.3em;
+                        border-radius: 3px;
+                        white-space: nowrap;
+                }
+
+                a {
+                        color: inherit;
+                        text-decoration: underline #198d93;
+                        text-decoration-thickness: auto;
+                        transition: all 100ms ease-out;
+                        text-underline-offset: 3px;
+                        text-decoration-thickness: 3px;
+                        text-decoration-skip-ink: none;
+                }
+                a:hover {
+                        text-decoration-thickness: 1.4em;
+                        text-underline-offset: -1em;
+                }
+
+                ul {
+                        list-style-type: disc;
+                }
+                ol {
+                        list-style-type: decimal;
+                }
+                ol li::marker {
+                        font-weight: bold;
+                }
+
+                li {
+                        margin-left: 1.8em;
+                        margin-top: 0.3em;
+                        margin-bottom: 0.5em;
+                }
+
+                table {
+                        width : 100%;
+                        border-radius: var(--rounding);
+                        background-color: var(--background-light);
+                        border: none;
+                }
+
+                /* Primarily intended for youtube embeds */
+                iframe {
+                        width: 100%;
+                        margin: 1.5em auto;
+                        display: block;
+                        border-radius: var(--rounding);
+                }
+
+                #content {
+                        max-width: 40em;
+                        padding: 0 1em;
+                }
+
+                .footref {
+                        vertical-align: super;
+                        font-size: 0.8em;
+                }
+
+                h1, h2, h3, h4, h5, h6 {
+                        font-weight: bold;
+                        margin: 0.9em 0 0.3em;
+                }
+                h1 { font-size: 2.0rem; }
+                h2 { font-size: 1.7rem; }
+                h3 { font-size: 1.4rem; }
+                h4 { font-size: 1.2rem; }
+
+                .tag {
+                        /* Hide tags */
+                        display: none;
+                }
+
+                footer {
+                        padding: 2.8em;
+                        margin-top: 4rem;
+                        background: var(--background-dark);
+                        display: flex;
+                        gap: 1.4em;
+                        justify-content: center;
+                        align-items: center;
+                }
+
+                .logo {
+                        width: 44px;
+                        height: 44px;
+                        opacity: 0.7;
+                        transition: all 100ms ease-out;
+                }
+                .logo:hover {
+                        opacity: 1;
+                }
+
+                .logo path {
+                        fill: currentColor;
+                }
+        </style>
+        ")
 
         ;; hard wrap org mode
         (add-hook 'org-mode-hook 'auto-fill-mode)
