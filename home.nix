@@ -405,6 +405,9 @@ in {
   # Services
   services.syncthing.enable = true;
 
+  # Automatically start/stop/restart services when their configuration changes
+  systemd.user.startServices = "sd-switch";
+
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
