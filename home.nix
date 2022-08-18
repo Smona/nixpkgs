@@ -1,8 +1,9 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   settings = import ./settings.nix;
   xdg_config_home = ~/.config;
+  desktopConfig = (lib.getAttr settings.desktopEnvironment (import ./desktops));
 in {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -10,6 +11,8 @@ in {
   home.homeDirectory = settings.homeDirectory;
   fonts.fontconfig.enable = true;
   targets.genericLinux.enable = true;
+
+  imports = [ desktopConfig ];
 
   home.packages = with pkgs; [
     # Programming languages
@@ -42,10 +45,6 @@ in {
     docker-compose
     hub
 
-    # Graphical applications
-    signal-desktop
-    spotify
-
     # Fonts
     # Fonts I like, in order of preference: Cascadia Code, FiraCode, Dank Mono, JetBrains Mono
     # Fonts to try: FantasqueSansMono, Inconsolata, Victor Mono
@@ -67,10 +66,6 @@ in {
     VISUAL = editor;
     EDITOR = editor;
     GIT_EDITOR = editor;
-    # Enable smooth scrolling and zooming in firefox.
-    # Source: https://www.reddit.com/r/firefox/comments/l5a9ez/comment/gktzijc/
-    MOZ_ENABLE_WAYLAND = 1;
-    MOZ_USE_XINPUT2 = 1;
   };
 
   home.shellAliases = {
@@ -403,11 +398,7 @@ in {
   # https://github.com/nix-community/nix-direnv
   programs.direnv.nix-direnv.enable = true;
 
-  programs.firefox.enable = true;
-  programs.chromium.enable = true;
-
   # Services
-
   services.syncthing.enable = true;
 
   # This value determines the Home Manager release that your

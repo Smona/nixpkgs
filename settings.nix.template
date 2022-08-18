@@ -1,4 +1,7 @@
 rec {
   username = "smona";
   homeDirectory = "/home/${username}";
+
+  # One of "none" | "gnome"
+  desktopEnvironment = "gnome";
 }
