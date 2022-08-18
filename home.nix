@@ -1,11 +1,13 @@
-let xdg_config_home = ~/.config;
-in { config, pkgs, ... }:
+{ config, pkgs, ... }:
 
-{
+let
+  settings = import ./settings.nix;
+  xdg_config_home = ~/.config;
+in {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home.username = "smona";
-  home.homeDirectory = "/home/smona";
+  home.username = settings.username;
+  home.homeDirectory = settings.homeDirectory;
   fonts.fontconfig.enable = true;
   targets.genericLinux.enable = true;
 
