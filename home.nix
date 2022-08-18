@@ -78,6 +78,9 @@ in {
     g = "git";
     e = "$EDITOR";
     doom = "~/.emacs.d/bin/doom";
+    hm = "home-manager";
+    hms = "hm switch";
+    hmn = "hm news";
 
     # Navigation
     "-- -" = "cd -";
