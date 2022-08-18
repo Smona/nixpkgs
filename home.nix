@@ -128,6 +128,10 @@ in {
   xdg.configFile."doom".source = ./doom;
   home.file.".inputrc".source = ./dotfiles/inputrc;
 
+  # This is required to properly set up the login shell on some linux systems,
+  # even if I don't really use bash.
+  programs.bash = { enable = true; };
+
   programs.zsh = {
     enable = true;
     history = {
