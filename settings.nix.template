@@ -4,6 +4,7 @@ rec {
 
   # One of "none" | "gnome"
   desktopEnvironment = "gnome";
+  nixOS = false;
 
   roles = { work = false; };
 }
