@@ -31,20 +31,22 @@ in {
       RestartSec = 2;
     };
   };
-  systemd.user.services.slack = {
-    Unit.Description = "Slack desktop application";
-    Install.WantedBy = [ "graphical-session.target" ];
-    Service = {
-      ExecStart = "${settings.homeDirectory}/.nix-profile/bin/slack";
-      Restart = "on-failure";
-      RestartSec = 2;
-    };
-  };
   systemd.user.services."1password" = {
     Unit.Description = "1password manager GUI application.";
     Install.WantedBy = [ "graphical-session.target" ];
     Service = {
       ExecStart = "${settings.homeDirectory}/.nix-profile/bin/1password";
+      Restart = "on-failure";
+      RestartSec = 2;
+    };
+  };
+
+  # I like to have slack installed everywhere, but only auto-start it on work machines
+  systemd.user.services.slack = lib.mkIf settings.roles.work {
+    Unit.Description = "Slack desktop application";
+    Install.WantedBy = [ "graphical-session.target" ];
+    Service = {
+      ExecStart = "${settings.homeDirectory}/.nix-profile/bin/slack";
       Restart = "on-failure";
       RestartSec = 2;
     };
