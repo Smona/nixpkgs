@@ -3,16 +3,24 @@
 {
   imports = [ ./gui.nix ];
 
-  home.packages = with pkgs; [
+  home.packages = with pkgs.gnomeExtensions; [
     # Gnome goodness
-    gnomeExtensions.burn-my-windows
-    gnomeExtensions.dash-to-dock
-    gnomeExtensions.espresso # FIXME upgrade to jammy jellyfish
-    gnomeExtensions.hide-keyboard-layout
-    gnomeExtensions.middle-click-to-close-in-overview
-    gnomeExtensions.noannoyance-2 # TODO: settings dialog broken
-    gnomeExtensions.system-monitor # FIXME
-    gnomeExtensions.transparent-window
-    gnomeExtensions.unite
+    always-indicator
+    audio-switcher-40
+    autohide-battery
+    burn-my-windows
+    clipboard-indicator
+    dash-to-dock
+    espresso # Requires gnome 40 (Ubuntu >= jammy jellyfish)
+    gesture-improvements
+    hide-keyboard-layout
+    middle-click-to-close-in-overview
+    noannoyance-2 # TODO: settings dialog broken
+    remove-alttab-delay-v2
+    system-monitor # Requires Ubuntu > 20.04
+    transparent-window # TODO: this doesn't seem to work
+    unite
+    user-themes
+    windownavigator
   ];
 }
