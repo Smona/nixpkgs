@@ -1,10 +1,11 @@
 rec {
+  # Base configuration
   username = "smona";
-  homeDirectory = "/home/${username}";
-
   # One of "none" | "gnome"
   desktopEnvironment = "gnome";
-  nixOS = false;
-
   roles = { work = false; };
+
+  # Overrideable defaults (the default should work most of the time)
+  homeDirectory = "/home/${username}";
+  nixOS = builtins.pathExists /etc/nixos/configuration.nix;
 }
