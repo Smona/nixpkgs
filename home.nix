@@ -93,6 +93,12 @@ in {
     lla = "ll -a";
     lal = "ll -a";
 
+    # Nix aliases
+    nd = "nix develop -c $SHELL";
+    ndp = "nix develop";
+    nb = "nix build";
+    ncg = "nix-collect-garbage";
+
     # Git aliases
     git = "hub";
     gb = "git branch";
