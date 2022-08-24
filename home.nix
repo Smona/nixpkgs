@@ -70,6 +70,10 @@ in {
 
   home.shellAliases = {
     # Natural language commands
+    backup = "sudo rsync -av --delete "
+      + "-e 'ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-rsa' "
+      + "--exclude-from='${./dotfiles/rsync-ignore.txt}' "
+      + "/ smona@192.168.0.198::NetBackup/${settings.hostName}";
     diskspace = "df -P -kHl";
     fonts = "fc-list";
 

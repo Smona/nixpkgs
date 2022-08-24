@@ -1,0 +1,17 @@
+boot
+dev
+lost+found
+media
+mnt
+nix/store
+proc
+sys
+tmp
+run/media
+run/mount
+swapfile
+
+**/.cache
+**/kbfs
+**/timeshift
+/var/cache/pacman

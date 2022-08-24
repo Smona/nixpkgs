@@ -1,5 +1,6 @@
 rec {
   # Base configuration
+  hostName = "choose_a_hostname";
   username = "smona";
   # One of "none" | "gnome"
   desktopEnvironment = "gnome";
