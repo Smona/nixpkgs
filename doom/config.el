@@ -100,6 +100,11 @@
 ;; MX Master 3 forward/back buttons
 (map! "<mouse-8>" #'previous-buffer)
 (map! "<mouse-9>" #'next-buffer)
+;; forward/back touchpad swipes with the gesture-improvements gnome extension
+;; https://extensions.gnome.org/extension/4245/gesture-improvements/
+(map! "<269025062>" #'previous-buffer)
+(map! "<269025063>" #'next-buffer)
+
 ;; Enable horizontal scrolling
 (setq mouse-wheel-tilt-scroll t)
 (setq mouse-wheel-flip-direction t)
