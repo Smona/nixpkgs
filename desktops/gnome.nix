@@ -41,6 +41,7 @@ in {
     settings = {
       "org/gnome/shell".enabled-extensions =
         builtins.map (e: e.extensionUuid) extensions;
+      "org/gnome/shell/extensions/user-theme" = { name = "Dracula"; };
     };
   };
 
