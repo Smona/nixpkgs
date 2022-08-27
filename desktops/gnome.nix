@@ -36,11 +36,15 @@ in {
     package = pkgs.dracula-theme;
     name = "Dracula-cursors";
   };
+
   dconf = {
     enable = true;
     settings = {
-      "org/gnome/shell".enabled-extensions =
-        builtins.map (e: e.extensionUuid) extensions;
+      "org/gnome/shell" = {
+        enabled-extensions = builtins.map (e: e.extensionUuid) extensions;
+        favorite-apps =
+          [ "emacsclient.desktop" "firefox.desktop" "spotify.desktop" ];
+      };
       "org/gnome/shell/extensions/user-theme" = { name = "Dracula"; };
     };
   };
