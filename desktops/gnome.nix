@@ -27,6 +27,15 @@ let
 in {
   imports = [ ./gui.nix ];
 
+  gtk.enable = true;
+  gtk.theme = {
+    package = pkgs.dracula-theme;
+    name = "Dracula";
+  };
+  gtk.cursorTheme = {
+    package = pkgs.dracula-theme;
+    name = "Dracula-cursors";
+  };
   dconf = {
     enable = true;
     settings = {
