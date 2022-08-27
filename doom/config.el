@@ -484,3 +484,9 @@
 ;; Use language major mode, syntax highlihting, and configuration in markdown code blocks.
 (use-package! polymode)
 (use-package! poly-markdown)
+
+;; Enable jq hooks in restclient-mode
+(use-package! restclient
+  :defer)
+(after! restclient
+  (require 'restclient-jq))
