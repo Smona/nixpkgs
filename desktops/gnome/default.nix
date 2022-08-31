@@ -24,14 +24,11 @@ let
     user-themes
     windownavigator
   ];
+  settings = import ../../settings.nix;
 in {
-  imports = [ ./gui.nix ];
+  imports = [ ../gui.nix settings.desktops.gnome.theme ];
 
   gtk.enable = true;
-  gtk.theme = {
-    package = pkgs.dracula-theme;
-    name = "Dracula";
-  };
   gtk.cursorTheme = {
     package = pkgs.dracula-theme;
     name = "Dracula-cursors";
@@ -46,7 +43,6 @@ in {
         favorite-apps =
           [ "emacsclient.desktop" "firefox.desktop" "spotify.desktop" ];
       };
-      "org/gnome/shell/extensions/user-theme" = { name = "Dracula"; };
     };
   };
 

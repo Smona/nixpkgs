@@ -3,7 +3,6 @@
 let
   settings = import ./settings.nix;
   xdg_config_home = ~/.config;
-  desktopConfig = (lib.getAttr settings.desktopEnvironment (import ./desktops));
 in {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -12,7 +11,8 @@ in {
   fonts.fontconfig.enable = true;
   targets.genericLinux.enable = true;
 
-  imports = [ desktopConfig ];
+  imports = with lib.lists;
+    (optional settings.desktops.gnome.enable (import ./desktops/gnome));
 
   home.packages = with pkgs; [
     # Programming languages

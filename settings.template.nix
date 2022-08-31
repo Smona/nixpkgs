@@ -2,8 +2,12 @@ rec {
   # Base configuration
   hostName = "choose_a_hostname";
   username = "smona";
-  # One of "none" | "gnome"
-  desktopEnvironment = "gnome";
+  desktops = {
+    gnome = {
+      enable = false;
+      theme = (import ./desktops/gnome/themes.nix).flat-remix;
+    };
+  };
   roles = { work = false; };
 
   # Overrideable defaults (the default should work most of the time)
