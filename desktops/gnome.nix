@@ -41,6 +41,7 @@ in {
     enable = true;
     settings = {
       "org/gnome/shell" = {
+        disable-user-extensions = false;
         enabled-extensions = builtins.map (e: e.extensionUuid) extensions;
         favorite-apps =
           [ "emacsclient.desktop" "firefox.desktop" "spotify.desktop" ];
