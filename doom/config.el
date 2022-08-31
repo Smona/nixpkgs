@@ -434,13 +434,6 @@
 
 ;; Various editor enhancements
 
-;; Auto-update matching HTML tag
-(use-package! auto-rename-tag
-     :hook (typescript-tsx-mode . auto-rename-tag-mode)
-     :hook (web-mode . auto-rename-tag-mode)
-     :config
-     (auto-rename-tag-mode t))
-
 ;; LSP config
 
 ;; I haven't been able to get graphql-lsp to start without crashing,

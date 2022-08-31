@@ -54,8 +54,6 @@
 
 (package! ox-slack)
 
-(package! auto-rename-tag)
-
 (package! wakatime-mode)
 
 (package! magit-delta)
