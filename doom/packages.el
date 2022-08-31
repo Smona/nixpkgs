@@ -63,12 +63,5 @@
 (package! polymode)
 (package! poly-markdown)
 
-;; Install restclient-jq
-(when (package! restclient :recipe (:host github :repo "pashky/restclient.el"
-                                    :files ("restclient.el" "restclient-jq.el"))
-        :pin "ae79e7dd283890072da69b8f48aeec1afd0d9442")
-  (package! jq-mode :recipe (:host github :repo "ljos/jq-mode")
-    :pin "1af31ba701cf844f938f840ed78867c9a28174b6"))
-
 ;; Set up prisma-mode
 (package! prisma-mode :recipe (:host github :repo "pimeys/emacs-prisma-mode" :branch "main"))
