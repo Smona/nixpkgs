@@ -30,6 +30,7 @@ in {
     python310Packages.debugpy # Required by dap-mode
     wakatime
     nodePackages.pyright
+    rnix-lsp # Required by (nix +lsp)
     # Shell utilities
     bpytop
     curl
