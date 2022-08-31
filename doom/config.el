@@ -105,6 +105,9 @@
 (map! "<269025062>" #'previous-buffer)
 (map! "<269025063>" #'next-buffer)
 
+;; Scrolling customization
+(setq scroll-margin 6)
+
 ;; Enable horizontal scrolling
 (setq mouse-wheel-tilt-scroll t)
 (setq mouse-wheel-flip-direction t)
