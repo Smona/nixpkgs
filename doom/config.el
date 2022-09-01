@@ -112,6 +112,9 @@
 (setq mouse-wheel-tilt-scroll t)
 (setq mouse-wheel-flip-direction t)
 
+(setq doom-modeline-major-mode-icon t)
+(setq doom-modeline-height 35)
+
 
 (after! auth-source
         ;; Allow non-encrypted authinfo
