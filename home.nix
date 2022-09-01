@@ -86,6 +86,9 @@ in {
     hm = "home-manager";
     hms = "hm switch";
     hmn = "hm news";
+    arch = "archive";
+    larch = "lsarchive";
+    uarch = "unarchive";
 
     # Navigation
     "-- -" = "cd -";
@@ -206,6 +209,7 @@ in {
       "spectrum"
       "utility"
       "node"
+      "archive"
       "completion"
       "syntax-highlighting"
       "history-substring-search"
