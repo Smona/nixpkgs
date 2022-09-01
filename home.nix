@@ -142,7 +142,7 @@ in {
   };
   xdg.configFile.".curlrc".source = ./dotfiles/curlrc;
   xdg.configFile.".rg.conf".source = ./dotfiles/rg.conf;
-  xdg.configFile."doom".source = ./doom;
+  xdg.configFile."doom".source = config.lib.file.mkOutOfStoreSymlink ./doom;
   xdg.configFile."nix.conf" = {
     # Enable nix command and nix flakes
     text = "experimental-features = nix-command flakes";
