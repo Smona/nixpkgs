@@ -1,8 +1,6 @@
 { config, pkgs, lib, ... }:
 
-let
-  settings = import ./settings.nix;
-  xdg_config_home = ~/.config;
+let settings = import ./settings.nix;
 in {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -64,7 +62,7 @@ in {
 
   home.sessionVariables = let editor = "emacs";
   in {
-    RIPGREP_CONFIG_PATH = "${xdg_config_home}/.rg.conf";
+    RIPGREP_CONFIG_PATH = "${./dotfiles/rg.conf}";
     VISUAL = editor;
     EDITOR = editor;
     GIT_EDITOR = editor;
@@ -134,15 +132,15 @@ in {
   # Dotfiles
   xdg = {
     enable = true;
-    configHome = xdg_config_home;
-  };
-  xdg.configFile.".curlrc".source = ./dotfiles/curlrc;
-  xdg.configFile.".rg.conf".source = ./dotfiles/rg.conf;
-  xdg.configFile."doom".source = config.lib.file.mkOutOfStoreSymlink ./doom;
-  xdg.configFile."nix.conf" = {
-    # Enable nix command and nix flakes
-    text = "experimental-features = nix-command flakes";
-    target = "nix/nix.conf";
+    configFile = {
+      ".curlrc".source = ./dotfiles/curlrc;
+      "doom".source = config.lib.file.mkOutOfStoreSymlink ./doom;
+      "nix.conf" = {
+        # Enable nix command and nix flakes
+        text = "experimental-features = nix-command flakes";
+        target = "nix/nix.conf";
+      };
+    };
   };
   home.file.".inputrc".source = ./dotfiles/inputrc;
 
