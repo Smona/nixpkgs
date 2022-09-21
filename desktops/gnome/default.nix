@@ -43,6 +43,8 @@ in {
         favorite-apps =
           [ "emacsclient.desktop" "firefox.desktop" "spotify.desktop" ];
       };
+      # Allow over-amplification
+      "org/gnome/desktop/sound" = { allow-volume-above-100-percent = true; };
     };
   };
 
