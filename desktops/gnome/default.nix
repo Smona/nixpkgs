@@ -23,10 +23,13 @@ let
     unite
     user-themes
     windownavigator
+    quake-mode
   ];
   settings = import ../../settings.nix;
 in {
   imports = [ ../gui.nix settings.desktops.gnome.theme ];
+
+  home.packages = extensions;
 
   gtk.enable = true;
   gtk.cursorTheme = {
@@ -55,8 +58,11 @@ in {
         # Change focus immediately rather than waiting for pointer to rest
         focus-change-on-pointer-rest = false;
       };
+      "com/github/repsac-by/quake-mode" = {
+        quake-mode-app = "Alacritty.desktop";
+        quake-mode-hide-from-overview = true;
+        quake-mode-hotkey = [ "<Alt>space" ];
+      };
     };
   };
-
-  home.packages = extensions;
 }
