@@ -31,7 +31,7 @@ in {
     genericName = "Terminal";
     exec = wrapWithNixGL "kitty";
     categories = [ "System" "TerminalEmulator" ];
-    icon = "Kitty";
+    icon = "kitty";
     type = "Application";
   };
 
