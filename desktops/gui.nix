@@ -20,8 +20,23 @@ in {
 
   programs.chromium.enable = true;
 
-  programs.alacritty = {
+  programs.kitty = {
     enable = true;
+    settings = { background_opacity = "0.9"; };
+  };
+  # Provide access to drivers so hardware acceleration works on non-NixOS
+  xdg.desktopEntries.kitty = {
+    # TODO: figure out how to inherit attributes from the base desktop item
+    name = "kitty";
+    genericName = "Terminal";
+    exec = wrapWithNixGL "kitty";
+    categories = [ "System" "TerminalEmulator" ];
+    icon = "Kitty";
+    type = "Application";
+  };
+
+  programs.alacritty = {
+    enable = false;
     settings = {
       window = {
         decorations = "none";
@@ -35,16 +50,10 @@ in {
           y = 0;
         };
       };
-      font = {
-        size = 12.0;
-      };
+      font = { size = 12.0; };
       cursor = {
-        style = {
-          shape = "Beam";
-        };
-        vi_mode_style = {
-          shape = "Block";
-        };
+        style = { shape = "Beam"; };
+        vi_mode_style = { shape = "Block"; };
       };
     };
   };

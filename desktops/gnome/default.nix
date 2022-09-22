@@ -59,7 +59,7 @@ in {
         focus-change-on-pointer-rest = false;
       };
       "com/github/repsac-by/quake-mode" = {
-        quake-mode-app = "Alacritty.desktop";
+        quake-mode-app = "kitty.desktop";
         quake-mode-hide-from-overview = true;
         quake-mode-hotkey = [ "<Alt>space" ];
       };
