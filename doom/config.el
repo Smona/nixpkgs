@@ -127,7 +127,11 @@
         (setq vterm-timer-delay 0.03))
 
 (after! magit
-        (add-hook 'magit-mode-hook (lambda () (magit-delta-mode +1))))
+        (add-hook 'magit-mode-hook (lambda () (magit-delta-mode +1)))
+
+        ; Performance optimizations
+        ; https://magit.vc/manual/magit/Performance.html
+        (setq magit-refresh-status-buffer nil))
 
 ; Don't require saving a file to update the git gutters.
 ; NOTE: keep an eye on the performance of this convenience feature.
