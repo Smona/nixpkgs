@@ -14,6 +14,10 @@ in {
         settings = {
           "browser.toolbars.bookmarks.visibility" = "newtab";
           "services.sync.username" = "mason.bourgeois@gmail.com";
+          # Hide the sharing popup window indicator.
+          # On wayland it shows up as a window in alt-tab, and it's kind of
+          # annoying even on platforms where it's more properly handled.
+          "privacy.webrtc.legacyGlobalIndicator" = false;
           # Enable hardware video acceleration
           # https://wiki.archlinux.org/title/firefox#Hardware_video_acceleration
           "media.ffmpeg.vaapi.enabled" = true;
