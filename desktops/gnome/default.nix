@@ -63,6 +63,31 @@ in {
         quake-mode-hide-from-overview = true;
         quake-mode-hotkey = [ "<Alt>space" ];
       };
+
+      # Custom keybindings
+      "org/gnome/desktop/wm/keybindings" = {
+        # Conflicts with desired guake hotkey
+        activate-window-menu = [ "<Shift><Alt>space" ];
+        close = [ "<Super><Shift>q" ];
+      };
+      "org/gnome/settings-daemon/plugins/media-keys" = {
+        custom-keybindings = [
+          "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+          "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+        ];
+      };
+      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
+        {
+          name = "Toggle guake";
+          binding = "<Alt>space";
+          command = "guake -t";
+        };
+      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" =
+        {
+          name = "1password Quick Access";
+          binding = "<Primary><Shift>space";
+          command = "1password --quick-access";
+        };
     };
   };
 }
