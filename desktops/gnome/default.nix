@@ -45,6 +45,16 @@ in {
       };
       # Allow over-amplification
       "org/gnome/desktop/sound" = { allow-volume-above-100-percent = true; };
+      "org/gnome/desktop/wm/preferences" = {
+        # Focus windows on hover, but preserve focus when hovering the desktop.
+        # Originally switched to fix https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/5162,
+        # but it seems more efficient anyways.
+        focus-mode = "sloppy";
+      };
+      "org/gnome/mutter" = {
+        # Change focus immediately rather than waiting for pointer to rest
+        focus-change-on-pointer-rest = false;
+      };
     };
   };
 
