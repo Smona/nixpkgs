@@ -8,7 +8,9 @@ let
     autohide-battery
     burn-my-windows
     clipboard-indicator
-    coverflow-alt-tab
+    # disabled because it doesn't play nice with quake-mode.
+    # popup shows up in alt-tab. It's also slower.
+    # coverflow-alt-tab
     dash-to-dock
     desktop-icons-ng-ding
     espresso # Requires gnome 40 (Ubuntu >= jammy jellyfish)
