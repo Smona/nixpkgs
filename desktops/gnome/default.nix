@@ -64,6 +64,7 @@ in {
         quake-mode-app = "kitty.desktop";
         quake-mode-hide-from-overview = true;
         quake-mode-hotkey = [ "<Alt>space" ];
+        quake-mode-tray = false;
       };
 
       # Custom keybindings
