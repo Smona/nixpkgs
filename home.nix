@@ -143,6 +143,8 @@ in {
     };
   };
   home.file.".inputrc".source = ./dotfiles/inputrc;
+  home.file.".p10k.zsh".source =
+    config.lib.file.mkOutOfStoreSymlink ./dotfiles/p10k.zsh;
 
   # This is required to properly set up the login shell on some linux systems,
   # even if I don't really use bash.
