@@ -98,6 +98,13 @@ in {
         quake-mode-hotkey = [ "<Alt>space" ];
         quake-mode-tray = false;
       };
+      "org/gnome/shell/extensions/system-monitor" = {
+        background = "#00000000";
+        cpu-show-text = false;
+        memory-show-text = false;
+        net-show-text = false;
+        icon-display = false;
+      };
     };
   };
 }
