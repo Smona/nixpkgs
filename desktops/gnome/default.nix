@@ -73,6 +73,7 @@ in {
         close = [ "<Super><Shift>q" ];
       };
       "org/gnome/settings-daemon/plugins/media-keys" = {
+        home = [ "<Super>e" ];
         custom-keybindings = [
           "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
           "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
