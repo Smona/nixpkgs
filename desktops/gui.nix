@@ -22,7 +22,19 @@ in {
 
   programs.kitty = {
     enable = true;
-    settings = { background_opacity = "0.9"; };
+    theme = "Tokyo Night";
+    settings = {
+      font_family = "Cascadia Code";
+      background_opacity = "0.9";
+      font_size = "12";
+      touch_scroll_multiplier = "2";
+      tab_bar_style = "slant";
+      wayland_titlebar_color = "background";
+      enable_audio_bell = false;
+      visual_bell_duration = "0.3";
+      visual_bell_color = "#777";
+      update_check_interval = "0";
+    };
   };
   # Provide access to drivers so hardware acceleration works on non-NixOS
   xdg.desktopEntries.kitty = {
@@ -34,6 +46,7 @@ in {
     icon = "kitty";
     type = "Application";
   };
+  home.shellAliases = { s = "kitty +kitten ssh"; };
 
   programs.alacritty = {
     enable = false;
