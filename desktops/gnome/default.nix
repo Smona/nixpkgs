@@ -60,11 +60,9 @@ in {
         # Change focus immediately rather than waiting for pointer to rest
         focus-change-on-pointer-rest = false;
       };
-      "com/github/repsac-by/quake-mode" = {
-        quake-mode-app = "kitty.desktop";
-        quake-mode-hide-from-overview = true;
-        quake-mode-hotkey = [ "<Alt>space" ];
-        quake-mode-tray = false;
+      "org/gnome/nautilus/preferences" = {
+        # Show image thumbnails for remote file storage
+        show-image-thumbnails = "always";
       };
 
       # Custom keybindings
@@ -92,6 +90,14 @@ in {
           binding = "<Primary><Shift>space";
           command = "1password --quick-access";
         };
+
+      # Extensions
+      "com/github/repsac-by/quake-mode" = {
+        quake-mode-app = "kitty.desktop";
+        quake-mode-hide-from-overview = true;
+        quake-mode-hotkey = [ "<Alt>space" ];
+        quake-mode-tray = false;
+      };
     };
   };
 }
