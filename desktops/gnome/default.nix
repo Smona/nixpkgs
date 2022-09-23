@@ -29,7 +29,7 @@ let
   ];
   settings = import ../../settings.nix;
 in {
-  imports = [ ../gui.nix settings.desktops.gnome.theme ];
+  imports = [ ../../applications/gui.nix settings.desktops.gnome.theme ];
 
   home.packages = extensions ++ [ pkgs.gnome.dconf-editor ];
 

@@ -2,7 +2,7 @@
 
 let settings = import ../settings.nix;
 in {
-  imports = [ ../applications/firefox.nix ../applications/terminal.nix ];
+  imports = [ ./firefox.nix ./terminal.nix ];
 
   home.packages = with pkgs;
     [
@@ -22,6 +22,7 @@ in {
     Unit.Description = "RescueTime time tracker";
     Install.WantedBy = [ "graphical-session.target" ];
     Service = {
+      # TODO: don't go through homeDirectory, reference rescuetime directly
       ExecStart = "${settings.homeDirectory}/.nix-profile/bin/rescuetime";
       Restart = "on-failure";
       RestartSec = 2;
