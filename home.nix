@@ -15,6 +15,7 @@ in {
 
   home.packages = with pkgs; [
     # Programming languages
+    gcc # required to compile some packages, e.g. emacsqlite
 
     ## NodeJS
     nodejs
@@ -277,6 +278,12 @@ in {
       ".idea"
       ".log"
     ];
+  };
+
+  programs.emacs = {
+    enable = true;
+    package = pkgs.emacs28NativeComp;
+    extraPackages = epkgs: [ epkgs.vterm ];
   };
 
   programs.vim = {
