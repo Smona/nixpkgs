@@ -16,6 +16,7 @@ in {
   home.packages = with pkgs; [
     # Programming languages
     gcc # required to compile some packages, e.g. emacsqlite
+    faust
 
     ## NodeJS
     nodejs
