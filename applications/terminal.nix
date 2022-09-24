@@ -60,14 +60,14 @@ in {
     };
   };
   # Provide access to drivers so hardware acceleration works on non-NixOS
-  xdg.desktopEntries.Alacritty = {
-    # TODO: figure out how to inherit attributes from the base desktop item
-    name = "Alacritty";
-    genericName = "Terminal";
-    exec = wrapWithNixGL "alacritty";
-    categories = [ "System" "TerminalEmulator" ];
-    icon = "Alacritty";
-    type = "Application";
-  };
+  # xdg.desktopEntries.Alacritty = {
+  #   # TODO: figure out how to inherit attributes from the base desktop item
+  #   name = "Alacritty";
+  #   genericName = "Terminal";
+  #   exec = wrapWithNixGL "alacritty";
+  #   categories = [ "System" "TerminalEmulator" ];
+  #   icon = "Alacritty";
+  #   type = "Application";
+  # };
 
 }
