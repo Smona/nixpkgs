@@ -15,6 +15,7 @@ in {
       font_family = "Cascadia Code";
       background_opacity = "0.9";
       font_size = "12";
+      window_padding_width = "4";
       touch_scroll_multiplier = "2";
       tab_bar_style = "slant";
       wayland_titlebar_color = "background";
