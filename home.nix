@@ -31,7 +31,10 @@ in {
     python310Packages.debugpy # Required by dap-mode
     wakatime
     nodePackages.pyright
+    # Language servers
     rnix-lsp # Required by (nix +lsp)
+    nodePackages.typescript-language-server
+    nodePackages.vscode-langservers-extracted
     # Shell utilities
     bpytop
     curl
