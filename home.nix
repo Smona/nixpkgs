@@ -35,6 +35,7 @@ in {
     rnix-lsp # Required by (nix +lsp)
     nodePackages.typescript-language-server
     nodePackages.vscode-langservers-extracted
+    nodePackages.dockerfile-language-server-nodejs
     # Shell utilities
     bpytop
     curl
