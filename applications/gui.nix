@@ -15,6 +15,7 @@ in {
       slack
       spotify
       libreoffice-fresh
+      vlc
     ] ++ (lib.lists.optional settings.roles.work zoom-us);
 
   programs.chromium.enable = true;
