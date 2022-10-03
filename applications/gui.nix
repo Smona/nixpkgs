@@ -14,6 +14,7 @@ in {
       signal-desktop
       slack
       spotify
+      libreoffice-fresh
     ] ++ (lib.lists.optional settings.roles.work zoom-us);
 
   programs.chromium.enable = true;
