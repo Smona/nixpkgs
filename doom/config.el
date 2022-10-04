@@ -492,3 +492,5 @@
 (use-package! polymode)
 (use-package! poly-markdown)
 
+
+(use-package! protobuf-mode)
