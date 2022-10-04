@@ -36,6 +36,8 @@ in {
     nodePackages.typescript-language-server
     nodePackages.vscode-langservers-extracted
     nodePackages.dockerfile-language-server-nodejs
+    python310Packages.grip # Required by grip-mode (markdown +grip)
+
     # Shell utilities
     bpytop
     curl
