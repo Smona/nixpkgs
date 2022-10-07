@@ -51,7 +51,6 @@ in {
     # Universal dev tools
     docker
     docker-compose
-    hub
 
     # Fonts
     # Fonts I like, in order of preference: Cascadia Code, FiraCode, Dank Mono, JetBrains Mono
@@ -115,7 +114,6 @@ in {
     ncg = "nix-collect-garbage";
 
     # Git aliases
-    git = "hub";
     gb = "git branch";
     gcl = "git clone";
     gd = "git diff";
@@ -359,6 +357,18 @@ in {
   programs.direnv.enable = true;
   # https://github.com/nix-community/nix-direnv
   programs.direnv.nix-direnv.enable = true;
+
+  programs.gh = {
+    enable = true;
+    settings = {
+      git_protocol = "ssh";
+      prompt = "enabled";
+      aliases = {
+        co = "pr checkout";
+        pv = "pr view";
+      };
+    };
+  };
 
   # Services
   services.syncthing.enable = true;
