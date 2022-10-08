@@ -5,7 +5,7 @@ rec {
   desktops = {
     gnome = {
       enable = false;
-      theme = (import ./desktops/gnome/themes.nix).flat-remix;
+      theme = "flat-remix";
     };
   };
   roles = { work = false; };

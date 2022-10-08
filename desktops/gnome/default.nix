@@ -27,9 +27,11 @@ let
     windownavigator
     quake-mode
   ];
+  themes = import ./themes.nix;
   settings = import ../../settings.nix;
 in {
-  imports = [ ../../applications/gui.nix settings.desktops.gnome.theme ];
+  imports =
+    [ ../../applications/gui.nix themes.${settings.desktops.gnome.theme} ];
 
   home.packages = extensions ++ [ pkgs.gnome.dconf-editor ];
 
