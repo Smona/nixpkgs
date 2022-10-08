@@ -18,3 +18,9 @@ if [ ! -d "~/.emacs.d" ]; then
   ~/.emacs.d/bin/doom install
 fi
 
+echo "\nLogging into Keybase & importing your keys."
+echo "If asked for a password, enter your Keybase account password."
+keybase login
+keybase pgp export | gpg --import
+# The password is your keybase account password
+keybase pgp export --secret | gpg --allow-secret-key-import --import
