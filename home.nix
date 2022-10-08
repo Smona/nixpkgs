@@ -142,8 +142,7 @@ in {
       ".curlrc".source = ./dotfiles/curlrc;
       "doom".source = config.lib.file.mkOutOfStoreSymlink ./doom;
       "nix.conf" = {
-        # Enable nix command and nix flakes
-        text = "experimental-features = nix-command flakes";
+        source = ./dotfiles/nix.conf;
         target = "nix/nix.conf";
       };
     };
