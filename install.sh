@@ -2,14 +2,6 @@
 
 set -e
 
-# Install Nix (single user mode)
-# NOTE: if installing on a system multiple people will be using, manually
-#       install the multi-user installation.
-# See: https://nixos.org/manual/nix/stable/installation/installing-binary.html#single-user-installation
-
-sh <(curl -L https://nixos.org/nix/install) --no-daemon
-. $HOME/.nix-profile/etc/profile.d/nix.sh
-
 # Add the home-manager channel
 
 nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
@@ -28,5 +20,3 @@ rm -rf ~/.ackrc ~/.curlrc ~/.gemrc ~/.screenrc ~/.doom.d ~/.zpreztorc ~/.zshrc \
 export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
 nix-shell '<home-manager>' -A install
 
-echo 'Adding you to the "docker" group...'
-sudo usermod -aG docker $USER
