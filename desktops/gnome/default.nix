@@ -120,6 +120,10 @@ in {
         matrix-overshoot = 0.14;
         matrix-trail-color = "rgb(78,41,244)";
       };
+      "org/gnome/shell/extensions/gestureImprovements" = {
+        alttab-delay = 100;
+        enable-forward-back-gesture = true;
+      };
     };
   };
 }
