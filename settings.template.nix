@@ -8,7 +8,10 @@ rec {
       theme = "flat-remix";
     };
   };
-  roles = { work = false; };
+  roles = {
+    gaming = true;
+    work = false;
+  };
 
   # Overrideable defaults (the default should work most of the time)
   homeDirectory = "/home/${username}";

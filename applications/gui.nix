@@ -2,7 +2,8 @@
 
 let settings = import ../settings.nix;
 in {
-  imports = [ ./firefox.nix ./terminal.nix ];
+  imports = [ ./firefox.nix ./terminal.nix ]
+    ++ (lib.lists.optional settings.roles.gaming ./games.nix);
 
   home.packages = with pkgs;
     [
