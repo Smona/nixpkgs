@@ -46,6 +46,8 @@ in {
     settings = {
       "org/gnome/shell" = {
         disable-user-extensions = false;
+        # Disabled so that I can use audio-switcher-40 on gnome 42
+        disable-extension-version-validation = true;
         enabled-extensions = builtins.map (e: e.extensionUuid) extensions;
         favorite-apps = [
           "emacsclient.desktop"
