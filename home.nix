@@ -184,6 +184,11 @@ in {
       }
       chpwd_functions=( auto-ls $chpwd_functions )
 
+      # Create a new directory and enter it
+      function md() {
+        mkdir -p "$@" && cd "$@"
+      }
+
       ## Source local extra (private) settings specific to machine if it exists
       [ -f ~/.zsh.local ] && source ~/.zsh.local
     '';
