@@ -28,6 +28,7 @@ in {
     nixfmt
 
     # Assorted Emacs dependencies
+    python310 # Required for advanced treemacs features
     python310Packages.debugpy # Required by dap-mode
     wakatime
     nodePackages.pyright
