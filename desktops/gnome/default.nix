@@ -52,6 +52,14 @@ in {
       };
       # Allow over-amplification
       "org/gnome/desktop/sound" = { allow-volume-above-100-percent = true; };
+      "org/gnome/desktop/input-sources" = {
+        sources = [
+          (lib.hm.gvariant.mkTuple [ "xkb" "us+dvorak" ])
+          (lib.hm.gvariant.mkTuple [ "xkb" "us" ])
+        ];
+        xkb-options =
+          [ "terminate:ctrl_alt_bksp" "lv3:ralt_switch" "caps:swapescape" ];
+      };
       "org/gnome/desktop/peripherals/touchpad" = {
         tap-to-click = true;
         two-finger-scrolling-enabled = true;
