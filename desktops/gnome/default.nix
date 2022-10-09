@@ -47,8 +47,13 @@ in {
       "org/gnome/shell" = {
         disable-user-extensions = false;
         enabled-extensions = builtins.map (e: e.extensionUuid) extensions;
-        favorite-apps =
-          [ "emacsclient.desktop" "firefox.desktop" "spotify.desktop" ];
+        favorite-apps = [
+          "emacsclient.desktop"
+          "firefox.desktop"
+          "spotify.desktop"
+          "discord.desktop"
+          "steam.desktop"
+        ];
       };
       # Allow over-amplification
       "org/gnome/desktop/sound" = { allow-volume-above-100-percent = true; };
