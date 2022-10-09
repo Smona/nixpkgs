@@ -52,6 +52,10 @@ in {
       };
       # Allow over-amplification
       "org/gnome/desktop/sound" = { allow-volume-above-100-percent = true; };
+      "org/gnome/desktop/peripherals/touchpad" = {
+        tap-to-click = true;
+        two-finger-scrolling-enabled = true;
+      };
       "org/gnome/desktop/wm/preferences" = {
         # Focus windows on hover, but preserve focus when hovering the desktop.
         # Originally switched to fix https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/5162,
