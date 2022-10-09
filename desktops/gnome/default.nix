@@ -111,6 +111,15 @@ in {
         net-show-text = false;
         icon-display = false;
       };
+      "org/gnome/shell/extensions/burn-my-windows" = {
+        fire-close-effect = false;
+
+        matrix-close-effect = true;
+        matrix-open-effect = true;
+        matrix-animation-time = 580;
+        matrix-overshoot = 0.14;
+        matrix-trail-color = "rgb(78,41,244)";
+      };
     };
   };
 }
