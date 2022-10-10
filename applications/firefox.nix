@@ -23,6 +23,9 @@ in {
           "media.ffmpeg.vaapi.enabled" = true;
           "media.hardware-video-decoding.enabled" = true;
           "media.hardware-video-decoding.force-enabled" = true;
+          # I tend to like a larger font size for web content compared to the base
+          # OS font size
+          "font.size.systemFontScale" = 110;
         };
       };
     };
