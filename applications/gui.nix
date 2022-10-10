@@ -8,8 +8,6 @@ in {
   home.packages = with pkgs;
     [
       # Graphical applications
-      # FIXME: system authentication isn't working, preventing use of SSH agent
-      # _1password-gui
       discord
       rescuetime
       signal-desktop
@@ -25,28 +23,30 @@ in {
     Unit.Description = "RescueTime time tracker";
     Install.WantedBy = [ "graphical-session.target" ];
     Service = {
-      # TODO: don't go through homeDirectory, reference rescuetime directly
-      ExecStart = "${settings.homeDirectory}/.nix-profile/bin/rescuetime";
+      ExecStart = "${pkgs.rescuetime}/bin/rescuetime";
       Restart = "on-failure";
       RestartSec = 2;
     };
   };
-  # systemd.user.services."1password" = {
-  #   Unit.Description = "1password manager GUI application.";
-  #   Install.WantedBy = [ "graphical-session.target" ];
-  #   Service = {
-  #     ExecStart = "${settings.homeDirectory}/.nix-profile/bin/1password";
-  #     Restart = "on-failure";
-  #     RestartSec = 2;
-  #   };
-  # };
 
   # I like to have slack installed everywhere, but only auto-start it on work machines
   systemd.user.services.slack = lib.mkIf settings.roles.work {
     Unit.Description = "Slack desktop application";
     Install.WantedBy = [ "graphical-session.target" ];
     Service = {
-      ExecStart = "${settings.homeDirectory}/.nix-profile/bin/slack";
+      ExecStart = "${pkgs.slack}/bin/slack";
+      Restart = "on-failure";
+      RestartSec = 2;
+    };
+  };
+
+  # 1password has to be installed at the system level to integrate with polkit
+  # and support system authentication / ssh agent / browser extension integration.
+  systemd.user.services."1password" = {
+    Unit.Description = "1password manager GUI application.";
+    Install.WantedBy = [ "graphical-session.target" ];
+    Service = {
+      ExecStart = "/usr/bin/env 1password";
       Restart = "on-failure";
       RestartSec = 2;
     };

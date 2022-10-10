@@ -13,6 +13,15 @@ before installing.
 Have fun!
 
 ** Recommended manual steps
+*** Set up 1password
+1password has to be installed at the system level to support the browser
+integration, system authentication, and the SSH agent. Go ahead and install it
+from your operating system's package manager.
+
+/TODO: check in nixos configurations to handle installation on NixOS/
+
+After installing, log in and enable 1password system authentication and the SSH agent.
+
 *** Set up syncthing shared folders
 home-manager will install syncthing and enable its systemd service on machines
 that use it.

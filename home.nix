@@ -171,6 +171,8 @@ in {
       fi
     '';
     initExtra = ''
+      export SSH_AUTH_SOCK=${settings.homeDirectory}/.1password/agent.sock
+
       # Set up nix paths
       if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
@@ -228,6 +230,12 @@ in {
       dotExpansion = true;
     };
     prompt = { theme = "powerlevel10k"; };
+  };
+
+  programs.ssh = {
+    enable = true;
+    # Set up the 1password SSH agent
+    extraConfig = "IdentityAgent ~/.1password/agent.sock";
   };
 
   programs.git = {
