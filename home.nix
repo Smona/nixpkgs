@@ -18,22 +18,30 @@ in {
     gcc # required to compile some packages, e.g. emacsqlite
     faust
 
+    ## Python
+    python310 # Required for advanced treemacs features
+    python310Packages.debugpy # Required by dap-mode
+    nodePackages.pyright
+
     ## NodeJS
     nodejs
     yarn
 
+    ## Nix
+    rnix-lsp # Required by (nix +lsp)
+    nixfmt # For emacs code formatting
+
+    ## Haskell
+    ghc
+    haskell-language-server # Required for doom (haskell +lsp) module
+
     # Code Formatters (used by emacs)
     nodePackages.prettier
     shfmt
-    nixfmt
 
     # Assorted Emacs dependencies
-    python310 # Required for advanced treemacs features
-    python310Packages.debugpy # Required by dap-mode
     wakatime
-    nodePackages.pyright
     # Language servers
-    rnix-lsp # Required by (nix +lsp)
     nodePackages.typescript-language-server
     nodePackages.vscode-langservers-extracted
     nodePackages.dockerfile-language-server-nodejs
