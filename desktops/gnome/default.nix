@@ -168,6 +168,13 @@ in {
         alttab-delay = 100;
         enable-forward-back-gesture = true;
       };
+      "org/gnome/shell/extensions/openweather" = {
+        city = "30.26370257725724,-97.86675768202726>Austin, TX 78735>0";
+        unit = "fahrenheit";
+        wind-speed-unit = "mph";
+        disable-forecast = false;
+        days-forecast = 3;
+      };
     };
   };
 }
