@@ -175,6 +175,9 @@ in {
         disable-forecast = false;
         days-forecast = 3;
       };
+      "org/gnome/shell/extensions/unite" = {
+        window-buttons-placement = "last";
+      };
     };
   };
 }

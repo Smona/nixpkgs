@@ -8,8 +8,13 @@
       package = pkgs.flat-remix-icon-theme;
       name = "Flat-Remix-Blue-Dark";
     };
-    dconf.settings."org/gnome/shell/extensions/user-theme" = {
-      name = "Flat-Remix-Blue-Dark-fullPanel";
+    dconf.settings = {
+      "org/gnome/shell/extensions/user-theme" = {
+        name = "Flat-Remix-Blue-Dark-fullPanel";
+      };
+      "org/gnome/shell/extensions/unite" = {
+        window-buttons-theme = "flat-remix";
+      };
     };
     home.packages = [ pkgs.flat-remix-gnome ];
   };
@@ -18,8 +23,11 @@
       package = pkgs.dracula-theme;
       name = "Dracula";
     };
-    dconf.settings."org/gnome/shell/extensions/user-theme" = {
-      name = "Dracula";
+    dconf.settings = {
+      "org/gnome/shell/extensions/user-theme" = { name = "Dracula"; };
+      "org/gnome/shell/extensions/unite" = {
+        window-buttons-theme = "dracula";
+      };
     };
   };
 }
