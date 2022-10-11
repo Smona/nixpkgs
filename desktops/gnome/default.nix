@@ -41,6 +41,33 @@ in {
     name = "Dracula-cursors";
   };
 
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = let
+      browser = "firefox.desktop";
+      imageViewer = "org.gnome.eog.desktop";
+    in {
+      "x-scheme-handler/http" = browser;
+      "text/html" = browser;
+      "application/pdf" = browser;
+      "application/xhtml+xml" = browser;
+      "x-scheme-handler/https" = browser;
+      "image/png" = imageViewer;
+      "image/jpeg" = imageViewer;
+    };
+    associations.added = let
+      browsers = [ "firefox.desktop" "chromium-browser.desktop" ];
+      imageViewers = [ "org.gnome.eog.desktop" "org.gnome.gThumb.desktop" ];
+    in {
+      "image/jpeg" = imageViewers;
+      "image/png" = imageViewers;
+      "x-scheme-handler/http" = browsers;
+      "text/html" = browsers;
+      "application/xhtml+xml" = browsers;
+      "x-scheme-handler/https" = browsers;
+    };
+  };
+
   dconf = {
     enable = true;
     settings = {
