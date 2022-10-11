@@ -33,7 +33,7 @@ in {
   imports =
     [ ../../applications/gui.nix themes.${settings.desktops.gnome.theme} ];
 
-  home.packages = extensions ++ [ pkgs.gnome.dconf-editor ];
+  home.packages = extensions ++ [ pkgs.gnome.dconf-editor pkgs.gthumb ];
 
   gtk.enable = true;
   gtk.cursorTheme = {
