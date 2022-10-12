@@ -1,10 +1,10 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, desktops, ... }:
 
 let
   extensions = with pkgs.gnomeExtensions; [
     # Gnome goodness
     always-indicator
-    audio-switcher-40
+    audio-selector
     autohide-battery
     burn-my-windows
     clipboard-indicator
@@ -17,7 +17,7 @@ let
     gesture-improvements
     hide-keyboard-layout
     middle-click-to-close-in-overview
-    noannoyance-2 # TODO: settings dialog broken
+    noannoyance-2
     openweather
     pip-on-top # Fix firefox PIP pinning on wayland
     remove-alttab-delay-v2
@@ -28,10 +28,8 @@ let
     quake-mode
   ];
   themes = import ./themes.nix;
-  settings = import ../../settings.nix;
 in {
-  imports =
-    [ ../../applications/gui.nix themes.${settings.desktops.gnome.theme} ];
+  imports = [ ../../applications/gui.nix themes.${desktops.gnome.theme} ];
 
   home.packages = extensions ++ [ pkgs.gnome.dconf-editor pkgs.gthumb ];
 

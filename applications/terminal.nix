@@ -1,6 +1,6 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, isNixOS, ... }:
 
-let wrapWithNixGL = import ./nixGL.nix pkgs;
+let wrapWithNixGL = import ./nixGL.nix { inherit pkgs isNixOS; };
 in {
   home.shellAliases = {
     # Convenience SSH alias for installing kitty terminfo on servers

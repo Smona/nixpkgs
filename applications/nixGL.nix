@@ -1,6 +1,7 @@
-let settings = import ../settings.nix;
-in pkgs: command:
-if settings.nixOS then
+# TODO: install as a flake
+{ pkgs, isNixOS }:
+command:
+if isNixOS then
   command
 else
   let

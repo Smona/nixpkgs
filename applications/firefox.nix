@@ -1,8 +1,6 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, isNixOS, ... }:
 
-let
-  settings = import ../settings.nix;
-  wrapWithNixGL = import ./nixGL.nix pkgs;
+let wrapWithNixGL = import ./nixGL.nix { inherit pkgs isNixOS; };
 in {
   programs.firefox = {
     enable = true;
