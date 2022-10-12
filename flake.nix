@@ -10,12 +10,15 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    nixGL.url = "github:guibou/nixGL";
+    nixGL.inputs.nixpkgs.follows = "nixpkgs";
+
     # Shameless plug: looking for a way to nixify your themes and make
     # everything match nicely? Try nix-colors!
     # nix-colors.url = "github:misterio77/nix-colors";
   };
 
-  outputs = { nixpkgs, home-manager, ... }@inputs: rec {
+  outputs = { nixpkgs, home-manager, nixGL, ... }@inputs: rec {
     # This instantiates nixpkgs for each system listed
     # Allowing you to configure it (e.g. allowUnfree)
     # Our configurations will use these instances
@@ -46,7 +49,6 @@
           inherit inputs; # Pass flake inputs to our config
           hostName = "xps_nixos";
           username = "smona";
-          isNixOS = true;
           desktops = {
             gnome = {
               enable = true;
@@ -59,6 +61,27 @@
           };
         };
         # > Our main home-manager configuration file <
+        modules = [ ./home.nix ];
+      };
+      "cobalt@remotestation376" = home-manager.lib.homeManagerConfiguration {
+        pkgs = legacyPackages.x86_64-linux;
+        extraSpecialArgs = {
+          inherit inputs; # Pass flake inputs to our config
+          hostName = "remotestation376";
+          username = "cobalt";
+          nixGLPrefix =
+            "${nixGL.packages.x86_64-linux.nixGLIntel}/bin/nixGLIntel ";
+          desktops = {
+            gnome = {
+              enable = true;
+              theme = "flat-remix";
+            };
+          };
+          roles = {
+            gaming = false;
+            work = true;
+          };
+        };
         modules = [ ./home.nix ];
       };
     };

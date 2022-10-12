@@ -1,7 +1,6 @@
-{ config, lib, pkgs, isNixOS, ... }:
+{ config, lib, pkgs, nixGLPrefix ? "", ... }:
 
-let wrapWithNixGL = import ./nixGL.nix { inherit pkgs isNixOS; };
-in {
+{
   home.shellAliases = {
     # Convenience SSH alias for installing kitty terminfo on servers
     s = "kitty +kitten ssh";
@@ -35,7 +34,7 @@ in {
     # TODO: figure out how to inherit attributes from the base desktop item
     name = "kitty";
     genericName = "Terminal";
-    exec = wrapWithNixGL "kitty";
+    exec = "${nixGLPrefix}kitty";
     categories = [ "System" "TerminalEmulator" ];
     icon = "kitty";
     type = "Application";
