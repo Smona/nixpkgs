@@ -84,6 +84,26 @@
         };
         modules = [ ./home.nix ];
       };
+      "smona@DESKTOP-9F9VN3S" = home-manager.lib.homeManagerConfiguration {
+        pkgs = legacyPackages.x86_64-linux;
+        extraSpecialArgs = {
+          inherit inputs; # Pass flake inputs to our config
+          hostName = "DESKTOP-9F9VN3S";
+          username = "smona";
+          desktops = {
+            gnome = {
+              enable = false;
+              theme = "flat-remix";
+            };
+          };
+          roles = {
+            gaming = false;
+            work = false;
+          };
+        };
+        modules = [ ./home.nix ];
+      };
+
     };
   };
 }
