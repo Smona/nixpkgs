@@ -4,7 +4,7 @@ let
   extensions = with pkgs.gnomeExtensions; [
     # Gnome goodness
     always-indicator
-    audio-selector
+    sound-output-device-chooser
     autohide-battery
     burn-my-windows
     clipboard-indicator
