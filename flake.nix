@@ -34,16 +34,16 @@
         });
 
     nixosConfigurations = {
-      xps_nixos = nixpkgs.lib.nixosSystem {
+      xps-nixos = nixpkgs.lib.nixosSystem {
         pkgs = legacyPackages.x86_64-linux;
         specialArgs = { inherit inputs; }; # Pass flake inputs to our config
         # > Our main nixos configuration file <
-        modules = [ ./nixos/xps_nixos/configuration.nix ];
+        modules = [ ./nixos/xps-nixos/configuration.nix ];
       };
     };
 
     homeConfigurations = {
-      "smona@xps_nixos" = home-manager.lib.homeManagerConfiguration {
+      "smona@xps-nixos" = home-manager.lib.homeManagerConfiguration {
         pkgs = legacyPackages.x86_64-linux;
         extraSpecialArgs = {
           inherit inputs; # Pass flake inputs to our config
