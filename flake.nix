@@ -49,6 +49,7 @@
           inherit inputs; # Pass flake inputs to our config
           hostName = "xps_nixos";
           username = "smona";
+          nixGLPrefix = "";
           desktops = {
             gnome = {
               enable = true;
