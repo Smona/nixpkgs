@@ -4,10 +4,11 @@
   imports = [ ./firefox.nix ./terminal.nix ]
     ++ (lib.lists.optional roles.gaming ./games.nix);
 
+  # Graphical applications
   home.packages = with pkgs;
     [
-      # Graphical applications
-      discord
+      # https://github.com/NixOS/nixpkgs/issues/78961
+      (discord.override { nss = nss_latest; })
       rescuetime
       signal-desktop
       slack
