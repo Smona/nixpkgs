@@ -50,4 +50,16 @@
       RestartSec = 2;
     };
   };
+  xdg.configFile."1password-settings" = {
+    target = "1Password/settings/settings.json";
+    text = ''
+      {
+        "app.double": false,
+        "security.authenticatedUnlock.enabled": true,
+        "sshAgent.enabled": true,
+        "sshAgent.storeKeyTitles": true,
+        "sshAgent.sshAuthorizatonModel": "application"
+      }
+    '';
+  };
 }
