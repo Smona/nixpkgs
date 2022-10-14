@@ -112,6 +112,10 @@ in {
         # Show image thumbnails for remote file storage
         show-image-thumbnails = "always";
       };
+      "org/gtk/settings/file-chooser" = {
+        # Sort folders first in nautilus
+        sort-directories-first = true;
+      };
 
       # Custom keybindings
       "org/gnome/desktop/wm/keybindings" = {
