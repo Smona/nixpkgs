@@ -1,10 +1,6 @@
 #+title: Smona's Home Configuration
 
 * Installation
-*WARNING:* The install script will delete your existing dotfiles if they would
-conflict with the installation process. Make sure to backup those dotfiles
-before installing.
-
 1. Clone this repository into ~$HOME/.config~.
 2. ~cp settings.template.nix settings.nix~
 3. Update ~settings.nix~ to reflect the machine you're installing on.
