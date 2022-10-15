@@ -6,6 +6,7 @@ let
     always-indicator
     sound-output-device-chooser
     autohide-battery
+    blur-my-shell
     burn-my-windows
     clipboard-indicator
     # disabled because it doesn't play nice with quake-mode.
@@ -180,6 +181,30 @@ in {
       };
       "org/gnome/shell/extensions/unite" = {
         window-buttons-placement = "last";
+      };
+      "org/gnome/shell/extensions/blur-my-shell" = { hacks-level = 3; };
+      "org/gnome/shell/extensions/blur-my-shell/applications" = {
+        whitelist = [ "kitty" ];
+        blur-on-overview = true;
+        sigma = 44;
+        opacity = 241;
+      };
+      "org/gnome/shell/extensions/blur-my-shell/appfolder" = {
+        blur = true;
+        dialog-opacity = 1;
+      };
+      "org/gnome/shell/extensions/blur-my-shell/dash-to-dock" = {
+        # Doesn't look good with rounded dock corners
+        blur = false;
+      };
+      "org/gnome/shell/extensions/blur-my-shell/overview" = {
+        blur = true;
+        # Match style of dock, search bar, and search results with translucent look
+        style-components = 2;
+      };
+      "org/gnome/shell/extensions/blur-my-shell/panel" = {
+        # Broken on smona@xps-nixos, panel just turns black
+        blur = false;
       };
     };
   };

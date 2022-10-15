@@ -12,7 +12,7 @@
     theme = "Tokyo Night";
     settings = {
       font_family = "Cascadia Code";
-      background_opacity = "0.9";
+      background_opacity = "0.7";
       font_size = "12";
       window_padding_width = "4";
       touch_scroll_multiplier = "2";
@@ -22,6 +22,7 @@
       visual_bell_duration = "0.3";
       visual_bell_color = "#777";
       update_check_interval = "0";
+      hide_window_decorations = "yes";
       # This option is required to prevent breaking when used with quake-mode
       # https://github.com/repsac-by/gnome-shell-extension-quake-mode/issues/16
       remember_window_size = "no";
