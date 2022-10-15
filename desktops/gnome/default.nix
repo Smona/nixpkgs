@@ -105,6 +105,7 @@ in {
         # Originally switched to fix https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/5162,
         # but it seems more efficient anyways.
         focus-mode = "sloppy";
+        resize-with-right-button = true;
       };
       "org/gnome/mutter" = {
         # Change focus immediately rather than waiting for pointer to rest
