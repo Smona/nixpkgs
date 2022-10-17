@@ -18,6 +18,7 @@ let
     gesture-improvements
     hide-keyboard-layout
     middle-click-to-close-in-overview
+    mouse-follows-focus
     noannoyance-2
     openweather
     pip-on-top # Fix firefox PIP pinning on wayland
