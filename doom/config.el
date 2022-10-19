@@ -115,6 +115,9 @@
 (setq mouse-wheel-tilt-scroll t)
 (setq mouse-wheel-flip-direction t)
 
+;; Focus follows mouse, just like in the desktop
+(setq mouse-autoselect-window t)
+
 (setq doom-modeline-major-mode-icon t)
 (setq doom-modeline-height 35)
 
