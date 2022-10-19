@@ -95,9 +95,12 @@ in {
         xkb-options =
           [ "terminate:ctrl_alt_bksp" "lv3:ralt_switch" "caps:swapescape" ];
       };
-      "org/gnome/desktop/peripherals/mouse" = { natural-scroll = true; };
+      "org/gnome/desktop/peripherals/mouse" = {
+        natural-scroll = true;
+        speed = 0.29;
+      };
       "org/gnome/desktop/peripherals/touchpad" = {
-        speed = 0.37;
+        speed = 0.4;
         tap-to-click = true;
         two-finger-scrolling-enabled = true;
       };
