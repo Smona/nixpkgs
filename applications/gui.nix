@@ -46,7 +46,7 @@
     Unit.Description = "1password manager GUI application.";
     Install.WantedBy = [ "graphical-session.target" ];
     Service = {
-      ExecStart = "/usr/bin/env 1password";
+      ExecStart = "/usr/bin/env 1password --silent";
       Restart = "on-failure";
       RestartSec = 2;
     };
