@@ -58,6 +58,8 @@
 
 (package! magit-delta)
 
+(package! dirvish)
+
 (package! polymode)
 (package! poly-markdown)
 

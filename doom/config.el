@@ -491,6 +491,10 @@
 (after! web-mode
         (setq web-mode-prettify-symbols-alist '()))
 
+(use-package! dirvish
+  :config
+  (dirvish-override-dired-mode))
+
 ;; Use language major mode, syntax highlihting, and configuration in markdown code blocks.
 (use-package! polymode)
 (use-package! poly-markdown)
