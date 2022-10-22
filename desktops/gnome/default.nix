@@ -156,6 +156,7 @@ in {
         quake-mode-hide-from-overview = true;
         quake-mode-hotkey = [ "<Alt>space" ];
         quake-mode-tray = false;
+        quake-mode-width = 100;
       };
       "org/gnome/shell/extensions/system-monitor" = {
         background = "#00000000";
