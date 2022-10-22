@@ -33,6 +33,7 @@ options.
 
 - ~$HOME/.zsh.local~
 - ~$HOME/.gitconfig.local~
+- ~$HOME/.ssh/config.local~
 
 I may one day decide to do this in a nix-ey way, but this is how my old
 configuration worked, and it's a good setup.

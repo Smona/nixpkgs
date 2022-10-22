@@ -244,6 +244,7 @@ in {
     enable = true;
     # Set up the 1password SSH agent
     extraConfig = "IdentityAgent ~/.1password/agent.sock";
+    includes = [ "~/.ssh/config.local" ];
   };
 
   programs.git = {
