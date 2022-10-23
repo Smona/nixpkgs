@@ -11,6 +11,7 @@
     ./desktops/gnome
     ./desktops/wlroots
     ./dotfiles/tmux.nix
+    ./applications/emacs.nix
   ];
 
   home.packages = with pkgs; [
@@ -20,32 +21,14 @@
 
     ## Python
     python310 # Required for advanced treemacs features
-    python310Packages.debugpy # Required by dap-mode
-    nodePackages.pyright
 
     ## NodeJS
     nodejs
     yarn
 
-    ## Nix
-    rnix-lsp # Required by (nix +lsp)
-    nixfmt # For emacs code formatting
-
     ## Haskell
     ghc
     haskell-language-server # Required for doom (haskell +lsp) module
-
-    # Code Formatters (used by emacs)
-    nodePackages.prettier
-    shfmt
-
-    # Assorted Emacs dependencies
-    wakatime
-    # Language servers
-    nodePackages.typescript-language-server
-    nodePackages.vscode-langservers-extracted
-    nodePackages.dockerfile-language-server-nodejs
-    python310Packages.grip # Required by grip-mode (markdown +grip)
 
     # Shell utilities
     bpytop
@@ -305,12 +288,6 @@
       ".idea"
       ".log"
     ];
-  };
-
-  programs.emacs = {
-    enable = true;
-    package = pkgs.emacs28NativeComp;
-    extraPackages = epkgs: [ epkgs.vterm ];
   };
 
   programs.vim = {

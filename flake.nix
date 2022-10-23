@@ -15,12 +15,14 @@
 
 
     hyprland.url = "github:hyprwm/Hyprland";
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
+
     # Shameless plug: looking for a way to nixify your themes and make
     # everything match nicely? Try nix-colors!
     # nix-colors.url = "github:misterio77/nix-colors";
   };
 
-  outputs = { nixpkgs, home-manager, nixGL, ... }@inputs: rec {
+  outputs = { nixpkgs, home-manager, nixGL, emacs-overlay, ... }@inputs: rec {
     # This instantiates nixpkgs for each system listed
     # Allowing you to configure it (e.g. allowUnfree)
     # Our configurations will use these instances
@@ -28,6 +30,7 @@
       (system:
         import inputs.nixpkgs {
           inherit system;
+          overlays = [ emacs-overlay.overlays.emacs ];
 
           # NOTE: Using `nixpkgs.config` in your NixOS config won't work
           # Instead, you should set nixpkgs configs here
