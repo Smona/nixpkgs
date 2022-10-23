@@ -13,6 +13,8 @@
     nixGL.url = "github:guibou/nixGL";
     nixGL.inputs.nixpkgs.follows = "nixpkgs";
 
+
+    hyprland.url = "github:hyprwm/Hyprland";
     # Shameless plug: looking for a way to nixify your themes and make
     # everything match nicely? Try nix-colors!
     # nix-colors.url = "github:misterio77/nix-colors";
@@ -51,6 +53,7 @@
           username = "smona";
           nixGLPrefix = "";
           desktops = {
+            hyprland.enable = true;
             gnome = {
               enable = true;
               theme = "flat-remix";

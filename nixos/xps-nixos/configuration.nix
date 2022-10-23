@@ -5,8 +5,9 @@
 { inputs, config, pkgs, lib, ... }:
 
 {
-  imports = [ # Include the results of the hardware scan.
-    ./hardware-configuration.nix
+  imports = [
+    ./hardware-configuration.nix # Include the results of the hardware scan.
+    ./wlroots.nix
   ];
 
   nix = {
@@ -84,7 +85,7 @@
   users.users.smona = {
     isNormalUser = true;
     description = "Mel Bourgeois";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "video" ];
     packages = with pkgs;
       [
         firefox

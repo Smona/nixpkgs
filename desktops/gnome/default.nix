@@ -1,6 +1,7 @@
 { config, lib, pkgs, desktops, ... }:
 
 let
+  commonOptions = import ../common.nix;
   extensions = with pkgs.gnomeExtensions; [
     # Gnome goodness
     always-indicator
@@ -92,8 +93,7 @@ in {
           (lib.hm.gvariant.mkTuple [ "xkb" "us+dvorak" ])
           (lib.hm.gvariant.mkTuple [ "xkb" "us" ])
         ];
-        xkb-options =
-          [ "terminate:ctrl_alt_bksp" "lv3:ralt_switch" "caps:swapescape" ];
+        xkb-options = commonOptions.xkbOptions;
       };
       "org/gnome/desktop/peripherals/mouse" = {
         natural-scroll = true;
