@@ -36,7 +36,7 @@
         });
 
     nixosConfigurations = {
-      xps-nixos = nixpkgs.lib.nixosSystem {
+      "xps-nixos" = nixpkgs.lib.nixosSystem {
         pkgs = legacyPackages.x86_64-linux;
         specialArgs = { inherit inputs; }; # Pass flake inputs to our config
         # > Our main nixos configuration file <
@@ -45,28 +45,6 @@
     };
 
     homeConfigurations = {
-      "smona@xps-nixos" = home-manager.lib.homeManagerConfiguration {
-        pkgs = legacyPackages.x86_64-linux;
-        extraSpecialArgs = {
-          inherit inputs; # Pass flake inputs to our config
-          hostName = "xps_nixos";
-          username = "smona";
-          nixGLPrefix = "";
-          desktops = {
-            hyprland.enable = true;
-            gnome = {
-              enable = true;
-              theme = "flat-remix";
-            };
-          };
-          roles = {
-            gaming = true;
-            work = false;
-          };
-        };
-        # > Our main home-manager configuration file <
-        modules = [ ./home.nix ];
-      };
       "cobalt@remotestation376" = home-manager.lib.homeManagerConfiguration {
         pkgs = legacyPackages.x86_64-linux;
         extraSpecialArgs = {

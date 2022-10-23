@@ -8,6 +8,7 @@
   imports = [
     ./hardware-configuration.nix # Include the results of the hardware scan.
     ./wlroots.nix
+    inputs.home-manager.nixosModule
   ];
 
   nix = {
@@ -92,6 +93,17 @@
         #  thunderbird
       ];
   };
+  home-manager.users.smona = { pkgs, ... }: {
+    imports = [ ../../home.nix ];
+
+    home.username = "smona";
+    smona.wlroots.enable = true;
+    gnome.enable = true;
+    roles = { gaming = true; };
+  };
+
+  home-manager.useGlobalPkgs = true;
+  home-manager.extraSpecialArgs = { inherit inputs; };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
