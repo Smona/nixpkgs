@@ -1,8 +1,8 @@
-{ config, lib, pkgs, nixGLPrefix ? "", ... }:
+{ config, lib, pkgs, ... }:
 
 {
+  imports = [ ./nixGL.nix ];
   programs.firefox = {
-    enable = true;
     package = pkgs.firefox-wayland.override {
       extraNativeMessagingHosts = [ pkgs.fx_cast_bridge ];
     };
@@ -36,7 +36,7 @@
     # TODO: figure out how to inherit attributes from the base desktop item
     name = "Firefox";
     genericName = "Web Browser";
-    exec = "${nixGLPrefix}firefox %U";
+    exec = "${config.nixGLPrefix}firefox %U";
     categories = [ "Network" "WebBrowser" ];
     icon = "firefox";
     mimeType = [

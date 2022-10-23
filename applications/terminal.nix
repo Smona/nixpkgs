@@ -1,6 +1,8 @@
-{ config, lib, pkgs, nixGLPrefix ? "", ... }:
+{ config, lib, pkgs, ... }:
 
 {
+  imports = [ ./nixGL.nix ];
+
   home.shellAliases = {
     # Convenience SSH alias for installing kitty terminfo on servers
     s = "kitty +kitten ssh";
@@ -35,7 +37,7 @@
     # TODO: figure out how to inherit attributes from the base desktop item
     name = "kitty";
     genericName = "Terminal";
-    exec = "${nixGLPrefix}kitty";
+    exec = "${config.nixGLPrefix}kitty";
     categories = [ "System" "TerminalEmulator" ];
     icon = "kitty";
     type = "Application";
