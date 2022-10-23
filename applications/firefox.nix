@@ -23,6 +23,9 @@
           # I tend to like a larger font size for web content compared to the base
           # OS font size
           "font.size.systemFontScale" = 110;
+          # Disable ads
+          "browser.newtabpage.activity-stream.showSponsored" = false;
+          "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
         };
       };
     };
