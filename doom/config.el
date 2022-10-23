@@ -502,5 +502,9 @@
 
 (use-package! protobuf-mode)
 
+;; Emacs 29 configuration
+
 ;; Hide unimportant warnings from doom incompatibility with emacs 29
 (setq warning-minimum-level :error)
+
+(pixel-scroll-precision-mode)
