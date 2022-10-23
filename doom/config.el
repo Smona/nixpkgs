@@ -501,3 +501,6 @@
 
 
 (use-package! protobuf-mode)
+
+;; Hide unimportant warnings from doom incompatibility with emacs 29
+(setq warning-minimum-level :error)
