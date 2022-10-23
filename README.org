@@ -1,26 +1,22 @@
 #+title: Smona's Home Configuration
 
 * Installation
-*WARNING:* The install script will delete your existing dotfiles if they would
-conflict with the installation process. Make sure to backup those dotfiles
-before installing.
-
-1. Clone this repository into ~$HOME/.config~.
-2. ~cp settings.template.nix settings.nix~
-3. Update ~settings.nix~ to reflect the machine you're installing on.
-4. ~./install.sh~.
-
-Have fun!
+1. If installing NixOS, go ahead and complete the installation with a generated
+   configuration, and login with your user account.
+2. Clone this repository into ~$HOME/.config~.
+3. Add your host and/or home manager configurations to flake.nix.
+4. If on NixOS, run ~./install_nixos.sh <your hostname>~. Otherwise, run ~install_non_nixos.sh~.
+5. Reboot, and have fun!
 
 ** Recommended manual steps
 *** Set up 1password
 1password has to be installed at the system level to support the browser
-integration, system authentication, and the SSH agent. Go ahead and install it
-from your operating system's package manager.
+integration, system authentication, and the SSH agent. On NixOS it will already
+be installed, but otherwise go ahead and install it from your operating system's
+package manager.
 
-/TODO: check in nixos configurations to handle installation on NixOS/
-
-After installing, log in and enable 1password system authentication and the SSH agent.
+After installing, log in to 1password. 1password settings are managed, so the
+SSH agent and system authentication will be automatically enabled.
 
 *** Set up syncthing shared folders
 home-manager will install syncthing and enable its systemd service on machines
@@ -37,6 +33,7 @@ options.
 
 - ~$HOME/.zsh.local~
 - ~$HOME/.gitconfig.local~
+- ~$HOME/.ssh/config.local~
 
 I may one day decide to do this in a nix-ey way, but this is how my old
 configuration worked, and it's a good setup.

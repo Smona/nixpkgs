@@ -115,6 +115,9 @@
 (setq mouse-wheel-tilt-scroll t)
 (setq mouse-wheel-flip-direction t)
 
+;; Focus follows mouse, just like in the desktop
+(setq mouse-autoselect-window t)
+
 (setq doom-modeline-major-mode-icon t)
 (setq doom-modeline-height 35)
 
@@ -487,6 +490,10 @@
 ;; Disable web-mode's default prettify symbols since they conflict with native ligatures
 (after! web-mode
         (setq web-mode-prettify-symbols-alist '()))
+
+(use-package! dirvish
+  :config
+  (dirvish-override-dired-mode))
 
 ;; Use language major mode, syntax highlihting, and configuration in markdown code blocks.
 (use-package! polymode)

@@ -1,11 +1,12 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, desktops, ... }:
 
 let
   extensions = with pkgs.gnomeExtensions; [
     # Gnome goodness
     always-indicator
-    audio-switcher-40
+    sound-output-device-chooser
     autohide-battery
+    blur-my-shell
     burn-my-windows
     clipboard-indicator
     # disabled because it doesn't play nice with quake-mode.
@@ -17,7 +18,8 @@ let
     gesture-improvements
     hide-keyboard-layout
     middle-click-to-close-in-overview
-    noannoyance-2 # TODO: settings dialog broken
+    mouse-follows-focus
+    noannoyance-2
     openweather
     pip-on-top # Fix firefox PIP pinning on wayland
     remove-alttab-delay-v2
@@ -28,10 +30,8 @@ let
     quake-mode
   ];
   themes = import ./themes.nix;
-  settings = import ../../settings.nix;
 in {
-  imports =
-    [ ../../applications/gui.nix themes.${settings.desktops.gnome.theme} ];
+  imports = [ ../../applications/gui.nix themes.${desktops.gnome.theme} ];
 
   home.packages = extensions ++ [ pkgs.gnome.dconf-editor pkgs.gthumb ];
 
@@ -95,8 +95,12 @@ in {
         xkb-options =
           [ "terminate:ctrl_alt_bksp" "lv3:ralt_switch" "caps:swapescape" ];
       };
+      "org/gnome/desktop/peripherals/mouse" = {
+        natural-scroll = true;
+        speed = 0.29;
+      };
       "org/gnome/desktop/peripherals/touchpad" = {
-        speed = 0.37;
+        speed = 0.4;
         tap-to-click = true;
         two-finger-scrolling-enabled = true;
       };
@@ -105,6 +109,7 @@ in {
         # Originally switched to fix https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/5162,
         # but it seems more efficient anyways.
         focus-mode = "sloppy";
+        resize-with-right-button = true;
       };
       "org/gnome/mutter" = {
         # Change focus immediately rather than waiting for pointer to rest
@@ -113,6 +118,10 @@ in {
       "org/gnome/nautilus/preferences" = {
         # Show image thumbnails for remote file storage
         show-image-thumbnails = "always";
+      };
+      "org/gtk/settings/file-chooser" = {
+        # Sort folders first in nautilus
+        sort-directories-first = true;
       };
 
       # Custom keybindings
@@ -147,6 +156,7 @@ in {
         quake-mode-hide-from-overview = true;
         quake-mode-hotkey = [ "<Alt>space" ];
         quake-mode-tray = false;
+        quake-mode-width = 100;
       };
       "org/gnome/shell/extensions/system-monitor" = {
         background = "#00000000";
@@ -177,6 +187,30 @@ in {
       };
       "org/gnome/shell/extensions/unite" = {
         window-buttons-placement = "last";
+      };
+      "org/gnome/shell/extensions/blur-my-shell" = { hacks-level = 3; };
+      "org/gnome/shell/extensions/blur-my-shell/applications" = {
+        whitelist = [ "kitty" ];
+        blur-on-overview = true;
+        sigma = 44;
+        opacity = 241;
+      };
+      "org/gnome/shell/extensions/blur-my-shell/appfolder" = {
+        blur = true;
+        dialog-opacity = 1;
+      };
+      "org/gnome/shell/extensions/blur-my-shell/dash-to-dock" = {
+        # Doesn't look good with rounded dock corners
+        blur = false;
+      };
+      "org/gnome/shell/extensions/blur-my-shell/overview" = {
+        blur = true;
+        # Match style of dock, search bar, and search results with translucent look
+        style-components = 2;
+      };
+      "org/gnome/shell/extensions/blur-my-shell/panel" = {
+        # Broken on smona@xps-nixos, panel just turns black
+        blur = false;
       };
     };
   };

@@ -1,21 +1,21 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, roles, ... }:
 
-let settings = import ../settings.nix;
-in {
+{
   imports = [ ./firefox.nix ./terminal.nix ]
-    ++ (lib.lists.optional settings.roles.gaming ./games.nix);
+    ++ (lib.lists.optional roles.gaming ./games.nix);
 
+  # Graphical applications
   home.packages = with pkgs;
     [
-      # Graphical applications
-      discord
+      # https://github.com/NixOS/nixpkgs/issues/78961
+      (discord.override { nss = nss_latest; })
       rescuetime
       signal-desktop
       slack
       spotify
       libreoffice-fresh
       vlc
-    ] ++ (lib.lists.optional settings.roles.work zoom-us);
+    ] ++ (lib.lists.optional roles.work zoom-us);
 
   programs.chromium.enable = true;
 
@@ -30,7 +30,7 @@ in {
   };
 
   # I like to have slack installed everywhere, but only auto-start it on work machines
-  systemd.user.services.slack = lib.mkIf settings.roles.work {
+  systemd.user.services.slack = lib.mkIf roles.work {
     Unit.Description = "Slack desktop application";
     Install.WantedBy = [ "graphical-session.target" ];
     Service = {
@@ -46,9 +46,21 @@ in {
     Unit.Description = "1password manager GUI application.";
     Install.WantedBy = [ "graphical-session.target" ];
     Service = {
-      ExecStart = "/usr/bin/env 1password";
+      ExecStart = "/usr/bin/env 1password --silent";
       Restart = "on-failure";
       RestartSec = 2;
     };
+  };
+  xdg.configFile."1password-settings" = {
+    target = "1Password/settings/settings.json";
+    text = ''
+      {
+        "app.double": false,
+        "security.authenticatedUnlock.enabled": true,
+        "sshAgent.enabled": true,
+        "sshAgent.storeKeyTitles": true,
+        "sshAgent.sshAuthorizatonModel": "application"
+      }
+    '';
   };
 }

@@ -1,9 +1,6 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, nixGLPrefix ? "", ... }:
 
-let
-  settings = import ../settings.nix;
-  wrapWithNixGL = import ./nixGL.nix pkgs;
-in {
+{
   programs.firefox = {
     enable = true;
     package = pkgs.firefox-wayland.override {
@@ -36,7 +33,7 @@ in {
     # TODO: figure out how to inherit attributes from the base desktop item
     name = "Firefox";
     genericName = "Web Browser";
-    exec = wrapWithNixGL "firefox %U";
+    exec = "${nixGLPrefix}firefox %U";
     categories = [ "Network" "WebBrowser" ];
     icon = "firefox";
     mimeType = [

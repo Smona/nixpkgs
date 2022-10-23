@@ -1,17 +1,17 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, username, hostName, desktops, ... }:
 
-let settings = import ./settings.nix;
+let homeDirectory = "/home/${username}";
 in {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home.username = settings.username;
-  home.homeDirectory = settings.homeDirectory;
+  home.username = username;
+  home.homeDirectory = homeDirectory;
   fonts.fontconfig.enable = true;
   targets.genericLinux.enable = true;
 
   imports = with lib.lists;
     [ ./dotfiles/tmux.nix ]
-    ++ (optional settings.desktops.gnome.enable ./desktops/gnome);
+    ++ (optional desktops.gnome.enable ./desktops/gnome);
 
   home.packages = with pkgs; [
     # Programming languages
@@ -89,7 +89,7 @@ in {
     backup = "sudo rsync -av --delete "
       + "-e 'ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-rsa' "
       + "--exclude-from='${./dotfiles/rsync-ignore.txt}' "
-      + "/ smona@192.168.0.198::NetBackup/${settings.hostName}";
+      + "/ smona@192.168.0.198::NetBackup/${hostName}";
     diskspace = "df -P -kHl";
     fonts = "fc-list";
 
@@ -179,7 +179,7 @@ in {
       fi
     '';
     initExtra = ''
-      export SSH_AUTH_SOCK=${settings.homeDirectory}/.1password/agent.sock
+      export SSH_AUTH_SOCK=${homeDirectory}/.1password/agent.sock
 
       # Set up nix paths
       if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
@@ -244,6 +244,7 @@ in {
     enable = true;
     # Set up the 1password SSH agent
     extraConfig = "IdentityAgent ~/.1password/agent.sock";
+    includes = [ "~/.ssh/config.local" ];
   };
 
   programs.git = {
