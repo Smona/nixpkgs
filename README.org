@@ -1,12 +1,12 @@
 #+title: Smona's Home Configuration
 
 * Installation
-1. Clone this repository into ~$HOME/.config~.
-2. ~cp settings.template.nix settings.nix~
-3. Update ~settings.nix~ to reflect the machine you're installing on.
-4. ~./install.sh~.
-
-Have fun!
+1. If installing NixOS, go ahead and complete the installation with a generated
+   configuration, and login with your user account.
+2. Clone this repository into ~$HOME/.config~.
+3. Add your host and/or home manager configurations to flake.nix.
+4. If on NixOS, run ~./install_nixos.sh <your hostname>~. Otherwise, run ~install_non_nixos.sh~.
+5. Reboot, and have fun!
 
 ** Recommended manual steps
 *** Set up 1password
