@@ -13,6 +13,8 @@
     nixGL.url = "github:guibou/nixGL";
     nixGL.inputs.nixpkgs.follows = "nixpkgs";
 
+    musnix.url = "github:musnix/musnix";
+    musnix.inputs.nixpkgs.follows = "nixpkgs";
 
     hyprland.url = "github:hyprwm/Hyprland";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
@@ -23,9 +25,6 @@
   };
 
   outputs = { nixpkgs, home-manager, nixGL, emacs-overlay, ... }@inputs: rec {
-    # This instantiates nixpkgs for each system listed
-    # Allowing you to configure it (e.g. allowUnfree)
-    # Our configurations will use these instances
     legacyPackages = nixpkgs.lib.genAttrs [ "x86_64-linux" "x86_64-darwin" ]
       (system:
         import inputs.nixpkgs {
@@ -41,7 +40,7 @@
     nixosConfigurations = {
       "xps-nixos" = nixpkgs.lib.nixosSystem {
         pkgs = legacyPackages.x86_64-linux;
-        specialArgs = { inherit inputs; }; # Pass flake inputs to our config
+        specialArgs = { inherit inputs; };
         # > Our main nixos configuration file <
         modules = [ ./nixos/xps-nixos/configuration.nix ];
       };
@@ -50,9 +49,7 @@
     homeConfigurations = {
       "cobalt@remotestation376" = home-manager.lib.homeManagerConfiguration {
         pkgs = legacyPackages.x86_64-linux;
-        extraSpecialArgs = {
-          inherit inputs; # Pass flake inputs to our config
-        };
+        extraSpecialArgs = { inherit inputs; };
         modules = [
           ./home.nix
           ({ ... }: {
@@ -66,9 +63,7 @@
       };
       "smona@DESKTOP-9F9VN3S" = home-manager.lib.homeManagerConfiguration {
         pkgs = legacyPackages.x86_64-linux;
-        extraSpecialArgs = {
-          inherit inputs; # Pass flake inputs to our config
-        };
+        extraSpecialArgs = { inherit inputs; };
         modules = [ ./home.nix ({ ... }: { home.username = "smona"; }) ];
       };
     };

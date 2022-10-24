@@ -1,13 +1,14 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [ ./firefox.nix ./terminal.nix ./games.nix ];
+  imports = [ ./firefox.nix ./terminal.nix ./games.nix ./music.nix ];
 
   options.graphical =
     lib.mkEnableOption "install and configure graphical applications.";
   options.roles = {
     gaming = lib.mkEnableOption "set up computer for gaming";
     work = lib.mkEnableOption "set up computer for work";
+    music = lib.mkEnableOption "set up computer for music production";
   };
 
   config = lib.mkIf config.graphical {
