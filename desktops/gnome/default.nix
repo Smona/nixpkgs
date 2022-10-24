@@ -89,6 +89,7 @@ in {
           # but it seems more efficient anyways.
           focus-mode = "sloppy";
           resize-with-right-button = true;
+          button-layout = "appmenu:minimize,close";
         };
         "org/gnome/mutter" = {
           # Change focus immediately rather than waiting for pointer to rest
