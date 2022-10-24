@@ -59,7 +59,7 @@
 
   home.language = { base = "en_US.UTF-8"; };
 
-  home.sessionVariables = let editor = "emacs";
+  home.sessionVariables = let editor = "vim";
   in {
     RIPGREP_CONFIG_PATH = "${./dotfiles/rg.conf}";
     VISUAL = editor;
