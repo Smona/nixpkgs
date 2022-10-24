@@ -89,6 +89,11 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+;; Theme customization
+(custom-set-faces!
+  ;; Italic comments
+  '(font-lock-comment-face :slant italic))
+
 ;; Hotkeys
 (map! :leader
       :desc "Clear search highlight"
