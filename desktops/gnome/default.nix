@@ -61,7 +61,10 @@ in {
             "steam.desktop"
           ];
         };
-        "org/gnome/desktop/interface" = { clock-format = "12h"; };
+        "org/gnome/desktop/interface" = {
+          clock-format = "12h";
+          show-battery-percentage = false;
+        };
         # Allow over-amplification
         "org/gnome/desktop/sound" = { allow-volume-above-100-percent = true; };
         "org/gnome/desktop/input-sources" = {
