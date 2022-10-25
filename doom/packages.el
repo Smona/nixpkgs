@@ -67,3 +67,6 @@
 (package! prisma-mode :recipe (:host github :repo "pimeys/emacs-prisma-mode" :branch "main"))
 
 (package! protobuf-mode)
+
+;; Prefer nix-installed pdf-tools
+(package! pdf-tools :built-in 'prefer)
