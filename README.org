@@ -26,6 +26,14 @@ Ensure syncthing is started, then go to [[http://localhost:8384][http://localhos
 password, link it to remote devices, and set up shared folders (such as ~/org in
 my case). Who needs dropbox?
 
+** Non-NixOS setup
+Some installed packages require system-level configuration that can't be
+automatically managed outside of NixOS.
+
+*** fx_cast
+The `fx_cast` bridge requires avahi daemon to be running with `nss-mdns`
+configured. Follow the [[https://wiki.archlinux.org/title/avahi#Hostname_resolution][Arch wiki instructions]] for setting it up.
+
 * Local Configuration
 Several tools are set up to include local configuration files, to allow
 overriding the reproducible configuration with arbitrary machine-specific

@@ -146,6 +146,12 @@
     polkitPolicyOwners = [ "smona" ];
   };
 
+  # Required for fx_cast
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+  };
+
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
