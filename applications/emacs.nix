@@ -32,6 +32,13 @@ in {
     nodePackages.dockerfile-language-server-nodejs
     python310Packages.grip # Required by grip-mode (markdown +grip)
 
+    # Dirvish stuff
+    ffmpegthumbnailer
+    gnutar
+    unzip
+    mediainfo
+    imagemagick # improves display of images in emacs
+
     # Assorted Emacs dependencies
     wakatime
   ];
