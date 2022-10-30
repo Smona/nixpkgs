@@ -170,7 +170,7 @@ in {
         };
         "org/gnome/shell/extensions/blur-my-shell" = { hacks-level = 3; };
         "org/gnome/shell/extensions/blur-my-shell/applications" = {
-          whitelist = [ "kitty" ];
+          whitelist = [ "kitty" "emacs" ];
           blur-on-overview = true;
           sigma = 44;
           opacity = 241;
