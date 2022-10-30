@@ -86,14 +86,19 @@ in {
           workspace_swipe=yes
       }
 
-      windowrule=tile,title:^(Spotify)$
+      windowrule=tile,class:^(Spotify)$
+
+      # Float windows
+      windowrule=float,1Password
+      # windowrule=size 20% 20%,title:(Extension: \(fx_cast\))
+      # windowrule=center,title:(Extension: \(fx_cast\))
+      windowrule=float,title:^(flameshot)$
 
       # Firefox PIP floating window
       windowrule=float,title:^(Picture-in-Picture)$
       windowrule=pin,title:^(Picture-in-Picture)$
       windowrule=size 22% 20%,title:^(Picture-in-Picture)$
       windowrule=move 78% 77%,title:^(Picture-in-Picture)$
-      windowrule=float,title:^(flameshot)$
 
       # some nice mouse binds
       bindm=${mod},mouse:272,movewindow
