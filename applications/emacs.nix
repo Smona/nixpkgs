@@ -24,6 +24,7 @@ in {
 
     # Code Formatters
     nodePackages.prettier
+    black
     shfmt
 
     # Language servers
