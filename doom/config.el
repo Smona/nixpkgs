@@ -118,7 +118,8 @@
 
 ;; Enable horizontal scrolling
 (setq mouse-wheel-tilt-scroll t)
-(setq mouse-wheel-flip-direction t)
+(setq mouse-wheel-flip-direction nil)
+(setq mouse-wheel-progressive-speed nil)
 
 ;; Focus follows mouse, just like in the desktop
 (setq mouse-autoselect-window t)
