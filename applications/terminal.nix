@@ -10,7 +10,6 @@
 
   # My current preferred terminal
   programs.kitty = {
-    enable = true;
     theme = "Tokyo Night";
     settings = {
       font_family = "Cascadia Code";
@@ -33,7 +32,7 @@
     };
   };
   # Provide access to drivers so hardware acceleration works on non-NixOS
-  xdg.desktopEntries.kitty = {
+  xdg.desktopEntries.kitty = lib.mkIf config.programs.kitty.enable {
     # TODO: figure out how to inherit attributes from the base desktop item
     name = "kitty";
     genericName = "Terminal";
@@ -45,7 +44,6 @@
 
   # Alacritty seems nice, but it's lacking some features and kept crashing gnome-shell
   programs.alacritty = {
-    enable = false;
     settings = {
       window = {
         decorations = "none";
@@ -66,15 +64,15 @@
       };
     };
   };
-  # Provide access to drivers so hardware acceleration works on non-NixOS
-  # xdg.desktopEntries.Alacritty = {
-  #   # TODO: figure out how to inherit attributes from the base desktop item
-  #   name = "Alacritty";
-  #   genericName = "Terminal";
-  #   exec = wrapWithNixGL "alacritty";
-  #   categories = [ "System" "TerminalEmulator" ];
-  #   icon = "Alacritty";
-  #   type = "Application";
-  # };
 
+  # Provide access to drivers so hardware acceleration works on non-NixOS
+  xdg.desktopEntries.Alacritty = lib.mkIf config.programs.alacritty.enable {
+    # TODO: figure out how to inherit attributes from the base desktop item
+    name = "Alacritty";
+    genericName = "Terminal";
+    exec = "${config.nixGLPrefix}alacritty";
+    categories = [ "System" "TerminalEmulator" ];
+    icon = "Alacritty";
+    type = "Application";
+  };
 }

@@ -28,6 +28,7 @@
 
     programs.chromium.enable = true;
     programs.firefox.enable = true;
+    programs.kitty.enable = true;
 
     systemd.user.services.rescuetime = {
       Unit.Description = "RescueTime time tracker";

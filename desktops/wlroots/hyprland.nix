@@ -7,7 +7,6 @@ in {
   imports = [ inputs.hyprland.homeManagerModules.default ];
 
   wayland.windowManager.hyprland = {
-    enable = true;
     extraConfig = let mod = "ALT";
     in ''
       monitor=,preferred,auto,1
