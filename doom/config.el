@@ -517,5 +517,5 @@
 ;; Hide unimportant warnings from doom incompatibility with emacs 29
 (setq warning-minimum-level :error)
 
-(add-to-list 'default-frame-alist '(alpha-background . 90))
+(add-to-list 'default-frame-alist '(alpha-background . 95))
 (pixel-scroll-precision-mode)
