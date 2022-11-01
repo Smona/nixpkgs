@@ -56,7 +56,7 @@
 
 (package! wakatime-mode)
 
-(package! magit-delta)
+;; (package! magit-delta)
 
 (package! dirvish)
 
