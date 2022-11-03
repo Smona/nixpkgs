@@ -10,6 +10,7 @@
     ./wlroots.nix
     ../realtime_audio.nix
     inputs.home-manager.nixosModule
+    inputs.hardware.nixosModules.dell-xps-13-7390
   ];
 
   nix = {
@@ -30,6 +31,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
+
+  # https://github.com/NixOS/nixos-hardware/tree/master/dell/xps/13-7390
+  systemd.sleep.extraConfig = "SuspendState=freeze";
 
   networking.hostName = "xps-nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -154,6 +158,19 @@
     enable = true;
     nssmdns = true;
   };
+
+  # Laptop stuff
+  services.power-profiles-daemon.enable = false;
+  services.tlp = {
+    enable = true;
+    extraConfig = ''
+      CPU_SCALING_GOVERNOR_ON_AC=performance
+      CPU_SCALING_GOVERNOR_ON_BAT=powersave
+    '';
+  };
+
+  # Firmware update manager
+  services.fwupd.enable = true;
 
   # List services that you want to enable:
 
