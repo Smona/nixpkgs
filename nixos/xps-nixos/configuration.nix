@@ -9,6 +9,7 @@
     ./hardware-configuration.nix # Include the results of the hardware scan.
     ./wlroots.nix
     ../realtime_audio.nix
+    ../samba.nix
     inputs.home-manager.nixosModule
     inputs.hardware.nixosModules.dell-xps-13-7390
   ];
