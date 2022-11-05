@@ -164,10 +164,10 @@
   services.power-profiles-daemon.enable = false;
   services.tlp = {
     enable = true;
-    extraConfig = ''
-      CPU_SCALING_GOVERNOR_ON_AC=performance
-      CPU_SCALING_GOVERNOR_ON_BAT=powersave
-    '';
+    settings = {
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+    };
   };
 
   services.logind.extraConfig = ''
