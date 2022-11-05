@@ -26,8 +26,7 @@ in {
         { command = "dbus-sway-environment"; }
         { command = "configure-gtk"; }
         {
-          command =
-            "swaybg -i ~/Pictures/wallpapers/neon-highway-wallpaper.jpg -m fill";
+          command = "swaybg -i ${commonOptions.backgroundImage} -m fill";
           always = true;
         }
       ];

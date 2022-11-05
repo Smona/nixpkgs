@@ -15,7 +15,7 @@ in {
       exec-once=systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
       exec-once=1password --silent
       exec-once=rescuetime
-      exec-once=swaybg -i ~/Pictures/wallpapers/neon-highway-wallpaper.jpg -m fill
+      exec-once=swaybg -i ${commonOptions.backgroundImage} -m fill
 
       bind=SUPER,C,killactive,
       bind=SUPER,M,exit,
