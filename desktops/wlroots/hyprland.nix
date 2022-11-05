@@ -35,7 +35,11 @@ in {
 
           touchpad {
               natural_scroll=yes
+              # press down 2 fingers for right click, 3 for middle
+              # https://wayland.freedesktop.org/libinput/doc/latest/clickpad-softbuttons.html#clickfinger-behavior
+              clickfinger_behavior=yes
           }
+
           accel_profile = adaptive
           sensitivity = 0.6
       }
