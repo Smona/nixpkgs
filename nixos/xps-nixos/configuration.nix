@@ -170,6 +170,11 @@
     '';
   };
 
+  services.logind.extraConfig = ''
+    # suspend with power button rather than shutting down
+    HandlePowerKey=suspend
+  '';
+
   # Firmware update manager
   services.fwupd.enable = true;
 
