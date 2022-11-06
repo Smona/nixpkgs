@@ -1,0 +1,70 @@
+$rounding: 15px;
+$spacing: 6px;
+
+.background {
+  font-family: "Source Sans 3", "sans-serif";
+  font-size: 18px;
+  background: transparent;
+}
+
+.icon {
+  font-size: 2em;
+}
+
+.stats {
+  font-size: 0.8em;
+}
+
+.bar {
+  padding: 5px;
+}
+
+.bubble {
+  background: #1a1b26;
+  border-radius: $rounding;
+  padding: 0 $rounding - $spacing + 4px;
+  > * {
+    margin: 0 $spacing;
+  }
+}
+progressbar,
+progressbar > trough {
+  min-width: 0;
+  min-height: 0;
+}
+
+.cpu-graph {
+  color: rgba(62, 134, 250, 1);
+  background-color: rgba(62, 134, 250, 0.5);
+}
+
+.ram {
+  color: rgba(240, 144, 34, 1);
+}
+
+.ram-graph {
+  background-color: rgba(240, 144, 34, 0.5);
+}
+
+.net-up,
+.net-up-graph {
+  color: palegreen;
+}
+
+.net-down,
+.net-down-graph {
+  color: palevioletred;
+}
+
+.right {
+  padding-left: 0;
+}
+
+.music-control {
+  margin-left: 0;
+}
+
+.music-control .remote-image {
+  border-top-left-radius: $rounding;
+  border-bottom-left-radius: $rounding;
+}

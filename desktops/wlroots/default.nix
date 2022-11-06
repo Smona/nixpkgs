@@ -2,7 +2,8 @@
 
 let cfg = config.smona.wlroots;
 in {
-  imports = [ ../../applications/gui.nix ./waybar ./sway.nix ./hyprland.nix ];
+  imports =
+    [ ../../applications/gui.nix ./waybar ./eww.nix ./sway.nix ./hyprland.nix ];
 
   options.smona.wlroots = {
     enable = lib.mkEnableOption "wlroots window managers";
@@ -12,6 +13,7 @@ in {
     graphical = true;
 
     smona.waybar.enable = true;
+    smona.eww.enable = true;
 
     home.packages = with pkgs; [
       inotify-tools

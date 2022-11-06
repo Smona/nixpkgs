@@ -1,0 +1,96 @@
+(defvar BAR_HEIGHT 35)
+
+(defpoll time :interval "1s" `date +%H:%M:%S`)
+
+(deflisten hypr_info :initial "{}" `python ~/.config/nixpkgs/desktops/wlroots/hypr_info/hypr_info.py`)
+
+(deflisten albumArt :initial "" `playerctl --follow metadata --format {{mpris:artUrl}}`)
+(deflisten songDescription :initial "" `playerctl --follow metadata --format '{{title}} - {{artist}}'`)
+(defpoll songPosition :interval "1s" `playerctl position --format {{position}}`)
+(deflisten songLength :initial 0 `playerctl --follow metadata --format {{mpris:length}}`)
+
+(defwindow powermenu
+           :monitor 0
+           :stacking "fg"
+           :exclusive true
+           :geometry (geometry
+              :width "100%"
+              :x "0%"
+              :height "35px"
+              :y "0%"
+              :anchor "center bottom")
+            (powermenu_layout))
+
+(defwidget remote_image [url]
+    (box :class "remote-image" :width BAR_HEIGHT :height BAR_HEIGHT :style 'background-size: cover; background-position: center; background-image: url("${url}");'))
+
+(defwidget bubble [halign class]
+           (box :orientation "h"
+                :height BAR_HEIGHT
+                :halign halign
+                :valign "center"
+                :space-evenly false
+                :class "bubble ${class}"
+                (children)))
+
+(defwidget music_control []
+           (box
+           :orientation "h"
+           :space-evenly false
+           :class "music-control"
+            :halign "end"
+               (remote_image :url albumArt :halign "start" :hexpand false)
+               (box
+               :orientation "v"
+               :space-evenly false
+                    (label :text songDescription :limit-width "20" :hexpand true :vexpand true)
+                    (progress :height "1" :valign "end" :width "20" :value "${100 * songPosition / songLength}")
+                )
+            )
+)
+
+(defvar battery_icons '["", "", "", "", ""]')
+
+(defwidget powermenu_layout []
+  (centerbox
+    :orientation "h"
+    :class "bar"
+        (bubble
+         :class "left"
+         :halign "start"
+            (label :class "icon" :text "${battery_icons[round(EWW_BATTERY.BAT0.capacity / 25, 0)]}")
+            (label :text "${EWW_BATTERY.BAT0.capacity}%")
+            (overlay
+                (graph
+                 :class "net-up-graph"
+                 :line-style "round"
+                 :width 80
+                 :time-range "1m"
+                 :dynamic true
+                 :value "${EWW_NET['wlp0s20f3'].NET_UP}")
+                (graph
+                 :class "net-down-graph"
+                 :line-style "round"
+                 :width 80
+                 :time-range "1m"
+                 :dynamic true
+                 :value "${EWW_NET['wlp0s20f3'].NET_DOWN}")
+            )
+            (box :orientation "v"
+                  :class "stats"
+                (label :class "net-up" :text "${round(EWW_NET['wlp0s20f3'].NET_UP / 1024, 1)}K")
+                (label :class "net-down" :text "${round(EWW_NET['wlp0s20f3'].NET_DOWN / 1024, 1)}K")
+            )
+            (graph :class "cpu-graph" :width 80 :time-range "2m" :value "${EWW_CPU.avg}")
+            (graph :class "ram ram-graph" :width 80 :time-range "2m" :value "${EWW_RAM.used_mem_perc}") (label :class "ram" :text "${round(EWW_RAM.used_mem / 1024 / 1024 / 1024, 1)}/${round(EWW_RAM.total_mem / 1024 / 1024 / 1024, 1)} GB")
+        )
+        (bubble :class "center" :halign "center" (label :limit-width 100 :text "${hypr_info.active_window}"))
+        (bubble
+         :class "right"
+         :halign "end"
+            (music_control)
+            (label :text "${hypr_info.active_workspace} / ${hypr_info.num_workspaces}")
+            (label :text time)
+        )
+    )
+)
