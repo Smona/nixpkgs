@@ -70,3 +70,5 @@
 
 ;; Prefer nix-installed pdf-tools
 (package! pdf-tools :built-in 'prefer)
+
+(package! yuck-mode)

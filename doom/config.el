@@ -519,3 +519,5 @@
 
 (add-to-list 'default-frame-alist '(alpha-background . 95))
 (pixel-scroll-precision-mode)
+
+(use-package! yuck-mode)
