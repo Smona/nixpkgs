@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 
-let cfg = config.smona.waybar;
+let cfg = config.smona.eww;
 in {
   options.smona.eww = { enable = lib.mkEnableOption "eww widgets"; };
 
