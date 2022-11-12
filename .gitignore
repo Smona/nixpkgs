@@ -3,5 +3,8 @@
 *.log
 tmp/
 
+# Direnv state
+.direnv
+
 # Ignore build results
 result
