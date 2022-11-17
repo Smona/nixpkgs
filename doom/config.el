@@ -127,11 +127,6 @@
 (setq doom-modeline-major-mode-icon t)
 (setq doom-modeline-height 35)
 
-
-(after! auth-source
-        ;; Allow non-encrypted authinfo
-        (add-to-list 'auth-sources "~/.authinfo"))
-
 (after! evil-snipe
         (setq evil-snipe-scope 'buffer))
 
@@ -481,9 +476,17 @@
         (interactive)
         (kill-process "syncthing"))
 
-(use-package! wakatime-mode
+(use-package! auth-source
   :config
-  (setq wakatime-api-key "8339e7e5-7fba-4939-a812-d3108ee1f0f5")
+  (let ((credential (auth-source-user-and-password "wakatime")))
+        (setq wakatime-api-key (cadr credential)))
+  (let ((credential (auth-source-user-and-password "api.github.com" "Smona^grip")))
+        (setq grip-github-user (car credential)
+              grip-github-password (cadr credential))))
+
+(use-package! wakatime-mode
+  :after auth-source
+  :config
   (global-wakatime-mode))
 
 (setq +treemacs-git-mode 'deferred)
