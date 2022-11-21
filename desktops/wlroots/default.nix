@@ -22,6 +22,8 @@ in {
       # Needed for flameshot
       grim
       slurp
+      swaylock-effects
+      playerctl
     ];
 
     services.flameshot = {
@@ -32,6 +34,30 @@ in {
     # Keeps track of media players so playerctl always acts on the most
     # recently active one.
     services.playerctld.enable = true;
+
+    services.swayidle = {
+      enable = true;
+      systemdTarget = "hyprland-session.target";
+      events = [{
+        event = "before-sleep";
+        command = cmd.goodbye;
+      }];
+      timeouts = [
+        {
+          timeout = 240;
+          command = builtins.toString cmd.screenOff;
+          resumeCommand = builtins.toString cmd.screenOn;
+        }
+        {
+          timeout = 300;
+          command = builtins.toString cmd.lock;
+        }
+        {
+          timeout = 600;
+          command = "systemctl suspend-then-hibernate";
+        }
+      ];
+    };
 
     wayland.windowManager.sway.enable = true;
     wayland.windowManager.hyprland.enable = true;

@@ -2,7 +2,7 @@
 
 let
   commonOptions = import ../common.nix;
-  cmd = import ./system-commands { inherit pkgs; };
+  cmd = import ./system-commands { inherit pkgs inputs; };
 in {
   imports = [ inputs.hyprland.homeManagerModules.default ];
 
@@ -117,6 +117,7 @@ in {
       bind=${mod},P,pseudo,
       bind=${mod},A,togglesplit,
       bind=${mod}_SHIFT,Q,killactive,
+      bind=${mod},END,exec, ${cmd.goodbye}
       bind=${mod},M,exit,
 
       # Media keys

@@ -1,8 +1,8 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 let
   commonOptions = import ../common.nix;
-  cmd = import ./system-commands { inherit pkgs; };
+  cmd = import ./system-commands { inherit pkgs inputs; };
 in {
   wayland.windowManager.sway = {
     config = {
