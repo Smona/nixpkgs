@@ -30,6 +30,9 @@
     ghc
     haskell-language-server # Required for doom (haskell +lsp) module
 
+    # system tools
+    dmidecode
+
     # Shell utilities
     bpytop
     curl
@@ -75,6 +78,7 @@
       + "/ smona@192.168.0.198::NetBackup/$(hostname)";
     diskspace = "df -P -kHl";
     fonts = "fc-list";
+    bios = "sudo dmidecode -t bios";
 
     # Shortcuts
     c = "bat";
