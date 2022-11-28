@@ -1,6 +1,8 @@
 { config, lib, pkgs, ... }:
 
-let cfg = config.smona.wlroots;
+let
+  cfg = config.smona.wlroots;
+  cmd = import ./system-commands { inherit pkgs inputs; };
 in {
   imports =
     [ ../../applications/gui.nix ./waybar ./eww.nix ./sway.nix ./hyprland.nix ];
