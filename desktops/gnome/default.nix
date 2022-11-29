@@ -54,7 +54,7 @@ in {
           disable-extension-version-validation = true;
           enabled-extensions = builtins.map (e: e.extensionUuid) extensions;
           favorite-apps = [
-            "emacsclient.desktop"
+            "emacs.desktop"
             "firefox.desktop"
             "spotify.desktop"
             "discord.desktop"
