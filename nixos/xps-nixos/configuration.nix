@@ -33,9 +33,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
-  # https://github.com/NixOS/nixos-hardware/tree/master/dell/xps/13-7390
-  systemd.sleep.extraConfig = "SuspendState=freeze";
-
   networking.hostName = "xps-nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -170,10 +167,18 @@
     };
   };
 
-  services.logind.extraConfig = ''
-    # suspend with power button rather than shutting down
-    HandlePowerKey=suspend
+  systemd.sleep.extraConfig = ''
+    HibernateDelaySec=6h
+    # https://github.com/NixOS/nixos-hardware/tree/master/dell/xps/13-7390
+    SuspendState=freeze
   '';
+  services.logind = {
+    lidSwitch = "suspend-then-hibernate";
+    lidSwitchExternalPower = "suspend-then-hibernate";
+    extraConfig = ''
+      HandlePowerKey=suspend-then-hibernate
+    '';
+  };
 
   # Firmware update manager
   services.fwupd.enable = true;
