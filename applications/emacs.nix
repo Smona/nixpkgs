@@ -8,11 +8,6 @@ in {
     extraPackages = epkgs: [ epkgs.vterm epkgs.pdf-tools ];
   };
 
-  services.emacs = {
-    enable = true;
-    package = emacs;
-  };
-
   home.packages = with pkgs; [
     # Python
     python310Packages.debugpy # Required by dap-mode
