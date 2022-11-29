@@ -8,11 +8,11 @@ $spacing: 6px;
 }
 
 .icon {
-  font-size: 2em;
+  font-size: 1.5em;
 }
 
 .stats {
-  font-size: 0.8em;
+  font-size: 0.65em;
 }
 
 .bar {
@@ -67,4 +67,8 @@ progressbar > trough {
 .music-control .remote-image {
   border-top-left-radius: $rounding;
   border-bottom-left-radius: $rounding;
+}
+
+.subtle {
+  color: rgba(255, 255, 255, 0.5);
 }

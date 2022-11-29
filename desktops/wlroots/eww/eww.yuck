@@ -2,7 +2,7 @@
 
 (defpoll time :interval "1s" `date +%H:%M:%S`)
 
-(deflisten hypr_info :initial "{}" `python ~/.config/nixpkgs/desktops/wlroots/hypr_info/hypr_info.py`)
+(deflisten hypr_info :initial "{}" `hypr_info`)
 
 (deflisten albumArt :initial "" `playerctl --follow metadata --format {{mpris:artUrl}}`)
 (deflisten songDescription :initial "" `playerctl --follow metadata --format '{{title}} - {{artist}}'`)
@@ -11,7 +11,7 @@
 
 (defwindow powermenu
            :monitor 0
-           :stacking "fg"
+           :stacking "bg"
            :exclusive true
            :geometry (geometry
               :width "100%"
@@ -84,7 +84,12 @@
             (graph :class "cpu-graph" :width 80 :time-range "2m" :value "${EWW_CPU.avg}")
             (graph :class "ram ram-graph" :width 80 :time-range "2m" :value "${EWW_RAM.used_mem_perc}") (label :class "ram" :text "${round(EWW_RAM.used_mem / 1024 / 1024 / 1024, 1)}/${round(EWW_RAM.total_mem / 1024 / 1024 / 1024, 1)} GB")
         )
-        (bubble :class "center" :halign "center" (label :limit-width 100 :text "${hypr_info.active_window}"))
+        (bubble
+         :class "center"
+         :halign "center"
+            (image :path "${hypr_info.active_window_icon}" :class "app-icon" :image-width 25 :image-height 25)
+            (label :text "${hypr_info.active_window}" :limit-width 100)
+        )
         (bubble
          :class "right"
          :halign "end"
