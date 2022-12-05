@@ -24,7 +24,7 @@
         spotify
         libreoffice-fresh
         vlc
-      ] ++ (lib.lists.optional config.roles.work zoom-us);
+      ] ++ (lib.lists.optionals config.roles.work [ gimp zoom-us ]);
 
     programs.chromium.enable = true;
     programs.firefox.enable = true;
