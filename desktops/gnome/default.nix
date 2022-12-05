@@ -63,7 +63,7 @@ in {
         };
         "org/gnome/desktop/interface" = {
           clock-format = "12h";
-          show-battery-percentage = false;
+          show-battery-percentage = true;
         };
         # Allow over-amplification
         "org/gnome/desktop/sound" = { allow-volume-above-100-percent = true; };
