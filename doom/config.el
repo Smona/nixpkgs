@@ -148,7 +148,9 @@
 ;; forward/back touchpad swipes with the gesture-improvements gnome extension
 ;; https://extensions.gnome.org/extension/4245/gesture-improvements/
 (map! "<269025062>" #'previous-buffer)
+(map! "<Back>" #'previous-buffer)
 (map! "<269025063>" #'next-buffer)
+(map! "<Forward>" #'next-buffer)
 
 ;; Scrolling customization
 (setq scroll-margin 6)
