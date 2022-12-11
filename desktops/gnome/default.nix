@@ -24,6 +24,7 @@ let
     openweather
     pip-on-top # Fix firefox PIP pinning on wayland
     remove-alttab-delay-v2
+    screen-rotate # Screen autorotation in tablet mode
     system-monitor # Requires Ubuntu > 20.04
     unite
     user-themes
