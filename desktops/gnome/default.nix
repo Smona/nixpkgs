@@ -62,6 +62,11 @@ in {
             "steam.desktop"
           ];
         };
+        "org/gnome/settings-daemon/plugins/power" = {
+          # Turn off automatic brightness adjustment
+          # Gnome's current implementation is not the best...
+          ambient-enabled = false;
+        };
         "org/gnome/desktop/interface" = {
           clock-format = "12h";
           show-battery-percentage = true;
