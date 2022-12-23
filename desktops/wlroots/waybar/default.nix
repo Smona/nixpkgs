@@ -2,16 +2,18 @@
 
 let
   cfg = config.smona.waybar;
-  cmd = import ../system-commands { inherit pkgs; };
+  cmd = import ../system-commands { inherit pkgs inputs; };
+  waybar = pkgs.waybar.override { withMediaPlayer = true; };
 in {
   options.smona.waybar = { enable = lib.mkEnableOption "waybar status bar"; };
 
   config = lib.mkIf cfg.enable {
+    home.packages = [ waybar ];
     systemd.user.services.waybar = {
       Unit.Description = "Status bar for wlroots";
       Install.WantedBy = [ "sway-session.target" "hyprland-session.target" ];
       Service = {
-        ExecStart = "${pkgs.waybar}/bin/waybar";
+        ExecStart = "${waybar}/bin/waybar";
         Restart = "on-failure";
         RestartSec = 2;
       };
@@ -24,9 +26,9 @@ in {
         {
               "layer": "top",
               "position": "bottom",
-              "modules-left": [ "battery", "memory", "cpu"  ],
-              "modules-center": [ "custom/window-title" ],
-              "modules-right": [ "tray", "pulseaudio", "backlight", "clock" ],
+              "modules-left": [ "battery", "memory", "cpu", "tray",  "sway/workspaces" ],
+              "modules-center": [ "sway/window", "custom/window-title"],
+              "modules-right": [ "custom/media", "network", "pulseaudio", "backlight", "clock" ],
               "cpu": {
                 "interval": 10,
                 "format": " {}%",
@@ -53,6 +55,10 @@ in {
                 "format": " {}%",
                 "max-length": 10
               },
+              "network": {
+                "format-wifi": "  {essid} ({signalStrength}%)",
+                "tooltip-format": "{bandwidthDownBytes}D{bandwidthUpBytes}U {ipaddr}@{essid}"
+              },
               "pulseaudio": {
                 "on-scroll-up": "${cmd.softer}",
                 "on-scroll-down": "${cmd.louder}",
@@ -74,6 +80,28 @@ in {
                 }
               },
               "tray": { "spacing": 8 },
+              "sway/window": {
+                  "format": "{title}",
+                  "max-length": 50,
+                  "rewrite": {
+                    "(.*) — Mozilla Firefox": " $1",
+                    "(.*) – Doom Emacs": " $1",
+                    "(.*) - vim": " $1",
+                    "(.*) - kitty": " [$1]"
+                  }
+              },
+              "custom/media": {
+                  "format": "{icon} {}",
+                  "escape": true,
+                  "return-type": "json",
+                  "max-length": 40,
+                  "on-click": "playerctl play-pause",
+                  "on-click-right": "playerctl stop",
+                  "smooth-scrolling-threshold": 10,
+                  "on-scroll-up": "playerctl next",
+                  "on-scroll-down": "playerctl previous",
+                  "exec": "${waybar}/bin/waybar-mediaplayer.py 2> /dev/null",
+              },
               "custom/window-title": {
                 "interval": 1,
                 "return-type": "json",

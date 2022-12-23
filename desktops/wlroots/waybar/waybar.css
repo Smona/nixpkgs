@@ -162,7 +162,7 @@ label:focus {
 }
 
 #network {
-  background-color: #2980b9;
+  /* background-color: #2980b9; */
 }
 
 #network.disconnected {
@@ -178,13 +178,13 @@ label:focus {
 }
 
 #custom-media {
-  background-color: #66cc99;
-  color: #2a5c45;
+  color: #66cc99;
+  /* color: #2a5c45; */
   min-width: 100px;
 }
 
 #custom-media.custom-spotify {
-  background-color: #66cc99;
+  color: #66cc99;
 }
 
 #custom-media.custom-vlc {
