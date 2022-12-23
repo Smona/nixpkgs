@@ -30,8 +30,9 @@ in {
               "modules-center": [ "sway/window", "custom/window-title"],
               "modules-right": [ "custom/media", "network", "pulseaudio", "backlight", "clock" ],
               "cpu": {
-                "interval": 10,
-                "format": " {}%",
+                "interval": 2,
+                "format": "{icon} {usage} %",
+                "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
                 "max-length": 10
               },
               "backlight": {
@@ -51,8 +52,9 @@ in {
                 "max-length": 25
               },
               "memory": {
-                "interval": 30,
-                "format": " {}%",
+                "interval": 10,
+                "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+                "format": "{icon} {used} GB",
                 "max-length": 10
               },
               "network": {
