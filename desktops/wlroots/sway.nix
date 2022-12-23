@@ -19,7 +19,7 @@ in {
           drag = "enabled";
           natural_scroll = "enabled";
           accel_profile = "adaptive";
-          pointer_accel = "0.2";
+          pointer_accel = "0.4";
         };
       };
       startup = [
