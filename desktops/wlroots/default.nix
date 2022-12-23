@@ -26,6 +26,7 @@ in {
       slurp
       swaylock-effects
       playerctl
+      blueman # GTK bluetooth manager
     ];
 
     services.flameshot = {
