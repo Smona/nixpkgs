@@ -50,6 +50,13 @@ in {
     extraConfig = ''
       # move the mouse to the center of windows when changing focus
       mouse_warping container
+
+      ################
+      # Window rules #
+      ################
+
+      # Firefox PIP floating window
+      for_window [title="^Picture-in-Picture$"] floating enable, sticky enable, move position 72 ppt 74 ppt, resize set 27 ppt 25 ppt
     '';
   };
 }
