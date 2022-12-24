@@ -117,7 +117,8 @@ in {
       bind=${mod},RETURN,exec,kitty
       bind=${mod},F,exec,firefox
       bind=${mod},E,exec,nautilus
-      bind=${mod},R,exec,wofi --show drun -o DP-3
+      bind=${mod},SPACE,exec,rofi -show drun -show-icons
+      bind=${mod}_SHIFT,PERIOD,exec,rofimoji --skin-tone light
       bind=${mod},V,togglefloating,
       bind=${mod},P,pseudo,
       bind=${mod},A,togglesplit,

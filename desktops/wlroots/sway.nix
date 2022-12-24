@@ -33,6 +33,8 @@ in {
       keybindings =
         let modifier = config.wayland.windowManager.sway.config.modifier;
         in lib.mkOptionDefault {
+          "${modifier}+space" = "exec rofi -show drun -show-icons";
+          "${modifier}+Shift+period" = "exec rofimoji --skin-tone light";
           Print = "exec flameshot gui";
           XF86MonBrightnessUp = "exec ${cmd.brighter}";
           XF86MonBrightnessDown = "exec ${cmd.darker}";
@@ -43,8 +45,6 @@ in {
           # =ALT,XF86AudioLowerVolume,exec,playerctl position 5-
           # =ALT,XF86AudioRaiseVolume,exec,playerctl position 5+
           # "${modifier}+Shift+q" = "kill";
-          # "${modifier}+d" =
-          #   "exec ${pkgs.dmenu}/bin/dmenu_path | ${pkgs.dmenu}/bin/dmenu | ${pkgs.findutils}/bin/xargs swaymsg exec --";
         };
     };
     extraConfig = ''

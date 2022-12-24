@@ -3,6 +3,7 @@
 let
   cfg = config.smona.wlroots;
   cmd = import ./system-commands { inherit pkgs inputs; };
+  my_rofi = pkgs.rofi-wayland.override { plugins = with pkgs; [ rofi-calc ]; };
 in {
   imports =
     [ ../../applications/gui.nix ./waybar ./eww.nix ./sway.nix ./hyprland.nix ];
@@ -26,12 +27,20 @@ in {
       slurp
       swaylock-effects
       playerctl
+      (rofimoji.override { rofi = my_rofi; })
       blueman # GTK bluetooth manager
     ];
 
     services.flameshot = {
       enable = true;
       # settings = {};
+    };
+
+    programs.rofi = {
+      enable = true;
+      package = my_rofi;
+      terminal = "${pkgs.kitty}/bin/kitty";
+      theme = "arthur";
     };
 
     # Keeps track of media players so playerctl always acts on the most
