@@ -40,7 +40,7 @@ in {
 
     services.swayidle = {
       enable = true;
-      systemdTarget = "hyprland-session.target";
+      systemdTarget = "sway-session.target hyprland-session.target";
       events = [{
         event = "before-sleep";
         command = cmd.goodbye;
