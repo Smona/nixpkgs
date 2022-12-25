@@ -24,6 +24,12 @@ in {
           pointer_accel = "0.4";
         };
       };
+      focus = {
+        # move the mouse to the center of windows when changing focus
+        mouseWarping = "container";
+        # allow windows to steal focus and switch to their workspace
+        newWindow = "focus";
+      };
       startup = [
         { command = "dbus-sway-environment"; }
         { command = "configure-gtk"; }
@@ -50,9 +56,6 @@ in {
         };
     };
     extraConfig = ''
-      # move the mouse to the center of windows when changing focus
-      mouse_warping container
-
       ################
       # Window rules #
       ################
