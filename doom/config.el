@@ -21,9 +21,8 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
-;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
 (setq! doom-font (font-spec :family "Cascadia Code" :size 13.0 :weight 'normal :width 'normal))
+(setq! doom-variable-pitch-font (font-spec :family "Merriweather" :size 20))
 ;; Nerd fonts break italics rendering within emacs for many fonts, so we use
 ;; the NF variant only for unicode glyphs. It appears that glyphs from other
 ;; languages will still use the default doom-font.
@@ -95,7 +94,6 @@
   '(font-lock-comment-face :slant italic))
 
 ;; The below was borrowed from https://zzamboni.org/post/beautifying-org-mode-in-emacs/
-;; TODO: inherit font color from default face
  (defun my/org-mode-hook ()
   (set-face-attribute 'org-level-4 nil :height 1.1)
   (set-face-attribute 'org-level-3 nil :height 1.2)
@@ -178,9 +176,12 @@
 ;; track habits
 (add-to-list 'org-modules 'org-habit)
 
+(defun my/org-local-hook () (setq-local default-text-properties '(line-spacing 0.4 line-height 1.4)))
+
 (after! org
         ;; Use non-monospace font by default in org mode
         (add-hook 'org-mode-hook 'variable-pitch-mode)
+        (add-hook 'org-mode-hook 'my/org-local-hook)
         ;; TODO: make this a bit bigger
         (setq org-ellipsis "⤵")
         (setq org-hidden-keywords '(title))
