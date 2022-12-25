@@ -7,6 +7,8 @@ in {
   wayland.windowManager.sway = {
     config = {
       terminal = "kitty";
+      # Let's let waybar handle the bars...
+      bars = [ ];
       input = {
         "type:keyboard" = {
           xkb_layout = "us";
