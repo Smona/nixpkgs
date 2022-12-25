@@ -43,6 +43,7 @@ in {
         in lib.mkOptionDefault {
           "${modifier}+space" = "exec rofi -show drun -show-icons";
           "${modifier}+Shift+period" = "exec rofimoji --skin-tone light";
+          "Ctrl+Shift+space" = "exec 1password --quick-access";
           Print = "exec flameshot gui";
           XF86MonBrightnessUp = "exec ${cmd.brighter}";
           XF86MonBrightnessDown = "exec ${cmd.darker}";
