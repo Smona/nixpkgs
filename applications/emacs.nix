@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 
-let emacs = pkgs.emacsPgtkNativeComp;
+let emacs = pkgs.emacsPgtk;
 in {
   programs.emacs = {
     enable = true;
