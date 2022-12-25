@@ -42,6 +42,8 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  # TODO: only install when wlroots is enabled (once nixos config is modularized)
+  programs.nm-applet.enable = true; # GUI WIFI tool for WMs
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
