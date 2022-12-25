@@ -1,8 +1,6 @@
-{ config, lib, pkgs, inputs, ... }:
+{ config, lib, pkgs, ... }:
 
-let
-  cfg = config.smona.eww;
-  eww = inputs.my-nixpkgs.legacyPackages.x86_64-linux.eww-wayland;
+let cfg = config.smona.eww;
 in {
   options.smona.eww = { enable = lib.mkEnableOption "eww widgets"; };
 
@@ -10,7 +8,7 @@ in {
     home.packages = [ (import ./hypr_info { inherit pkgs; }) ];
     programs.eww = {
       enable = true;
-      package = eww;
+      package = pkgs.eww-wayland;
       configDir = ./eww;
     };
   };
