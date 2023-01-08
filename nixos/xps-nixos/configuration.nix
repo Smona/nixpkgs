@@ -92,7 +92,7 @@
   users.users.smona = {
     isNormalUser = true;
     description = "Mel Bourgeois";
-    extraGroups = [ "networkmanager" "wheel" "video" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "docker" ];
     packages = with pkgs;
       [
         firefox
@@ -147,6 +147,7 @@
 
   virtualisation.virtualbox.host.enable = true;
   users.extraGroups.vboxusers.members = [ "smona" ];
+  virtualisation.docker.enable = true;
 
   programs._1password-gui = {
     enable = true;
