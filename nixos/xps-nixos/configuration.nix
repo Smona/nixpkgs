@@ -92,7 +92,7 @@
   users.users.smona = {
     isNormalUser = true;
     description = "Mel Bourgeois";
-    extraGroups = [ "networkmanager" "wheel" "video" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "input" "docker" ];
     packages = with pkgs;
       [
         firefox

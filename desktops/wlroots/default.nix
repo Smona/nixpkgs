@@ -28,6 +28,7 @@ in {
       swaylock-effects
       playerctl
       (rofimoji.override { rofi = my_rofi; })
+      fusuma
       blueman # GTK bluetooth manager
     ];
 
@@ -74,5 +75,20 @@ in {
 
     wayland.windowManager.sway.enable = true;
     wayland.windowManager.hyprland.enable = true;
+
+    services.fusuma = {
+      enable = true;
+      extraPackages = with pkgs; [ my_rofi coreutils-full wtype ];
+      settings = {
+        threshold = { swipe = 0.1; };
+        interval = { swipe = 0.7; };
+        swipe = {
+          "4" = {
+            left = { command = "${pkgs.sway}/bin/swaymsg workspace next"; };
+            right = { command = "${pkgs.sway}/bin/swaymsg workspace prev"; };
+          };
+        };
+      };
+    };
   };
 }
