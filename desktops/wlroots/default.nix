@@ -57,12 +57,13 @@ in {
       timeouts = [
         {
           timeout = 240;
-          command = builtins.toString cmd.screenOff;
-          resumeCommand = builtins.toString cmd.screenOn;
+          # Locking should come before screen off to prevent FOIC (flash of insecure content)
+          command = builtins.toString cmd.lock;
         }
         {
-          timeout = 300;
-          command = builtins.toString cmd.lock;
+          timeout = 270;
+          command = builtins.toString cmd.screenOff;
+          resumeCommand = builtins.toString cmd.screenOn;
         }
         {
           timeout = 600;
