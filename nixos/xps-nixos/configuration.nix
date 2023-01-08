@@ -109,6 +109,8 @@
       gaming = true;
       music = true;
     };
+    # Should apply to any NixOS machine
+    _1passwordBinary = "${pkgs._1password-gui}/bin/1password";
   };
 
   home-manager.useGlobalPkgs = true;

@@ -5,6 +5,10 @@
 
   options.graphical =
     lib.mkEnableOption "install and configure graphical applications.";
+  options._1passwordBinary = lib.mkOption {
+    type = lib.types.str;
+    default = "/usr/bin/env 1password";
+  };
   options.roles = {
     gaming = lib.mkEnableOption "set up computer for gaming";
     work = lib.mkEnableOption "set up computer for work";
@@ -55,9 +59,9 @@
     # and support system authentication / ssh agent / browser extension integration.
     systemd.user.services."1password" = {
       Unit.Description = "1password manager GUI application.";
-      Install.WantedBy = [ "graphical-session.target" ];
+      Install.WantedBy = [ "graphical-session.target" "sway-session.target" ];
       Service = {
-        ExecStart = "/usr/bin/env 1password --silent";
+        ExecStart = "${config._1passwordBinary} --silent";
         Restart = "on-failure";
         RestartSec = 2;
       };
