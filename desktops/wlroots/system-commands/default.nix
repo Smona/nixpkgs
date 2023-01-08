@@ -43,8 +43,11 @@ in rec {
   brighter = pkgs.writeShellScript "brighter" "${brightnessctl} s +2%";
   darker = pkgs.writeShellScript "darker" "${brightnessctl} s 2%-";
 
-  screenOn = pkgs.writeShellScript "screenOn" "${hyprctl} dispatch dpms on";
-  screenOff = pkgs.writeShellScript "screenOff" "${hyprctl} dispatch dpms off";
+  # TODO: be smarter about this, use the right command per-wm
+  screenOn = pkgs.writeShellScript "screenOn"
+    "${hyprctl} dispatch dpms on; ${pkgs.sway}/bin/swaymsg 'output * dpms on'";
+  screenOff = pkgs.writeShellScript "screenOff"
+    "${hyprctl} dispatch dpms off; ${pkgs.sway}/bin/swaymsg 'output * dpms off'";
 
   # ...and wm locking
   lock = pkgs.writeShellScript "lock" ''
