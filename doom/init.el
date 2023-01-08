@@ -156,7 +156,7 @@
        (nix +lsp +tree-sitter)               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
        ;; organize your plain life in plain tet
-       (org +pretty +roam2 +org-enable-auto-update-cookies-h +org-enable-auto-reformat-tables-h)
+       (org +present +pretty +roam2 +org-enable-auto-update-cookies-h +org-enable-auto-reformat-tables-h)
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
