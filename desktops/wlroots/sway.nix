@@ -9,6 +9,21 @@ in {
       terminal = "kitty";
       # Let's let waybar handle the bars...
       bars = [ ];
+      colors = {
+        focused = {
+          background = "#285577";
+          border = "#8130d988";
+          childBorder = "#8130d988";
+          indicator = "#2e9ef4";
+          text = "#ffffff";
+        };
+      };
+      gaps = {
+        # Doubling inner gaps gives windows the same space on each side
+        inner = 10;
+        outer = 5;
+        smartBorders = "on";
+      };
       input = {
         "type:keyboard" = {
           xkb_layout = "us";
