@@ -68,7 +68,11 @@
   console.keyMap = "dvorak";
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services.printing = {
+    enable = true;
+    # Necessary drivers for Canon MX860
+    drivers = with pkgs; [ cups-bjnp gutenprint ];
+  };
 
   # Enable sound with pipewire.
   sound.enable = true;
