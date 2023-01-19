@@ -68,6 +68,8 @@ in {
           XF86AudioPlay = "exec ${cmd.play}";
           # =ALT,XF86AudioLowerVolume,exec,playerctl position 5-
           # =ALT,XF86AudioRaiseVolume,exec,playerctl position 5+
+          XF86AudioPrev = "exec ${cmd.prev}";
+          XF86AudioNext = "exec ${cmd.next}";
           # "${modifier}+Shift+q" = "kill";
         };
     };

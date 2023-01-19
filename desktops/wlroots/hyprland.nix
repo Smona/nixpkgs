@@ -135,6 +135,8 @@ in {
       bind=,XF86AudioPlay,exec,${cmd.play}
       binde=ALT,XF86AudioLowerVolume,exec,playerctl position 5-
       binde=ALT,XF86AudioRaiseVolume,exec,playerctl position 5+
+      binde=XF86AudioPrev,exec,${cmd.prev}
+      binde=XF86AudioNext,exec,${cmd.next}
 
       bind=${mod},H,movefocus,l
       bind=${mod},L,movefocus,r

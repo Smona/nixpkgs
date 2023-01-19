@@ -28,6 +28,9 @@ in rec {
 
   pause = pkgs.writeShellScript "play" "${playerctl} pause";
 
+  prev = pkgs.writeShellScript "prev" "${playerctl} previous";
+  next = pkgs.writeShellScript "next" "${playerctl} next";
+
   tao = pkgs.stdenv.mkDerivation {
     name = "tao";
     buildInputs = [ pkgs.python3 ];
