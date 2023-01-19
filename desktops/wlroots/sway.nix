@@ -25,6 +25,7 @@ in {
         smartBorders = "on";
       };
       input = {
+        "*" = { natural_scroll = "enabled"; };
         "type:keyboard" = {
           xkb_layout = "us";
           xkb_variant = "dvorak";
@@ -34,7 +35,6 @@ in {
           tap = "enabled";
           click_method = "clickfinger";
           drag = "enabled";
-          natural_scroll = "enabled";
           accel_profile = "adaptive";
           pointer_accel = "0.4";
         };
