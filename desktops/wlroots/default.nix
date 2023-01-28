@@ -32,6 +32,22 @@ in {
       blueman # GTK bluetooth manager
     ];
 
+    services.kanshi = {
+      enable = true;
+      profiles = {
+        undocked = { outputs = [{ criteria = "eDP-1"; }]; };
+        home-office = {
+          outputs = [
+            { criteria = "eDP-1"; }
+            {
+              criteria = "Acer Technologies Acer XR382CQK 0x0000B7AA";
+              position = "-1820,-1600";
+            }
+          ];
+        };
+      };
+    };
+
     services.flameshot = {
       enable = true;
       # settings = {};
