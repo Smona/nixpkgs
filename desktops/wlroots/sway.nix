@@ -49,6 +49,11 @@ in {
         { command = "dbus-sway-environment"; }
         { command = "configure-gtk"; }
         {
+          # Mostly just needed for 1password system authentication, so I can use the SSH agent
+          command =
+            "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        }
+        {
           command = "swaybg -i ${commonOptions.backgroundImage} -m fill";
           always = true;
         }
