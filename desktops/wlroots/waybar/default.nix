@@ -26,7 +26,7 @@ in {
         {
               "layer": "top",
               "position": "bottom",
-              "modules-left": [ "battery", "memory", "cpu", "tray",  "sway/workspaces" ],
+              "modules-left": [ "battery", "memory", "cpu", "idle_inhibitor", "sway/workspaces", "tray" ],
               "modules-center": [ "sway/window", "custom/window-title"],
               "modules-right": [ "custom/media", "network", "pulseaudio", "backlight", "clock" ],
               "cpu": {
@@ -60,6 +60,13 @@ in {
               "network": {
                 "format-wifi": "  {essid} ({signalStrength}%)",
                 "tooltip-format": "{bandwidthDownBytes}D{bandwidthUpBytes}U {ipaddr}@{essid}"
+              },
+              "idle_inhibitor": {
+                  "format": "{icon}",
+                  "format-icons": {
+                      "activated": "",
+                      "deactivated": ""
+                  }
               },
               "pulseaudio": {
                 "on-scroll-up": "${cmd.softer}",
