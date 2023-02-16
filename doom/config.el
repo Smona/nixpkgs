@@ -43,6 +43,8 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function.
 (setq doom-theme 'doom-tokyo-night)
+;; Use fixed-pitch font in treemacs
+(setq doom-themes-treemacs-enable-variable-pitch nil)
 ;; Other themes I like: doom-rouge, doom-challenger-deep, doom-monokai-spectrum, doom-monokai-octagon, doom-city-lights, doom-material, doom-palenight, doom-tokyo-night
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
