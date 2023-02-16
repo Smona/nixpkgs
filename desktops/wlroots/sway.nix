@@ -27,8 +27,7 @@ in {
       input = {
         "*" = { natural_scroll = "enabled"; };
         "type:keyboard" = {
-          xkb_layout = "us";
-          xkb_variant = "dvorak";
+          xkb_layout = "us(dvorak),us";
           xkb_options = builtins.concatStringsSep "," commonOptions.xkbOptions;
         };
         "type:touchpad" = {
