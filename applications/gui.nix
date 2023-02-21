@@ -19,14 +19,19 @@
     # Graphical applications
     home.packages = with pkgs;
       [
-        # https://github.com/NixOS/nixpkgs/issues/78961
-        (discord.override { nss = nss_latest; })
         gthumb
         rescuetime
+
+        # Messaging apps
+        (discord.override {
+          nss = nss_latest;
+        }) # https://github.com/NixOS/nixpkgs/issues/78961
         signal-desktop
         # Telegram desktop
         tdesktop
         slack
+
+        # Media apps
         spotify
         libreoffice-fresh
         vlc
