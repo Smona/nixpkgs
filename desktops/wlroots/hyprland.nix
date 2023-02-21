@@ -115,7 +115,7 @@ in {
       # Key binds
       bind=,Print,exec,XDG_CURRENT_DESKTOP=sway flameshot gui
       bind=${mod},RETURN,exec,kitty
-      bind=${mod},F,exec,firefox
+      bind=${mod},B,exec,firefox
       bind=${mod},E,exec,nautilus
       bind=${mod},SPACE,exec,rofi -show drun -show-icons
       bind=${mod}_SHIFT,PERIOD,exec,rofimoji --skin-tone light

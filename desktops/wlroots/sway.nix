@@ -63,6 +63,8 @@ in {
           "${modifier}+space" = "exec rofi -show drun -show-icons";
           "${modifier}+Shift+period" = "exec rofimoji --skin-tone light";
           "Ctrl+Shift+space" = "exec 1password --quick-access";
+          "${modifier}+b" = "exec firefox";
+          "${modifier}+e" = "exec nautilus";
           Print = "exec flameshot gui";
           XF86MonBrightnessUp = "exec ${cmd.brighter}";
           XF86MonBrightnessDown = "exec ${cmd.darker}";
