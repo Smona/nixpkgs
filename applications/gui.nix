@@ -24,6 +24,8 @@
         gthumb
         rescuetime
         signal-desktop
+        # Telegram desktop
+        tdesktop
         slack
         spotify
         libreoffice-fresh
