@@ -40,11 +40,11 @@ in {
           outputs = [
             {
               criteria = "eDP-1";
-              position = "-960,0";
+              position = "960,1600";
             }
             {
               criteria = "Acer Technologies Acer XR382CQK 0x0000B7AA";
-              position = "-1820,-1600";
+              position = "0,0";
             }
           ];
         };
