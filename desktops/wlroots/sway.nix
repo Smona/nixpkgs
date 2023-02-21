@@ -56,6 +56,11 @@ in {
           command = "swaybg -i ${commonOptions.backgroundImage} -m fill";
           always = true;
         }
+        {
+          # Enable dynamic tiling
+          command = "${pkgs.autotiling}/bin/autotiling";
+          always = true;
+        }
       ];
       keybindings =
         let modifier = config.wayland.windowManager.sway.config.modifier;
