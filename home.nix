@@ -81,6 +81,7 @@
     diskspace = "df -P -kHl";
     fonts = "fc-list";
     bios = "sudo dmidecode -t bios";
+    fucking = "sudo";
 
     # Shortcuts
     c = "bat";
