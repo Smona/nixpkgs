@@ -87,7 +87,7 @@
     g = "git";
     e = "$EDITOR";
     doom = "~/.emacs.d/bin/doom";
-    hm = "home-manager";
+    hm = "home-manager --flake ~/.config/nixpkgs";
     hms = "hm switch";
     hmn = "hm news";
     arch = "archive";
