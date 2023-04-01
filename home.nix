@@ -88,6 +88,7 @@
     g = "git";
     e = "$EDITOR";
     doom = "~/.emacs.d/bin/doom";
+    upgrade = "sudo nixos-rebuild --flake ~/.config/nixpkgs";
     hm = "home-manager --flake ~/.config/nixpkgs";
     hms = "hm switch";
     hmn = "hm news";
