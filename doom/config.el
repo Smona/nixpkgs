@@ -557,3 +557,6 @@
 (pixel-scroll-precision-mode)
 
 (use-package! yuck-mode)
+
+;; Custom default file templates
+(set-file-template! "\\.tsx$" :trigger "__.tsx" :mode 'tsx-mode)
