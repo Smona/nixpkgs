@@ -42,7 +42,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function.
-(setq doom-theme 'doom-tokyo-night)
+(setq doom-theme 'doom-dracula)
 ;; Use fixed-pitch font in treemacs
 (setq doom-themes-treemacs-enable-variable-pitch nil)
 ;; Other themes I like: doom-rouge, doom-challenger-deep, doom-monokai-spectrum, doom-monokai-octagon, doom-city-lights, doom-material, doom-palenight, doom-tokyo-night
