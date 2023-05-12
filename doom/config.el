@@ -559,4 +559,4 @@
 (use-package! yuck-mode)
 
 ;; Custom default file templates
-(set-file-template! "\\.tsx$" :trigger "__.tsx" :mode 'tsx-mode)
+;; (set-file-template! "\\.tsx$" :trigger "__.tsx" :mode 'tsx-mode)
