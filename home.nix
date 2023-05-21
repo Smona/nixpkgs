@@ -53,7 +53,7 @@
     #
     # Required by Emacs:
     cascadia-code
-    merriweather
+    google-fonts
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
 
     # Fun
