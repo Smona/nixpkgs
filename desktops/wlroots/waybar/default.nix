@@ -48,7 +48,7 @@ in {
               },
               "clock": {
                 "interval": 60,
-                "format": "{:%a %m/%d   %I:%M %p}",
+                "format": "{:%I:%M %p   %a %m/%d}",
                 "max-length": 25
               },
               "memory": {
