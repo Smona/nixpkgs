@@ -186,6 +186,9 @@
     (add-hook 'org-mode-hook #'valign-mode)
 )
 
+(map! :after evil-org
+      :map evil-org-mode-map
+      :ni "C-<return>" #'org-insert-heading-respect-content)
 
 (after! org
         ;; Use non-monospace font by default in org mode

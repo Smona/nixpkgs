@@ -70,6 +70,9 @@ in {
           "Ctrl+Shift+space" = "exec 1password --quick-access";
           "${modifier}+b" = "exec firefox";
           "${modifier}+e" = "exec nautilus";
+          "${modifier}+t" = "exec kitty";
+          # Allow org-mode to use this hotkey
+          "${modifier}+Return" = null;
           Print = "exec flameshot gui";
           XF86MonBrightnessUp = "exec ${cmd.brighter}";
           XF86MonBrightnessDown = "exec ${cmd.darker}";
