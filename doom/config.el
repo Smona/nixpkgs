@@ -22,7 +22,7 @@
 ;; accept. For example:
 ;;
 (setq! doom-font (font-spec :family "Cascadia Code" :size 13.0 :weight 'normal :width 'normal))
-(setq! doom-variable-pitch-font (font-spec :family "Merriweather" :size 20))
+(setq! doom-variable-pitch-font (font-spec :family "Source Serif Pro" :size 20))
 ;; Nerd fonts break italics rendering within emacs for many fonts, so we use
 ;; the NF variant only for unicode glyphs. It appears that glyphs from other
 ;; languages will still use the default doom-font.
