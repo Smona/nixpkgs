@@ -179,6 +179,13 @@
 (add-to-list 'org-modules 'org-habit)
 
 (defun my/org-local-hook () (setq-local default-text-properties '(line-spacing 0.4 line-height 1.4)))
+(use-package! valign
+    :after org
+    :config
+    (setq valign-fancy-bar t)
+    (add-hook 'org-mode-hook #'valign-mode)
+)
+
 
 (after! org
         ;; Use non-monospace font by default in org mode

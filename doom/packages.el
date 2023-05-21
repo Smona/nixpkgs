@@ -72,3 +72,5 @@
 (package! pdf-tools :built-in 'prefer)
 
 (package! yuck-mode)
+
+(package! valign)
