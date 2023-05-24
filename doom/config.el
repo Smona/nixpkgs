@@ -543,9 +543,11 @@
 (after! dap-mode
   (setq dap-python-debugger 'debugpy))
 
-;; Disable web-mode's default prettify symbols since they conflict with native ligatures
+;; Disable modes' default prettify symbols since they conflict with native ligatures
 (after! web-mode
         (setq web-mode-prettify-symbols-alist '()))
+(after! rjsx-mode
+        (setq js--prettify-symbols-alist '()))
 
 (use-package! dirvish
   :config
