@@ -58,6 +58,7 @@ in {
           command = "swaybg -i ${commonOptions.backgroundImage} -m fill";
           always = true;
         }
+        { command = "swaync"; }
         {
           # Enable dynamic tiling
           command = "${pkgs.autotiling}/bin/autotiling";

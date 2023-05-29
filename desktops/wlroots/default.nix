@@ -30,6 +30,7 @@ in {
       (rofimoji.override { rofi = my_rofi; })
       fusuma
       blueman # GTK bluetooth manager
+      swaynotificationcenter
     ];
 
     services.kanshi = {
@@ -102,6 +103,16 @@ in {
         threshold = { swipe = 0.1; };
         interval = { swipe = 0.7; };
         swipe = {
+          "3" = {
+            left = {
+              command =
+                "${pkgs.swaynotificationcenter}/bin/swaync-client --open-panel";
+            };
+            right = {
+              command =
+                "${pkgs.swaynotificationcenter}/bin/swaync-client --close-panel";
+            };
+          };
           "4" = {
             left = { command = "${pkgs.sway}/bin/swaymsg workspace next"; };
             right = { command = "${pkgs.sway}/bin/swaymsg workspace prev"; };
