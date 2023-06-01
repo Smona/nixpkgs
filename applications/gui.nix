@@ -21,14 +21,14 @@
       [
         gthumb
         rescuetime
+        keybase-gui
 
         # Messaging apps
         (discord.override {
           nss = nss_latest;
         }) # https://github.com/NixOS/nixpkgs/issues/78961
         signal-desktop
-        # Telegram desktop
-        tdesktop
+        tdesktop # Telegram desktop
         slack
 
         # Media apps
@@ -40,6 +40,9 @@
     programs.chromium.enable = true;
     programs.firefox.enable = true;
     programs.kitty.enable = true;
+
+    # Required for keybase-gui
+    services.kbfs.enable = true;
 
     systemd.user.services.rescuetime = {
       Unit.Description = "RescueTime time tracker";
