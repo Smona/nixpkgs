@@ -17,7 +17,9 @@
     musnix.inputs.nixpkgs.follows = "nixpkgs";
 
     hyprland.url = "github:hyprwm/Hyprland";
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
+    # Pinned to late emacs 29, since doom isn't quite ready for emacs 30 yet
+    emacs-overlay.url =
+      "github:nix-community/emacs-overlay?rev=bcd60c7ed335f46570d9c9a9f6695c6ebf13ef1b";
 
     # Shameless plug: looking for a way to nixify your themes and make
     # everything match nicely? Try nix-colors!
