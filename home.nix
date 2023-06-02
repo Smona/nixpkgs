@@ -55,6 +55,7 @@
     cascadia-code
     google-fonts
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    noto-fonts-emoji
 
     # Fun
     cowsay

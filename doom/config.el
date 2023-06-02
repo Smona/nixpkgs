@@ -27,6 +27,16 @@
 ;; the NF variant only for unicode glyphs. It appears that glyphs from other
 ;; languages will still use the default doom-font.
 (setq! doom-unicode-font (font-spec :family "FiraCode Nerd Font"))
+;; Use native unicode emoji rendering
+(setq! emojify-display-style 'unicode)
+;; add back the emoji fallback font families that aren't used when setting doom-unicode-font
+;; https://github.com/doomemacs/doomemacs/issues/7036
+(defun add-back-emoji-fallback-font-families ()
+  (when (fboundp 'set-fontset-font)
+    (let ((fn (doom-rpartial #'member (font-family-list))))
+      (when-let (font (cl-find-if fn doom-emoji-fallback-font-families))
+        (set-fontset-font t 'unicode font nil 'append)))))
+(add-hook 'after-setting-font-hook 'add-back-emoji-fallback-font-families)
 
 ;; Give lines more space, while keeping text centered.
 ;; Source: https://github.com/syl20bnr/spacemacs/issues/10502#issuecomment-404453194
