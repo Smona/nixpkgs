@@ -20,7 +20,6 @@
     home.packages = with pkgs;
       [
         gthumb
-        rescuetime
         keybase-gui
 
         # Messaging apps
@@ -43,16 +42,6 @@
 
     # Required for keybase-gui
     services.kbfs.enable = true;
-
-    systemd.user.services.rescuetime = {
-      Unit.Description = "RescueTime time tracker";
-      Install.WantedBy = [ "graphical-session.target" ];
-      Service = {
-        ExecStart = "${pkgs.rescuetime}/bin/rescuetime";
-        Restart = "on-failure";
-        RestartSec = 2;
-      };
-    };
 
     # I like to have slack installed everywhere, but only auto-start it on work machines
     systemd.user.services.slack = lib.mkIf config.roles.work {
