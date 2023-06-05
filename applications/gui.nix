@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [ ./firefox.nix ./terminal.nix ./games.nix ./music.nix ];
+  imports = [ ./art.nix ./firefox.nix ./terminal.nix ./games.nix ./music.nix ];
 
   options.graphical =
     lib.mkEnableOption "install and configure graphical applications.";
@@ -9,7 +9,9 @@
     type = lib.types.str;
     default = "/usr/bin/env 1password";
   };
+  # Roles are all defined here for ease of discoverability
   options.roles = {
+    art = lib.mkEnableOption "set up computer for visual art creation";
     gaming = lib.mkEnableOption "set up computer for gaming";
     work = lib.mkEnableOption "set up computer for work";
     music = lib.mkEnableOption "set up computer for music production";
