@@ -531,11 +531,20 @@
 
 (use-package! auth-source
   :config
-  (let ((credential (auth-source-user-and-password "wakatime")))
-        (setq wakatime-api-key (cadr credential)))
-  (let ((credential (auth-source-user-and-password "api.github.com" "Smona^grip")))
-        (setq grip-github-user (car credential)
-              grip-github-password (cadr credential))))
+  (setq auth-source-do-cache nil))
+
+(defun load-password (host user)
+  "Loads a password from auth-source"
+  (let ((found (car (auth-source-search :host host :user user :require '(:secret)))))
+        (funcall (plist-get found :secret))))
+
+(after! (auth-source epg)
+  ;; Load credentials which should always be defined
+  (setq wakatime-api-key (load-password "wakatime" "smona")))
+
+(after! grip-mode
+  (setq grip-github-user "Smona^grip")
+  (setq grip-github-password (load-password "api.github.com" "Smona^grip")))
 
 (use-package! wakatime-mode
   :after auth-source
