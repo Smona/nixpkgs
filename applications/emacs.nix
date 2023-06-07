@@ -35,6 +35,9 @@ in {
     mediainfo
     imagemagick # improves display of images in emacs
 
+    # org-roam-graph
+    graphviz
+
     # Assorted Emacs dependencies
     wakatime
   ];
