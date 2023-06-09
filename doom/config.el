@@ -538,18 +538,20 @@
   (let ((found (car (auth-source-search :host host :user user :require '(:secret)))))
         (funcall (plist-get found :secret))))
 
-(after! (auth-source epg)
-  ;; Load credentials which should always be defined
-  (setq wakatime-api-key (load-password "wakatime" "smona")))
-
 (after! grip-mode
   (setq grip-github-user "Smona^grip")
   (setq grip-github-password (load-password "api.github.com" "Smona^grip")))
 
+
+(defun my/wakatime-hook () (setq wakatime-api-key (load-password "wakatime" "smona")))
 (use-package! wakatime-mode
-  :after auth-source
+  :after (auth-source epa)
   :config
-  (global-wakatime-mode))
+  (global-wakatime-mode)
+  ;; This seems to reliably decrypt and load the secret without crashing startup 😵
+  ;; If you see an error with startup hooks saying "void-function nil", it's probably this
+  ;; hook running before necessary stuff has initialized to decrypt the authinfo file.
+  (add-hook! 'doom-first-buffer-hook 'my/wakatime-hook))
 
 (setq +treemacs-git-mode 'deferred)
 
