@@ -21,22 +21,29 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-(setq! doom-font (font-spec :family "Cascadia Code" :size 13.0 :weight 'normal :width 'normal))
-(setq! doom-variable-pitch-font (font-spec :family "Source Serif Pro" :size 20))
-;; Nerd fonts break italics rendering within emacs for many fonts, so we use
-;; the NF variant only for unicode glyphs. It appears that glyphs from other
-;; languages will still use the default doom-font.
-(setq! doom-unicode-font (font-spec :family "FiraCode Nerd Font"))
+(setq! doom-font (font-spec :family "CaskaydiaCove Nerd Font" :size 13.0 :weight 'normal :width 'normal))
+(setq! doom-variable-pitch-font (font-spec :family "Source Serif 4" :size 20))
+(setq! doom-unicode-font doom-font)
 ;; Use native unicode emoji rendering
 (setq! emojify-display-style 'unicode)
-;; add back the emoji fallback font families that aren't used when setting doom-unicode-font
-;; https://github.com/doomemacs/doomemacs/issues/7036
-(defun add-back-emoji-fallback-font-families ()
-  (when (fboundp 'set-fontset-font)
-    (let ((fn (doom-rpartial #'member (font-family-list))))
-      (when-let (font (cl-find-if fn doom-emoji-fallback-font-families))
-        (set-fontset-font t 'unicode font nil 'append)))))
-(add-hook 'after-setting-font-hook 'add-back-emoji-fallback-font-families)
+;; Override all emoji unicode block to Noto Color Emoji
+(after! unicode-fonts
+  (dolist (unicode-block '("Emoticons"
+                           "Dingbats"
+                           "Enclosed Alphanumeric Supplement"
+                           "Miscellaneous Technical"
+                           "Enclosed Ideographic Supplement"
+                           "Geometric Shapes Extended"
+                           "Arrows"
+                           "Geometric Shapes"
+                           "Miscellaneous Symbols"
+                           "Miscellaneous Symbols and Arrows"
+                           "Miscellaneous Symbols and Pictographs"
+                           "Supplemental Symbols and Pictographs"
+                           "Transport and Map Symbols"))
+        (push "Noto Color Emoji" (cadr (assoc unicode-block unicode-fonts-block-font-mapping))))
+  (push '("Symbols and Pictographs Extended-A" ("Noto Color Emoji")) unicode-fonts-block-font-mapping)
+  )
 
 ;; Give lines more space, while keeping text centered.
 ;; Source: https://github.com/syl20bnr/spacemacs/issues/10502#issuecomment-404453194

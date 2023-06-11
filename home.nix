@@ -50,12 +50,11 @@
     # Fonts
     # Fonts I like, in order of preference: Cascadia Code, FiraCode, Dank Mono, JetBrains Mono
     # Fonts to try: FantasqueSansMono, Inconsolata, Victor Mono
-    #
-    # Required by Emacs:
     cascadia-code
-    google-fonts
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
-    noto-fonts-emoji
+    (nerdfonts.override { fonts = [ "CascadiaCode" ]; }) # Required by Emacs
+    noto-fonts-emoji # Required by Emacs
+    source-serif # Required by Emacs
+    source-sans
 
     # Fun
     cowsay
