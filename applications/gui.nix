@@ -1,6 +1,9 @@
 { config, lib, pkgs, ... }:
 
-{
+let
+  nixGL = import ./nixGL.nix { inherit pkgs config; };
+  my-slack = (nixGL pkgs.slack);
+in {
   imports = [ ./art.nix ./firefox.nix ./terminal.nix ./games.nix ./music.nix ];
 
   options.graphical =
@@ -8,6 +11,15 @@
   options._1passwordBinary = lib.mkOption {
     type = lib.types.str;
     default = "/usr/bin/env 1password";
+  };
+  options.nixGLPrefix = lib.mkOption {
+    type = lib.types.str;
+    default = "";
+    description = ''
+      Will be prepended to commands which require working OpenGL.
+
+      This needs to be set to the right nixGL package on non-NixOS systems.
+    '';
   };
   # Roles are all defined here for ease of discoverability
   options.roles = {
@@ -22,23 +34,29 @@
     home.packages = with pkgs;
       [
         gthumb
-        keybase-gui
+        (nixGL keybase-gui)
 
         # Messaging apps
-        (discord.override {
-          nss = nss_latest;
-        }) # https://github.com/NixOS/nixpkgs/issues/78961
-        signal-desktop
-        tdesktop # Telegram desktop
-        slack
+        (nixGL (discord.override {
+          nss = nss_latest; # https://github.com/NixOS/nixpkgs/issues/78961
+        }))
+        (nixGL signal-desktop)
+        (nixGL tdesktop) # Telegram desktop
+        my-slack
 
         # Media apps
-        spotify
-        libreoffice-fresh
-        vlc
-      ] ++ (lib.lists.optionals config.roles.work [ gimp zoom-us ]);
+        (nixGL spotify)
+        (nixGL libreoffice-fresh)
+        (nixGL vlc)
+      ] ++ (lib.lists.optionals config.roles.work [
+        (nixGL gimp)
+        (nixGL zoom-us)
+      ]);
 
-    programs.chromium.enable = true;
+    programs.chromium = {
+      enable = true;
+      package = (nixGL pkgs.chromium);
+    };
     programs.firefox.enable = true;
     programs.kitty.enable = true;
 
@@ -50,7 +68,7 @@
       Unit.Description = "Slack desktop application";
       Install.WantedBy = [ "graphical-session.target" ];
       Service = {
-        ExecStart = "${pkgs.slack}/bin/slack";
+        ExecStart = "${my-slack}/bin/slack";
         Restart = "on-failure";
         RestartSec = 2;
       };

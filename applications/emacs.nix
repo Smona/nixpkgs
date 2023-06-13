@@ -1,11 +1,13 @@
 { config, lib, pkgs, ... }:
 
-let emacs = pkgs.emacsPgtk;
+let
+  emacs = pkgs.emacsPgtk;
+  nixGL = import ./nixGL.nix { inherit config pkgs; };
 in {
   programs.emacs = {
     enable = true;
-    package = emacs;
-    extraPackages = epkgs: [ epkgs.vterm epkgs.pdf-tools ];
+    package = (nixGL ((pkgs.emacsPackagesFor emacs).emacsWithPackages
+      (epkgs: [ epkgs.vterm epkgs.pdf-tools ])));
   };
 
   home.packages = with pkgs; [
