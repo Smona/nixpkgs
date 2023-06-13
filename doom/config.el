@@ -50,6 +50,7 @@
 (setq-default default-text-properties '(line-spacing 0.15 line-height 1.15))
 ;; No extra line spacing in vterm, where it can make text taller than powerline symbols & break continuity.
 (add-hook! 'vterm-mode-hook (setq-local default-text-properties '(line-spacing 0 line-height 1)))
+(add-hook! 'org-mode-hook (setq-local default-text-properties '(line-spacing 0 line-height 1)))
 
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
