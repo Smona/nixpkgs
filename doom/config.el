@@ -600,3 +600,6 @@
 
 ;; Custom default file templates
 ;; (set-file-template! "\\.tsx$" :trigger "__.tsx" :mode 'tsx-mode)
+
+;; ROS support
+(add-to-list 'auto-mode-alist '("\\.launch$" . xml-mode))
