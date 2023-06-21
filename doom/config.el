@@ -146,6 +146,9 @@
 (map! :leader
       :desc "Repeat a recent search"
       "s R" #'vertico-repeat-select)
+(map! :localleader
+      :desc "Open Org Roam UI"
+      "m u" #'org-roam-ui-open)
 
 ;; MX Master 3 forward/back buttons
 (map! "<mouse-8>" #'previous-buffer)
