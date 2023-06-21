@@ -40,6 +40,9 @@ in {
     # org-roam-graph
     graphviz
 
+    # mermaid-mode
+    nodePackages.mermaid-cli
+
     # Assorted Emacs dependencies
     wakatime
   ];

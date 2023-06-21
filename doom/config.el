@@ -611,3 +611,5 @@
 
 ;; ROS support
 (add-to-list 'auto-mode-alist '("\\.launch$" . xml-mode))
+
+(use-package! mermaid-mode)

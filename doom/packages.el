@@ -74,3 +74,6 @@
 (package! yuck-mode)
 
 (package! valign)
+
+(package! mermaid-mode)
+(package! ob-mermaid)
