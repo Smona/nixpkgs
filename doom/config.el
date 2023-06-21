@@ -195,7 +195,12 @@
 ;; track habits
 (add-to-list 'org-modules 'org-habit)
 
-(defun my/org-local-hook () (setq-local default-text-properties '(line-spacing 0.4 line-height 1.4)))
+(defun my/org-local-hook ()
+  (setq-local default-text-properties '(line-spacing 0.4 line-height 1.4))
+  ;; Ensure saved code block results are always up to date, and speed up
+  ;; iteration, without tempting going a while without saving 😉
+  ;; The last argument makes it buffer-local.
+  (add-hook 'before-save-hook 'org-babel-execute-buffer nil t))
 (use-package! valign
     :after org
     :config
