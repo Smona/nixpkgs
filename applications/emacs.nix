@@ -19,6 +19,9 @@ in {
     rnix-lsp # Required by (nix +lsp)
     nixfmt # For emacs code formatting
 
+    # C
+    cmake-language-server
+
     # Code Formatters
     nodePackages.prettier
     black
