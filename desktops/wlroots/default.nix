@@ -31,6 +31,8 @@ in {
       fusuma
       blueman # GTK bluetooth manager
       swaynotificationcenter
+
+      gammastep
     ];
 
     services.kanshi = {

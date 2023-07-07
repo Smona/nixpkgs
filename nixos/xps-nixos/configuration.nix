@@ -172,6 +172,9 @@
     };
   };
 
+  # Location service provider, required for gammastep
+  services.geoclue2.enable = true;
+
   # Enable IIO for autorotation and light detection
   hardware.sensor.iio.enable = true;
 

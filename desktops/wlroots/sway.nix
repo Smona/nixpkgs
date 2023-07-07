@@ -47,6 +47,7 @@ in {
       startup = [
         { command = "dbus-sway-environment"; }
         { command = "configure-gtk"; }
+        { command = "gammastep-indicator -t 6500K:3800K"; }
         {
           # Mostly just needed for 1password system authentication, so I can use the SSH agent
           # I used to use the gnome agent, but the deepin one just looks nicer, and appears to
