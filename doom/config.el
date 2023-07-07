@@ -613,3 +613,6 @@
 (add-to-list 'auto-mode-alist '("\\.launch$" . xml-mode))
 
 (use-package! mermaid-mode)
+
+;; Add support for viewing webp and other "exotic" image formats
+(setq image-use-external-converter t)
