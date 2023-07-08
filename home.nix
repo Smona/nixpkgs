@@ -34,7 +34,7 @@
     dmidecode
 
     # Shell utilities
-    bpytop
+    btop
     curl
     jq # Format, slice and dice json on the command line. Also used by restclient.el
     ## cooler rust versions of basic GNU utilities
