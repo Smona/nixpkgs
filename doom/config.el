@@ -619,3 +619,6 @@
 
 ;; Prevent vterm from messing with evil's mode-based cursor styling
 (advice-add #'vterm--redraw :around (lambda (fun &rest args) (let ((cursor-type cursor-type)) (apply fun args))))
+;; Fix https://github.com/emacs-evil/evil-collection/issues/651
+(defadvice! +vterm-update-cursor (orig-fn &rest args) :before #'vterm-send-key (vterm-goto-char (point)))
+(defadvice! +vterm-update-cursor-boon (orig-fn &rest args) :before #'boon-insert (vterm-goto-char (point)))
