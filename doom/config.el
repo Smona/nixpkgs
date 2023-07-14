@@ -616,3 +616,6 @@
 
 ;; Add support for viewing webp and other "exotic" image formats
 (setq image-use-external-converter t)
+
+;; Prevent vterm from messing with evil's mode-based cursor styling
+(advice-add #'vterm--redraw :around (lambda (fun &rest args) (let ((cursor-type cursor-type)) (apply fun args))))
