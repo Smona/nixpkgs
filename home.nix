@@ -56,6 +56,7 @@
     noto-fonts-emoji # Required by Emacs
     source-serif # Required by Emacs
     source-sans
+    rounded-mgenplus # Japanese font support
 
     # Fun
     cowsay
