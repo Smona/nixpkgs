@@ -46,6 +46,7 @@
     # Universal dev tools
     docker
     docker-compose
+    vulnix
 
     # Fonts
     # Fonts I like, in order of preference: Cascadia Code, FiraCode, Dank Mono, JetBrains Mono
