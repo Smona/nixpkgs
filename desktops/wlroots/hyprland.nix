@@ -4,7 +4,6 @@ let
   commonOptions = import ../common.nix;
   cmd = import ./system-commands { inherit pkgs inputs; };
 in {
-  imports = [ inputs.hyprland.homeManagerModules.default ];
 
   wayland.windowManager.hyprland = {
     extraConfig = let mod = "ALT";

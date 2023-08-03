@@ -6,7 +6,7 @@ let
   playerctl = "${pkgs.playerctl}/bin/playerctl";
   brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
   wpctl = "${pkgs.wireplumber}/bin/wpctl";
-  hyprctl = "${inputs.hyprland.packages.x86_64-linux.hyprland}/bin/hyprctl";
+  hyprctl = "${pkgs.hyprland}/bin/hyprctl";
 in rec {
   # We need to handle our own media keys
 
