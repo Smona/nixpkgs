@@ -41,7 +41,10 @@
     nixosConfigurations = {
       "xps-nixos" = nixpkgs.lib.nixosSystem {
         pkgs = legacyPackages.x86_64-linux;
-        specialArgs = { inherit inputs; };
+        specialArgs = {
+          inherit inputs;
+          system = "x86_64-linux";
+        };
         # > Our main nixos configuration file <
         modules = [ ./nixos/xps-nixos/configuration.nix ];
       };
@@ -50,7 +53,10 @@
     homeConfigurations = {
       "cobalt@remotestation376" = home-manager.lib.homeManagerConfiguration {
         pkgs = legacyPackages.x86_64-linux;
-        extraSpecialArgs = { inherit inputs; };
+        extraSpecialArgs = {
+          inherit inputs;
+          system = "x86_64-linux";
+        };
         modules = [
           ./home.nix
           ({ ... }: {

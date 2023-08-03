@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, config, pkgs, lib, ... }:
+{ inputs, system, config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -119,7 +119,7 @@
   };
 
   home-manager.useGlobalPkgs = true;
-  home-manager.extraSpecialArgs = { inherit inputs; };
+  home-manager.extraSpecialArgs = { inherit inputs system; };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
