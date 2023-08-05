@@ -33,6 +33,7 @@ in {
       swaynotificationcenter
 
       gammastep
+      (import ./tablet_mode_switch { inherit pkgs; })
     ];
 
     services.kanshi = {
