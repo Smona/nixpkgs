@@ -107,9 +107,14 @@ window#waybar.chromium {
   color: #ffffff;
 }
 
+#battery.warning {
+  color: #f5a13b;
+}
+
 #battery.charging,
 #battery.plugged {
   color: #26a65b;
+  background: transparent;
   animation-name: pulse;
   animation-duration: 2s;
   animation-timing-function: ease-in;
@@ -124,17 +129,23 @@ window#waybar.chromium {
 }
 
 @keyframes blink {
-  to {
-    background-color: #ffffff;
-    color: #000000;
+  0% {
+    background-color: transparent;
+    color: #f2304e;
+  }
+  80% {
+    background-color: transparent;
+    color: #f2304e;
+  }
+  100% {
+    background-color: #f2304e;
+    color: #ffffff;
   }
 }
 
 #battery.critical:not(.charging) {
-  background-color: #f53c3c;
-  color: #ffffff;
   animation-name: blink;
-  animation-duration: 0.5s;
+  animation-duration: 2s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-direction: alternate;

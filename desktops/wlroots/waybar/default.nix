@@ -44,7 +44,12 @@ in {
               },
               "battery": {
                 "format": "{icon} {capacity}%",
-                "format-icons": [ "", "", "", "", "" ]
+                "interval": 2,
+                "format-icons": [ "", "", "", "", "" ],
+                "states": {
+                  "warning": 25,
+                  "critical": 10
+                }
               },
               "clock": {
                 "interval": 60,
@@ -118,11 +123,7 @@ in {
                 "exec": "${
                   pkgs.writeShellApplication {
                     name = "hypr-get-title";
-                    runtimeInputs = with pkgs; [
-                      inputs.hyprland.packages.x86_64-linux.hyprland
-                      gnused
-                      gnugrep
-                    ];
+                    runtimeInputs = with pkgs; [ hyprland gnused gnugrep ];
                     text = ''
                       TITLE=$(hyprctl activewindow \
                         | grep 'title:' | sed 's/title: //' \
