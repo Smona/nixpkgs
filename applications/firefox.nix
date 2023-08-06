@@ -28,7 +28,15 @@ in {
           # Disable ads
           "browser.newtabpage.activity-stream.showSponsored" = false;
           "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
+          # Enable userChrome.css
+          "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         };
+        userChrome = ''
+          /* Hide the tabs bar, in favor of sideberry */
+          #TabsToolbar {
+            visibility: collapse;
+          }
+        '';
       };
     };
   };
