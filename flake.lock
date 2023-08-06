@@ -154,22 +154,6 @@
         "type": "indirect"
       }
     },
-    "nixpkgs-bitwig": {
-      "locked": {
-        "lastModified": 1626386683,
-        "narHash": "sha256-yU15cGgnpSMd76AEOcTJNam1TwiULGCtUbtr4DUvRho=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "0c98c6bbc43daa8af7554a3efe1983c0c096d979",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "0c98c6bbc43daa8af7554a3efe1983c0c096d979",
-        "type": "github"
-      }
-    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1690881714,
@@ -194,8 +178,7 @@
         "home-manager": "home-manager",
         "musnix": "musnix",
         "nixGL": "nixGL",
-        "nixpkgs": "nixpkgs_2",
-        "nixpkgs-bitwig": "nixpkgs-bitwig"
+        "nixpkgs": "nixpkgs_2"
       }
     }
   },
