@@ -67,6 +67,8 @@ in {
       theme = "arthur";
     };
 
+    programs.wlogout.enable = true;
+
     # Keeps track of media players so playerctl always acts on the most
     # recently active one.
     services.playerctld.enable = true;

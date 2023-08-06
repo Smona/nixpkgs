@@ -72,30 +72,45 @@ in {
           always = true;
         }
       ];
-      keybindings =
-        let modifier = config.wayland.windowManager.sway.config.modifier;
-        in lib.mkOptionDefault {
-          "${modifier}+space" = "exec rofi -show drun -show-icons";
-          "${modifier}+Shift+period" = "exec rofimoji --skin-tone light";
-          "Ctrl+Shift+space" = "exec 1password --quick-access";
-          "${modifier}+b" = "exec firefox";
-          "${modifier}+e" = "exec nautilus";
-          "${modifier}+t" = "exec kitty";
-          # Allow org-mode to use this hotkey
-          "${modifier}+Return" = null;
-          Print = "exec flameshot gui";
-          XF86MonBrightnessUp = "exec ${cmd.brighter}";
-          XF86MonBrightnessDown = "exec ${cmd.darker}";
-          XF86AudioLowerVolume = "exec ${cmd.softer}";
-          XF86AudioRaiseVolume = "exec ${cmd.louder}";
-          XF86AudioMute = "exec ${cmd.mute}";
-          XF86AudioPlay = "exec ${cmd.play}";
-          # =ALT,XF86AudioLowerVolume,exec,playerctl position 5-
-          # =ALT,XF86AudioRaiseVolume,exec,playerctl position 5+
-          XF86AudioPrev = "exec ${cmd.prev}";
-          XF86AudioNext = "exec ${cmd.next}";
-          # "${modifier}+Shift+q" = "kill";
-        };
+      modifier = "Mod4";
+      keybindings = let
+        modifier = config.wayland.windowManager.sway.config.modifier;
+        secondaryMod = "Mod1";
+      in lib.mkOptionDefault {
+        "Mod1+space" =
+          "exec rofi -show combi -combi-modes 'drun,ssh,run' -show-icons";
+        "Mod1+tab" = "exec rofi -show window -show-icons";
+        "${modifier}+period" = "exec rofimoji --skin-tone light";
+        "${modifier}+Shift+e" = "exec wlogout";
+        "Ctrl+Shift+space" = "exec 1password --quick-access";
+        "${modifier}+b" = "exec firefox";
+        "${modifier}+e" = "exec nautilus";
+        "${modifier}+t" = "exec kitty";
+        "${modifier}+n" = "exec swaync-client -t";
+        # Allow org-mode to use this hotkey
+        "${modifier}+Return" = null;
+        # "${secondarymod}+h" = "workspace prev";
+        # "${secondaryMod}+l" = "workspace next";
+        Print = "exec grimshot --notify copy area";
+        XF86MonBrightnessUp = "exec ${cmd.brighter}";
+        XF86MonBrightnessDown = "exec ${cmd.darker}";
+        XF86AudioMute = "exec ${cmd.mute}";
+        XF86AudioPlay = "exec ${cmd.play}";
+        XF86AudioPrev = "exec ${cmd.prev}";
+        XF86AudioNext = "exec ${cmd.next}";
+        XF86AudioLowerVolume = "exec ${cmd.softer}";
+        XF86AudioRaiseVolume = "exec ${cmd.louder}";
+        "${modifier}+XF86AudioLowerVolume" =
+          "exec ${pkgs.playerctl}/bin/playerctl position 5-";
+        "${modifier}+XF86AudioRaiseVolume" =
+          "exec ${pkgs.playerctl}/bin/playerctl position 5+";
+        "Ctrl+XF86AudioLowerVolume" =
+          "exec ${pkgs.playerctl}/bin/playerctl volume 0.02-";
+        "Ctrl+XF86AudioRaiseVolume" =
+          "exec ${pkgs.playerctl}/bin/playerctl volume 0.02+";
+        "${secondaryMod}+XF86AudioLowerVolume" = "exec ${cmd.prev}";
+        "${secondaryMod}+XF86AudioRaiseVolume" = "exec ${cmd.next}";
+      };
     };
     extraConfig = ''
       ################
