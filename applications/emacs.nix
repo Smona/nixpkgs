@@ -2,12 +2,19 @@
 
 let
   emacs = pkgs.emacsPgtk;
+  my-emacs = (nixGL ((pkgs.emacsPackagesFor emacs).emacsWithPackages
+    (epkgs: [ epkgs.vterm epkgs.pdf-tools ])));
   nixGL = import ./nixGL.nix { inherit config pkgs; };
 in {
   programs.emacs = {
     enable = true;
-    package = (nixGL ((pkgs.emacsPackagesFor emacs).emacsWithPackages
-      (epkgs: [ epkgs.vterm epkgs.pdf-tools ])));
+    package = my-emacs;
+  };
+
+  systemd.user.services."emacs" = {
+    Unit.Description = "Start emacs at login";
+    Install.WantedBy = [ "graphical-session.target" ];
+    Service = { ExecStart = "${my-emacs}/bin/emacs"; };
   };
 
   home.packages = with pkgs; [
