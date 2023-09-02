@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, pkgs, ... }:
 
 let
   emacs = pkgs.emacs29-pgtk;
@@ -23,7 +23,7 @@ in {
     nodePackages.pyright
 
     # Nix
-    rnix-lsp # Required by (nix +lsp)
+    nil # Required by (nix +lsp)
     nixfmt # For emacs code formatting
 
     # C
