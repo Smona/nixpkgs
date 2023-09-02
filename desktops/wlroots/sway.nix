@@ -4,8 +4,6 @@ let
   commonOptions = import ../common.nix;
   cmd = import ./system-commands { inherit pkgs inputs; };
 in {
-  home.packages = [ pkgs.squeekboard ];
-
   wayland.windowManager.sway = {
     config = {
       terminal = "kitty";
@@ -50,9 +48,7 @@ in {
         { command = "dbus-sway-environment"; }
         { command = "configure-gtk"; }
         { command = "squeekboard"; }
-        {
-          command = "tablet_mode_switch";
-        }
+        { command = "tablet_mode_switch"; }
         { command = "gammastep-indicator -t 6500K:3800K"; }
         {
           # Mostly just needed for 1password system authentication, so I can use the SSH agent

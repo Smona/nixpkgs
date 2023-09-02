@@ -34,6 +34,7 @@ in {
 
       gammastep
       (import ./tablet_mode_switch { inherit pkgs; })
+      squeekboard
     ];
 
     services.kanshi = {
