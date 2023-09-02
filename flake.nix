@@ -16,21 +16,16 @@
     musnix.url = "github:musnix/musnix";
     musnix.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Pinned to late emacs 29, since doom isn't quite ready for emacs 30 yet
-    emacs-overlay.url =
-      "github:nix-community/emacs-overlay?rev=bcd60c7ed335f46570d9c9a9f6695c6ebf13ef1b";
-
     # Shameless plug: looking for a way to nixify your themes and make
     # everything match nicely? Try nix-colors!
     # nix-colors.url = "github:misterio77/nix-colors";
   };
 
-  outputs = { nixpkgs, home-manager, nixGL, emacs-overlay, ... }@inputs: rec {
+  outputs = { nixpkgs, home-manager, nixGL, ... }@inputs: rec {
     legacyPackages = nixpkgs.lib.genAttrs [ "x86_64-linux" "x86_64-darwin" ]
       (system:
         import inputs.nixpkgs {
           inherit system;
-          overlays = [ emacs-overlay.overlays.emacs ];
 
           # NOTE: Using `nixpkgs.config` in your NixOS config won't work
           # Instead, you should set nixpkgs configs here

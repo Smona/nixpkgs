@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  emacs = pkgs.emacsPgtk;
+  emacs = pkgs.emacs29-pgtk;
   my-emacs = (nixGL ((pkgs.emacsPackagesFor emacs).emacsWithPackages
     (epkgs: [ epkgs.vterm epkgs.pdf-tools ])));
   nixGL = import ./nixGL.nix { inherit config pkgs; };
