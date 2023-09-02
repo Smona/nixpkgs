@@ -175,6 +175,9 @@
 
 ;; LSP config
 
+(after! lsp-mode
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.node_modules\\'"))
+
 ;; I haven't been able to get graphql-lsp to start without crashing,
 ;; and it takes ts-ls down with it.
 (setq lsp-disabled-clients '(graphql-lsp))
