@@ -48,10 +48,7 @@ in {
         (nixGL spotify)
         (nixGL libreoffice-fresh)
         (nixGL vlc)
-      ] ++ (lib.lists.optionals config.roles.work [
-        (nixGL gimp)
-        (nixGL zoom-us)
-      ]);
+      ] ++ (lib.lists.optionals config.roles.work [ (nixGL gimp) ]);
 
     programs.chromium = {
       enable = true;
