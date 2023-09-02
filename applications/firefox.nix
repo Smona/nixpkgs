@@ -31,12 +31,7 @@ in {
           # Enable userChrome.css
           "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         };
-        userChrome = ''
-          /* Hide the tabs bar, in favor of sideberry */
-          #TabsToolbar {
-            visibility: collapse;
-          }
-        '';
+        userChrome = builtins.readFile ./firefox.css;
       };
     };
   };

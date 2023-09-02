@@ -1,0 +1,9 @@
+/* Hide the tabs bar, in favor of sideberry */
+#TabsToolbar {
+  visibility: collapse;
+}
+
+/* Hide sidebar header */
+#sidebar-box #sidebar-header {
+  display: none !important;
+}
