@@ -113,7 +113,7 @@
     nd = "nix develop -c $SHELL";
     ndp = "nix develop";
     nb = "nix build";
-    ncg = "nix-collect-garbage";
+    ncg = "sudo nix-collect-garbage";
 
     # Git aliases
     gb = "git branch";
