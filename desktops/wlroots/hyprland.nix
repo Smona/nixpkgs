@@ -1,12 +1,11 @@
 { config, lib, pkgs, inputs, ... }:
 
 let
-  commonOptions = import ../common.nix;
+  commonOptions = import ./common.nix { inherit pkgs inputs; };
   cmd = import ./system-commands { inherit pkgs inputs; };
 in {
-
   wayland.windowManager.hyprland = {
-    extraConfig = let mod = "ALT";
+    extraConfig = let mod = "SUPER";
     in ''
       monitor=,preferred,auto,1
 
@@ -111,30 +110,19 @@ in {
       bindm=${mod},mouse:273,resizewindow
 
       # Key binds
-      bind=,Print,exec,XDG_CURRENT_DESKTOP=sway flameshot gui
-      bind=${mod},RETURN,exec,kitty
-      bind=${mod},B,exec,firefox
-      bind=${mod},E,exec,nautilus
-      bind=${mod},SPACE,exec,rofi -show drun -show-icons
-      bind=${mod}_SHIFT,PERIOD,exec,rofimoji --skin-tone light
+      ${(builtins.concatStringsSep "\n" (builtins.map (hk:
+        let bindCommand = if hk.repeat or false then "binde" else "bind";
+        in "${bindCommand}=${
+          builtins.concatStringsSep "_"
+          ((lib.lists.optional hk.ctrl or false "CTRL")
+            ++ (lib.lists.optional hk.shift or false "SHIFT")
+            ++ (lib.lists.optional hk.primaryMod or false mod)
+            ++ (lib.lists.optional hk.secondaryMod or false "ALT"))
+        },${hk.key},exec,${hk.command}") commonOptions.keyBinds))}
       bind=${mod},V,togglefloating,
       bind=${mod},P,pseudo,
       bind=${mod},A,togglesplit,
       bind=${mod}_SHIFT,Q,killactive,
-      bind=${mod},END,exec, ${cmd.goodbye}
-      bind=${mod},M,exit,
-
-      # Media keys
-      binde=,XF86MonBrightnessUp,exec,${cmd.brighter}
-      binde=,XF86MonBrightnessDown,exec,${cmd.darker}
-      binde=,XF86AudioLowerVolume,exec,${cmd.softer}
-      binde=,XF86AudioRaiseVolume,exec,${cmd.louder}
-      bind=,XF86AudioMute,exec,${cmd.mute}
-      bind=,XF86AudioPlay,exec,${cmd.play}
-      binde=ALT,XF86AudioLowerVolume,exec,playerctl position 5-
-      binde=ALT,XF86AudioRaiseVolume,exec,playerctl position 5+
-      binde=XF86AudioPrev,exec,${cmd.prev}
-      binde=XF86AudioNext,exec,${cmd.next}
 
       bind=${mod},H,movefocus,l
       bind=${mod},L,movefocus,r
@@ -162,16 +150,16 @@ in {
       bind=${mod},9,workspace,9
       bind=${mod},0,workspace,10
 
-      bind=SUPER,1,movetoworkspace,1
-      bind=SUPER,2,movetoworkspace,2
-      bind=SUPER,3,movetoworkspace,3
-      bind=SUPER,4,movetoworkspace,4
-      bind=SUPER,5,movetoworkspace,5
-      bind=SUPER,6,movetoworkspace,6
-      bind=SUPER,7,movetoworkspace,7
-      bind=SUPER,8,movetoworkspace,8
-      bind=SUPER,9,movetoworkspace,9
-      bind=SUPER,0,movetoworkspace,10
+      bind=${mod}_SHIFT,1,movetoworkspace,1
+      bind=${mod}_SHIFT,2,movetoworkspace,2
+      bind=${mod}_SHIFT,3,movetoworkspace,3
+      bind=${mod}_SHIFT,4,movetoworkspace,4
+      bind=${mod}_SHIFT,5,movetoworkspace,5
+      bind=${mod}_SHIFT,6,movetoworkspace,6
+      bind=${mod}_SHIFT,7,movetoworkspace,7
+      bind=${mod}_SHIFT,8,movetoworkspace,8
+      bind=${mod}_SHIFT,9,movetoworkspace,9
+      bind=${mod}_SHIFT,0,movetoworkspace,10
 
       bind=SUPER,mouse_down,workspace,e+1
       bind=SUPER,mouse_up,workspace,e-1
