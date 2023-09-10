@@ -92,6 +92,7 @@ in {
       }
 
       windowrule=tile,class:^(Spotify)$
+      windowrule=noblur,title:(Quick Access — 1Password)
 
       # Float windows
       windowrule=float,1Password
