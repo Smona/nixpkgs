@@ -46,27 +46,17 @@ in {
       startup = [
         { command = "dbus-sway-environment"; }
         { command = "configure-gtk"; }
-        { command = "squeekboard"; }
-        { command = "tablet_mode_switch"; }
-        { command = "gammastep-indicator -t 6500K:3800K"; }
-        {
-          # Mostly just needed for 1password system authentication, so I can use the SSH agent
-          # I used to use the gnome agent, but the deepin one just looks nicer, and appears to
-          # be better maintained.
-          command =
-            "${pkgs.pantheon.pantheon-agent-polkit}/libexec/policykit-1-pantheon/io.elementary.desktop.agent-polkit";
-        }
-        {
-          command = "swaybg -i ${commonOptions.backgroundImage} -m fill";
-          always = true;
-        }
-        { command = "swaync"; }
         {
           # Enable dynamic tiling
           command = "${pkgs.autotiling}/bin/autotiling";
           always = true;
         }
-      ];
+      ] ++ (builtins.map (cmd: { command = cmd; }) commonOptions.execStart)
+        ++ (builtins.map (cmd: {
+          command = cmd;
+          always = true;
+        }) commonOptions.execAlways);
+
       modifier = "Mod4";
       keybindings = let
         modifier = config.wayland.windowManager.sway.config.modifier;

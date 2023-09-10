@@ -11,8 +11,11 @@ in {
 
       exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
       exec-once=systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-      exec-once=1password --silent
-      exec-once=swaybg -i ${commonOptions.backgroundImage} -m fill
+      # exec-once=1password --silent
+      ${(builtins.concatStringsSep "\n"
+        (builtins.map (cmd: "exec-once=${cmd}") commonOptions.execStart))}
+      ${(builtins.concatStringsSep "\n"
+        (builtins.map (cmd: "exec=${cmd}") commonOptions.execAlways))}
 
       bind=SUPER,C,killactive,
       bind=SUPER,M,exit,
