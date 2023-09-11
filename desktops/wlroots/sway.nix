@@ -68,9 +68,9 @@ in {
         # "${secondaryMod}+l" = "workspace next";
       } // (builtins.listToAttrs (builtins.map (hk: {
         name = (if hk.ctrl or false then "Ctrl+" else "")
-          + (if hk.shift or false then "Shift+" else "")
           + (if hk.secondaryMod or false then "${secondaryMod}+" else "")
-          + (if hk.primaryMod or false then "${modifier}+" else "") + hk.key;
+          + (if hk.primaryMod or false then "${modifier}+" else "")
+          + (if hk.shift or false then "Shift+" else "") + hk.key;
         value = "exec ${hk.command}";
       }) commonOptions.keyBinds)));
     };
