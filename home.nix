@@ -30,6 +30,11 @@
     ghc
     haskell-language-server # Required for doom (haskell +lsp) module
 
+    ## Rust
+    cargo
+    cargo-watch
+    rustc
+
     # system tools
     dmidecode
 

@@ -29,6 +29,10 @@ in {
     # C
     cmake-language-server
 
+    # Rust
+    rust-analyzer
+    rustfmt
+
     # Code Formatters
     nodePackages.prettier
     black
