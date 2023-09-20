@@ -42,10 +42,14 @@ in {
       profiles = {
         undocked = { outputs = [{ criteria = "eDP-1"; }]; };
         home-office = {
-          outputs = [
+          outputs = let externalScale = 1.3;
+          in with builtins; [
             {
               criteria = "eDP-1";
-              position = "960,1600";
+              position = "${toString (ceil (960 / externalScale))},${
+                  toString (ceil (1600 / externalScale))
+                }";
+              scale = 1.15;
             }
             {
               criteria = "Acer Technologies Acer XR382CQK 0x0000B7AA";
