@@ -179,7 +179,7 @@
   hardware.sensor.iio.enable = true;
 
   systemd.sleep.extraConfig = ''
-    HibernateDelaySec=6h
+    HibernateDelaySec=4h
     # https://github.com/NixOS/nixos-hardware/tree/master/dell/xps/13-7390
     SuspendState=freeze
   '';
