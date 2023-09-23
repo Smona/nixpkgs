@@ -12,6 +12,7 @@
     ./desktops/wlroots
     ./dotfiles/tmux.nix
     ./applications/emacs.nix
+    ./peripherals/logitech.nix
   ];
 
   home.packages = with pkgs; [

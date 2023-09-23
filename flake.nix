@@ -57,6 +57,7 @@
           ({ ... }: {
             home.username = "cobalt";
             gnome.enable = true;
+            logitech.enabled = true;
             roles = { work = true; };
             nixGLPrefix =
               "${nixGL.packages.x86_64-linux.nixGLIntel}/bin/nixGLIntel ";
