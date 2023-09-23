@@ -9,6 +9,7 @@ in commonOptions // {
     "tablet_mode_switch"
     "gammastep-indicator -t 6500K:3800K"
     "swaync"
+    "rot8"
     # Mostly just needed for 1password system authentication, so I can use the SSH agent
     # I used to use the gnome agent, but the deepin one just looks nicer, and appears to
     # be better maintained.

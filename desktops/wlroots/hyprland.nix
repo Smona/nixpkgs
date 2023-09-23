@@ -1,8 +1,6 @@
 { config, lib, pkgs, inputs, ... }:
 
-let
-  commonOptions = import ./common.nix { inherit pkgs inputs; };
-  cmd = import ./system-commands { inherit pkgs inputs; };
+let commonOptions = import ./common.nix { inherit pkgs inputs; };
 in {
   wayland.windowManager.hyprland = {
     extraConfig = let mod = "SUPER";
