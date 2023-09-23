@@ -45,7 +45,7 @@
     ## cooler rust versions of basic GNU utilities
     fd # Better find
     ripgrep # Better grep
-    exa # Better ls
+    eza # Better ls
     bat # Better 🐱
 
     # Universal dev tools
@@ -108,7 +108,7 @@
 
     # Better ls
     l = "ls -1a";
-    ls = "exa -gFHh --git --group-directories-first";
+    ls = "eza -gFHh --git --group-directories-first";
     la = "ls -a";
     ll = "ls -l --icons"; # icons mess up alignment in grid view
     lla = "ll -a";
@@ -190,7 +190,7 @@
       # Automatically list directory contents on `cd`.
       auto-ls () {
         emulate -L zsh;
-        exa --group-directories-first
+        eza --group-directories-first
       }
       chpwd_functions=( auto-ls $chpwd_functions )
 
