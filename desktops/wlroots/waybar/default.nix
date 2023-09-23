@@ -22,12 +22,23 @@ in {
     xdg.configFile.waybar = {
       onChange = "systemctl --user restart waybar";
       target = "waybar/config";
-      text = ''
+      text = let
+        window_config = ''
+          "format": "{title}",
+          "max-length": 50,
+          "rewrite": {
+                "(.*) — Mozilla Firefox": " $1",
+                "(.*) – Doom Emacs": " $1",
+                "(.*) - vim": " $1",
+                "(.*) - kitty": " [$1]"
+          }
+        '';
+      in ''
         {
               "layer": "top",
               "position": "bottom",
-              "modules-left": [ "battery", "memory", "cpu", "idle_inhibitor", "sway/workspaces", "tray" ],
-              "modules-center": [ "sway/window", "custom/window-title"],
+              "modules-left": [ "battery", "memory", "cpu", "idle_inhibitor", "sway/workspaces", "hyprland/workspaces", "tray" ],
+              "modules-center": [ "sway/window", "hyprland/window"],
               "modules-right": [ "custom/media", "network", "pulseaudio", "backlight", "clock" ],
               "cpu": {
                 "interval": 2,
@@ -95,14 +106,14 @@ in {
               },
               "tray": { "spacing": 8 },
               "sway/window": {
-                  "format": "{title}",
-                  "max-length": 50,
-                  "rewrite": {
-                    "(.*) — Mozilla Firefox": " $1",
-                    "(.*) – Doom Emacs": " $1",
-                    "(.*) - vim": " $1",
-                    "(.*) - kitty": " [$1]"
-                  }
+                  ${window_config}
+              },
+              "hyprland/window": {
+                  ${window_config}
+              },
+              "hyprland/workspaces": {
+                  "on-scroll-up": "hyprctl dispatch workspace e+1",
+                  "on-scroll-down": "hyprctl dispatch workspace e-1"
               },
               "custom/media": {
                   "format": "{icon} {}",
