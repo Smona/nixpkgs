@@ -55,6 +55,7 @@ in {
             {
               criteria = "Acer Technologies Acer XR382CQK 0x0000B7AA";
               position = "0,0";
+              scale = externalScale;
             }
           ];
         };
