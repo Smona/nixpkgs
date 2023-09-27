@@ -107,7 +107,10 @@
     imports = [ ../../home.nix ];
 
     home.username = "smona";
-    smona.wlroots.enable = true;
+    smona.wlroots = {
+      enable = true;
+      builtInDisplay = "eDP-1";
+    };
     gnome.enable = true;
     roles = {
       art = true;

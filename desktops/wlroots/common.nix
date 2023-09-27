@@ -1,15 +1,16 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, config, ... }:
 
 let
   commonOptions = (import ../common.nix);
   cmd = import ./system-commands { inherit pkgs inputs; };
+  cfg = config.smona.wlroots;
+  hasBuiltinDisplay = cfg.builtInDisplay != "";
 in commonOptions // {
   execStart = [
     "squeekboard"
     "tablet_mode_switch"
     "gammastep-indicator -t 6500K:3800K"
     "swaync"
-    "rot8"
     # Mostly just needed for 1password system authentication, so I can use the SSH agent
     # I used to use the gnome agent, but the deepin one just looks nicer, and appears to
     # be better maintained.
@@ -17,7 +18,7 @@ in commonOptions // {
     # TODO: handle this properly, it's specific to xps-nixos
     # It looks like xps-nixos's mic clips above 50%
     "wpctl set-volume 43 50%"
-  ];
+  ] ++ (pkgs.lib.lists.optional hasBuiltinDisplay "rot8");
   execAlways = [ "swaybg -i ${commonOptions.backgroundImage} -m fill" ];
   keyBinds = [
     {
