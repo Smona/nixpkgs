@@ -57,7 +57,10 @@ in {
                 "format": "{icon} {capacity}%",
                 "interval": 2,
                 "format-icons": [ "", "", "", "", "" ],
+                "format-full": "",
                 "states": {
+                  "full": 100,
+                  "normal": 99,
                   "warning": 25,
                   "critical": 10
                 }
