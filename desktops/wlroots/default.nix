@@ -46,17 +46,24 @@ in {
 
     services.kanshi = {
       enable = true;
-      profiles = {
-        undocked = { outputs = [{ criteria = "eDP-1"; }]; };
+      profiles = let
+        externalScale = 1.3;
+        builtinScale = 1.25;
+      in {
+        undocked = {
+          outputs = [{
+            criteria = "eDP-1";
+            scale = builtinScale;
+          }];
+        };
         home-office = {
-          outputs = let externalScale = 1.3;
-          in with builtins; [
+          outputs = with builtins; [
             {
               criteria = "eDP-1";
               position = "${toString (ceil (960 / externalScale))},${
                   toString (ceil (1600 / externalScale))
                 }";
-              scale = 1.2;
+              scale = builtinScale;
             }
             {
               criteria = "Acer Technologies Acer XR382CQK 0x0000B7AA";
