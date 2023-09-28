@@ -56,7 +56,7 @@ in {
               position = "${toString (ceil (960 / externalScale))},${
                   toString (ceil (1600 / externalScale))
                 }";
-              scale = 1.15;
+              scale = 1.2;
             }
             {
               criteria = "Acer Technologies Acer XR382CQK 0x0000B7AA";
