@@ -139,8 +139,7 @@ window#waybar.chromium {
     color: #f2304e;
   }
   100% {
-    background-color: #f2304e;
-    color: #ffffff;
+    color: #f00;
   }
 }
 
