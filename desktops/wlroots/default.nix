@@ -48,7 +48,7 @@ in {
       enable = true;
       profiles = let
         externalScale = 1.3;
-        builtinScale = 1.25;
+        builtinScale = 1.2;
       in {
         undocked = {
           outputs = [{
