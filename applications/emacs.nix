@@ -32,6 +32,7 @@ in {
     # Rust
     rust-analyzer
     rustfmt
+    clippy
 
     # Code Formatters
     nodePackages.prettier

@@ -276,3 +276,6 @@
 ;; Fix https://github.com/emacs-evil/evil-collection/issues/651
 (defadvice! +vterm-update-cursor (orig-fn &rest args) :before #'vterm-send-key (vterm-goto-char (point)))
 (defadvice! +vterm-update-cursor-boon (orig-fn &rest args) :before #'boon-insert (vterm-goto-char (point)))
+
+;; Get clippy suggestions from rust LSP
+(setq lsp-rust-analyzer-cargo-watch-command "clippy")
