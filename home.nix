@@ -10,7 +10,7 @@
   imports = [
     ./desktops/gnome
     ./desktops/wlroots
-    ./dotfiles/tmux.nix
+    ./applications/tmux.nix
     ./applications/emacs.nix
     ./peripherals/logitech.nix
   ];
