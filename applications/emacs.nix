@@ -11,6 +11,13 @@ in {
     package = my-emacs;
   };
 
+  xdg = {
+    enable = true;
+    configFile."doom".source = config.lib.file.mkOutOfStoreSymlink ../doom;
+  };
+  home.file.".authinfo.gpg".source = ../dotfiles/authinfo.gpg;
+  home.shellAliases = { doom = "~/.emacs.d/bin/doom"; };
+
   systemd.user.services."emacs" = {
     Unit.Description = "Start emacs at login";
     Install.WantedBy = [ "graphical-session.target" ];
@@ -60,5 +67,6 @@ in {
 
     # Assorted Emacs dependencies
     wakatime
+    jq # Used by restclient.el
   ];
 }

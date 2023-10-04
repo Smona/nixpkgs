@@ -86,7 +86,6 @@
     c = "bat";
     g = "git";
     e = "$EDITOR";
-    doom = "~/.emacs.d/bin/doom";
     upgrade = "sudo nixos-rebuild --flake ~/.config/nixpkgs";
     hm = "home-manager --flake ~/.config/nixpkgs";
     hms = "hm switch";
@@ -127,7 +126,6 @@
     enable = true;
     configFile = {
       ".curlrc".source = ./dotfiles/curlrc;
-      "doom".source = config.lib.file.mkOutOfStoreSymlink ./doom;
       "nix.conf" = {
         source = ./dotfiles/nix.conf;
         target = "nix/nix.conf";
@@ -135,7 +133,6 @@
     };
   };
   home.file.".inputrc".source = ./dotfiles/inputrc;
-  home.file.".authinfo.gpg".source = ./dotfiles/authinfo.gpg;
 
   programs.ssh = {
     enable = true;
