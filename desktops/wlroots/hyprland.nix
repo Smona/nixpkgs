@@ -92,6 +92,11 @@ in {
         swallow_regex = (kitty)
       }
 
+      layerrule = blur,waybar
+      layerrule = ignorezero,waybar
+      layerrule = blur,rofi
+      layerrule = ignorezero,rofi
+
       windowrule=tile,class:^(Spotify)$
       windowrule=noblur,title:(Quick Access — 1Password)
 
