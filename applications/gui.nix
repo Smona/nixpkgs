@@ -30,6 +30,11 @@ in {
   };
 
   config = lib.mkIf config.graphical {
+    home.sessionVariables = {
+      # Automatically set ozone platform flags in all the places where it matters
+      NIXOS_OZONE_WL = 1;
+    };
+
     # Graphical applications
     home.packages = with pkgs;
       [
