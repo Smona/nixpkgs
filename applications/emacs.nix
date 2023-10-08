@@ -3,7 +3,13 @@
 let
   emacs = pkgs.emacs29-pgtk;
   my-emacs = (nixGL ((pkgs.emacsPackagesFor emacs).emacsWithPackages
-    (epkgs: [ epkgs.vterm epkgs.pdf-tools ])));
+    (epkgs: [ epkgs.vterm epkgs.pdf-tools ]))).overrideAttrs (oldAttrs: {
+      # Temporarily working around this issue: https://github.com/NixOS/nixpkgs/issues/66706
+      # TODO: submit upstream fix
+      buildCommand = oldAttrs.buildCommand + ''
+        ln -s $emacs/share/emacs $out/share/emacs
+      '';
+    });
   nixGL = import ./nixGL.nix { inherit config pkgs; };
 in {
   programs.emacs = {
