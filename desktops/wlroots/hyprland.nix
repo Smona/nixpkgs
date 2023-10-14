@@ -48,18 +48,18 @@ in {
           gaps_in=5
           gaps_out=5
           border_size=2
-          col.active_border=0x888130d9
-          col.inactive_border=0x00333333
+          col.active_border=rgba(8130d988)
+          col.inactive_border=rgba(33333300)
 
           apply_sens_to_raw=0 # whether to apply the sensitivity to raw input (e.g. used by games where you aim using your mouse)
       }
 
       decoration {
           rounding=10
-          blur=yes
-          blur_size=5 # minimum 1
-          blur_passes=2 # minimum 1
-          blur_new_optimizations=1
+          blur {
+            passes=2 # minimum 1
+            size=5 # minimum 1
+          }
 
           drop_shadow = yes
           shadow_range = 4
