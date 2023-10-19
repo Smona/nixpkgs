@@ -49,6 +49,8 @@
   # even if I don't really use bash.
   programs.bash = { enable = true; };
 
+  programs.nushell = { enable = true; };
+
   programs.zsh = {
     enable = true;
     history = {
