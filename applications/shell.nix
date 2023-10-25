@@ -24,6 +24,12 @@
     ll = "ls -l --icons"; # icons mess up alignment in grid view
     lla = "ll -a";
     lal = "ll -a";
+    # Better terraform
+    tf = "terraform";
+    tfa = "tf apply";
+    tfp = "tf plan";
+    tfi = "tf init";
+    tfd = "tf destroy";
   };
 
   programs.direnv.enable = true;
