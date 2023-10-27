@@ -42,7 +42,9 @@ in {
         (nixGL keybase-gui)
 
         # Messaging apps
-        (nixGL webcord-vencord)
+        (nixGL (discord.override {
+          nss = nss_latest; # https://github.com/NixOS/nixpkgs/issues/78961
+        }))
         (nixGL signal-desktop)
         (nixGL tdesktop) # Telegram desktop
         my-slack

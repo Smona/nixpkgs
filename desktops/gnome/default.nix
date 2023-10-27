@@ -58,7 +58,7 @@ in {
             "emacs.desktop"
             "firefox.desktop"
             "spotify.desktop"
-            "webcord.desktop"
+            "discord.desktop"
             "steam.desktop"
           ];
         };
