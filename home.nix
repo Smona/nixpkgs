@@ -39,6 +39,7 @@
 
     # system tools
     dmidecode
+    wireplumber
 
     # Universal dev tools
     docker
