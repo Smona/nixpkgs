@@ -1,6 +1,12 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, ... }:
 
-{
+let
+  monolisa = builtins.fetchGit {
+    url = "git@gitlab.com:Smona/monolisa.git";
+    ref = "main";
+    rev = "91cc7d681d1f7c2f0c7803f4d3fc762af98ab7c4";
+  };
+in {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.homeDirectory = "/home/${config.home.username}";
@@ -47,7 +53,7 @@
     vulnix
 
     # Fonts
-    # Fonts I like, in order of preference: Cascadia Code, FiraCode, Dank Mono, JetBrains Mono
+    # Fonts I like, in order of preference: MonoLisa, Cascadia Code, FiraCode, Dank Mono, JetBrains Mono
     # Fonts to try: FantasqueSansMono, Inconsolata, Victor Mono
     cascadia-code
     (nerdfonts.override { fonts = [ "CascadiaCode" ]; }) # Required by Emacs
@@ -55,6 +61,7 @@
     source-serif # Required by Emacs
     source-sans
     rounded-mgenplus # Japanese font support
+    (callPackage monolisa { })
 
     # Fun
     cowsay
