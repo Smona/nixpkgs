@@ -28,7 +28,7 @@
 ;; refresh your font settings. If Emacs still can't find your font, it likely
 ;; wasn't installed correctly. Font issues are rarely Doom issues!
 
-(setq! doom-font (font-spec :family "CaskaydiaCove Nerd Font" :size 13.0 :weight 'normal :width 'normal))
+(setq! doom-font (font-spec :family "MonoLisa Nerd Font" :size 12.0 :weight 'normal :width 'normal))
 (setq! doom-variable-pitch-font (font-spec :family "Source Serif 4" :size 20))
 (setq! doom-unicode-font doom-font)
 ;; Use native unicode emoji rendering

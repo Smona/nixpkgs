@@ -62,6 +62,9 @@ in {
             "steam.desktop"
           ];
         };
+        "org/gnome/desktop/interface" = {
+          monospace-font-name = "MonoLisa Nerd Font 12";
+        };
         "org/gnome/settings-daemon/plugins/power" = {
           # Turn off automatic brightness adjustment
           # Gnome's current implementation is not the best...

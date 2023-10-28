@@ -12,7 +12,7 @@ in {
     theme = "Tokyo Night";
     package = (nixGL pkgs.kitty);
     settings = {
-      font_family = "Cascadia Code";
+      font_family = "MonoLisa Nerd Font";
       background_opacity = "0.9";
       font_size = "12";
       window_padding_width = "4";
