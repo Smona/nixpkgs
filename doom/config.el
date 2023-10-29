@@ -54,7 +54,7 @@
 
 ;; Give lines more space, while keeping text centered.
 ;; Source: https://github.com/syl20bnr/spacemacs/issues/10502#issuecomment-404453194
-(setq-default default-text-properties '(line-spacing 0.15 line-height 1.15))
+(setq-default default-text-properties '(line-spacing 0.05 line-height 1.05))
 ;; No extra line spacing in vterm, where it can make text taller than powerline symbols & break continuity.
 (add-hook! 'vterm-mode-hook (setq-local default-text-properties '(line-spacing 0 line-height 1)))
 (add-hook! 'org-mode-hook (setq-local default-text-properties '(line-spacing 0 line-height 1)))
