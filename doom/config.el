@@ -266,6 +266,10 @@
 ;; ROS support
 (add-to-list 'auto-mode-alist '("\\.launch$" . xml-mode))
 
+;; Typescript esnext support
+(add-to-list 'auto-mode-alist '("\\.mts$" . typescript-mode))
+(add-to-list 'auto-mode-alist '("\\.cts$" . typescript-mode))
+
 (use-package! mermaid-mode)
 
 ;; Add support for viewing webp and other "exotic" image formats
