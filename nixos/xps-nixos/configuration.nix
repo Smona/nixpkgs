@@ -125,9 +125,6 @@
   home-manager.useGlobalPkgs = true;
   home-manager.extraSpecialArgs = { inherit inputs system; };
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
   # Packages installed in the system profile
   environment.systemPackages = with pkgs; [ git vim ];
 
