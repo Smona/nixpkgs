@@ -126,6 +126,10 @@
       :desc "Open Org Roam UI"
       "m u" #'org-roam-ui-open)
 
+(map! :localleader
+      :desc "Run NPM script"
+      "n r" #'npm-mode-npm-run)
+
 ;; MX Master 3 forward/back buttons
 (map! "<mouse-8>" #'previous-buffer)
 (map! "<mouse-9>" #'next-buffer)
