@@ -48,7 +48,7 @@
                            "Miscellaneous Symbols and Pictographs"
                            "Supplemental Symbols and Pictographs"
                            "Transport and Map Symbols"))
-        (push "Noto Color Emoji" (cadr (assoc unicode-block unicode-fonts-block-font-mapping))))
+    (push "Noto Color Emoji" (cadr (assoc unicode-block unicode-fonts-block-font-mapping))))
   (push '("Symbols and Pictographs Extended-A" ("Noto Color Emoji")) unicode-fonts-block-font-mapping)
   )
 
@@ -71,8 +71,8 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
-; Make doom/goto-private-config-file et al point to the source rather than the
-; built nix store object
+;; Make doom/goto-private-config-file et al point to the source rather than the
+;; built nix store object
 (setq doom-private-dir "~/.config/nixpkgs/doom/")
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
@@ -155,25 +155,25 @@
 (setq doom-modeline-height 35)
 
 (after! evil-snipe
-        (setq evil-snipe-scope 'buffer))
+  (setq evil-snipe-scope 'buffer))
 
 (after! vterm
-        (setq vterm-timer-delay 0.03))
+  (setq vterm-timer-delay 0.03))
 
 ;; (after! magit
-        ;; magit-delta is disabled until they fix the performance on large diffs:
-        ;; https://github.com/dandavison/magit-delta/issues/9
-        ;; (add-hook 'magit-mode-hook (lambda () (magit-delta-mode +1)))
+;; magit-delta is disabled until they fix the performance on large diffs:
+;; https://github.com/dandavison/magit-delta/issues/9
+;; (add-hook 'magit-mode-hook (lambda () (magit-delta-mode +1)))
 
-        ;; Performance optimizations
-        ;; https://magit.vc/manual/magit/Performance.html
-        ;; Disabled since magit-delta was causing most of the performance issues
-        ;; (setq magit-refresh-status-buffer nil))
+;; Performance optimizations
+;; https://magit.vc/manual/magit/Performance.html
+;; Disabled since magit-delta was causing most of the performance issues
+;; (setq magit-refresh-status-buffer nil))
 
-; Don't require saving a file to update the git gutters.
-; NOTE: keep an eye on the performance of this convenience feature.
+;; Don't require saving a file to update the git gutters.
+;; NOTE: keep an eye on the performance of this convenience feature.
 (after! git-gutter
-        (setq git-gutter:update-interval 0.3))
+  (setq git-gutter:update-interval 0.3))
 
 ;; Various editor enhancements
 
@@ -189,18 +189,18 @@
 ;; Format with prettier rather than ts-ls, for example
 (setq +format-with-lsp nil)
 
-; The following functions make it simpler to run syncthing in the background on systems that don't
-; have an init system, such as WSL.
+;; The following functions make it simpler to run syncthing in the background on systems that don't
+;; have an init system, such as WSL.
 
 (defun syncthing-start ()
-        "Start a syncthing process in the background."
-        (interactive)
-        (start-process "syncthing" "*syncthing*" "syncthing" "-no-browser"))
+  "Start a syncthing process in the background."
+  (interactive)
+  (start-process "syncthing" "*syncthing*" "syncthing" "-no-browser"))
 
 (defun syncthing-stop ()
-        "Stop the syncthing background process if it exists."
-        (interactive)
-        (kill-process "syncthing"))
+  "Stop the syncthing background process if it exists."
+  (interactive)
+  (kill-process "syncthing"))
 
 (use-package! auth-source
   :config
@@ -209,7 +209,7 @@
 (defun load-password (host user)
   "Loads a password from auth-source"
   (let ((found (car (auth-source-search :host host :user user :require '(:secret)))))
-        (funcall (plist-get found :secret))))
+    (funcall (plist-get found :secret))))
 
 (after! grip-mode
   (setq grip-github-user "Smona^grip")
@@ -239,9 +239,9 @@
 
 ;; Disable modes' default prettify symbols since they conflict with native ligatures
 (after! web-mode
-        (setq web-mode-prettify-symbols-alist '()))
+  (setq web-mode-prettify-symbols-alist '()))
 (after! rjsx-mode
-        (setq js--prettify-symbols-alist '()))
+  (setq js--prettify-symbols-alist '()))
 
 (use-package! dirvish
   :config
