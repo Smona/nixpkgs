@@ -45,6 +45,9 @@
   # TODO: only install when wlroots is enabled (once nixos config is modularized)
   programs.nm-applet.enable = true; # GUI WIFI tool for WMs
 
+  # Always use Cloudflare nameservers
+  networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
+
   # Set your time zone.
   time.timeZone = "America/Chicago";
 
