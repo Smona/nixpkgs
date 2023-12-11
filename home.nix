@@ -46,6 +46,8 @@ in {
     # system tools
     dmidecode
     wireplumber
+    appimage-run
+    dig
 
     # Universal dev tools
     docker
