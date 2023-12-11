@@ -56,7 +56,8 @@ in {
     # Fonts I like, in order of preference: MonoLisa, Cascadia Code, FiraCode, Dank Mono, JetBrains Mono
     # Fonts to try: FantasqueSansMono, Inconsolata, Victor Mono
     cascadia-code
-    (nerdfonts.override { fonts = [ "CascadiaCode" ]; }) # Required by Emacs
+    # NerdFontsSymbolsOnly required by Emacs
+    (nerdfonts.override { fonts = [ "CascadiaCode" "NerdFontsSymbolsOnly" ]; })
     noto-fonts-emoji # Required by Emacs
     source-serif # Required by Emacs
     source-sans
