@@ -38,8 +38,10 @@ in {
     # Graphical applications
     home.packages = with pkgs;
       [
+        gparted
         gthumb
         (nixGL keybase-gui)
+        gcolor3
 
         # Messaging apps
         (nixGL (discord.override {
