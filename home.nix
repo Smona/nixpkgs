@@ -48,6 +48,7 @@ in {
     wireplumber
     appimage-run
     dig
+    dua # disk usage analyzer
 
     # Universal dev tools
     docker
