@@ -96,6 +96,7 @@ in {
 
     # Shortcuts
     c = "bat";
+    cat = "bat";
     g = "git";
     e = "$EDITOR";
     upgrade = "sudo nixos-rebuild --flake ~/.config/nixpkgs";
