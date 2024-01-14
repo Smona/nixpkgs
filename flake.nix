@@ -4,6 +4,10 @@
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # GPG 2.4.1 is currently broken with EPA:
+    # https://emacs.stackexchange.com/a/78141/38190
+    nixpkgs-downgrade-gpg.url =
+      "github:nixos/nixpkgs?rev=5a8650469a9f8a1958ff9373bd27fb8e54c4365d";
     hardware.url = "github:nixos/nixos-hardware";
 
     # Home manager

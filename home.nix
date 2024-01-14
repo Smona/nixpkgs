@@ -6,6 +6,8 @@ let
     ref = "main";
     rev = "91cc7d681d1f7c2f0c7803f4d3fc762af98ab7c4";
   };
+  nixpkgs-downgrade-gpg =
+    import inputs.nixpkgs-downgrade-gpg { inherit system; };
 in {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -279,6 +281,9 @@ in {
   services.keybase.enable = true;
 
   programs.gpg.enable = true;
+  # TODO: remove this and the input once the referenced issue is fixed
+  programs.gpg.package = nixpkgs-downgrade-gpg.gnupg;
+
   services.gpg-agent.enable = true;
   # Source: https://discourse.nixos.org/t/cant-get-gnupg-to-work-no-pinentry/15373/2
   services.gpg-agent.pinentryFlavor = "gtk2";
