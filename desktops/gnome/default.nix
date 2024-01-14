@@ -40,12 +40,6 @@ in {
     graphical = true;
     home.packages = extensions ++ [ pkgs.gnome.dconf-editor ];
 
-    gtk.enable = true;
-    gtk.cursorTheme = {
-      package = pkgs.dracula-theme;
-      name = "Dracula-cursors";
-    };
-
     dconf = {
       enable = true;
       settings = {
@@ -103,14 +97,6 @@ in {
         "org/gnome/mutter" = {
           # Change focus immediately rather than waiting for pointer to rest
           focus-change-on-pointer-rest = false;
-        };
-        "org/gnome/nautilus/preferences" = {
-          # Show image thumbnails for remote file storage
-          show-image-thumbnails = "always";
-        };
-        "org/gtk/settings/file-chooser" = {
-          # Sort folders first in nautilus
-          sort-directories-first = true;
         };
 
         # Custom keybindings

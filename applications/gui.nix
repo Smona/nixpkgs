@@ -57,6 +57,13 @@ in {
         (nixGL vlc)
       ] ++ (lib.lists.optionals config.roles.work [ (nixGL gimp) ]);
 
+    gtk.enable = true;
+    gtk.cursorTheme = {
+      package = pkgs.dracula-theme;
+      name = "Dracula-cursors";
+      size = 24;
+    };
+
     programs.chromium = {
       enable = true;
       package = (nixGL pkgs.chromium);
@@ -126,6 +133,23 @@ in {
         "text/html" = browsers;
         "application/xhtml+xml" = browsers;
         "x-scheme-handler/https" = browsers;
+      };
+    };
+
+    dconf = {
+      enable = true;
+      # Setup global GTK settings
+      settings = {
+        "org/gnome/nautilus/preferences" = {
+          # Show image thumbnails for remote file storage
+          show-image-thumbnails = "always";
+        };
+        "org/gtk/settings/debug" = { enable-inspector-keybinding = true; };
+        "org/gtk/settings/file-chooser" = {
+          # Sort folders first in nautilus
+          sort-directories-first = true;
+        };
+        "org/gnome/desktop/interface" = { font-name = "Source Sans 3 14"; };
       };
     };
   };
