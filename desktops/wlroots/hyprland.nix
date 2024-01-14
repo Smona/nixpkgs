@@ -98,6 +98,7 @@ in {
       layerrule = ignorezero,waybar
       layerrule = blur,rofi
       layerrule = ignorezero,rofi
+      layerrule = blur,swaync-control-center
 
       windowrule=tile,class:^(Spotify)$
       windowrule=noblur,title:(Quick Access — 1Password)
