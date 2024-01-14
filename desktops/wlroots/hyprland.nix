@@ -129,6 +129,7 @@ in {
             ++ (lib.lists.optional hk.secondaryMod or false "ALT"))
         },${hk.key},exec,${hk.command}") commonOptions.keyBinds))}
       bind=${mod},V,togglefloating,
+      bind=${mod},F,fullscreen
       bind=${mod},P,pseudo,
       bind=${mod},A,togglesplit,
       bind=${mod}_SHIFT,Q,killactive,
