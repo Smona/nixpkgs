@@ -9,7 +9,9 @@ in {
 
       exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
       exec-once=systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-      exec-once=hyprctl setcursor ${config.gtk.cursorTheme.name} ${config.gtk.cursorTheme.size}
+      exec-once=hyprctl setcursor ${config.gtk.cursorTheme.name} ${
+        builtins.toString config.gtk.cursorTheme.size
+      }
       ${(builtins.concatStringsSep "\n"
         (builtins.map (cmd: "exec-once=${cmd}") commonOptions.execStart))}
       ${(builtins.concatStringsSep "\n"
