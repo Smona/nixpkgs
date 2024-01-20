@@ -17,6 +17,8 @@
     nixGL.url = "github:guibou/nixGL";
     nixGL.inputs.nixpkgs.follows = "nixpkgs";
 
+    nixos-wsl.url = "github:nix-community/NixOS-WSL";
+
     musnix.url = "github:musnix/musnix";
     musnix.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -25,7 +27,7 @@
     # nix-colors.url = "github:misterio77/nix-colors";
   };
 
-  outputs = { nixpkgs, home-manager, nixGL, ... }@inputs: rec {
+  outputs = { nixpkgs, home-manager, nixGL, nixos-wsl, ... }@inputs: rec {
     legacyPackages = nixpkgs.lib.genAttrs [ "x86_64-linux" "x86_64-darwin" ]
       (system:
         import inputs.nixpkgs {
@@ -46,6 +48,15 @@
         };
         # > Our main nixos configuration file <
         modules = [ ./nixos/xps-nixos/configuration.nix ];
+      };
+      "luma-nixos" = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
+
+        modules = [
+          nixos-wsl.nixosModules.wsl
+          home-manager.nixosModule
+          ./nixos/luma-nixos/configuration.nix
+        ];
       };
     };
 
