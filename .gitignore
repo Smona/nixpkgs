@@ -8,3 +8,7 @@ tmp/
 
 # Ignore build results
 result
+
+# Terraaform stuff
+id_rsa.pem
+.terraform
