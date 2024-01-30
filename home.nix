@@ -56,6 +56,9 @@ in {
     docker
     docker-compose
     vulnix
+    # Cloud administration
+    terraform
+    awscli2
 
     # Fonts
     # Fonts I like, in order of preference: MonoLisa, Cascadia Code, FiraCode, Dank Mono, JetBrains Mono
