@@ -59,7 +59,7 @@ resource "aws_key_pair" "generated_key" {
 
 resource "aws_instance" "machine" {
   ami             = module.nixos_image.ami
-  instance_type   = "t3.micro"
+  instance_type   = "t3.small"
   security_groups = [aws_security_group.ssh_and_egress.name]
   key_name        = aws_key_pair.generated_key.key_name
 
