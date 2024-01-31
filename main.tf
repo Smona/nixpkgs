@@ -75,6 +75,12 @@ module "deploy_nixos" {
   ssh_private_key_file = local_sensitive_file.machine_ssh_key.filename
   ssh_agent            = false
   flake                = true
+  keys = {
+    gitlab-runner-registration = <<EOF
+      CI_SERVER_URL=https://gitlab.com
+      REGISTRATION_TOKEN=${var.gitlab_runner_token}
+    EOF
+  }
 }
 
 output "public_dns" {
