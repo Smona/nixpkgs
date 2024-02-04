@@ -116,7 +116,6 @@
       enable = true;
       builtInDisplay = "eDP-1";
     };
-    gnome.enable = true;
     roles = {
       art = true;
       gaming = true;
