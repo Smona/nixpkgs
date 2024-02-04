@@ -32,7 +32,7 @@ in {
 
   home.packages = with pkgs; [
     # Python
-    python310Packages.debugpy # Required by dap-mode
+    python3Packages.debugpy # Required by dap-mode
     nodePackages.pyright
 
     # Nix
