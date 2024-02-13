@@ -9,13 +9,20 @@
     nixpkgs-downgrade-gpg.url =
       "github:nixos/nixpkgs?rev=5a8650469a9f8a1958ff9373bd27fb8e54c4365d";
     hardware.url = "github:nixos/nixos-hardware";
+    #
+    # Last known commit (to me) which is compatible with Ubuntu 22 and gnome 44
+    nixpkgs-ubuntu.url =
+      "github:nixos/nixpkgs?rev=5ba549eafcf3e33405e5f66decd1a72356632b96";
+    hm-ubuntu.url =
+      "github:nix-community/home-manager?rev=408ba13188ff9ce309fa2bdd2f81287d79773b00";
+    hm-ubuntu.inputs.nixpkgs.follows = "nixpkgs-ubuntu";
 
     # Home manager
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     nixGL.url = "github:guibou/nixGL";
-    nixGL.inputs.nixpkgs.follows = "nixpkgs";
+    nixGL.inputs.nixpkgs.follows = "nixpkgs-ubuntu";
 
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
 
@@ -69,24 +76,28 @@
     };
 
     homeConfigurations = {
-      "cobalt@remotestation376" = home-manager.lib.homeManagerConfiguration {
-        pkgs = legacyPackages.x86_64-linux;
-        extraSpecialArgs = {
-          inherit inputs;
-          system = "x86_64-linux";
+      "cobalt@remotestation376" =
+        inputs.hm-ubuntu.lib.homeManagerConfiguration {
+          pkgs = import inputs.nixpkgs-ubuntu {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
+          extraSpecialArgs = {
+            inherit inputs;
+            system = "x86_64-linux";
+          };
+          modules = [
+            ./home.nix
+            ({ ... }: {
+              home.username = "cobalt";
+              gnome.enable = true;
+              logitech.enabled = true;
+              roles = { work = true; };
+              nixGLPrefix =
+                "${nixGL.packages.x86_64-linux.nixGLIntel}/bin/nixGLIntel ";
+            })
+          ];
         };
-        modules = [
-          ./home.nix
-          ({ ... }: {
-            home.username = "cobalt";
-            gnome.enable = true;
-            logitech.enabled = true;
-            roles = { work = true; };
-            nixGLPrefix =
-              "${nixGL.packages.x86_64-linux.nixGLIntel}/bin/nixGLIntel ";
-          })
-        ];
-      };
       "smona@DESKTOP-9F9VN3S" = home-manager.lib.homeManagerConfiguration {
         pkgs = legacyPackages.x86_64-linux;
         extraSpecialArgs = { inherit inputs; };
