@@ -56,6 +56,7 @@ in {
     nodePackages.typescript-language-server
     nodePackages.vscode-langservers-extracted
     nodePackages.dockerfile-language-server-nodejs
+    nodePackages.graphql-language-service-cli
     python310Packages.grip # Required by grip-mode (markdown +grip)
 
     # Dirvish stuff
