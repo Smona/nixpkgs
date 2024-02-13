@@ -106,7 +106,7 @@ in {
     e = "$EDITOR";
     upgrade = "sudo nixos-rebuild --flake ~/.config/nixpkgs";
     hm = "home-manager --flake ~/.config/nixpkgs";
-    hms = "hm switch";
+    hms = "hm switch --max-jobs 4";
     hmn = "hm news";
     arch = "archive";
     larch = "lsarchive";
