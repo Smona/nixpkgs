@@ -248,7 +248,10 @@
 (use-package! poly-markdown)
 
 
+;; Language support
+
 (use-package! protobuf-mode)
+(use-package! systemd)
 
 ;; Emacs 29 configuration
 
