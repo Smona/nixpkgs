@@ -78,5 +78,6 @@
 (package! mermaid-mode)
 (package! ob-mermaid)
 
-;; Language support for systemd units
+;; Language support for various random file formats
 (package! systemd)
+(package! jinja2-mode)

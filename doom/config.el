@@ -252,6 +252,7 @@
 
 (use-package! protobuf-mode)
 (use-package! systemd)
+(use-package! jinja2-mode)
 
 ;; Emacs 29 configuration
 
