@@ -92,6 +92,8 @@ in {
         focus_on_activate = yes
         enable_swallow = yes
         swallow_regex = (kitty)
+        # Sorry, hypr-chan...
+        disable_hyprland_logo = yes
       }
 
       layerrule = blur,waybar
