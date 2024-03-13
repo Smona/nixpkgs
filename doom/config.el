@@ -160,6 +160,9 @@
 (after! vterm
   (setq vterm-timer-delay 0.03))
 
+;; Always use indentation of 2 for JSON
+(add-hook! 'json-mode-hook (setq-local js-indent-level 2))
+
 ;; (after! magit
 ;; magit-delta is disabled until they fix the performance on large diffs:
 ;; https://github.com/dandavison/magit-delta/issues/9
