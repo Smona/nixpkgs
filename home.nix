@@ -186,6 +186,8 @@ in {
       init = { defaultBranch = "main"; };
       pull = { rebase = true; };
       fetch = { prune = true; };
+      rebase = { autoStash = true; };
+      merge = { autoStash = true; };
       # Correct typos
       help = { autocorrect = 1; };
       # Use different colors for moved code vs additions/deletions.
