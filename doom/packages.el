@@ -81,3 +81,4 @@
 ;; Language support for various random file formats
 (package! systemd)
 (package! jinja2-mode)
+(package! lsp-tailwindcss :recipe (:host github :repo "merrickluo/lsp-tailwindcss"))

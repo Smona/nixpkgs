@@ -290,3 +290,8 @@
 
 ;; Get clippy suggestions from rust LSP
 (setq lsp-rust-analyzer-cargo-watch-command "clippy")
+
+;; Tailwind CSS support
+(use-package! lsp-tailwindcss
+  :init
+  (setq lsp-tailwindcss-add-on-mode t))
