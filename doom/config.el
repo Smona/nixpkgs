@@ -225,6 +225,15 @@
   ;; hook running before necessary stuff has initialized to decrypt the authinfo file.
   (add-hook! 'doom-first-buffer-hook 'my/wakatime-hook))
 
+(use-package! prettier
+  :config
+  (global-prettier-mode)
+  (setq prettier-enabled-parsers '(angular babel babel-flow babel-ts css elm graphql html json json5 json-stringify less markdown mdx postgresql scss svelte typescript vue xml yaml)))
+
+(use-package! blacken
+  :config
+  (add-hook! 'python-mode-hook 'blacken-mode))
+
 (setq +treemacs-git-mode 'deferred)
 
 (after! treemacs

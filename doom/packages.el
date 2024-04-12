@@ -82,3 +82,5 @@
 (package! systemd)
 (package! jinja2-mode)
 (package! lsp-tailwindcss :recipe (:host github :repo "merrickluo/lsp-tailwindcss"))
+(package! prettier)
+(package! blacken)
