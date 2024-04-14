@@ -51,6 +51,7 @@ in {
           gaps_in=5
           gaps_out=5
           border_size=2
+          resize_on_border = yes
           col.active_border=rgba(8130d988)
           col.inactive_border=rgba(33333300)
 
