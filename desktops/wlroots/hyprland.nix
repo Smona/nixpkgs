@@ -22,8 +22,9 @@ in {
 
       input {
           kb_file=
-          kb_layout=us
-          kb_variant=dvorak
+          kb_layout=us,us
+          kb_variant=dvorak,
+          kb_options=grp:win_space_toggle
           kb_model=
           kb_options=${builtins.concatStringsSep "," commonOptions.xkbOptions}
           kb_rules=
