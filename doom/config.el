@@ -332,11 +332,8 @@
   (add-hook 'jtsx-jsx-mode-hook 'prettier-mode)
   (add-hook 'jtsx-tsx-mode-hook 'prettier-mode)
   (add-hook 'jtsx-typescript-mode-hook 'prettier-mode)
-  ;; TODO: fix syntax highlighting in "show documentation" LSP help window for tsx? files.
-  )
 
-;; Integrate JTSX smart comment function with evil-nerd-commenter
-(after! 'evil-nerd-commenter
+  ;; Integrate JTSX smart comment function with evil-nerd-commenter
   (defun use-jtsx-comment (beg end)
     (set-mark beg)(goto-char end)(activate-mark)(jtsx-comment-dwim nil))
   (defun my-comment-or-uncomment-region (beg end)
@@ -344,4 +341,7 @@
         (use-jtsx-comment beg end)
       (evilnc-comment-or-uncomment-region-internal beg end)))
   (setq evilnc-comment-or-uncomment-region-function
-        'my-comment-or-uncomment-region))
+        'my-comment-or-uncomment-region)
+
+  ;; TODO: fix syntax highlighting in "show documentation" LSP help window for tsx? files.
+  )
