@@ -305,3 +305,43 @@
 (use-package! lsp-tailwindcss
   :init
   (setq lsp-tailwindcss-add-on-mode t))
+
+(use-package! jtsx
+   :mode (("\\.jsx?\\'" . jtsx-jsx-mode)
+         ("\\.tsx\\'" . jtsx-tsx-mode)
+         ("\\.ts\\'" . jtsx-typescript-mode))
+  :commands jtsx-install-treesit-language
+  :hook ((jtsx-jsx-mode . hs-minor-mode)
+         (jtsx-tsx-mode . hs-minor-mode)
+         (jtsx-typescript-mode . hs-minor-mode))
+  :config
+    (map! :map jtsx-jsx-mode-map
+        :localleader
+        :desc "Jump to matching JSX tag"
+        "%" #'jtsx-jump-jsx-element-tag-dwim)
+    (map! :map jtsx-tsx-mode-map
+        :localleader
+        :desc "Jump to matching JSX tag"
+        "%" #'jtsx-jump-jsx-element-tag-dwim)
+
+  (setq jtsx-enable-jsx-element-tags-auto-sync t)
+
+  (add-hook 'jtsx-jsx-mode-hook 'lsp)
+  (add-hook 'jtsx-tsx-mode-hook 'lsp)
+  (add-hook 'jtsx-typescript-mode-hook 'lsp)
+  (add-hook 'jtsx-jsx-mode-hook 'prettier-mode)
+  (add-hook 'jtsx-tsx-mode-hook 'prettier-mode)
+  (add-hook 'jtsx-typescript-mode-hook 'prettier-mode)
+  ;; TODO: fix syntax highlighting in "show documentation" LSP help window for tsx? files.
+  )
+
+;; Integrate JTSX smart comment function with evil-nerd-commenter
+(after! 'evil-nerd-commenter
+  (defun use-jtsx-comment (beg end)
+    (set-mark beg)(goto-char end)(activate-mark)(jtsx-comment-dwim nil))
+  (defun my-comment-or-uncomment-region (beg end)
+    (if (equal major-mode #'jtsx-tsx-mode)
+        (use-jtsx-comment beg end)
+      (evilnc-comment-or-uncomment-region-internal beg end)))
+  (setq evilnc-comment-or-uncomment-region-function
+        'my-comment-or-uncomment-region))
