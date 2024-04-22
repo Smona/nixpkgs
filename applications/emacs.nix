@@ -1,7 +1,8 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, system, ... }:
 
 let
   emacs = pkgs.emacs29-pgtk;
+  pkgs-latest = import inputs.nixpkgs { inherit system; };
   my-emacs = (nixGL ((pkgs.emacsPackagesFor emacs).emacsWithPackages
     (epkgs: [ epkgs.vterm epkgs.pdf-tools ]))).overrideAttrs (oldAttrs: {
       # Temporarily working around this issue: https://github.com/NixOS/nixpkgs/issues/66706
@@ -56,7 +57,7 @@ in {
     nodePackages.typescript-language-server
     nodePackages.vscode-langservers-extracted
     nodePackages.dockerfile-language-server-nodejs
-    nodePackages.graphql-language-service-cli
+    pkgs-latest.nodePackages.graphql-language-service-cli
     python310Packages.grip # Required by grip-mode (markdown +grip)
 
     # Dirvish stuff
