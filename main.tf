@@ -66,6 +66,10 @@ resource "aws_instance" "machine" {
   root_block_device {
     volume_size = 50 # GiB
   }
+
+  tags = {
+    "Name" = "Nix gitlab runner"
+  }
 }
 
 module "deploy_nixos" {
