@@ -301,6 +301,10 @@
 ;; Get clippy suggestions from rust LSP
 (setq lsp-rust-analyzer-cargo-watch-command "clippy")
 
+;; Nix support
+(after! nix-mode
+        (add-hook! 'before-save-hook 'nix-format-before-save))
+
 ;; Tailwind CSS support
 (use-package! lsp-tailwindcss
   :init
