@@ -1,8 +1,9 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, system, ... }:
 
 let
   nixGL = import ./nixGL.nix { inherit pkgs config; };
-  my-slack = (nixGL pkgs.slack);
+  my-slack = (config.lib.nixGL.wrap pkgs.slack);
+  pkgs-ubuntu = import inputs.nixpkgs-ubuntu { inherit system; };
 in {
   imports = [ ./art.nix ./firefox.nix ./terminal.nix ./games.nix ./music.nix ];
 
@@ -66,10 +67,11 @@ in {
 
     programs.chromium = {
       enable = true;
-      package = (nixGL pkgs.chromium);
+      package = (nixGL pkgs-ubuntu.chromium);
     };
     programs.firefox.enable = true;
     programs.kitty.enable = true;
+    programs.alacritty.enable = true;
 
     # Required for keybase-gui
     services.kbfs.enable = true;

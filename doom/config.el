@@ -352,3 +352,10 @@
 
 (after! rustic
   (setq rustic-format-on-save t))
+
+(use-package! s3ed
+        :config
+        (map! :leader
+                :desc "Find file in S3"
+                "f a" #'s3ed-find-file)
+        (s3ed-mode))

@@ -1,8 +1,9 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, system, ... }:
 
 let
   commonOptions = import ../common.nix;
-  extensions = with pkgs.gnomeExtensions; [
+  pkgs-ubuntu = import inputs.nixpkgs-ubuntu { inherit system; };
+  extensions = with pkgs-ubuntu.gnomeExtensions; [
     # Gnome goodness
     always-indicator
     sound-output-device-chooser

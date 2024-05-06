@@ -86,3 +86,4 @@
 (package! blacken)
 
 (package! jtsx)
+(package! s3ed)

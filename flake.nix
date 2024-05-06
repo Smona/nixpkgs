@@ -14,8 +14,8 @@
     nixpkgs-ubuntu.url =
       "github:nixos/nixpkgs?rev=5ba549eafcf3e33405e5f66decd1a72356632b96";
     hm-ubuntu.url =
-      "github:nix-community/home-manager?rev=408ba13188ff9ce309fa2bdd2f81287d79773b00";
-    hm-ubuntu.inputs.nixpkgs.follows = "nixpkgs-ubuntu";
+      "github:Smona/home-manager?rev=66702ccb53a7cc7f84c94e8e571658e1f6b7da69";
+    # hm-ubuntu.inputs.nixpkgs.follows = "nixpkgs-ubuntu";
 
     # Home manager
     home-manager.url = "github:nix-community/home-manager";
@@ -78,7 +78,7 @@
     homeConfigurations = {
       "cobalt@remotestation376" =
         inputs.hm-ubuntu.lib.homeManagerConfiguration {
-          pkgs = import inputs.nixpkgs-ubuntu {
+          pkgs = import inputs.nixpkgs {
             system = "x86_64-linux";
             config.allowUnfree = true;
           };
@@ -93,7 +93,7 @@
               gnome.enable = true;
               logitech.enabled = true;
               roles = { work = true; };
-              nixGLPrefix =
+              nixGL.prefix =
                 "${nixGL.packages.x86_64-linux.nixGLIntel}/bin/nixGLIntel ";
             })
           ];
