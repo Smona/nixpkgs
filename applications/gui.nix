@@ -54,7 +54,7 @@ in {
         # Media apps
         (nixGL spotify)
         (nixGL libreoffice-fresh)
-        (nixGL vlc)
+        (nixGL clapper)
       ] ++ (lib.lists.optionals config.roles.work [ (nixGL gimp) ]);
 
     gtk.enable = true;
