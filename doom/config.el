@@ -349,3 +349,6 @@
 
   ;; TODO: fix syntax highlighting in "show documentation" LSP help window for tsx? files.
   )
+
+(after! rustic
+  (setq rustic-format-on-save t))
