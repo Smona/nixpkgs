@@ -8,7 +8,6 @@ let
   };
   nixpkgs-downgrade-gpg =
     import inputs.nixpkgs-downgrade-gpg { inherit system; };
-  nixGL = import ./applications/nixGL.nix { inherit pkgs config; };
 in {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -293,10 +292,6 @@ in {
   services.gpg-agent.enable = true;
   # Source: https://discourse.nixos.org/t/cant-get-gnupg-to-work-no-pinentry/15373/2
   services.gpg-agent.pinentryPackage = pkgs.pinentry-gnome;
-  services.easyeffects = {
-    enable = true;
-    package = (config.lib.nixGL.wrap pkgs.easyeffects);
-  };
 
   # Automatically start/stop/restart services when their configuration changes
   systemd.user.startServices = "sd-switch";
