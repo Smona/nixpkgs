@@ -360,3 +360,6 @@
                 :desc "Find file in S3"
                 "f a" #'s3ed-find-file)
         (s3ed-mode))
+
+;; Safe local variables
+(put 'python-pytest-executable 'safe-local-variable #'stringp)
