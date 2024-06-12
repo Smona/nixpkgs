@@ -184,7 +184,8 @@
 ;; LSP config
 
 (after! lsp-mode
-  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.node_modules\\'"))
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.node_modules\\'")
+  (setq lsp-clients-typescript-prefer-use-project-ts-server t))
 
 ;; Format with prettier rather than ts-ls, for example
 (setq +format-with-lsp nil)
