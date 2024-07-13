@@ -76,6 +76,8 @@ in {
     cowsay
     ponysay
     pridecat
+    nyancat
+    blahaj
   ];
 
   home.language = { base = "en_US.UTF-8"; };
