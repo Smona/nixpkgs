@@ -29,80 +29,119 @@
     musnix.url = "github:musnix/musnix";
     musnix.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Darwin stuff:
+    nix-darwin.url = "github:LnL7/nix-darwin";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+    nix-homebrew.inputs.nixpkgs.follows = "nixpkgs";
+    nix-homebrew.inputs.nix-darwin.follows = "nix-darwin";
+    # Optional: Declarative tap management
+    homebrew-core = {
+      url = "github:homebrew/homebrew-core";
+      flake = false;
+    };
+    homebrew-cask = {
+      url = "github:homebrew/homebrew-cask";
+      flake = false;
+    };
+    homebrew-bundle = {
+      url = "github:homebrew/homebrew-bundle";
+      flake = false;
+    };
+    homebrew-emacs-plus = {
+      url = "github:d12frosted/homebrew-emacs-plus";
+      flake = false;
+    };
+
     # Shameless plug: looking for a way to nixify your themes and make
     # everything match nicely? Try nix-colors!
     # nix-colors.url = "github:misterio77/nix-colors";
   };
 
-  outputs = { nixpkgs, home-manager, nixGL, nixos-wsl, ... }@inputs: rec {
-    legacyPackages = nixpkgs.lib.genAttrs [ "x86_64-linux" "x86_64-darwin" ]
-      (system:
-        import inputs.nixpkgs {
-          inherit system;
+  outputs = { nixpkgs, home-manager, nixGL, nixos-wsl, nix-darwin, nix-homebrew
+    , ... }@inputs: rec {
+      legacyPackages = nixpkgs.lib.genAttrs [ "x86_64-linux" "x86_64-darwin" ]
+        (system:
+          import inputs.nixpkgs {
+            inherit system;
 
-          # NOTE: Using `nixpkgs.config` in your NixOS config won't work
-          # Instead, you should set nixpkgs configs here
-          # (https://nixos.org/manual/nixpkgs/stable/#idm140737322551056)
-          config.allowUnfree = true;
-        });
-
-    nixosConfigurations = {
-      "xps-nixos" = nixpkgs.lib.nixosSystem {
-        pkgs = legacyPackages.x86_64-linux;
-        specialArgs = {
-          inherit inputs;
-          system = "x86_64-linux";
-        };
-        # > Our main nixos configuration file <
-        modules = [ ./nixos/xps-nixos/configuration.nix ];
-      };
-      "luma-nixos" = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
-
-        modules = [
-          nixos-wsl.nixosModules.wsl
-          home-manager.nixosModule
-          ./nixos/luma-nixos/configuration.nix
-        ];
-      };
-      "build-farm" = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs;
-          system = "x86_64-linux";
-        };
-
-        modules = [ ./nixos/build-farm/configuration.nix ];
-      };
-    };
-
-    homeConfigurations = {
-      "cobalt@remotestation376" =
-        inputs.hm-ubuntu.lib.homeManagerConfiguration {
-          pkgs = import inputs.nixpkgs {
-            system = "x86_64-linux";
+            # NOTE: Using `nixpkgs.config` in your NixOS config won't work
+            # Instead, you should set nixpkgs configs here
+            # (https://nixos.org/manual/nixpkgs/stable/#idm140737322551056)
             config.allowUnfree = true;
-          };
-          extraSpecialArgs = {
+          });
+
+      nixosConfigurations = {
+        "xps-nixos" = nixpkgs.lib.nixosSystem {
+          pkgs = legacyPackages.x86_64-linux;
+          specialArgs = {
             inherit inputs;
             system = "x86_64-linux";
           };
+          # > Our main nixos configuration file <
+          modules = [ ./nixos/xps-nixos/configuration.nix ];
+        };
+        "luma-nixos" = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+
           modules = [
-            ./home.nix
-            ({ ... }: {
-              home.username = "cobalt";
-              gnome.enable = true;
-              logitech.enabled = true;
-              roles = { work = true; };
-              nixGL.prefix =
-                "${nixGL.packages.x86_64-linux.nixGLIntel}/bin/nixGLIntel ";
-            })
+            nixos-wsl.nixosModules.wsl
+            home-manager.nixosModule
+            ./nixos/luma-nixos/configuration.nix
           ];
         };
-      "smona@DESKTOP-9F9VN3S" = home-manager.lib.homeManagerConfiguration {
-        pkgs = legacyPackages.x86_64-linux;
-        extraSpecialArgs = { inherit inputs; };
-        modules = [ ./home.nix ({ ... }: { home.username = "smona"; }) ];
+        "build-farm" = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+            system = "x86_64-linux";
+          };
+
+          modules = [ ./nixos/build-farm/configuration.nix ];
+        };
+      };
+
+      # Build darwin flake using:
+      # $ darwin-rebuild build --flake .#Mels-MacBook-Air
+      darwinConfigurations."Mels-MacBook-Air" = nix-darwin.lib.darwinSystem {
+        specialArgs = {
+          inherit inputs;
+          system = "aarch64-darwin";
+        };
+        modules = [
+          nix-homebrew.darwinModules.nix-homebrew
+          home-manager.darwinModules.home-manager
+          ./darwin/configuration.nix
+        ];
+      };
+
+      homeConfigurations = {
+        "cobalt@remotestation376" =
+          inputs.hm-ubuntu.lib.homeManagerConfiguration {
+            pkgs = import inputs.nixpkgs {
+              system = "x86_64-linux";
+              config.allowUnfree = true;
+            };
+            extraSpecialArgs = {
+              inherit inputs;
+              system = "x86_64-linux";
+            };
+            modules = [
+              ./home.nix
+              ({ ... }: {
+                home.username = "cobalt";
+                gnome.enable = true;
+                logitech.enabled = true;
+                roles = { work = true; };
+                nixGL.prefix =
+                  "${nixGL.packages.x86_64-linux.nixGLIntel}/bin/nixGLIntel ";
+              })
+            ];
+          };
+        "smona@DESKTOP-9F9VN3S" = home-manager.lib.homeManagerConfiguration {
+          pkgs = legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs; };
+          modules = [ ./home.nix ({ ... }: { home.username = "smona"; }) ];
+        };
       };
     };
-  };
 }
