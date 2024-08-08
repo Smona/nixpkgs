@@ -87,3 +87,5 @@
 
 (package! jtsx)
 (package! s3ed)
+
+(package! exec-path-from-shell)
