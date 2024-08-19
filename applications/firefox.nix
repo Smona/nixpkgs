@@ -12,6 +12,8 @@ in {
           "browser.toolbars.bookmarks.visibility" = "newtab";
           # Show history & tabs before search suggestions
           "browser.urlbar.showSearchSuggestionsFirst" = false;
+          # Restore the previous sesssion on startup
+          "browser.startup.page" = 3;
           "services.sync.username" = "mason.bourgeois@gmail.com";
           # Hide the sharing popup window indicator.
           # On wayland it shows up as a window in alt-tab, and it's kind of
