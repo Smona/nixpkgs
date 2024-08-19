@@ -4,8 +4,6 @@
 
 set -e
 
-# activate the initial home-manager generation
-nix --extra-experimental-features nix-command --extra-experimental-features flakes run 'nixpkgs#home-manager' -- --extra-experimental-features nix-command --extra-experimental-features flakes --flake . switch
 
 # Install doom emacs
 if [ ! -d "~/.emacs.d" ]; then
