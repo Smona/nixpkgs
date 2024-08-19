@@ -2,9 +2,9 @@
 
 let
   monolisa = builtins.fetchGit {
-    url = "git@gitlab.com:Smona/monolisa.git";
+    url = "https://gitlab.com/Smona/monolisa.git";
     ref = "main";
-    rev = "91cc7d681d1f7c2f0c7803f4d3fc762af98ab7c4";
+    rev = "aa8a79e698d1cc6548e9e507f675ad35f1b9c1fc";
   };
   nixpkgs-downgrade-gpg =
     import inputs.nixpkgs-downgrade-gpg { inherit system; };
