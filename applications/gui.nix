@@ -2,7 +2,7 @@
 
 let
   nixGL = import ./nixGL.nix { inherit pkgs config; };
-  my-slack = (config.lib.nixGL.wrap pkgs.slack);
+  my-slack = (nixGL pkgs.slack);
   pkgs-ubuntu = import inputs.nixpkgs-ubuntu { inherit system; };
 in {
   imports = [ ./art.nix ./firefox.nix ./terminal.nix ./games.nix ./music.nix ];

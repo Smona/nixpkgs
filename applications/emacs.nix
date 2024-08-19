@@ -2,16 +2,16 @@
 
 let
   emacs = pkgs.emacs29-pgtk;
+  nixGL = import ./nixGL.nix { inherit pkgs config; };
   pkgs-latest = import inputs.nixpkgs { inherit system; };
-  my-emacs = (config.lib.nixGL.wrap
-    ((pkgs.emacsPackagesFor emacs).emacsWithPackages
-      (epkgs: [ epkgs.vterm epkgs.pdf-tools ]))).overrideAttrs (oldAttrs: {
-        # Temporarily working around this issue: https://github.com/NixOS/nixpkgs/issues/66706
-        # TODO: submit upstream fix
-        buildCommand = oldAttrs.buildCommand + ''
-          ln -s $emacs/share/emacs $out/share/emacs
-        '';
-      });
+  my-emacs = (nixGL ((pkgs.emacsPackagesFor emacs).emacsWithPackages
+    (epkgs: [ epkgs.vterm epkgs.pdf-tools ]))).overrideAttrs (oldAttrs: {
+      # Temporarily working around this issue: https://github.com/NixOS/nixpkgs/issues/66706
+      # TODO: submit upstream fix
+      buildCommand = oldAttrs.buildCommand + ''
+        ln -s $emacs/share/emacs $out/share/emacs
+      '';
+    });
 in {
   programs.emacs = {
     enable = true;

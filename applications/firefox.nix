@@ -1,9 +1,10 @@
 { config, lib, pkgs, inputs, system, ... }:
 
 let pkgs-ubuntu = import inputs.nixpkgs-ubuntu { inherit system; };
+  nixGL = import ./nixGL.nix { inherit config pkgs; };
 in {
   programs.firefox = {
-    package = (config.lib.nixGL.wrap pkgs-ubuntu.firefox);
+    package = (nixGL pkgs-ubuntu.firefox);
     nativeMessagingHosts = [ pkgs.fx_cast_bridge ];
     profiles = {
       Smona = {
