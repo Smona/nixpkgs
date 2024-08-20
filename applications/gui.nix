@@ -141,16 +141,21 @@ in {
     dconf = {
       enable = true;
       # Setup global GTK settings
-      settings = {
+      settings = let
+        fileChooserPrefs = {
+          # Sort folders first in nautilus
+          sort-directories-first = true;
+        };
+      in {
+        # Don't show a warning when opening dconf-editor
+        "ca/desrt/dconf-editor" = { show-warning = false; };
         "org/gnome/nautilus/preferences" = {
           # Show image thumbnails for remote file storage
           show-image-thumbnails = "always";
         };
         "org/gtk/settings/debug" = { enable-inspector-keybinding = true; };
-        "org/gtk/settings/file-chooser" = {
-          # Sort folders first in nautilus
-          sort-directories-first = true;
-        };
+        "org/gtk/settings/file-chooser" = fileChooserPrefs;
+        "org/gtk/gtk4/settings/file-chooser" = fileChooserPrefs;
         "org/gnome/desktop/interface" = { font-name = "Source Sans 3 14"; };
       };
     };
