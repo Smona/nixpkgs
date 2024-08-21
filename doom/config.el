@@ -63,7 +63,7 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function.
 ;; Other themes I like: doom-rouge, doom-challenger-deep, doom-monokai-spectrum, doom-monokai-octagon, doom-city-lights, doom-material, doom-palenight, doom-tokyo-night, doom-dracula
-(setq doom-theme 'doom-vibrant)
+(setq doom-theme 'doom-horizon)
 ;; Use fixed-pitch font in treemacs
 (setq doom-themes-treemacs-enable-variable-pitch nil)
 
