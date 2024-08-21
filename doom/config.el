@@ -329,8 +329,6 @@
         :desc "Jump to matching JSX tag"
         "%" #'jtsx-jump-jsx-element-tag-dwim)
 
-  (setq jtsx-enable-jsx-element-tags-auto-sync t)
-
   (add-hook 'jtsx-jsx-mode-hook 'lsp)
   (add-hook 'jtsx-tsx-mode-hook 'lsp)
   (add-hook 'jtsx-typescript-mode-hook 'lsp)
