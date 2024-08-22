@@ -7,33 +7,10 @@
 {
   imports = [
     ./hardware-configuration.nix # Include the results of the hardware scan.
-    ./wlroots.nix
     ../realtime_audio.nix
-    ../samba.nix
-    inputs.home-manager.nixosModule
+    ../common_configuration.nix
     inputs.hardware.nixosModules.dell-xps-13-7390
   ];
-
-  nix = {
-    # This will add each flake input as a registry
-    # To make nix3 commands consistent with your flake
-    registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
-
-    # This will additionally add your inputs to the system's legacy channels
-    # Making legacy nix commands consistent as well, awesome!
-    nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}")
-      config.nix.registry;
-    # auto-optimise-store
-    optimise.automatic = true;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-  };
-
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
   networking.hostName = "xps-nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -50,49 +27,12 @@
   # Always use Cloudflare nameservers
   networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
 
-  # Set your time zone.
-  time.timeZone = "America/Chicago";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.utf8";
-
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "dvorak";
-  };
-
-  # Configure console keymap
-  console.keyMap = "dvorak";
-
-  # Enable CUPS to print documents.
-  services.printing = {
-    enable = true;
-    # Necessary drivers for Canon MX860
-    drivers = with pkgs; [ cups-bjnp gutenprint ];
-  };
-
-  # Enable sound with pipewire.
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -126,12 +66,6 @@
     _1passwordBinary = "${pkgs._1password-gui}/bin/1password";
   };
 
-  home-manager.useGlobalPkgs = true;
-  home-manager.extraSpecialArgs = { inherit inputs system; };
-
-  # Packages installed in the system profile
-  environment.systemPackages = with pkgs; [ git vim ];
-
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -139,18 +73,6 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
-  # Set up zsh as the default user shell
-  programs.zsh.enable = true;
-  users.defaultUserShell = pkgs.zsh;
-
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall =
-      true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall =
-      true; # Open ports in the firewall for Source Dedicated Server
-  };
 
   virtualisation.virtualbox.host.enable = true;
   users.extraGroups.vboxusers.members = [ "smona" ];
@@ -178,9 +100,6 @@
       CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
     };
   };
-
-  # Location service provider, required for gammastep
-  services.geoclue2.enable = true;
 
   # Enable IIO for autorotation and light detection
   hardware.sensor.iio.enable = true;

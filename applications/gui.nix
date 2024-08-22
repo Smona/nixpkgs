@@ -149,6 +149,7 @@ in {
       in {
         # Don't show a warning when opening dconf-editor
         "ca/desrt/dconf-editor" = { show-warning = false; };
+        "org/gnome/desktop/interface" = { color-scheme = "prefer-dark"; };
         "org/gnome/nautilus/preferences" = {
           # Show image thumbnails for remote file storage
           show-image-thumbnails = "always";

@@ -51,8 +51,16 @@ in {
   };
 
   services.dbus.enable = true;
+  # Location service provider, required for gammastep
+  services.geoclue2.enable = true;
+
+  hardware.bluetooth = { enable = true; };
+  services.blueman.enable = true;
+
   xdg.portal = {
     enable = true;
+    # fix GTK theming in hyprland
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
     wlr.enable = true;
   };
 }

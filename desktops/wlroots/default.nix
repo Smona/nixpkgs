@@ -35,7 +35,6 @@ in {
       playerctl
       (rofimoji.override { rofi = my_rofi; })
       fusuma
-      blueman # GTK bluetooth manager
       swaynotificationcenter
 
       gammastep
