@@ -63,4 +63,10 @@ in {
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
     wlr.enable = true;
   };
+
+  # Enable a keyring service and password UI for non-gnome environments
+  # https://discourse.nixos.org/t/login-keyring-did-not-get-unlocked-hyprland/40869/8?u=smona
+  services.gnome.gnome-keyring.enable = true;
+  programs.seahorse.enable = true;
+  security.pam.services.gdm-password.enableGnomeKeyring = true;
 }
