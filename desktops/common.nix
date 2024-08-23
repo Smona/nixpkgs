@@ -1,5 +1,5 @@
 {
-  backgroundImage = "~/Pictures/wallpapers/neon-highway-wallpaper.jpg";
+  backgroundImage = "~/.config/background";
   xkbOptions = [
     "terminate:ctrl_alt_bksp"
     "lv3:ralt_switch"
