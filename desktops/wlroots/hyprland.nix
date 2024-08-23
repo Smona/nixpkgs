@@ -96,6 +96,11 @@ in {
         disable_hyprland_logo = yes
       }
 
+      # without this i can't apply fractional scaling without a warning showing up :\
+      # TODO: figure out scales that work for my monitors without having to disable this validation,
+      # it could help with image quality.
+      debug:disable_scale_checks = true
+
       layerrule = blur,waybar
       layerrule = ignorezero,waybar
       layerrule = blur,rofi

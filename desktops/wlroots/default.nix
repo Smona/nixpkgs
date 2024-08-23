@@ -46,7 +46,8 @@ in {
     services.kanshi = {
       enable = true;
       profiles = let
-        externalScale = 1.3;
+        externalScale = 1.25;
+        verticalScale = 1.0;
         builtinScale = 1.2;
       in {
         undocked = {
@@ -55,7 +56,7 @@ in {
             scale = builtinScale;
           }];
         };
-        home-office = {
+        docked = {
           outputs = with builtins; [
             {
               criteria = "eDP-1";
@@ -68,6 +69,23 @@ in {
               criteria = "Acer Technologies Acer XR382CQK 0x0000B7AA";
               position = "0,0";
               scale = externalScale;
+            }
+          ];
+        };
+        desktop = {
+          outputs = with builtins; [
+            {
+              criteria = "Acer Technologies Acer XR382CQK 0x9227A1AA";
+              # note that leaving a small gap here will keep the mouse trapped if moving slow, and
+              # require speedy movement to get to the other monitor. could come in handy!
+              position = "${toString (ceil (1080 / verticalScale))},0";
+              scale = externalScale;
+            }
+            {
+              criteria = "HP Inc. HP VH240a 6CM1290957";
+              position = "0,0";
+              scale = verticalScale;
+              transform = "90";
             }
           ];
         };
