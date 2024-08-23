@@ -64,7 +64,9 @@
   };
 
   # Packages installed in the system profile
-  environment.systemPackages = with pkgs; [ git vim ];
+  environment.systemPackages = with pkgs; [ git vim nautilus ];
+  # Enable file previews for nautilus with spacebar.
+  services.gnome.sushi.enable = true;
 
   # Enable CUPS to print documents.
   services.printing = {
@@ -80,5 +82,4 @@
     dedicatedServer.openFirewall =
       true; # Open ports in the firewall for Source Dedicated Server
   };
-
 }
