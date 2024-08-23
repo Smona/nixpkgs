@@ -34,7 +34,7 @@ in {
   home.packages = with pkgs; [
     # Python
     python3Packages.debugpy # Required by dap-mode
-    nodePackages.pyright
+    pyright
 
     # Nix
     nil # Required by (nix +lsp)
@@ -55,7 +55,7 @@ in {
 
     # Language servers
     nodePackages.typescript-language-server
-    nodePackages.vscode-langservers-extracted
+    vscode-langservers-extracted
     nodePackages.dockerfile-language-server-nodejs
     pkgs-latest.nodePackages.graphql-language-service-cli
     python310Packages.grip # Required by grip-mode (markdown +grip)

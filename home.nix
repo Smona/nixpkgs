@@ -293,7 +293,7 @@ in {
 
   services.gpg-agent.enable = true;
   # Source: https://discourse.nixos.org/t/cant-get-gnupg-to-work-no-pinentry/15373/2
-  services.gpg-agent.pinentryPackage = pkgs.pinentry-gnome;
+  services.gpg-agent.pinentryPackage = pkgs.pinentry-gnome3;
 
   # Automatically start/stop/restart services when their configuration changes
   systemd.user.startServices = "sd-switch";

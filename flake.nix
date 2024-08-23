@@ -85,6 +85,10 @@
           extraSpecialArgs = {
             inherit inputs;
             system = "x86_64-linux";
+            pkgsCompat = import inputs.nixpkgs-ubuntu {
+              system = "x86_64-linux";
+              config.allowUnfree = true;
+            };
           };
           modules = [
             ./home.nix

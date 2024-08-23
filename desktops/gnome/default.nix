@@ -1,9 +1,8 @@
-{ config, lib, pkgs, inputs, system, ... }:
+{ config, lib, pkgs, pkgsCompat ? pkgs, inputs, system, ... }:
 
 let
   commonOptions = import ../common.nix;
-  pkgs-ubuntu = import inputs.nixpkgs-ubuntu { inherit system; };
-  extensions = with pkgs-ubuntu.gnomeExtensions; [
+  extensions = with pkgsCompat.gnomeExtensions; [
     # Gnome goodness
     always-indicator
     sound-output-device-chooser
@@ -21,10 +20,11 @@ let
     hide-keyboard-layout
     middle-click-to-close-in-overview
     mouse-follows-focus
-    noannoyance-2
+    noannoyance-fork
     openweather
     pip-on-top # Fix firefox PIP pinning on wayland
-    remove-alttab-delay-v2
+    # TODO: find a replacement
+    # remove-alttab-delay-v2
     screen-rotate # Screen autorotation in tablet mode
     system-monitor-next # Requires Ubuntu > 20.04
     unite
@@ -39,7 +39,7 @@ in {
 
   config = lib.mkIf config.gnome.enable {
     graphical = true;
-    home.packages = extensions ++ [ pkgs.gnome.dconf-editor ];
+    home.packages = extensions ++ [ pkgs.dconf-editor ];
 
     dconf = {
       enable = true;
