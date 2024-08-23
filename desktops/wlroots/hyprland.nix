@@ -50,8 +50,8 @@ in {
           gaps_out=5
           border_size=2
           resize_on_border = yes
-          col.active_border=rgba(8130d988)
-          col.inactive_border=rgba(33333300)
+          col.active_border=rgba(8130d9ff)
+          col.inactive_border=rgba(333333cc)
 
           apply_sens_to_raw=0 # whether to apply the sensitivity to raw input (e.g. used by games where you aim using your mouse)
       }
