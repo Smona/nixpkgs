@@ -85,10 +85,6 @@
           extraSpecialArgs = {
             inherit inputs;
             system = "x86_64-linux";
-            pkgsCompat = import inputs.nixpkgs-ubuntu {
-              system = "x86_64-linux";
-              config.allowUnfree = true;
-            };
           };
           modules = [
             ./home.nix
@@ -99,6 +95,10 @@
               roles = { work = true; };
               nixGL.prefix =
                 "${nixGL.packages.x86_64-linux.nixGLIntel}/bin/nixGLIntel ";
+              pkgsCompat = import inputs.nixpkgs-ubuntu {
+                system = "x86_64-linux";
+                config.allowUnfree = true;
+              };
             })
           ];
         };

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, pkgsCompat ? pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   nixGL = import ./nixGL.nix { inherit pkgs config; };
@@ -66,7 +66,7 @@ in {
 
     programs.chromium = {
       enable = true;
-      package = (nixGL pkgsCompat.chromium);
+      package = (nixGL config.pkgsCompat.chromium);
     };
     programs.firefox.enable = true;
     programs.kitty.enable = true;

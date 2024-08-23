@@ -1,8 +1,8 @@
-{ config, lib, pkgs, pkgsCompat ? pkgs, inputs, system, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   commonOptions = import ../common.nix;
-  extensions = with pkgsCompat.gnomeExtensions; [
+  extensions = with config.pkgsCompat.gnomeExtensions; [
     # Gnome goodness
     always-indicator
     sound-output-device-chooser
@@ -36,6 +36,19 @@ in {
   imports = [ ../../applications/gui.nix ./themes.nix ];
 
   options.gnome.enable = lib.mkEnableOption "Manage gnome configuration.";
+  options.pkgsCompat = lib.mkOption {
+    type = lib.types.pkgs;
+    default = pkgs;
+    description = ''
+      A version of nixpkgs which lags behind the main package set, to preserve
+      compatibility with non-NixOS installs on distributions that have slower
+      release cycles (e.g. Ubuntu).
+
+      This is especially necessary for packages which integrate closely with the
+      system-supplied desktop environment (e.g. gnome extensions), but can come
+      up in other cases as well.
+    '';
+  };
 
   config = lib.mkIf config.gnome.enable {
     graphical = true;
