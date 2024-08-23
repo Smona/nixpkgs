@@ -82,4 +82,9 @@
     dedicatedServer.openFirewall =
       true; # Open ports in the firewall for Source Dedicated Server
   };
+
+  # Ports required by spotify connect:
+  # https://nixos.wiki/wiki/Spotify
+  networking.firewall.allowedTCPPorts = [ 57621 ];
+  networking.firewall.allowedUDPPorts = [ 5353 ];
 }
