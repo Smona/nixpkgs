@@ -46,8 +46,10 @@ in {
           "sway/workspaces"
           "hyprland/workspaces"
           "tray"
+          "sway/window"
+          "hyprland/window"
         ];
-        modules-center = [ "sway/window" "hyprland/window" ];
+        # modules-center = [];
         modules-right =
           [ "custom/media" "network" "pulseaudio" "backlight" "clock" ];
         cpu = {
@@ -88,7 +90,7 @@ in {
           max-length = 10;
         };
         network = {
-          format-wifi = "  {essid} ({signalStrength}%)";
+          format-wifi = " {signalStrength}";
           tooltip-format =
             "{bandwidthDownBytes}D{bandwidthUpBytes}U {ipaddr}@{essid}";
         };
