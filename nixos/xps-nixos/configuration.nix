@@ -83,12 +83,6 @@
     polkitPolicyOwners = [ "smona" ];
   };
 
-  # Required for fx_cast
-  services.avahi = {
-    enable = true;
-    nssmdns = true;
-  };
-
   # Laptop stuff
   services.power-profiles-daemon.enable = false;
   services.tlp = {
