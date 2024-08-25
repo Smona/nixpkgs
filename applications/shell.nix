@@ -1,4 +1,5 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, ... }:
+{
   programs.fzf.enable = true;
   programs.zoxide.enable = true;
   programs.less.enable = true;
@@ -48,14 +49,13 @@
     };
   };
 
-  home.file.".p10k.zsh".source =
-    config.lib.file.mkOutOfStoreSymlink ../dotfiles/p10k.zsh;
+  home.file.".p10k.zsh".source = config.lib.file.mkOutOfStoreSymlink ../dotfiles/p10k.zsh;
 
   # This is required to properly set up the login shell on some linux systems,
   # even if I don't really use bash.
-  programs.bash = { enable = true; };
+  programs.bash.enable = true;
 
-  programs.nushell = { enable = true; };
+  programs.nushell.enable = true;
 
   programs.zsh = {
     enable = true;
@@ -99,17 +99,19 @@
       ## Source local extra (private) settings specific to machine if it exists
       [ -f ~/.zsh.local ] && source ~/.zsh.local
     '';
-    plugins = [{
-      # Use zsh for nix-shell
-      name = "zsh-nix-shell";
-      file = "nix-shell.plugin.zsh";
-      src = pkgs.fetchFromGitHub {
-        owner = "chisui";
-        repo = "zsh-nix-shell";
-        rev = "v0.5.0";
-        sha256 = "0za4aiwwrlawnia4f29msk822rj9bgcygw6a8a6iikiwzjjz0g91";
-      };
-    }];
+    plugins = [
+      {
+        # Use zsh for nix-shell
+        name = "zsh-nix-shell";
+        file = "nix-shell.plugin.zsh";
+        src = pkgs.fetchFromGitHub {
+          owner = "chisui";
+          repo = "zsh-nix-shell";
+          rev = "v0.5.0";
+          sha256 = "0za4aiwwrlawnia4f29msk822rj9bgcygw6a8a6iikiwzjjz0g91";
+        };
+      }
+    ];
   };
   programs.zsh.prezto = {
     enable = true;
@@ -133,6 +135,6 @@
       # Expand ... -> ../.. recursively
       dotExpansion = true;
     };
-    prompt = { theme = "powerlevel10k"; };
+    prompt.theme = "powerlevel10k";
   };
 }
