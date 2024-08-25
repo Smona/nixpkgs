@@ -1,8 +1,18 @@
-{ inputs, system, config, pkgs, lib, ... }:
+{
+  inputs,
+  system,
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
-  imports =
-    [ inputs.home-manager.nixosModule ./samba.nix ./wlroots.nix ./keymapp.nix ];
+  imports = [
+    inputs.home-manager.nixosModule
+    ./samba.nix
+    ./wlroots.nix
+  ];
 
   nix = {
     # This will add each flake input as a registry
@@ -11,8 +21,7 @@
 
     # This will additionally add your inputs to the system's legacy channels
     # Making legacy nix commands consistent as well, awesome!
-    nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}")
-      config.nix.registry;
+    nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
     # auto-optimise-store
     optimise.automatic = true;
     extraOptions = ''
@@ -22,7 +31,9 @@
 
   home-manager.useGlobalPkgs = true;
   home-manager.backupFileExtension = "bk";
-  home-manager.extraSpecialArgs = { inherit inputs system; };
+  home-manager.extraSpecialArgs = {
+    inherit inputs system;
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -65,26 +76,33 @@
   };
 
   # Packages installed in the system profile
-  environment.systemPackages = with pkgs; [ git vim nautilus ];
+  environment.systemPackages = with pkgs; [
+    git
+    vim
+    nautilus
+    keymapp
+  ];
   # Enable file previews for nautilus with spacebar.
   services.gnome.sushi.enable = true;
+
+  # Enable flashing ZSA keyboards.
+  hardware.keyboard.zsa.enable = true;
 
   # Enable CUPS to print documents.
   services.printing = {
     enable = true;
     # Necessary drivers for Canon MX860
-    drivers = with pkgs; [ cups-bjnp gutenprint ];
+    drivers = with pkgs; [
+      cups-bjnp
+      gutenprint
+    ];
   };
 
   programs.steam = {
     enable = true;
-    remotePlay.openFirewall =
-      true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall =
-      true; # Open ports in the firewall for Source Dedicated Server
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   };
-
-  programs.keymapp.enable = true;
 
   # Ports required by spotify connect:
   # https://nixos.wiki/wiki/Spotify
