@@ -19,7 +19,7 @@
   home.shellAliases = {
     # Better ls
     l = "ls -1a";
-    ls = "eza -gFHh --git --group-directories-first";
+    ls = "eza -gHh --git --group-directories-first";
     la = "ls -a";
     ll = "ls -l --icons"; # icons mess up alignment in grid view
     lla = "ll -a";
