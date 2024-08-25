@@ -107,6 +107,7 @@ in
       Install.WantedBy = [
         "graphical-session.target"
         "hyprland-session.target"
+        "sway-session.target"
       ];
       Service = {
         ExecStart = "${config._1passwordBinary} --silent";
