@@ -106,8 +106,6 @@
 
   # List services that you want to enable:
 
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
   services.hardware.openrgb = {
     enable = true;
     package = pkgs.openrgb-with-all-plugins;
