@@ -53,9 +53,9 @@
           inherit inputs;
           system = "x86_64-linux";
         };
-        # > Our main nixos configuration file <
         modules = [ ./nixos/xps-nixos/configuration.nix ];
       };
+      # WSL installation
       "luma-nixos" = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
 
@@ -64,6 +64,15 @@
           home-manager.nixosModule
           ./nixos/luma-nixos/configuration.nix
         ];
+      };
+      # Baremetal installation
+      "luma" = nixpkgs.lib.nixosSystem {
+        pkgs = legacyPackages.x86_64-linux;
+        specialArgs = {
+          inherit inputs;
+          system = "x86_64-linux";
+        };
+        modules = [ ./nixos/luma/configuration.nix ];
       };
       "build-farm" = nixpkgs.lib.nixosSystem {
         specialArgs = {
