@@ -100,6 +100,6 @@
   # Required for fx_cast, and possible geoclue
   services.avahi = {
     enable = true;
-    nssmdns = true;
+    nssmdns4 = true;
   };
 }
