@@ -8,6 +8,8 @@ in {
     profiles = {
       Smona = {
         settings = {
+          # Don't show warning when opening about:config
+          "browser.aboutConfig.showWarning" = false;
           "browser.toolbars.bookmarks.visibility" = "newtab";
           # Show history & tabs before search suggestions
           "browser.urlbar.showSearchSuggestionsFirst" = false;
