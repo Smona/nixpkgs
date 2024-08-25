@@ -1,7 +1,13 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   commonOptions = import ../common.nix;
+  theme = import ../../theme.nix { inherit pkgs; };
   extensions = with config.pkgsCompat.gnomeExtensions; [
     # Gnome goodness
     always-indicator
@@ -32,8 +38,9 @@ let
     windownavigator
     quake-mode
   ];
-in {
-  imports = [ ../../applications/gui.nix ./themes.nix ];
+in
+{
+  imports = [ ../../applications/gui.nix ];
 
   options.gnome.enable = lib.mkEnableOption "gnome configuration management";
   options.pkgsCompat = lib.mkOption {
@@ -52,7 +59,7 @@ in {
 
   config = lib.mkIf config.gnome.enable {
     graphical = true;
-    home.packages = extensions ++ [ pkgs.dconf-editor ];
+    home.packages = extensions ++ [ theme.gnome.package ];
 
     dconf = {
       enable = true;
@@ -70,6 +77,9 @@ in {
             "steam.desktop"
           ];
         };
+        "org/gnome/shell/extensions/user-theme" = {
+          name = theme.gnome.shell;
+        };
         "org/gnome/desktop/interface" = {
           monospace-font-name = "MonoLisa Nerd Font 12";
         };
@@ -83,11 +93,19 @@ in {
           show-battery-percentage = true;
         };
         # Allow over-amplification
-        "org/gnome/desktop/sound" = { allow-volume-above-100-percent = true; };
+        "org/gnome/desktop/sound" = {
+          allow-volume-above-100-percent = true;
+        };
         "org/gnome/desktop/input-sources" = {
           sources = [
-            (lib.hm.gvariant.mkTuple [ "xkb" "us+dvorak" ])
-            (lib.hm.gvariant.mkTuple [ "xkb" "us" ])
+            (lib.hm.gvariant.mkTuple [
+              "xkb"
+              "us+dvorak"
+            ])
+            (lib.hm.gvariant.mkTuple [
+              "xkb"
+              "us"
+            ])
           ];
           xkb-options = commonOptions.xkbOptions;
         };
@@ -126,18 +144,16 @@ in {
             "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
           ];
         };
-        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
-          {
-            name = "Toggle guake";
-            binding = "<Alt>space";
-            command = "guake -t";
-          };
-        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" =
-          {
-            name = "1password Quick Access";
-            binding = "<Primary><Shift>space";
-            command = "1password --quick-access";
-          };
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+          name = "Toggle guake";
+          binding = "<Alt>space";
+          command = "guake -t";
+        };
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
+          name = "1password Quick Access";
+          binding = "<Primary><Shift>space";
+          command = "1password --quick-access";
+        };
 
         # Extensions
         "com/github/repsac-by/quake-mode" = {
@@ -176,10 +192,16 @@ in {
         };
         "org/gnome/shell/extensions/unite" = {
           window-buttons-placement = "last";
+          window-buttons-theme = theme.gnome.uniteButtons;
         };
-        "org/gnome/shell/extensions/blur-my-shell" = { hacks-level = 3; };
+        "org/gnome/shell/extensions/blur-my-shell" = {
+          hacks-level = 3;
+        };
         "org/gnome/shell/extensions/blur-my-shell/applications" = {
-          whitelist = [ "kitty" "emacs" ];
+          whitelist = [
+            "kitty"
+            "emacs"
+          ];
           blur-on-overview = true;
           sigma = 44;
           opacity = 241;

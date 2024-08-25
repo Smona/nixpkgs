@@ -8,6 +8,7 @@
 let
   nixGL = import ./nixGL.nix { inherit pkgs config; };
   my-slack = (nixGL pkgs.slack);
+  theme = import ../theme.nix { inherit pkgs; };
 in
 {
   imports = [
@@ -50,6 +51,9 @@ in
     home.packages =
       with pkgs;
       [
+        theme.uiFont.package
+        dconf-editor
+
         gparted
         gthumb
         (nixGL keybase-gui)
@@ -72,11 +76,9 @@ in
       ++ (lib.lists.optionals config.roles.work [ (nixGL gimp) ]);
 
     gtk.enable = true;
-    gtk.cursorTheme = {
-      package = pkgs.dracula-theme;
-      name = "Dracula-cursors";
-      size = 24;
-    };
+    gtk.cursorTheme = (theme.cursor // { size = 24; });
+    gtk.theme = theme.gtk;
+    gtk.iconTheme = theme.icons;
 
     programs.chromium = {
       enable = true;
@@ -193,7 +195,7 @@ in
           "org/gtk/settings/file-chooser" = fileChooserPrefs;
           "org/gtk/gtk4/settings/file-chooser" = fileChooserPrefs;
           "org/gnome/desktop/interface" = {
-            font-name = "Source Sans 3 14";
+            font-name = "${theme.uiFont.name} ${builtins.toString theme.uiFont.size}";
           };
         };
     };

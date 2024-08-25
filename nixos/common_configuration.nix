@@ -12,6 +12,7 @@
     inputs.home-manager.nixosModule
     ./samba.nix
     ./wlroots.nix
+    ./greetd.nix
   ];
 
   nix = {
@@ -100,6 +101,12 @@
       gutenprint
     ];
   };
+
+  # Enable the GNOME Desktop Environment.
+  # services.xserver.displayManager.gdm.enable = true;
+  # TODO: ensure that gnome is not enabled at the same time as wlroots.
+  # This should probably just be an enum configuration option to guarantee that.
+  # services.xserver.desktopManager.gnome.enable = true;
 
   programs.steam = {
     enable = true;

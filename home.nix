@@ -1,4 +1,10 @@
-{ config, pkgs, inputs, system, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  system,
+  ...
+}:
 
 let
   monolisa = builtins.fetchGit {
@@ -6,9 +12,9 @@ let
     ref = "main";
     rev = "aa8a79e698d1cc6548e9e507f675ad35f1b9c1fc";
   };
-  nixpkgs-downgrade-gpg =
-    import inputs.nixpkgs-downgrade-gpg { inherit system; };
-in {
+  nixpkgs-downgrade-gpg = import inputs.nixpkgs-downgrade-gpg { inherit system; };
+in
+{
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.homeDirectory = "/home/${config.home.username}";
@@ -65,10 +71,14 @@ in {
     # Fonts to try: FantasqueSansMono, Inconsolata, Victor Mono
     cascadia-code
     # NerdFontsSymbolsOnly required by Emacs
-    (nerdfonts.override { fonts = [ "CascadiaCode" "NerdFontsSymbolsOnly" ]; })
+    (nerdfonts.override {
+      fonts = [
+        "CascadiaCode"
+        "NerdFontsSymbolsOnly"
+      ];
+    })
     noto-fonts-emoji # Required by Emacs
     source-serif # Required by Emacs
-    source-sans
     rounded-mgenplus # Japanese font support
     (callPackage monolisa { })
 
@@ -80,19 +90,25 @@ in {
     blahaj
   ];
 
-  home.language = { base = "en_US.UTF-8"; };
-
-  home.sessionVariables = let editor = "vim";
-  in {
-    RIPGREP_CONFIG_PATH = "${./dotfiles/rg.conf}";
-    VISUAL = editor;
-    EDITOR = editor;
-    GIT_EDITOR = editor;
+  home.language = {
+    base = "en_US.UTF-8";
   };
+
+  home.sessionVariables =
+    let
+      editor = "vim";
+    in
+    {
+      RIPGREP_CONFIG_PATH = "${./dotfiles/rg.conf}";
+      VISUAL = editor;
+      EDITOR = editor;
+      GIT_EDITOR = editor;
+    };
 
   home.shellAliases = {
     # Natural language commands
-    backup = "sudo rsync -av --delete "
+    backup =
+      "sudo rsync -av --delete "
       + "-e 'ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-rsa' "
       + "--exclude-from='${./dotfiles/rsync-ignore.txt}' "
       + "/ smona@192.168.0.198::NetBackup/$(hostname)";
@@ -184,18 +200,36 @@ in {
       };
     };
     extraConfig = {
-      core = { autocrlf = "input"; };
-      init = { defaultBranch = "main"; };
-      pull = { rebase = true; };
-      fetch = { prune = true; };
-      rebase = { autoStash = true; };
-      merge = { autoStash = true; };
+      core = {
+        autocrlf = "input";
+      };
+      init = {
+        defaultBranch = "main";
+      };
+      pull = {
+        rebase = true;
+      };
+      fetch = {
+        prune = true;
+      };
+      rebase = {
+        autoStash = true;
+      };
+      merge = {
+        autoStash = true;
+      };
       # Correct typos
-      help = { autocorrect = 1; };
+      help = {
+        autocorrect = 1;
+      };
       # Use different colors for moved code vs additions/deletions.
-      diff = { colorMoved = "zebra"; };
+      diff = {
+        colorMoved = "zebra";
+      };
       # Forges
-      github = { user = "Smona"; };
+      github = {
+        user = "Smona";
+      };
     };
     ignores = [
       ".gitconfig.local" # Local config file
