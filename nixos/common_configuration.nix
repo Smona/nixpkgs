@@ -1,7 +1,8 @@
 { inputs, system, config, pkgs, lib, ... }:
 
 {
-  imports = [ inputs.home-manager.nixosModule ./samba.nix ./wlroots.nix ];
+  imports =
+    [ inputs.home-manager.nixosModule ./samba.nix ./wlroots.nix ./keymapp.nix ];
 
   nix = {
     # This will add each flake input as a registry
@@ -82,6 +83,8 @@
     dedicatedServer.openFirewall =
       true; # Open ports in the firewall for Source Dedicated Server
   };
+
+  programs.keymapp.enable = true;
 
   # Ports required by spotify connect:
   # https://nixos.wiki/wiki/Spotify
