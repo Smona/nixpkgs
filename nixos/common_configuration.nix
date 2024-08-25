@@ -12,6 +12,7 @@
     inputs.home-manager.nixosModule
     ./samba.nix
     ./wlroots.nix
+    ./boot.nix
     ./greetd.nix
   ];
 
@@ -35,11 +36,6 @@
   home-manager.extraSpecialArgs = {
     inherit inputs system;
   };
-
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
