@@ -45,6 +45,7 @@ in {
 
     services.kanshi = {
       enable = true;
+      systemdTarget = "hyprland-session.target";
       profiles = let
         externalScale = 1.25;
         verticalScale = 1.0;
