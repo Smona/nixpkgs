@@ -1,13 +1,24 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   nixGL = import ./nixGL.nix { inherit pkgs config; };
   my-slack = (nixGL pkgs.slack);
-in {
-  imports = [ ./art.nix ./firefox.nix ./terminal.nix ./games.nix ./music.nix ];
+in
+{
+  imports = [
+    ./art.nix
+    ./firefox.nix
+    ./terminal.nix
+    ./games.nix
+    ./music.nix
+  ];
 
-  options.graphical =
-    lib.mkEnableOption "install and configure graphical applications.";
+  options.graphical = lib.mkEnableOption "install and configure graphical applications.";
   options._1passwordBinary = lib.mkOption {
     type = lib.types.str;
     default = "/usr/bin/env 1password";
@@ -36,7 +47,8 @@ in {
     };
 
     # Graphical applications
-    home.packages = with pkgs;
+    home.packages =
+      with pkgs;
       [
         gparted
         gthumb
@@ -44,9 +56,11 @@ in {
         gcolor3
 
         # Messaging apps
-        (nixGL (discord.override {
-          nss = nss_latest; # https://github.com/NixOS/nixpkgs/issues/78961
-        }))
+        (nixGL (
+          discord.override {
+            nss = nss_latest; # https://github.com/NixOS/nixpkgs/issues/78961
+          }
+        ))
         (nixGL signal-desktop)
         my-slack
 
@@ -54,7 +68,8 @@ in {
         (nixGL spotify)
         (nixGL libreoffice-fresh)
         (nixGL clapper)
-      ] ++ (lib.lists.optionals config.roles.work [ (nixGL gimp) ]);
+      ]
+      ++ (lib.lists.optionals config.roles.work [ (nixGL gimp) ]);
 
     gtk.enable = true;
     gtk.cursorTheme = {
@@ -89,7 +104,10 @@ in {
     # and support system authentication / ssh agent / browser extension integration.
     systemd.user.services."1password" = {
       Unit.Description = "1password manager GUI application.";
-      Install.WantedBy = [ "graphical-session.target" "sway-session.target" ];
+      Install.WantedBy = [
+        "graphical-session.target"
+        "hyprland-session.target"
+      ];
       Service = {
         ExecStart = "${config._1passwordBinary} --silent";
         Restart = "on-failure";
@@ -111,52 +129,72 @@ in {
 
     xdg.mimeApps = {
       enable = true;
-      defaultApplications = let
-        browser = "firefox.desktop";
-        imageViewer = "org.gnome.eog.desktop";
-      in {
-        "x-scheme-handler/http" = browser;
-        "text/html" = browser;
-        "application/pdf" = browser;
-        "application/xhtml+xml" = browser;
-        "x-scheme-handler/https" = browser;
-        "image/png" = imageViewer;
-        "image/jpeg" = imageViewer;
-      };
-      associations.added = let
-        browsers = [ "firefox.desktop" "chromium-browser.desktop" ];
-        imageViewers = [ "org.gnome.eog.desktop" "org.gnome.gThumb.desktop" ];
-      in {
-        "image/jpeg" = imageViewers;
-        "image/png" = imageViewers;
-        "x-scheme-handler/http" = browsers;
-        "text/html" = browsers;
-        "application/xhtml+xml" = browsers;
-        "x-scheme-handler/https" = browsers;
-      };
+      defaultApplications =
+        let
+          browser = "firefox.desktop";
+          imageViewer = "org.gnome.eog.desktop";
+        in
+        {
+          "x-scheme-handler/http" = browser;
+          "text/html" = browser;
+          "application/pdf" = browser;
+          "application/xhtml+xml" = browser;
+          "x-scheme-handler/https" = browser;
+          "image/png" = imageViewer;
+          "image/jpeg" = imageViewer;
+        };
+      associations.added =
+        let
+          browsers = [
+            "firefox.desktop"
+            "chromium-browser.desktop"
+          ];
+          imageViewers = [
+            "org.gnome.eog.desktop"
+            "org.gnome.gThumb.desktop"
+          ];
+        in
+        {
+          "image/jpeg" = imageViewers;
+          "image/png" = imageViewers;
+          "x-scheme-handler/http" = browsers;
+          "text/html" = browsers;
+          "application/xhtml+xml" = browsers;
+          "x-scheme-handler/https" = browsers;
+        };
     };
 
     dconf = {
       enable = true;
       # Setup global GTK settings
-      settings = let
-        fileChooserPrefs = {
-          # Sort folders first in nautilus
-          sort-directories-first = true;
+      settings =
+        let
+          fileChooserPrefs = {
+            # Sort folders first in nautilus
+            sort-directories-first = true;
+          };
+        in
+        {
+          # Don't show a warning when opening dconf-editor
+          "ca/desrt/dconf-editor" = {
+            show-warning = false;
+          };
+          "org/gnome/desktop/interface" = {
+            color-scheme = "prefer-dark";
+          };
+          "org/gnome/nautilus/preferences" = {
+            # Show image thumbnails for remote file storage
+            show-image-thumbnails = "always";
+          };
+          "org/gtk/settings/debug" = {
+            enable-inspector-keybinding = true;
+          };
+          "org/gtk/settings/file-chooser" = fileChooserPrefs;
+          "org/gtk/gtk4/settings/file-chooser" = fileChooserPrefs;
+          "org/gnome/desktop/interface" = {
+            font-name = "Source Sans 3 14";
+          };
         };
-      in {
-        # Don't show a warning when opening dconf-editor
-        "ca/desrt/dconf-editor" = { show-warning = false; };
-        "org/gnome/desktop/interface" = { color-scheme = "prefer-dark"; };
-        "org/gnome/nautilus/preferences" = {
-          # Show image thumbnails for remote file storage
-          show-image-thumbnails = "always";
-        };
-        "org/gtk/settings/debug" = { enable-inspector-keybinding = true; };
-        "org/gtk/settings/file-chooser" = fileChooserPrefs;
-        "org/gtk/gtk4/settings/file-chooser" = fileChooserPrefs;
-        "org/gnome/desktop/interface" = { font-name = "Source Sans 3 14"; };
-      };
     };
   };
 }
