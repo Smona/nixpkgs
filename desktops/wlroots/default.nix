@@ -1,18 +1,29 @@
-{ config, lib, pkgs, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 
 let
   cfg = config.smona.wlroots;
   cmd = import ./system-commands { inherit pkgs inputs; };
   my_rofi = pkgs.rofi-wayland.override { plugins = with pkgs; [ rofi-calc ]; };
-in {
-  imports =
-    [ ../../applications/gui.nix ./waybar ./eww.nix ./sway.nix ./hyprland.nix ];
+in
+{
+  imports = [
+    ../../applications/gui.nix
+    ./waybar
+    ./eww.nix
+    ./sway.nix
+    ./hyprland.nix
+  ];
 
   options.smona.wlroots = {
     enable = lib.mkEnableOption "wlroots window managers";
     builtInDisplay = lib.mkOption {
-      description =
-        "Which sway output ID represents the builtin screen. Get the ID via `swaymsg -t get_outputs`";
+      description = "Which sway output ID represents the builtin screen. Get the ID via `swaymsg -t get_outputs`";
       type = lib.types.str;
       default = "";
     };
@@ -46,51 +57,53 @@ in {
     services.kanshi = {
       enable = true;
       systemdTarget = "hyprland-session.target";
-      profiles = let
-        externalScale = 1.25;
-        verticalScale = 1.0;
-        builtinScale = 1.2;
-      in {
-        undocked = {
-          outputs = [{
-            criteria = "eDP-1";
-            scale = builtinScale;
-          }];
+      profiles =
+        let
+          externalScale = 1.25;
+          verticalScale = 1.0;
+          builtinScale = 1.2;
+        in
+        {
+          undocked = {
+            outputs = [
+              {
+                criteria = "eDP-1";
+                scale = builtinScale;
+              }
+            ];
+          };
+          docked = {
+            outputs = with builtins; [
+              {
+                criteria = "eDP-1";
+                position = "${toString (ceil (960 / externalScale))},${toString (ceil (1600 / externalScale))}";
+                scale = builtinScale;
+              }
+              {
+                criteria = "Acer Technologies Acer XR382CQK 0x0000B7AA";
+                position = "0,0";
+                scale = externalScale;
+              }
+            ];
+          };
+          desktop = {
+            outputs = with builtins; [
+              {
+                criteria = "Acer Technologies Acer XR382CQK 0x9227A1AA";
+                # note that leaving a small gap here will keep the mouse trapped if moving slow, and
+                # require speedy movement to get to the other monitor. could come in handy!
+                position = "${toString (ceil (1080 / verticalScale))},0";
+                scale = externalScale;
+              }
+              {
+                criteria = "HP Inc. HP VH240a 6CM1290957";
+                position = "0,0";
+                scale = verticalScale;
+                transform = "90";
+              }
+            ];
+          };
         };
-        docked = {
-          outputs = with builtins; [
-            {
-              criteria = "eDP-1";
-              position = "${toString (ceil (960 / externalScale))},${
-                  toString (ceil (1600 / externalScale))
-                }";
-              scale = builtinScale;
-            }
-            {
-              criteria = "Acer Technologies Acer XR382CQK 0x0000B7AA";
-              position = "0,0";
-              scale = externalScale;
-            }
-          ];
-        };
-        desktop = {
-          outputs = with builtins; [
-            {
-              criteria = "Acer Technologies Acer XR382CQK 0x9227A1AA";
-              # note that leaving a small gap here will keep the mouse trapped if moving slow, and
-              # require speedy movement to get to the other monitor. could come in handy!
-              position = "${toString (ceil (1080 / verticalScale))},0";
-              scale = externalScale;
-            }
-            {
-              criteria = "HP Inc. HP VH240a 6CM1290957";
-              position = "0,0";
-              scale = verticalScale;
-              transform = "90";
-            }
-          ];
-        };
-      };
     };
 
     services.flameshot = {
@@ -105,7 +118,9 @@ in {
       theme = "arthur";
     };
 
-    programs.wlogout.enable = true;
+    programs.wlogout = {
+      enable = true;
+    };
 
     # Keeps track of media players so playerctl always acts on the most
     # recently active one.
@@ -141,24 +156,34 @@ in {
 
     services.fusuma = {
       enable = true;
-      extraPackages = with pkgs; [ my_rofi coreutils-full wtype ];
+      extraPackages = with pkgs; [
+        my_rofi
+        coreutils-full
+        wtype
+      ];
       settings = {
-        threshold = { swipe = 0.1; };
-        interval = { swipe = 0.7; };
+        threshold = {
+          swipe = 0.1;
+        };
+        interval = {
+          swipe = 0.7;
+        };
         swipe = {
           "3" = {
             left = {
-              command =
-                "${pkgs.swaynotificationcenter}/bin/swaync-client --open-panel";
+              command = "${pkgs.swaynotificationcenter}/bin/swaync-client --open-panel";
             };
             right = {
-              command =
-                "${pkgs.swaynotificationcenter}/bin/swaync-client --close-panel";
+              command = "${pkgs.swaynotificationcenter}/bin/swaync-client --close-panel";
             };
           };
           "4" = {
-            left = { command = "${pkgs.sway}/bin/swaymsg workspace next"; };
-            right = { command = "${pkgs.sway}/bin/swaymsg workspace prev"; };
+            left = {
+              command = "${pkgs.sway}/bin/swaymsg workspace next";
+            };
+            right = {
+              command = "${pkgs.sway}/bin/swaymsg workspace prev";
+            };
           };
         };
       };
