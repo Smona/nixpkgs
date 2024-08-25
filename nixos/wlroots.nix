@@ -52,6 +52,13 @@ in
     dbus-sway-environment
     configure-gtk
   ];
+  environment.sessionVariables = {
+    # Force electron apps to run in wayland natively. This is required for
+    # them to display on scaled monitors without getting blurry.
+    # NB: This breaks copying from the 1password app. It should still work
+    # in the browser.
+    ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+  };
 
   programs.hyprland.enable = true;
   programs.nm-applet.enable = true; # GUI WIFI tool for WMs
