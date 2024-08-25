@@ -54,10 +54,6 @@ in
   ];
 
   programs.hyprland.enable = true;
-  programs.sway = {
-    enable = true;
-    wrapperFeatures.gtk = true;
-  };
   programs.nm-applet.enable = true; # GUI WIFI tool for WMs
 
   services.dbus.enable = true;
