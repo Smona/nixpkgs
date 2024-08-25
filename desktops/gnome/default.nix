@@ -35,7 +35,7 @@ let
 in {
   imports = [ ../../applications/gui.nix ./themes.nix ];
 
-  options.gnome.enable = lib.mkEnableOption "Manage gnome configuration.";
+  options.gnome.enable = lib.mkEnableOption "gnome configuration management";
   options.pkgsCompat = lib.mkOption {
     type = lib.types.pkgs;
     default = pkgs;
