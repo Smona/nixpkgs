@@ -2,7 +2,14 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, system, config, pkgs, lib, ... }:
+{
+  inputs,
+  system,
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   imports = [
@@ -13,19 +20,12 @@
   ];
 
   networking.hostName = "xps-nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
-  # TODO: only install when wlroots is enabled (once nixos config is modularized)
-  programs.nm-applet.enable = true; # GUI WIFI tool for WMs
 
   # Always use Cloudflare nameservers
-  networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
+  networking.nameservers = [
+    "1.1.1.1"
+    "1.0.0.1"
+  ];
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -41,30 +41,34 @@
   users.users.smona = {
     isNormalUser = true;
     description = "Mel Bourgeois";
-    extraGroups = [ "networkmanager" "wheel" "video" "input" "docker" ];
-    packages = with pkgs;
-      [
-        firefox
-        #  thunderbird
-      ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "video"
+      "input"
+      "docker"
+    ];
+    packages = with pkgs; [ firefox ];
   };
-  home-manager.users.smona = { pkgs, ... }: {
-    imports = [ ../../home.nix ];
+  home-manager.users.smona =
+    { pkgs, ... }:
+    {
+      imports = [ ../../home.nix ];
 
-    home.username = "smona";
-    smona.wlroots = {
-      enable = true;
-      builtInDisplay = "eDP-1";
+      home.username = "smona";
+      smona.wlroots = {
+        enable = true;
+        builtInDisplay = "eDP-1";
+      };
+      roles = {
+        art = true;
+        gaming = true;
+        music = true;
+      };
+      logitech.enabled = true;
+      # Should apply to any NixOS machine
+      _1passwordBinary = "${pkgs._1password-gui}/bin/1password";
     };
-    roles = {
-      art = true;
-      gaming = true;
-      music = true;
-    };
-    logitech.enabled = true;
-    # Should apply to any NixOS machine
-    _1passwordBinary = "${pkgs._1password-gui}/bin/1password";
-  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

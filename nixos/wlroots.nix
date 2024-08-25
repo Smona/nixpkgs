@@ -1,4 +1,10 @@
-{ config, lib, pkgs, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 
 let
   # bash script to let dbus know about important env variables and
@@ -29,17 +35,20 @@ let
     name = "configure-gtk";
     destination = "/bin/configure-gtk";
     executable = true;
-    text = let
-      schema = pkgs.gsettings-desktop-schemas;
-      datadir = "${schema}/share/gsettings-schemas/${schema.name}";
-    in ''
-      export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
-      gnome_schema=org.gnome.desktop.interface
-    '';
+    text =
+      let
+        schema = pkgs.gsettings-desktop-schemas;
+        datadir = "${schema}/share/gsettings-schemas/${schema.name}";
+      in
+      ''
+        export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
+        gnome_schema=org.gnome.desktop.interface
+      '';
   };
 
-in {
-  environment.systemPackages = with pkgs; [
+in
+{
+  environment.systemPackages = [
     dbus-sway-environment
     configure-gtk
   ];
@@ -49,12 +58,13 @@ in {
     enable = true;
     wrapperFeatures.gtk = true;
   };
+  programs.nm-applet.enable = true; # GUI WIFI tool for WMs
 
   services.dbus.enable = true;
   # Location service provider, required for gammastep
   services.geoclue2.enable = true;
 
-  hardware.bluetooth = { enable = true; };
+  hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
   xdg.portal = {
