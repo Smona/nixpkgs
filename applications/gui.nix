@@ -56,6 +56,7 @@ in
 
         gparted
         gthumb
+        file-roller
         (nixGL keybase-gui)
         gcolor3
 
@@ -140,6 +141,7 @@ in
         in
         {
           "application/pdf" = "com.github.xournalpp.xournalpp.desktop";
+          "application/x-gzip" = "org.gnome.FileRoller.desktop";
           "x-scheme-handler/http" = browser;
           "text/html" = browser;
           "application/xhtml+xml" = browser;
@@ -160,6 +162,7 @@ in
         in
         {
           "application/pdf" = [ "com.github.xournalpp.xournalpp.desktop" ];
+          "application/x-gzip" = [ "org.gnome.FileRoller.desktop" ];
           "image/jpeg" = imageViewers;
           "image/png" = imageViewers;
           "x-scheme-handler/http" = browsers;
