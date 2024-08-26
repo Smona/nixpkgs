@@ -138,7 +138,7 @@ in
       settings = {
         general = {
           lock_cmd = cmd.lock;
-          before_sleep_cmd = cmd.lock;
+          before_sleep_cmd = "${cmd.lock} --immediate";
         };
         listener = [
           {
