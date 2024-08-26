@@ -29,10 +29,6 @@
     ## Python
     python310 # Required for advanced treemacs features
 
-    ## Haskell
-    ghc
-    haskell-language-server # Required for doom (haskell +lsp) module
-
     ## Rust
     cargo
     cargo-watch
