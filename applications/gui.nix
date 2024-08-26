@@ -72,6 +72,7 @@ in
         (nixGL spotify)
         (nixGL libreoffice-fresh)
         (nixGL clapper)
+        xournalpp
       ]
       ++ (lib.lists.optionals config.roles.work [ (nixGL gimp) ]);
 
@@ -138,9 +139,9 @@ in
           imageViewer = "org.gnome.eog.desktop";
         in
         {
+          "application/pdf" = "com.github.xournalpp.xournalpp.desktop";
           "x-scheme-handler/http" = browser;
           "text/html" = browser;
-          "application/pdf" = browser;
           "application/xhtml+xml" = browser;
           "x-scheme-handler/https" = browser;
           "image/png" = imageViewer;
@@ -158,6 +159,7 @@ in
           ];
         in
         {
+          "application/pdf" = [ "com.github.xournalpp.xournalpp.desktop" ];
           "image/jpeg" = imageViewers;
           "image/png" = imageViewers;
           "x-scheme-handler/http" = browsers;
