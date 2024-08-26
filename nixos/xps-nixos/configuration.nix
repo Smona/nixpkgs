@@ -14,11 +14,11 @@
 {
   imports = [
     ./hardware-configuration.nix # Include the results of the hardware scan.
-    ../realtime_audio.nix
     ../common_configuration.nix
     inputs.hardware.nixosModules.dell-xps-13-7390
   ];
 
+  smona.username = "smona";
   networking.hostName = "xps-nixos"; # Define your hostname.
 
   # Always use Cloudflare nameservers

@@ -15,6 +15,7 @@
     ../common_configuration.nix
   ];
 
+  smona.username = "mel";
   networking.hostName = "luma"; # Define your hostname.
 
   # Enable the X11 windowing system.
