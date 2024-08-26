@@ -20,9 +20,16 @@ in
     ./realtime_audio.nix
   ];
 
-  options.smona.username = lib.mkOption {
-    type = lib.types.str;
-    description = "smona's username on this system.";
+  options.smona = {
+    username = lib.mkOption {
+      type = lib.types.str;
+      description = "smona's username on this system.";
+    };
+
+    primaryMonitor = lib.mkOption {
+      description = "Which monitor ID represents the 'primary' monitor.";
+      type = lib.types.str;
+    };
   };
 
   config = {

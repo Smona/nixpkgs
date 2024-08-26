@@ -19,6 +19,7 @@
   ];
 
   smona.username = "smona";
+  smona.primaryMonitor = "eDP-1";
   networking.hostName = "xps-nixos"; # Define your hostname.
 
   # Always use Cloudflare nameservers
@@ -42,6 +43,7 @@
       smona.wlroots = {
         enable = true;
         builtInDisplay = "eDP-1";
+        primaryMonitor = config.smona.primaryMonitor;
       };
       roles = {
         art = true;

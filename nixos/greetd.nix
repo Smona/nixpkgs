@@ -18,10 +18,12 @@ in
         default_session =
           let
             hyprConfig = pkgs.writeText "regreet-hyprland-config" ''
-              ${import ../desktops/wlroots/hyprland_common_config.nix}
+              ${import ../desktops/wlroots/hyprland_common_config.nix {
+                primaryMonitor = config.smona.primaryMonitor;
+              }}
 
               # regreet-specific
-              windowrule=monitor DP-3, .*
+              windowrule=monitor ${config.smona.primaryMonitor}, .*
               monitor=DP-2, disable
               exec-once = ${lib.getExe pkgs.greetd.regreet}; hyprctl dispatch exit
             '';

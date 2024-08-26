@@ -23,9 +23,13 @@ in
   options.smona.wlroots = {
     enable = lib.mkEnableOption "wlroots window managers";
     builtInDisplay = lib.mkOption {
-      description = "Which sway output ID represents the builtin screen. Get the ID via `swaymsg -t get_outputs`";
+      description = "Which monitor ID represents the builtin screen. Get the ID via `swaymsg -t get_outputs`";
       type = lib.types.str;
       default = "";
+    };
+    primaryMonitor = lib.mkOption {
+      description = "Which monitor ID represents the 'primary' monitor.";
+      type = lib.types.str;
     };
   };
 

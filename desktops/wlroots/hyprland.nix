@@ -8,14 +8,14 @@
 
 let
   commonOptions = import ./common.nix { inherit pkgs inputs config; };
+  cfg = config.smona.wlroots;
 in
 {
   programs.hyprlock = {
     enable = true;
     extraConfig = ''
         label {
-          # TODO: parameterize "primary" monitor
-          monitor = DP-3
+          monitor = ${cfg.primaryMonitor}
           text = $TIME
           text_align = center
           color = rgba(200, 200, 200, 1.0)
@@ -43,7 +43,7 @@ in
         {
           size = "200, 50";
           position = "0, -80";
-          monitor = "DP-3";
+          monitor = cfg.primaryMonitor;
           dots_center = true;
           fade_on_empty = false;
           font_color = "rgb(202, 211, 245)";
@@ -65,7 +65,7 @@ in
         mod = "SUPER";
       in
       ''
-        ${import ./hyprland_common_config.nix}
+        ${import ./hyprland_common_config.nix { primaryMonitor = cfg.primaryMonitor; }}
 
         exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
         exec-once=systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
