@@ -54,6 +54,7 @@ in
     # Python
     python3Packages.debugpy # Required by dap-mode
     pyright
+    python310 # Required for advanced treemacs features
 
     # Nix
     nil # Required by (nix +lsp)

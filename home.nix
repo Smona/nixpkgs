@@ -25,10 +25,6 @@
   home.packages = with pkgs; [
     # Programming languages
     gcc # required to compile some packages, e.g. emacsqlite
-    faust
-
-    ## Python
-    python310 # Required for advanced treemacs features
 
     ## Rust
     cargo
@@ -39,23 +35,10 @@
     dmidecode
     wireplumber
     appimage-run
-    dig
-    dua # disk usage analyzer
 
     # Universal dev tools
     docker
     docker-compose
-    vulnix
-    # Cloud administration
-    terraform
-    awscli2
-
-    # Fun
-    cowsay
-    ponysay
-    pridecat
-    nyancat
-    blahaj
   ];
 
   # Set up the 1password SSH agent
