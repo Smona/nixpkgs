@@ -70,15 +70,6 @@
     show-trace = true;
   };
 
-  # Dotfiles
-  xdg = {
-    enable = true;
-    configFile = {
-      ".curlrc".source = ./dotfiles/curlrc;
-    };
-  };
-  home.file.".inputrc".source = ./dotfiles/inputrc;
-
   # Set up the 1password SSH agent
   programs.ssh.extraConfig = "IdentityAgent ~/.1password/agent.sock";
 
