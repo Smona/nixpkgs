@@ -136,7 +136,7 @@ in
       defaultApplications =
         let
           browser = "firefox.desktop";
-          imageViewer = "org.gnome.eog.desktop";
+          imageViewer = "gthumb.desktop";
         in
         {
           "application/pdf" = "com.github.xournalpp.xournalpp.desktop";
