@@ -33,19 +33,6 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.smona = {
-    isNormalUser = true;
-    description = "Mel Bourgeois";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-      "video"
-      "input"
-      "docker"
-    ];
-    packages = with pkgs; [ firefox ];
-  };
   home-manager.users.smona =
     { pkgs, ... }:
     {

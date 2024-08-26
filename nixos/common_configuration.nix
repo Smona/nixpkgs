@@ -21,7 +21,7 @@ in
   ];
 
   options.smona.username = lib.mkOption {
-    type = lib.types.string;
+    type = lib.types.str;
     description = "smona's username on this system.";
   };
 
@@ -106,6 +106,20 @@ in
         cups-bjnp
         gutenprint
       ];
+    };
+
+    # Define a user account. Don't forget to set a password with ‘passwd’.
+    users.users.${config.smona.username} = {
+      isNormalUser = true;
+      description = "Mel Bourgeois";
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+        "video"
+        "input"
+        "docker"
+      ];
+      packages = with pkgs; [ firefox ];
     };
 
     # Enable the GNOME Desktop Environment.
