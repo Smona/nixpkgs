@@ -27,10 +27,19 @@ in
     ./applications/tmux.nix
     ./applications/emacs.nix
     ./applications/shell.nix
+    inputs.dCachix.homeManagerModules.declarative-cachix
     ./peripherals/logitech.nix
   ];
 
+  caches.cachix = [
+    {
+      name = "nix-community";
+      sha256 = "sha256:0m6kb0a0m3pr6bbzqz54x37h5ri121sraj1idfmsrr6prknc7q3x";
+    }
+  ];
+
   home.packages = with pkgs; [
+    cachix
     # Programming languages
     gcc # required to compile some packages, e.g. emacsqlite
     faust
@@ -157,15 +166,23 @@ in
     dcr = "docker compose restart";
   };
 
+  # Configuration of the nix CLI
+  # https://nixos.org/manual/nix/stable/command-ref/conf-file.html
+  nix.settings = {
+    # Massively reduce disk usage by hard linking any duplicate files
+    # to a single location on disk.
+    auto-optimise-store = true;
+    # Enable nix command and nix flakes
+    experimental-features = "nix-command flakes";
+    # Always show failure traces
+    show-trace = true;
+  };
+
   # Dotfiles
   xdg = {
     enable = true;
     configFile = {
       ".curlrc".source = ./dotfiles/curlrc;
-      "nix.conf" = {
-        source = ./dotfiles/nix.conf;
-        target = "nix/nix.conf";
-      };
     };
   };
   home.file.".inputrc".source = ./dotfiles/inputrc;
