@@ -50,5 +50,17 @@
     home-manager.extraSpecialArgs = {
       inherit inputs system;
     };
+
+    # Configure the system-wide /etc/zshrc, and install zsh for root on linux.
+    # Note that this is required on darwin, since it loads the nix-darwin environment in the default shell on macos.
+    programs.zsh.enable = true;
+
+    # Set the system timezone
+    time.timeZone = "America/Chicago";
+
+    environment.systemPackages = with pkgs; [
+      git
+      vim
+    ];
   };
 }

@@ -35,9 +35,6 @@ in
   };
 
   config = {
-    # Set your time zone.
-    time.timeZone = "America/Chicago";
-
     # Select internationalisation properties.
     i18n.defaultLocale = "en_US.utf8";
 
@@ -51,7 +48,6 @@ in
     console.keyMap = "dvorak";
 
     # Set up zsh as the default user shell
-    programs.zsh.enable = true;
     users.defaultUserShell = pkgs.zsh;
 
     # Enable networking with networkmanager
@@ -75,8 +71,6 @@ in
 
     # Packages installed in the system profile
     environment.systemPackages = with pkgs; [
-      git
-      vim
       nautilus
       keymapp
     ];
