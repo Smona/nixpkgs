@@ -1,14 +1,15 @@
-{ config, lib, pkgs, inputs, system, ... }:
+{ config, pkgs, ... }:
 
-let pkgs-ubuntu = import inputs.nixpkgs-ubuntu { inherit system; };
-  nixGL = import ./nixGL.nix { inherit config pkgs; };
+let nixGL = import ./nixGL.nix { inherit config pkgs; };
 in {
   programs.firefox = {
-    package = (nixGL pkgs-ubuntu.firefox);
+    package = (nixGL config.pkgsCompat.firefox);
     nativeMessagingHosts = [ pkgs.fx_cast_bridge ];
     profiles = {
       Smona = {
         settings = {
+          # Don't show warning when opening about:config
+          "browser.aboutConfig.showWarning" = false;
           "browser.toolbars.bookmarks.visibility" = "newtab";
           # Show history & tabs before search suggestions
           "browser.urlbar.showSearchSuggestionsFirst" = false;

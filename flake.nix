@@ -4,12 +4,8 @@
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # GPG 2.4.1 is currently broken with EPA:
-    # https://emacs.stackexchange.com/a/78141/38190
-    nixpkgs-downgrade-gpg.url =
-      "github:nixos/nixpkgs?rev=5a8650469a9f8a1958ff9373bd27fb8e54c4365d";
     hardware.url = "github:nixos/nixos-hardware";
-    #
+
     # Last known commit (to me) which is compatible with Ubuntu 22 and gnome 44
     nixpkgs-ubuntu.url =
       "github:nixos/nixpkgs?rev=5ba549eafcf3e33405e5f66decd1a72356632b96";
@@ -28,6 +24,13 @@
 
     musnix.url = "github:musnix/musnix";
     musnix.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Inputs I occasionally use temporarily
+    # hyprland.url =
+    #   "github:hyprwm/Hyprland?rev=1c460e98f870676b15871fe4e5bfeb1a32a3d6d8";
+    # my-nixpkgs.url = "git+file:/home/smona/dev/nixpkgs-upstream";
+
+    dCachix.url = "github:jonascarpay/declarative-cachix";
 
     # Darwin stuff:
     nix-darwin.url = "github:LnL7/nix-darwin";
@@ -64,6 +67,11 @@
         (system:
           import inputs.nixpkgs {
             inherit system;
+            # overlays = [
+            #   (final: prev: {
+            #     hyprland = inputs.hyprland.packages.${system}.hyprland;
+            #   })
+            # ];
 
             # NOTE: Using `nixpkgs.config` in your NixOS config won't work
             # Instead, you should set nixpkgs configs here
@@ -78,9 +86,9 @@
             inherit inputs;
             system = "x86_64-linux";
           };
-          # > Our main nixos configuration file <
           modules = [ ./nixos/xps-nixos/configuration.nix ];
         };
+        # WSL installation
         "luma-nixos" = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
 
@@ -89,6 +97,15 @@
             home-manager.nixosModule
             ./nixos/luma-nixos/configuration.nix
           ];
+        };
+        # Baremetal installation
+        "luma" = nixpkgs.lib.nixosSystem {
+          pkgs = legacyPackages.x86_64-linux;
+          specialArgs = {
+            inherit inputs;
+            system = "x86_64-linux";
+          };
+          modules = [ ./nixos/luma/configuration.nix ];
         };
         "build-farm" = nixpkgs.lib.nixosSystem {
           specialArgs = {
@@ -100,8 +117,6 @@
         };
       };
 
-      # Build darwin flake using:
-      # $ darwin-rebuild build --flake .#Mels-MacBook-Air
       darwinConfigurations."Mels-MacBook-Air" = nix-darwin.lib.darwinSystem {
         specialArgs = {
           inherit inputs;
@@ -121,10 +136,9 @@
               system = "x86_64-linux";
               config.allowUnfree = true;
             };
-            extraSpecialArgs = {
-              inherit inputs;
-              system = "x86_64-linux";
-            };
+
+            specialArgs = { inherit inputs; };
+
             modules = [
               ./home.nix
               ({ ... }: {
@@ -134,6 +148,10 @@
                 roles = { work = true; };
                 nixGL.prefix =
                   "${nixGL.packages.x86_64-linux.nixGLIntel}/bin/nixGLIntel ";
+                pkgsCompat = import inputs.nixpkgs-ubuntu {
+                  system = "x86_64-linux";
+                  config.allowUnfree = true;
+                };
               })
             ];
           };

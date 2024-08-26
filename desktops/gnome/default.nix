@@ -1,9 +1,14 @@
-{ config, lib, pkgs, inputs, system, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   commonOptions = import ../common.nix;
-  pkgs-ubuntu = import inputs.nixpkgs-ubuntu { inherit system; };
-  extensions = with pkgs-ubuntu.gnomeExtensions; [
+  theme = import ../../theme.nix { inherit pkgs; };
+  extensions = with config.pkgsCompat.gnomeExtensions; [
     # Gnome goodness
     always-indicator
     sound-output-device-chooser
@@ -21,10 +26,11 @@ let
     hide-keyboard-layout
     middle-click-to-close-in-overview
     mouse-follows-focus
-    noannoyance-2
+    noannoyance-fork
     openweather
     pip-on-top # Fix firefox PIP pinning on wayland
-    remove-alttab-delay-v2
+    # TODO: find a replacement
+    # remove-alttab-delay-v2
     screen-rotate # Screen autorotation in tablet mode
     system-monitor-next # Requires Ubuntu > 20.04
     unite
@@ -32,14 +38,28 @@ let
     windownavigator
     quake-mode
   ];
-in {
-  imports = [ ../../applications/gui.nix ./themes.nix ];
+in
+{
+  imports = [ ../../applications/gui.nix ];
 
-  options.gnome.enable = lib.mkEnableOption "Manage gnome configuration.";
+  options.gnome.enable = lib.mkEnableOption "gnome configuration management";
+  options.pkgsCompat = lib.mkOption {
+    type = lib.types.pkgs;
+    default = pkgs;
+    description = ''
+      A version of nixpkgs which lags behind the main package set, to preserve
+      compatibility with non-NixOS installs on distributions that have slower
+      release cycles (e.g. Ubuntu).
+
+      This is especially necessary for packages which integrate closely with the
+      system-supplied desktop environment (e.g. gnome extensions), but can come
+      up in other cases as well.
+    '';
+  };
 
   config = lib.mkIf config.gnome.enable {
     graphical = true;
-    home.packages = extensions ++ [ pkgs.gnome.dconf-editor ];
+    home.packages = extensions ++ [ theme.gnome.package ];
 
     dconf = {
       enable = true;
@@ -57,6 +77,9 @@ in {
             "steam.desktop"
           ];
         };
+        "org/gnome/shell/extensions/user-theme" = {
+          name = theme.gnome.shell;
+        };
         "org/gnome/desktop/interface" = {
           monospace-font-name = "MonoLisa Nerd Font 12";
         };
@@ -70,11 +93,19 @@ in {
           show-battery-percentage = true;
         };
         # Allow over-amplification
-        "org/gnome/desktop/sound" = { allow-volume-above-100-percent = true; };
+        "org/gnome/desktop/sound" = {
+          allow-volume-above-100-percent = true;
+        };
         "org/gnome/desktop/input-sources" = {
           sources = [
-            (lib.hm.gvariant.mkTuple [ "xkb" "us+dvorak" ])
-            (lib.hm.gvariant.mkTuple [ "xkb" "us" ])
+            (lib.hm.gvariant.mkTuple [
+              "xkb"
+              "us+dvorak"
+            ])
+            (lib.hm.gvariant.mkTuple [
+              "xkb"
+              "us"
+            ])
           ];
           xkb-options = commonOptions.xkbOptions;
         };
@@ -113,18 +144,16 @@ in {
             "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
           ];
         };
-        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
-          {
-            name = "Toggle guake";
-            binding = "<Alt>space";
-            command = "guake -t";
-          };
-        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" =
-          {
-            name = "1password Quick Access";
-            binding = "<Primary><Shift>space";
-            command = "1password --quick-access";
-          };
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+          name = "Toggle guake";
+          binding = "<Alt>space";
+          command = "guake -t";
+        };
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
+          name = "1password Quick Access";
+          binding = "<Primary><Shift>space";
+          command = "1password --quick-access";
+        };
 
         # Extensions
         "com/github/repsac-by/quake-mode" = {
@@ -163,10 +192,16 @@ in {
         };
         "org/gnome/shell/extensions/unite" = {
           window-buttons-placement = "last";
+          window-buttons-theme = theme.gnome.uniteButtons;
         };
-        "org/gnome/shell/extensions/blur-my-shell" = { hacks-level = 3; };
+        "org/gnome/shell/extensions/blur-my-shell" = {
+          hacks-level = 3;
+        };
         "org/gnome/shell/extensions/blur-my-shell/applications" = {
-          whitelist = [ "kitty" "emacs" ];
+          whitelist = [
+            "kitty"
+            "emacs"
+          ];
           blur-on-overview = true;
           sigma = 44;
           opacity = 241;

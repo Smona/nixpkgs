@@ -1,11 +1,18 @@
-{ pkgs, inputs, config, ... }:
+{
+  pkgs,
+  inputs,
+  config,
+  ...
+}:
 
 let
   commonOptions = (import ../common.nix);
   cmd = import ./system-commands { inherit pkgs inputs; };
   cfg = config.smona.wlroots;
   hasBuiltinDisplay = cfg.builtInDisplay != "";
-in commonOptions // {
+in
+commonOptions
+// {
   execStart = [
     "squeekboard"
     "tablet_mode_switch"
@@ -19,7 +26,7 @@ in commonOptions // {
     # It looks like xps-nixos's mic clips above 50%
     "wpctl set-volume 43 50%"
   ] ++ (pkgs.lib.lists.optional hasBuiltinDisplay "rot8");
-  execAlways = [ "swaybg -i ${commonOptions.backgroundImage} -m fill" ];
+  execAlways = [ "swaybg -i ${cfg.wallpaper} -m fill" ];
   keyBinds = [
     {
       primaryMod = true;
@@ -30,7 +37,7 @@ in commonOptions // {
     {
       primaryMod = true;
       key = "End";
-      command = cmd.goodbye;
+      command = cmd.lock;
     }
     {
       secondaryMod = true;

@@ -1,9 +1,15 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
-let cfg = config.logitech;
-in {
-  options.logitech.enabled =
-    lib.mkEnableOption "Run logiops logitech settings daemon.";
+let
+  cfg = config.logitech;
+in
+{
+  options.logitech.enabled = lib.mkEnableOption "logiops logitech settings daemon";
 
   config = lib.mkIf cfg.enabled {
     systemd.user.services."logiops" = {

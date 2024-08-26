@@ -1,9 +1,6 @@
 { config, pkgs, inputs, system, ... }:
 
-let
-  nixpkgs-downgrade-gpg =
-    import inputs.nixpkgs-downgrade-gpg { inherit system; };
-in {
+{
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.homeDirectory = "/home/${config.home.username}";
@@ -60,16 +57,22 @@ in {
 
   home.language = { base = "en_US.UTF-8"; };
 
+  # Configuration of the nix CLI
+  # https://nixos.org/manual/nix/stable/command-ref/conf-file.html
+  nix.settings = {
+    # Massively reduce disk usage by hard linking any duplicate files
+    # to a single location on disk.
+    auto-optimise-store = true;
+    # Enable nix command and nix flakes
+    experimental-features = "nix-command flakes";
+    # Always show failure traces
+    show-trace = true;
+  };
+
   # Dotfiles
   xdg = {
     enable = true;
-    configFile = {
-      ".curlrc".source = ./dotfiles/curlrc;
-      "nix.conf" = {
-        source = ./dotfiles/nix.conf;
-        target = "nix/nix.conf";
-      };
-    };
+    configFile = { ".curlrc".source = ./dotfiles/curlrc; };
   };
   home.file.".inputrc".source = ./dotfiles/inputrc;
 
@@ -84,13 +87,11 @@ in {
   services.keybase.enable = true;
 
   programs.gpg.enable = true;
-  # TODO: remove this and the input once the referenced issue is fixed
-  programs.gpg.package = nixpkgs-downgrade-gpg.gnupg;
 
   services.gpg-agent.enable = true;
   # Source: https://discourse.nixos.org/t/cant-get-gnupg-to-work-no-pinentry/15373/2
   services.gpg-agent.pinentryPackage =
-    if pkgs.stdenv.isDarwin then pkgs.pinentry_mac else pkgs.pinentry-gnome;
+    if pkgs.stdenv.isDarwin then pkgs.pinentry_mac else pkgs.pinentry-gnome3;
 
   # Automatically start/stop/restart services when their configuration changes
   systemd.user.startServices = "sd-switch";

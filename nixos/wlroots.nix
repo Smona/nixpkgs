@@ -1,4 +1,10 @@
-{ config, lib, pkgs, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 
 let
   # bash script to let dbus know about important env variables and
@@ -29,30 +35,52 @@ let
     name = "configure-gtk";
     destination = "/bin/configure-gtk";
     executable = true;
-    text = let
-      schema = pkgs.gsettings-desktop-schemas;
-      datadir = "${schema}/share/gsettings-schemas/${schema.name}";
-    in ''
-      export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
-      gnome_schema=org.gnome.desktop.interface
-    '';
+    text =
+      let
+        schema = pkgs.gsettings-desktop-schemas;
+        datadir = "${schema}/share/gsettings-schemas/${schema.name}";
+      in
+      ''
+        export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
+        gnome_schema=org.gnome.desktop.interface
+      '';
   };
 
-in {
-  environment.systemPackages = with pkgs; [
+in
+{
+  environment.systemPackages = [
     dbus-sway-environment
     configure-gtk
   ];
+  environment.sessionVariables = {
+    # Force electron apps to run in wayland natively. This is required for
+    # them to display on scaled monitors without getting blurry.
+    # NB: This breaks copying from the 1password app. It should still work
+    # in the browser.
+    ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+  };
 
   programs.hyprland.enable = true;
-  programs.sway = {
-    enable = true;
-    wrapperFeatures.gtk = true;
-  };
+  programs.hyprlock.enable = true;
+  programs.nm-applet.enable = true; # GUI WIFI tool for WMs
 
   services.dbus.enable = true;
+  # Location service provider, required for gammastep
+  services.geoclue2.enable = true;
+
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
+
   xdg.portal = {
     enable = true;
+    # fix GTK theming in hyprland
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
     wlr.enable = true;
   };
+
+  # Enable a keyring service and password UI for non-gnome environments
+  # https://discourse.nixos.org/t/login-keyring-did-not-get-unlocked-hyprland/40869/8?u=smona
+  services.gnome.gnome-keyring.enable = true;
+  programs.seahorse.enable = true;
+  security.pam.services.gdm-password.enableGnomeKeyring = true;
 }

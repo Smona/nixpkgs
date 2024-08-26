@@ -2,7 +2,7 @@
 # As much stuff as possible should go in here, but some things are necessarily different between
 # the two platforms.
 
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 let
   monolisa = builtins.fetchGit {
@@ -11,9 +11,20 @@ let
     rev = "aa8a79e698d1cc6548e9e507f675ad35f1b9c1fc";
   };
 in {
-  imports = [ ./applications/shell.nix ./applications/emacs.nix ];
+  imports = [
+    inputs.dCachix.homeManagerModules.declarative-cachix
+    ./applications/shell.nix
+    ./applications/emacs.nix
+  ];
+
+  caches.cachix = [{
+    name = "nix-community";
+    sha256 = "sha256:0m6kb0a0m3pr6bbzqz54x37h5ri121sraj1idfmsrr6prknc7q3x";
+  }];
 
   home.packages = with pkgs; [
+    cachix
+
     ## NodeJS
     nodejs
     yarn
@@ -56,6 +67,8 @@ in {
     g = "git";
     e = "$EDITOR";
     upgrade = "sudo nixos-rebuild --flake ~/.config/nixpkgs";
+    generations =
+      "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
     hm = "home-manager --flake ~/.config/nixpkgs";
     hms = "hm switch --max-jobs 4";
     hmn = "hm news";
@@ -121,11 +134,19 @@ in {
       merge = { autoStash = true; };
       # Correct typos
       help = { autocorrect = 1; };
-      # Use different colors for moved code vs additions/deletions.
-      diff = { colorMoved = "zebra"; };
+      diff = {
+        # Use different colors for moved code vs additions/deletions.
+        colorMoved = "zebra";
+        # Diff bun lockfiles legibly, according to docs. Fun setup step! 🙄
+        lockb = {
+          textconv = "bun";
+          binary = true;
+        };
+      };
       # Forges
       github = { user = "Smona"; };
     };
+    attributes = [ "*.lockb binary diff=lockb" ];
     ignores = [
       ".gitconfig.local" # Local config file
       "private" # General-purpose private directories
