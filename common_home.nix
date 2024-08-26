@@ -15,6 +15,7 @@ in
   imports = [
     inputs.dCachix.homeManagerModules.declarative-cachix
     ./applications/shell.nix
+    ./applications/tmux.nix
     ./applications/emacs.nix
   ];
 

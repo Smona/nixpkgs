@@ -19,7 +19,6 @@
     ./common_home.nix
     ./desktops/gnome
     ./desktops/wlroots
-    ./applications/tmux.nix
     ./peripherals/logitech.nix
   ];
 
