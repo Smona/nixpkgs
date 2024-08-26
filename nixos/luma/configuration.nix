@@ -51,10 +51,6 @@
       # Should apply to any NixOS machine
       _1passwordBinary = "${pkgs._1password-gui}/bin/1password";
     };
-  programs._1password-gui = {
-    enable = true;
-    polkitPolicyOwners = [ "mel" ];
-  };
 
   # NVIDIA stuff
 
