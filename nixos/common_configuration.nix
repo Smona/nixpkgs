@@ -20,15 +20,18 @@ in
     ./realtime_audio.nix
   ];
 
-  options.smona = {
-    username = lib.mkOption {
-      type = lib.types.str;
+  options.smona = with lib; {
+    username = mkOption {
+      type = types.str;
       description = "smona's username on this system.";
     };
-
-    primaryMonitor = lib.mkOption {
+    primaryMonitor = mkOption {
       description = "Which monitor ID represents the 'primary' monitor.";
-      type = lib.types.str;
+      type = types.str;
+    };
+    wallpaper = mkOption {
+      description = "Image to use as the system-wide wallpaper.";
+      type = types.path;
     };
   };
 

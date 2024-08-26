@@ -20,16 +20,20 @@ in
     ./hyprland.nix
   ];
 
-  options.smona.wlroots = {
-    enable = lib.mkEnableOption "wlroots window managers";
-    builtInDisplay = lib.mkOption {
+  options.smona.wlroots = with lib; {
+    enable = mkEnableOption "wlroots window managers";
+    builtInDisplay = mkOption {
       description = "Which monitor ID represents the builtin screen. Get the ID via `swaymsg -t get_outputs`";
-      type = lib.types.str;
+      type = types.str;
       default = "";
     };
-    primaryMonitor = lib.mkOption {
+    primaryMonitor = mkOption {
       description = "Which monitor ID represents the 'primary' monitor.";
-      type = lib.types.str;
+      type = types.str;
+    };
+    wallpaper = mkOption {
+      description = "Image to use as the desktop wallpaper.";
+      type = types.path;
     };
   };
 

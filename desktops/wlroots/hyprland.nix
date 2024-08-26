@@ -35,7 +35,7 @@ in
       };
       background = {
         color = "rgba(25, 20, 50, 1.0)";
-        path = commonOptions.backgroundImage;
+        path = builtins.toString cfg.wallpaper;
         blur_passes = 3;
         blur_size = 8;
       };

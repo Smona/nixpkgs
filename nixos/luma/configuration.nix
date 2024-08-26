@@ -17,6 +17,7 @@
 
   smona.username = "mel";
   smona.primaryMonitor = "DP-3";
+  smona.wallpaper = ../../wallpapers/vibrant-paint-streaks.jpg;
   networking.hostName = "luma"; # Define your hostname.
 
   # Enable the X11 windowing system.
@@ -30,6 +31,7 @@
       home.username = "mel";
       smona.wlroots.enable = true;
       smona.wlroots.primaryMonitor = config.smona.primaryMonitor;
+      smona.wlroots.wallpaper = config.smona.wallpaper;
       # gnome.enable = true;
       roles = {
         gaming = true;

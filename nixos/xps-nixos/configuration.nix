@@ -20,6 +20,7 @@
 
   smona.username = "smona";
   smona.primaryMonitor = "eDP-1";
+  smona.wallpaper = ../../wallpapers/neon-highway-wallpaper.jpg;
   networking.hostName = "xps-nixos"; # Define your hostname.
 
   # Always use Cloudflare nameservers
@@ -44,6 +45,7 @@
         enable = true;
         builtInDisplay = "eDP-1";
         primaryMonitor = config.smona.primaryMonitor;
+        wallpaper = config.smona.wallpaper;
       };
       roles = {
         art = true;

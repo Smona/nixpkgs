@@ -6,7 +6,6 @@
 }:
 
 let
-  backgroundImage = ./background;
   theme = import ../theme.nix { inherit pkgs; };
 in
 {
@@ -30,7 +29,6 @@ in
           in
           {
             command = "${lib.getExe pkgs.hyprland} --config ${hyprConfig}";
-            # command = "${pkgs.sway}/bin/sway --config ${swayConfig}";
           };
       };
     };
@@ -45,7 +43,7 @@ in
       cursorTheme = theme.cursor;
       settings = {
         background = {
-          path = backgroundImage;
+          path = config.smona.wallpaper;
           fit = "Cover";
         };
       };
