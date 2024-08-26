@@ -30,7 +30,7 @@ in commonOptions // {
     {
       primaryMod = true;
       key = "End";
-      command = cmd.goodbye;
+      command = cmd.lock;
     }
     {
       secondaryMod = true;

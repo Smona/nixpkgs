@@ -42,7 +42,6 @@ in
       # Needed for flameshot
       grim
       slurp
-      swaylock-effects
       playerctl
       (rofimoji.override { rofi = my_rofi; })
       fusuma
@@ -126,29 +125,31 @@ in
     # recently active one.
     services.playerctld.enable = true;
 
-    services.swayidle = {
+    services.hypridle = {
       enable = true;
-      systemdTarget = "sway-session.target hyprland-session.target";
-      events = [{
-        event = "before-sleep";
-        command = cmd.goodbye;
-      }];
-      timeouts = [
-        {
-          timeout = 240;
-          # Locking should come before screen off to prevent FOIC (flash of insecure content)
-          command = builtins.toString cmd.lock;
-        }
-        {
-          timeout = 270;
-          command = builtins.toString cmd.screenOff;
-          resumeCommand = builtins.toString cmd.screenOn;
-        }
-        {
-          timeout = 600;
-          command = "systemctl suspend-then-hibernate";
-        }
-      ];
+      settings = {
+        general = {
+          lock_cmd = cmd.lock;
+          before_sleep_cmd = cmd.lock;
+        };
+        listener = [
+          {
+            timeout = 240;
+            # Locking should come before screen off to prevent FOIC (flash of insecure content)
+            on-timeout = cmd.lock;
+          }
+          {
+            timeout = 480;
+            on-timeout = builtins.toString cmd.screenOff;
+            on-resume = builtins.toString cmd.screenOn;
+          }
+          # FIXME: re-enable on laptop but not desktop
+          # {
+          #   timeout = 600;
+          #   on-timeout = "systemctl suspend-then-hibernate";
+          # }
+        ];
+      };
     };
 
     wayland.windowManager.sway.enable = true;

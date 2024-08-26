@@ -45,14 +45,10 @@ rec {
   darker = pkgs.writeShellScript "darker" "${brightnessctl} s 2%-";
 
   # TODO: be smarter about this, use the right command per-wm
-  screenOn = pkgs.writeShellScript "screenOn" "${hyprctl} dispatch dpms on; ${pkgs.sway}/bin/swaymsg 'output * dpms on'";
-  screenOff = pkgs.writeShellScript "screenOff" "${hyprctl} dispatch dpms off; ${pkgs.sway}/bin/swaymsg 'output * dpms off'";
+  screenOn = pkgs.writeShellScript "screenOn" "${hyprctl} dispatch dpms on";
+  screenOff = pkgs.writeShellScript "screenOff" "${hyprctl} dispatch dpms off";
 
   # ...and wm locking
-  lock = pkgs.writeShellScript "lock" ''
-    ${pkgs.swaylock-effects}/bin/swaylock -f -i ${commonOptions.backgroundImage} --indicator --clock --ring-color 8130d9 --key-hl-color 58e3f5 --fade-in 0.3 --grace 4  --effect-vignette 0.6:0.2\'
-    # --effect-blur 10x5
-  '';
-
-  goodbye = "${pause} & ${lock}";
+  # note that pause will error if nothing is playing, so we can't use &&
+  lock = "${pause}; hyprlock";
 }
