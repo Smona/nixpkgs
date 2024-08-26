@@ -1,7 +1,16 @@
-{ pkgs, lib, config, inputs, system, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  inputs,
+  system,
+  ...
+}:
 
-let user = "mel";
-in {
+let
+  user = "mel";
+in
+{
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
@@ -40,8 +49,7 @@ in {
   programs.zsh.enable = true; # default shell on catalina
 
   # Set Git commit hash for darwin-version.
-  system.configurationRevision =
-    inputs.self.rev or inputs.self.dirtyRev or null;
+  system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
@@ -58,7 +66,9 @@ in {
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.users.${user} = import ./home.nix;
-  home-manager.extraSpecialArgs = { inherit inputs system; };
+  home-manager.extraSpecialArgs = {
+    inherit inputs system;
+  };
 
   # Optionally, use home-manager.extraSpecialArgs to pass
   # arguments to home.nix
@@ -82,12 +92,16 @@ in {
       persistent-apps = [
         "/Applications/Firefox.app"
         "/Applications/Spotify.app"
+        "/Applications/Slack.app"
+        "/Applications/Kitty.app"
         "/opt/homebrew/Cellar/emacs-plus@29/29.4/Emacs.app"
       ];
     };
     # Defaults for which validation hasn't been added to nix-darwin yet
     CustomUserPreferences = {
-      NSGlobalDomain = { "com.apple.trackpad.scrolling" = 1.0; };
+      NSGlobalDomain = {
+        "com.apple.trackpad.scrolling" = 1.0;
+      };
     };
   };
 
@@ -172,8 +186,7 @@ in {
 
   # This will additionally add your inputs to the system's legacy channels
   # Making legacy nix commands consistent as well, awesome!
-  nix.nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}")
-    config.nix.registry;
+  nix.nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
 
   # This will add each flake input as a registry
   # To make nix3 commands consistent with your flake
