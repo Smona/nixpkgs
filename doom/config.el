@@ -239,7 +239,6 @@
 (setq +treemacs-git-mode 'deferred)
 
 (after! treemacs
-  (setq doom-themes-treemacs-theme "doom-colors")
   (treemacs-set-scope-type 'Perspectives)
   (treemacs-follow-mode t)
   (setq treemacs-width-is-initially-locked nil))
