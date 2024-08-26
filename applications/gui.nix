@@ -56,6 +56,7 @@ in
 
         gparted
         gthumb
+        shotwell
         file-roller
         (nixGL keybase-gui)
         gcolor3
