@@ -190,6 +190,11 @@ in
     ];
   };
 
+  programs.ssh = {
+    enable = true;
+    includes = [ "~/.ssh/config.local" ];
+  };
+
   programs.vim = {
     enable = true;
     settings = {

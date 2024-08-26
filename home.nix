@@ -1,3 +1,5 @@
+# Linux-only home-manager configurations.
+
 {
   config,
   pkgs,
@@ -78,12 +80,8 @@
   };
   home.file.".inputrc".source = ./dotfiles/inputrc;
 
-  programs.ssh = {
-    enable = true;
-    # Set up the 1password SSH agent
-    extraConfig = "IdentityAgent ~/.1password/agent.sock";
-    includes = [ "~/.ssh/config.local" ];
-  };
+  # Set up the 1password SSH agent
+  programs.ssh.extraConfig = "IdentityAgent ~/.1password/agent.sock";
 
   # Services
   services.keybase.enable = true;
