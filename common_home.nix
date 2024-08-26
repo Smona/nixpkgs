@@ -26,6 +26,18 @@ in
     }
   ];
 
+  # Configuration of the nix CLI
+  # https://nixos.org/manual/nix/stable/command-ref/conf-file.html
+  nix.settings = {
+    # Massively reduce disk usage by hard linking any duplicate files
+    # to a single location on disk.
+    auto-optimise-store = true;
+    # Enable nix command and nix flakes
+    experimental-features = "nix-command flakes";
+    # Always show failure traces
+    show-trace = true;
+  };
+
   home.language.base = "en_US.UTF-8";
 
   home.packages = with pkgs; [
