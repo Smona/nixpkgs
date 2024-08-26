@@ -132,6 +132,7 @@ in
     g = "git";
     e = "$EDITOR";
     upgrade = "sudo nixos-rebuild --flake ~/.config/nixpkgs";
+    generations = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
     hm = "home-manager --flake ~/.config/nixpkgs";
     hms = "hm switch --max-jobs 4";
     hmn = "hm news";
