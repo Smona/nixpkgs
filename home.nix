@@ -1,4 +1,10 @@
-{ config, pkgs, inputs, system, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  system,
+  ...
+}:
 
 {
   # Home Manager needs a bit of information about you and the
@@ -55,8 +61,6 @@
     blahaj
   ];
 
-  home.language = { base = "en_US.UTF-8"; };
-
   # Configuration of the nix CLI
   # https://nixos.org/manual/nix/stable/command-ref/conf-file.html
   nix.settings = {
@@ -72,7 +76,9 @@
   # Dotfiles
   xdg = {
     enable = true;
-    configFile = { ".curlrc".source = ./dotfiles/curlrc; };
+    configFile = {
+      ".curlrc".source = ./dotfiles/curlrc;
+    };
   };
   home.file.".inputrc".source = ./dotfiles/inputrc;
 

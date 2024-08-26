@@ -7,10 +7,8 @@
     hardware.url = "github:nixos/nixos-hardware";
 
     # Last known commit (to me) which is compatible with Ubuntu 22 and gnome 44
-    nixpkgs-ubuntu.url =
-      "github:nixos/nixpkgs?rev=5ba549eafcf3e33405e5f66decd1a72356632b96";
-    hm-ubuntu.url =
-      "github:Smona/home-manager?rev=66702ccb53a7cc7f84c94e8e571658e1f6b7da69";
+    nixpkgs-ubuntu.url = "github:nixos/nixpkgs?rev=5ba549eafcf3e33405e5f66decd1a72356632b96";
+    hm-ubuntu.url = "github:Smona/home-manager?rev=66702ccb53a7cc7f84c94e8e571658e1f6b7da69";
     # hm-ubuntu.inputs.nixpkgs.follows = "nixpkgs-ubuntu";
 
     # Home manager
@@ -61,23 +59,39 @@
     # nix-colors.url = "github:misterio77/nix-colors";
   };
 
-  outputs = { nixpkgs, home-manager, nixGL, nixos-wsl, nix-darwin, nix-homebrew
-    , ... }@inputs: rec {
-      legacyPackages = nixpkgs.lib.genAttrs [ "x86_64-linux" "x86_64-darwin" ]
-        (system:
-          import inputs.nixpkgs {
-            inherit system;
-            # overlays = [
-            #   (final: prev: {
-            #     hyprland = inputs.hyprland.packages.${system}.hyprland;
-            #   })
-            # ];
+  outputs =
+    {
+      nixpkgs,
+      home-manager,
+      nixGL,
+      nixos-wsl,
+      nix-darwin,
+      nix-homebrew,
+      ...
+    }@inputs:
+    rec {
+      legacyPackages =
+        nixpkgs.lib.genAttrs
+          [
+            "x86_64-linux"
+            "x86_64-darwin"
+          ]
+          (
+            system:
+            import inputs.nixpkgs {
+              inherit system;
+              # overlays = [
+              #   (final: prev: {
+              #     hyprland = inputs.hyprland.packages.${system}.hyprland;
+              #   })
+              # ];
 
-            # NOTE: Using `nixpkgs.config` in your NixOS config won't work
-            # Instead, you should set nixpkgs configs here
-            # (https://nixos.org/manual/nixpkgs/stable/#idm140737322551056)
-            config.allowUnfree = true;
-          });
+              # NOTE: Using `nixpkgs.config` in your NixOS config won't work
+              # Instead, you should set nixpkgs configs here
+              # (https://nixos.org/manual/nixpkgs/stable/#idm140737322551056)
+              config.allowUnfree = true;
+            }
+          );
 
       nixosConfigurations = {
         "xps-nixos" = nixpkgs.lib.nixosSystem {
@@ -90,7 +104,9 @@
         };
         # WSL installation
         "luma-nixos" = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
+          specialArgs = {
+            inherit inputs;
+          };
 
           modules = [
             nixos-wsl.nixosModules.wsl
@@ -130,35 +146,50 @@
       };
 
       homeConfigurations = {
-        "cobalt@remotestation376" =
-          inputs.hm-ubuntu.lib.homeManagerConfiguration {
-            pkgs = import inputs.nixpkgs {
-              system = "x86_64-linux";
-              config.allowUnfree = true;
-            };
+        "cobalt@remotestation376" = inputs.hm-ubuntu.lib.homeManagerConfiguration {
+          pkgs = import inputs.nixpkgs {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
 
-            specialArgs = { inherit inputs; };
+          specialArgs = {
+            inherit inputs;
+          };
 
-            modules = [
-              ./home.nix
-              ({ ... }: {
+          modules = [
+            ./home.nix
+            (
+              { ... }:
+              {
                 home.username = "cobalt";
                 gnome.enable = true;
                 logitech.enabled = true;
-                roles = { work = true; };
-                nixGL.prefix =
-                  "${nixGL.packages.x86_64-linux.nixGLIntel}/bin/nixGLIntel ";
+                roles = {
+                  work = true;
+                };
+                nixGL.prefix = "${nixGL.packages.x86_64-linux.nixGLIntel}/bin/nixGLIntel ";
                 pkgsCompat = import inputs.nixpkgs-ubuntu {
                   system = "x86_64-linux";
                   config.allowUnfree = true;
                 };
-              })
-            ];
-          };
+              }
+            )
+          ];
+        };
         "smona@DESKTOP-9F9VN3S" = home-manager.lib.homeManagerConfiguration {
           pkgs = legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs; };
-          modules = [ ./home.nix ({ ... }: { home.username = "smona"; }) ];
+          extraSpecialArgs = {
+            inherit inputs;
+          };
+          modules = [
+            ./home.nix
+            (
+              { ... }:
+              {
+                home.username = "smona";
+              }
+            )
+          ];
         };
       };
     };

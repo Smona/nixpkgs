@@ -10,17 +10,22 @@ let
     ref = "main";
     rev = "aa8a79e698d1cc6548e9e507f675ad35f1b9c1fc";
   };
-in {
+in
+{
   imports = [
     inputs.dCachix.homeManagerModules.declarative-cachix
     ./applications/shell.nix
     ./applications/emacs.nix
   ];
 
-  caches.cachix = [{
-    name = "nix-community";
-    sha256 = "sha256:0m6kb0a0m3pr6bbzqz54x37h5ri121sraj1idfmsrr6prknc7q3x";
-  }];
+  caches.cachix = [
+    {
+      name = "nix-community";
+      sha256 = "sha256:0m6kb0a0m3pr6bbzqz54x37h5ri121sraj1idfmsrr6prknc7q3x";
+    }
+  ];
+
+  home.language.base = "en_US.UTF-8";
 
   home.packages = with pkgs; [
     cachix
@@ -34,7 +39,12 @@ in {
     # Fonts to try: FantasqueSansMono, Inconsolata, Victor Mono
     cascadia-code
     # NerdFontsSymbolsOnly required by Emacs
-    (nerdfonts.override { fonts = [ "CascadiaCode" "NerdFontsSymbolsOnly" ]; })
+    (nerdfonts.override {
+      fonts = [
+        "CascadiaCode"
+        "NerdFontsSymbolsOnly"
+      ];
+    })
     noto-fonts-emoji # Required by Emacs
     source-serif # Required by Emacs
     source-sans
@@ -42,17 +52,21 @@ in {
     (callPackage monolisa { })
   ];
 
-  home.sessionVariables = let editor = "vim";
-  in {
-    RIPGREP_CONFIG_PATH = "${./dotfiles/rg.conf}";
-    VISUAL = editor;
-    EDITOR = editor;
-    GIT_EDITOR = editor;
-  };
+  home.sessionVariables =
+    let
+      editor = "vim";
+    in
+    {
+      RIPGREP_CONFIG_PATH = "${./dotfiles/rg.conf}";
+      VISUAL = editor;
+      EDITOR = editor;
+      GIT_EDITOR = editor;
+    };
 
   home.shellAliases = {
     # Natural language commands
-    backup = "sudo rsync -av --delete "
+    backup =
+      "sudo rsync -av --delete "
       + "-e 'ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-rsa' "
       + "--exclude-from='${./dotfiles/rsync-ignore.txt}' "
       + "/ smona@192.168.0.198::NetBackup/$(hostname)";
@@ -66,9 +80,12 @@ in {
     cat = "bat";
     g = "git";
     e = "$EDITOR";
-    upgrade = "sudo nixos-rebuild --flake ~/.config/nixpkgs";
-    generations =
-      "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
+    upgrade =
+      if pkgs.stdenv.isDarwin then
+        "darwin-rebuild switch --flake ~/.config/nixpkgs"
+      else
+        "sudo nixos-rebuild --flake ~/.config/nixpkgs";
+    generations = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
     hm = "home-manager --flake ~/.config/nixpkgs";
     hms = "hm switch --max-jobs 4";
     hmn = "hm news";
@@ -126,14 +143,14 @@ in {
       };
     };
     extraConfig = {
-      core = { autocrlf = "input"; };
-      init = { defaultBranch = "main"; };
-      pull = { rebase = true; };
-      fetch = { prune = true; };
-      rebase = { autoStash = true; };
-      merge = { autoStash = true; };
+      core.autocrlf = "input";
+      init.defaultBranch = "main";
+      pull.rebase = true;
+      fetch.prune = true;
+      rebase.autoStash = true;
+      merge.autoStash = true;
       # Correct typos
-      help = { autocorrect = 1; };
+      help.autocorrect = 1;
       diff = {
         # Use different colors for moved code vs additions/deletions.
         colorMoved = "zebra";
@@ -144,7 +161,7 @@ in {
         };
       };
       # Forges
-      github = { user = "Smona"; };
+      github.user = "Smona";
     };
     attributes = [ "*.lockb binary diff=lockb" ];
     ignores = [
