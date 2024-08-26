@@ -7,10 +7,15 @@
   ...
 }:
 
-let
-  user = "mel";
-in
 {
+  imports = [
+    inputs.nix-homebrew.darwinModules.nix-homebrew
+    inputs.home-manager.darwinModules.home-manager
+    ../common_configuration.nix
+  ];
+
+  smona.username = "mel";
+
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
@@ -42,9 +47,6 @@ in
   services.nix-daemon.enable = true;
   # nix.package = pkgs.nix;
 
-  # Necessary for using flakes on this system.
-  nix.settings.experimental-features = "nix-command flakes";
-
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh.enable = true; # default shell on catalina
 
@@ -63,15 +65,7 @@ in
   # Below: stuff added by me #
   ############################
 
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
-  home-manager.users.${user} = import ./home.nix;
-  home-manager.extraSpecialArgs = {
-    inherit inputs system;
-  };
-
-  # Optionally, use home-manager.extraSpecialArgs to pass
-  # arguments to home.nix
+  home-manager.users.${config.smona.username} = import ./home.nix;
 
   system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToEscape = true;
@@ -108,9 +102,9 @@ in
   # Enable TouchID sudo authentication
   security.pam.enableSudoTouchIdAuth = true;
 
-  users.users.${user} = {
+  users.users.${config.smona.username} = {
     description = "Mel Bourgeois";
-    home = "/Users/${user}";
+    home = "/Users/${config.smona.username}";
   };
 
   nix-homebrew = {
@@ -121,7 +115,7 @@ in
     enableRosetta = true;
 
     # User owning the Homebrew prefix
-    inherit user;
+    user = config.smona.username;
 
     # Optional: Declarative tap management
     taps = {
@@ -179,16 +173,4 @@ in
       "proxy-audio-device" # enable using system volume controls w/ external audio interfaces
     ];
   };
-
-  ###########################################################
-  # Below: stuff that should come from existing config repo #
-  ###########################################################
-
-  # This will additionally add your inputs to the system's legacy channels
-  # Making legacy nix commands consistent as well, awesome!
-  nix.nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
-
-  # This will add each flake input as a registry
-  # To make nix3 commands consistent with your flake
-  nix.registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
 }

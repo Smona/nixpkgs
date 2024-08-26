@@ -66,7 +66,6 @@
       nixGL,
       nixos-wsl,
       nix-darwin,
-      nix-homebrew,
       ...
     }@inputs:
     rec {
@@ -134,15 +133,12 @@
       };
 
       darwinConfigurations."Mels-MacBook-Air" = nix-darwin.lib.darwinSystem {
+        # TODO: pass pkgs here
         specialArgs = {
           inherit inputs;
           system = "aarch64-darwin";
         };
-        modules = [
-          nix-homebrew.darwinModules.nix-homebrew
-          home-manager.darwinModules.home-manager
-          ./darwin/configuration.nix
-        ];
+        modules = [ ./darwin/configuration.nix ];
       };
 
       homeConfigurations = {
