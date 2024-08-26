@@ -5,7 +5,7 @@
 {
   imports = [
     ../common_home.nix
-    ../applications/gui.nix
+    ../applications/common_gui.nix
   ];
 
   graphical = true;

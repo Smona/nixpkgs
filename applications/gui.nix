@@ -1,3 +1,5 @@
+# Configs specific to graphical linux systems
+
 {
   config,
   lib,
@@ -12,14 +14,12 @@ let
 in
 {
   imports = [
+    ./common_gui.nix
     ./art.nix
-    ./firefox.nix
-    ./terminal.nix
     ./games.nix
     ./music.nix
   ];
 
-  options.graphical = lib.mkEnableOption "install and configure graphical applications.";
   options._1passwordBinary = lib.mkOption {
     type = lib.types.str;
     default = "/usr/bin/env 1password";
@@ -32,13 +32,6 @@ in
 
       This needs to be set to the right nixGL package on non-NixOS systems.
     '';
-  };
-  # Roles are all defined here for ease of discoverability
-  options.roles = {
-    art = lib.mkEnableOption "set up computer for visual art creation";
-    gaming = lib.mkEnableOption "set up computer for gaming";
-    work = lib.mkEnableOption "set up computer for work";
-    music = lib.mkEnableOption "set up computer for music production";
   };
 
   config = lib.mkIf config.graphical {
@@ -83,13 +76,10 @@ in
     gtk.theme = theme.gtk;
     gtk.iconTheme = theme.icons;
 
-    programs.chromium = {
-      enable = true;
-      package = (nixGL config.pkgsCompat.chromium);
-    };
-    programs.firefox.enable = true;
-    programs.kitty.enable = true;
-    programs.alacritty.enable = true;
+    programs.firefox.package = (nixGL config.pkgsCompat.firefox);
+    programs.chromium.package = (nixGL config.pkgsCompat.chromium);
+    programs.kitty.package = (nixGL pkgs.kitty);
+    programs.alacritty.package = (nixGL pkgs.alacritty);
 
     # Required for keybase-gui
     services.kbfs.enable = true;
@@ -120,6 +110,7 @@ in
         RestartSec = 2;
       };
     };
+    # TODO: get this working on darwin
     xdg.configFile."1password-settings" = {
       target = "1Password/settings/settings.json";
       text = ''

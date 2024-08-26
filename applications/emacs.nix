@@ -12,6 +12,7 @@ let
   pkgs-latest = import inputs.nixpkgs { inherit system; };
   my-emacs =
     (nixGL (
+      # TODO: replace with programs.emacs.extraPackages?
       (pkgs.emacsPackagesFor emacs).emacsWithPackages (epkgs: [
         epkgs.vterm
         epkgs.pdf-tools
@@ -29,7 +30,7 @@ let
 in
 {
   programs.emacs = {
-    enable = true;
+    enable = pkgs.stdenv.isLinux;
     package = my-emacs;
   };
 
