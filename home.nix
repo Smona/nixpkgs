@@ -240,15 +240,21 @@ in
       help = {
         autocorrect = 1;
       };
-      # Use different colors for moved code vs additions/deletions.
       diff = {
+        # Use different colors for moved code vs additions/deletions.
         colorMoved = "zebra";
+        # Diff bun lockfiles legibly, according to docs. Fun setup step! 🙄
+        lockb = {
+          textconv = "bun";
+          binary = true;
+        };
       };
       # Forges
       github = {
         user = "Smona";
       };
     };
+    attributes = [ "*.lockb binary diff=lockb" ];
     ignores = [
       ".gitconfig.local" # Local config file
       "private" # General-purpose private directories
