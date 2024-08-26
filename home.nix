@@ -12,7 +12,6 @@ let
     ref = "main";
     rev = "aa8a79e698d1cc6548e9e507f675ad35f1b9c1fc";
   };
-  nixpkgs-downgrade-gpg = import inputs.nixpkgs-downgrade-gpg { inherit system; };
 in
 {
   # Home Manager needs a bit of information about you and the
@@ -346,8 +345,6 @@ in
   services.keybase.enable = true;
 
   programs.gpg.enable = true;
-  # TODO: remove this and the input once the referenced issue is fixed
-  programs.gpg.package = nixpkgs-downgrade-gpg.gnupg;
 
   services.gpg-agent.enable = true;
   # Source: https://discourse.nixos.org/t/cant-get-gnupg-to-work-no-pinentry/15373/2
