@@ -130,6 +130,13 @@
   homebrew = {
     enable = true;
 
+    onActivation = {
+      # TODO: errors from homebrew on uninstall, programs aren't actually cleaned up.
+      # This can likely be fixed by using nixpkgs emacs
+      cleanup = "uninstall";
+      upgrade = true;
+    };
+
     # Prevent tap management conflicts b/w nix-homebrew & nix-darwin
     # https://github.com/zhaofengli/nix-homebrew/issues/5#issuecomment-1878798641
     taps = builtins.attrNames config.nix-homebrew.taps;
