@@ -22,6 +22,7 @@ in
     ./applications/shell.nix
     ./applications/tmux.nix
     ./applications/emacs.nix
+    ./applications/common_gui.nix
   ];
 
   options = with lib; {

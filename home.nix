@@ -17,6 +17,7 @@
 
   imports = [
     ./common_home.nix
+    ./applications/gui.nix
     ./desktops/gnome
     ./desktops/wlroots
     ./peripherals/logitech.nix

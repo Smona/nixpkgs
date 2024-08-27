@@ -13,7 +13,6 @@ let
 in
 {
   imports = [
-    ../../applications/gui.nix
     ./waybar
     ./eww.nix
     ./sway.nix

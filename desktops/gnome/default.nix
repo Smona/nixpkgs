@@ -40,8 +40,6 @@ let
   ];
 in
 {
-  imports = [ ../../applications/gui.nix ];
-
   options.gnome.enable = lib.mkEnableOption "gnome configuration management";
 
   config = lib.mkIf config.gnome.enable {

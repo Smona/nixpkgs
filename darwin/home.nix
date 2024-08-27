@@ -3,12 +3,12 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ../common_home.nix
-    ../applications/common_gui.nix
-  ];
+  imports = [ ../common_home.nix ];
 
   graphical = true;
+  roles = {
+    work = true;
+  };
 
   # Set up the 1password SSH agent
   programs.ssh.extraConfig = ''

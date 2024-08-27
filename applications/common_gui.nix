@@ -44,10 +44,23 @@ in
     programs.kitty.enable = true;
     # programs.alacritty.enable = true;
 
-    home.packages = with pkgs; [
-      my-slack
-      (nixGL spotify)
-    ];
+    home.packages =
+      with pkgs;
+      [
+        # Messaging apps
+        (nixGL (
+          if pkgs.stdenv.isDarwin then
+            discord
+          else
+            discord.override {
+              nss = nss_latest; # https://github.com/NixOS/nixpkgs/issues/78961
+            }
+        ))
+        my-slack
+
+        (nixGL spotify)
+      ]
+      ++ (lib.lists.optionals config.roles.work [ (nixGL gimp) ]);
 
     # I like to have slack installed everywhere, but only auto-start it on work machines
     systemd.user.services.slack = lib.mkIf config.roles.work {

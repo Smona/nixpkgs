@@ -31,33 +31,25 @@ in
     };
 
     # Graphical applications
-    home.packages =
-      with pkgs;
-      [
-        theme.uiFont.package
-        dconf-editor
+    home.packages = with pkgs; [
+      theme.uiFont.package
+      dconf-editor
 
-        gparted
-        gthumb
-        shotwell
-        file-roller
-        (nixGL keybase-gui)
-        gcolor3
+      gparted
+      gthumb
+      shotwell
+      file-roller
+      (nixGL keybase-gui)
+      gcolor3
 
-        # Messaging apps
-        (nixGL (
-          discord.override {
-            nss = nss_latest; # https://github.com/NixOS/nixpkgs/issues/78961
-          }
-        ))
-        (nixGL signal-desktop)
+      # Messaging apps not supported on darwin
+      (nixGL signal-desktop)
 
-        # Media apps
-        (nixGL libreoffice-fresh)
-        (nixGL clapper)
-        xournalpp
-      ]
-      ++ (lib.lists.optionals config.roles.work [ (nixGL gimp) ]);
+      # Media apps
+      (nixGL libreoffice-fresh)
+      (nixGL clapper)
+      xournalpp
+    ];
 
     gtk.enable = true;
     gtk.cursorTheme = (theme.cursor // { size = 24; });
