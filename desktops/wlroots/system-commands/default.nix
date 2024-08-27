@@ -2,6 +2,7 @@
 
 let
   maxVolume = "1.2";
+  volumeStepPercent = "4";
   commonOptions = import ../../common.nix;
   playerctl = "${pkgs.playerctl}/bin/playerctl";
   brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
@@ -12,11 +13,11 @@ rec {
   # We need to handle our own media keys
 
   louder = pkgs.writeShellScript "louder" ''
-    ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 2%+ --limit ${maxVolume}
+    ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ ${volumeStepPercent}%+ --limit ${maxVolume}
     unmute
   '';
 
-  softer = pkgs.writeShellScript "softer" "${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 2%- --limit ${maxVolume}";
+  softer = pkgs.writeShellScript "softer" "${wpctl} set-volume @DEFAULT_AUDIO_SINK@ ${volumeStepPercent}%- --limit ${maxVolume}";
 
   mute = pkgs.writeShellScript "mute" "${wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle";
 
