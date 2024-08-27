@@ -79,6 +79,8 @@
 
     dock = {
       autohide = true;
+      # this is distracting and not super helpful for me
+      show-recents = false;
       persistent-apps = [
         "/Applications/Firefox.app"
         "${pkgs.spotify}/Applications/Spotify.app"
