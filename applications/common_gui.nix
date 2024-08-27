@@ -7,6 +7,10 @@
   ...
 }:
 
+let
+  nixGL = import ./nixGL.nix { inherit pkgs config; };
+  my-slack = (nixGL pkgs.slack);
+in
 {
   imports = [
     ./firefox.nix
@@ -24,14 +28,36 @@
       work = mkEnableOption "set up computer for work";
       music = mkEnableOption "set up computer for music production";
     };
+
+    nixGLPrefix = mkOption {
+      type = types.str;
+      default = "";
+      description = ''
+        Will be prepended to commands which require working OpenGL.
+
+        This needs to be set to the right nixGL package on non-NixOS systems.
+      '';
+    };
   };
 
   config = lib.mkIf config.graphical {
     programs.kitty.enable = true;
+    # programs.alacritty.enable = true;
 
-    # programs.chromium = {
-    #   enable = true;
-    # };
-    # programs.firefox.enable = true;
+    home.packages = with pkgs; [
+      my-slack
+      (nixGL spotify)
+    ];
+
+    # I like to have slack installed everywhere, but only auto-start it on work machines
+    systemd.user.services.slack = lib.mkIf config.roles.work {
+      Unit.Description = "Slack desktop application";
+      Install.WantedBy = [ "graphical-session.target" ];
+      Service = {
+        ExecStart = "${my-slack}/bin/slack";
+        Restart = "on-failure";
+        RestartSec = 2;
+      };
+    };
   };
 }

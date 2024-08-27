@@ -9,7 +9,6 @@
 
 let
   nixGL = import ./nixGL.nix { inherit pkgs config; };
-  my-slack = (nixGL pkgs.slack);
   theme = import ../theme.nix { inherit pkgs; };
 in
 {
@@ -23,15 +22,6 @@ in
   options._1passwordBinary = lib.mkOption {
     type = lib.types.str;
     default = "/usr/bin/env 1password";
-  };
-  options.nixGLPrefix = lib.mkOption {
-    type = lib.types.str;
-    default = "";
-    description = ''
-      Will be prepended to commands which require working OpenGL.
-
-      This needs to be set to the right nixGL package on non-NixOS systems.
-    '';
   };
 
   config = lib.mkIf config.graphical {
@@ -61,10 +51,8 @@ in
           }
         ))
         (nixGL signal-desktop)
-        my-slack
 
         # Media apps
-        (nixGL spotify)
         (nixGL libreoffice-fresh)
         (nixGL clapper)
         xournalpp
@@ -76,24 +64,15 @@ in
     gtk.theme = theme.gtk;
     gtk.iconTheme = theme.icons;
 
-    programs.firefox.package = (nixGL config.pkgsCompat.firefox);
-    programs.chromium.package = (nixGL config.pkgsCompat.chromium);
-    programs.kitty.package = (nixGL pkgs.kitty);
-    programs.alacritty.package = (nixGL pkgs.alacritty);
+    # TODO: install browsers with nix on darwin, maybe with
+    programs.chromium = {
+      enable = true;
+      package = (nixGL config.pkgsCompat.chromium);
+    };
+    programs.firefox.enable = true;
 
     # Required for keybase-gui
     services.kbfs.enable = true;
-
-    # I like to have slack installed everywhere, but only auto-start it on work machines
-    systemd.user.services.slack = lib.mkIf config.roles.work {
-      Unit.Description = "Slack desktop application";
-      Install.WantedBy = [ "graphical-session.target" ];
-      Service = {
-        ExecStart = "${my-slack}/bin/slack";
-        Restart = "on-failure";
-        RestartSec = 2;
-      };
-    };
 
     # 1password has to be installed at the system level to integrate with polkit
     # and support system authentication / ssh agent / browser extension integration.

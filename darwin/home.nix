@@ -9,7 +9,6 @@
   ];
 
   graphical = true;
-  programs.firefox.package = null;
 
   # Set up the 1password SSH agent
   programs.ssh.extraConfig = ''

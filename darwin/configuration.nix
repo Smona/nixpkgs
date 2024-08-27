@@ -81,9 +81,9 @@
       autohide = true;
       persistent-apps = [
         "/Applications/Firefox.app"
-        "/Applications/Spotify.app"
-        "/Applications/Slack.app"
-        "/Applications/Kitty.app"
+        "${pkgs.spotify}/Applications/Spotify.app"
+        "${pkgs.slack}/Applications/Slack.app"
+        "${pkgs.kitty}/Applications/kitty.app"
         "/opt/homebrew/Cellar/emacs-plus@29/29.4/Emacs.app"
       ];
     };
@@ -159,14 +159,12 @@
     casks = [
       "firefox"
       "1password"
-      "slack"
-      "spotify"
       "middleclick"
       "keybase"
-      "kitty"
       "steam"
       "keymapp" # ZSA companion UI, e.g. for flashing
       "proxy-audio-device" # enable using system volume controls w/ external audio interfaces
+      "raycast"
     ];
   };
 }
