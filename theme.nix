@@ -18,6 +18,7 @@
     package = pkgs.dracula-theme;
     name = "Dracula-cursors";
   };
+  cursorSize = 24;
   gnome = {
     package = pkgs.flat-remix-gnome;
     shell = "Flat-Remix-Blue-Dark-fullPanel";

@@ -65,11 +65,12 @@ in
         mod = "SUPER";
       in
       ''
-        ${import ./hyprland_common_config.nix { primaryMonitor = cfg.primaryMonitor; }}
+        ${import ./hyprland_common_config.nix {
+          primaryMonitor = cfg.primaryMonitor;
+          cursorThemeName = config.gtk.cursorTheme.name;
+          cursorSize = config.gtk.cursorTheme.size;
+        }}
 
-        exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-        exec-once=systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-        exec-once=hyprctl setcursor ${config.gtk.cursorTheme.name} ${builtins.toString config.gtk.cursorTheme.size}
         ${(builtins.concatStringsSep "\n" (builtins.map (cmd: "exec-once=${cmd}") commonOptions.execStart))}
         ${(builtins.concatStringsSep "\n" (builtins.map (cmd: "exec=${cmd}") commonOptions.execAlways))}
 

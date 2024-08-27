@@ -19,6 +19,8 @@ in
             hyprConfig = pkgs.writeText "regreet-hyprland-config" ''
               ${import ../desktops/wlroots/hyprland_common_config.nix {
                 primaryMonitor = config.smona.primaryMonitor;
+                cursorThemeName = theme.cursor.name;
+                cursorSize = theme.cursorSize;
               }}
 
               # regreet-specific
