@@ -167,6 +167,8 @@
 
     casks = [
       "firefox"
+      "chromium"
+      "floorp"
       "1password"
       "middleclick"
       "keybase"
