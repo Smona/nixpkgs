@@ -89,8 +89,6 @@
     '';
   };
 
-  # Firmware update manager
-  services.fwupd.enable = true;
   services.flatpak.enable = true;
 
   # Open ports in the firewall.

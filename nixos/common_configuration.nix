@@ -7,9 +7,6 @@
   ...
 }:
 
-let
-  cfg = config.smona;
-in
 {
   imports = [
     inputs.home-manager.nixosModule
@@ -114,6 +111,8 @@ in
 
     # Enable flashing ZSA keyboards.
     hardware.keyboard.zsa.enable = true;
+
+    services.fwupd.enable = true; # Firmware update manager
 
     # Enable CUPS to print documents.
     services.printing = {
