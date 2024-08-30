@@ -65,6 +65,7 @@ in
     appimage-run
     dig
     dua # disk usage analyzer
+    usbutils
 
     # Universal dev tools
     docker
