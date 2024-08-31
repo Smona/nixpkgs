@@ -67,11 +67,19 @@
     # Select internationalisation properties.
     i18n.defaultLocale = "en_US.utf8";
 
+    # We don't need to instll X11. We are so wayland!!
+    # services.xserver.enable = true;
     # Configure keymap in X11
     services.xserver.xkb = {
       layout = "us";
       variant = "dvorak";
     };
+
+    # Enable the GNOME Desktop Environment.
+    # services.xserver.displayManager.gdm.enable = true;
+    # TODO: ensure that gnome is not enabled at the same time as wlroots.
+    # This should probably just be an enum configuration option to guarantee that.
+    # services.xserver.desktopManager.gnome.enable = true;
 
     # Configure console keymap
     console.keyMap = "dvorak";
@@ -137,12 +145,6 @@
       ];
       packages = with pkgs; [ firefox ];
     };
-
-    # Enable the GNOME Desktop Environment.
-    # services.xserver.displayManager.gdm.enable = true;
-    # TODO: ensure that gnome is not enabled at the same time as wlroots.
-    # This should probably just be an enum configuration option to guarantee that.
-    # services.xserver.desktopManager.gnome.enable = true;
 
     # Some programs need SUID wrappers, can be configured further or are
     # started in user sessions.
