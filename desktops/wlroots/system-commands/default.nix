@@ -3,6 +3,7 @@
 let
   maxVolume = "1.2";
   volumeStepPercent = "4";
+  brightnessStepPercent = "4";
   commonOptions = import ../../common.nix;
   playerctl = "${pkgs.playerctl}/bin/playerctl";
   brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
@@ -42,8 +43,8 @@ rec {
 
   # ...and brightness control
 
-  brighter = pkgs.writeShellScript "brighter" "${brightnessctl} s +2%";
-  darker = pkgs.writeShellScript "darker" "${brightnessctl} s 2%-";
+  brighter = pkgs.writeShellScript "brighter" "${brightnessctl} s +${brightnessStepPercent}%";
+  darker = pkgs.writeShellScript "darker" "${brightnessctl} s ${brightnessStepPercent}%-";
 
   # TODO: be smarter about this, use the right command per-wm
   screenOn = pkgs.writeShellScript "screenOn" "${hyprctl} dispatch dpms on";
