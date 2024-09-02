@@ -13,6 +13,7 @@ let
 in
 {
   imports = [
+    inputs.wayland-pipewire-idle-inhibit.homeModules.default
     ../../applications/gui.nix
     ./waybar
     ./eww.nix
@@ -80,6 +81,20 @@ in
     # Keeps track of media players so playerctl always acts on the most
     # recently active one.
     services.playerctld.enable = true;
+
+    # inhibit idle lock when playing media
+    # NOTE: this will inhibit locking when music is playing. This is a quick fix, but it
+    # would be better to continue locking & screen blanking when music is playing, but provide
+    # music controls on the lock screen and disable suspend instead. locking should still be fully
+    # disabled when videos are playing.
+    services.wayland-pipewire-idle-inhibit = {
+      enable = true;
+      systemdTarget = "hyprland-session.target";
+      settings = {
+        verbosity = "INFO";
+        idle_inhibitor = "wayland";
+      };
+    };
 
     services.hypridle = {
       enable = true;
