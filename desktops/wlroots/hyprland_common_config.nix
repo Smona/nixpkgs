@@ -3,14 +3,20 @@
   cursorThemeName,
   cursorSize,
 }:
+let
+  externalScale = 1.25;
+  builtinScale = 1.2;
+in
 ''
   exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
   exec-once=systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-  exec-once=hyprctl setcursor ${cursorThemeName} ${builtins.toString cursorSize}
+  exec-once=hyprctl setcursor ${cursorThemeName} ${toString cursorSize}
 
-  monitor=,preferred,auto,1
-  monitor=DP-3, preferred, auto, 1.25
+  monitor=DP-3, preferred, 0x0, ${toString externalScale}
   monitor=DP-2, preferred, auto-left, 1, transform, 1
+  monitor=eDP-1, preferred, ${toString (3840 / externalScale / 2 - 1920 / builtinScale / 2)}x${
+    toString (1600 / externalScale)
+  }, ${toString builtinScale}
   workspace = 1,monitor:${primaryMonitor}
 
   misc:disable_hyprland_logo = yes
