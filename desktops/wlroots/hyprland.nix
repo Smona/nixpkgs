@@ -89,6 +89,7 @@ in
             repeat_delay = 400
 
             follow_mouse=1
+            scroll_factor=0.7
             natural_scroll=yes
 
             touchpad {
