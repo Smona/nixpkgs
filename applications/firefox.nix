@@ -8,6 +8,9 @@ in {
     profiles = {
       Smona = {
         settings = {
+          # Disable pointer lock warning popup
+          "pointer-lock-api.warning.timeout" = 0;
+          "general.smoothScroll" = true;
           # Don't show warning when opening about:config
           "browser.aboutConfig.showWarning" = false;
           "browser.toolbars.bookmarks.visibility" = "newtab";
