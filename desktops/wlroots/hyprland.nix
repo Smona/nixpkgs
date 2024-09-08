@@ -75,7 +75,6 @@ in
         ${(builtins.concatStringsSep "\n" (builtins.map (cmd: "exec=${cmd}") commonOptions.execAlways))}
 
         bind=SUPER,C,killactive,
-        bind=SUPER,M,exit,
 
         input {
             kb_file=
