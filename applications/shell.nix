@@ -6,7 +6,6 @@
 
   home.packages = with pkgs; [
     # Shell utilities
-    btop
     curl
     jq # Format, slice and dice json on the command line.
 
@@ -34,6 +33,8 @@
 
   # Better 🐱
   programs.bat.enable = true;
+  # System monitor
+  programs.btop.enable = true;
 
   programs.direnv.enable = true;
   # https://github.com/nix-community/nix-direnv
