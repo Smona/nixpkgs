@@ -54,6 +54,7 @@ in
     ## NodeJS
     nodejs
     yarn
+    nodePackages.prettier
 
     ## Haskell
     ghc
