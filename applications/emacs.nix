@@ -36,6 +36,10 @@ in
   xdg = {
     enable = true;
     configFile."doom".source = config.lib.file.mkOutOfStoreSymlink ../doom;
+    # Pass config from nix into doom emacs configuration
+    configFile."doom_vars.el".text = ''
+      (setq catppuccin-flavor '${config.catppuccin.flavor})
+    '';
   };
   home.file.".authinfo.gpg".source = ../dotfiles/authinfo.gpg;
   home.shellAliases = {
