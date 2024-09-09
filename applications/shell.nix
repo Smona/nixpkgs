@@ -14,7 +14,6 @@
     fd # Better find
     ripgrep # Better grep
     eza # Better ls
-    bat # Better 🐱
   ];
 
   home.shellAliases = {
@@ -32,6 +31,9 @@
     tfi = "tf init";
     tfd = "tf destroy";
   };
+
+  # Better 🐱
+  programs.bat.enable = true;
 
   programs.direnv.enable = true;
   # https://github.com/nix-community/nix-direnv

@@ -1,7 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
-let nixGL = import ./nixGL.nix { inherit pkgs config; };
-in {
+let
+  nixGL = import ./nixGL.nix { inherit pkgs config; };
+in
+{
   home.shellAliases = {
     # Convenience SSH alias for installing kitty terminfo on servers
     s = "kitty +kitten ssh";
@@ -9,7 +16,6 @@ in {
 
   # My current preferred terminal
   programs.kitty = {
-    theme = "Tokyo Night";
     package = (nixGL pkgs.kitty);
     settings = {
       font_family = "MonoLisa Nerd Font";
@@ -48,10 +54,10 @@ in {
           y = 0;
         };
       };
-      font = { size = 12.0; };
+      font.size = 12.0;
       cursor = {
-        style = { shape = "Beam"; };
-        vi_mode_style = { shape = "Block"; };
+        style.shape = "Beam";
+        vi_mode_style.shape = "Block";
       };
     };
   };

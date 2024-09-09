@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   inputs,
   system,
   ...
@@ -27,6 +28,7 @@ in
     ./applications/emacs.nix
     ./applications/shell.nix
     inputs.dCachix.homeManagerModules.declarative-cachix
+    inputs.catppuccin.homeManagerModules.catppuccin
     ./peripherals/logitech.nix
   ];
 
@@ -36,6 +38,9 @@ in
       sha256 = "sha256:0m6kb0a0m3pr6bbzqz54x37h5ri121sraj1idfmsrr6prknc7q3x";
     }
   ];
+
+  catppuccin.enable = true;
+  catppuccin.flavor = "macchiato";
 
   home.packages = with pkgs; [
     cachix
@@ -212,7 +217,7 @@ in
       # NB: adding line-numbers feature breaks magit-delta
       # https://github.com/dandavison/magit-delta/issues/13
       options = {
-        features = "side-by-side decorations";
+        features = lib.mkForce "side-by-side decorations catppuccin-${config.catppuccin.flavor}";
         syntax-theme = "Sublime Snazzy";
         hyperlinks = true;
       };

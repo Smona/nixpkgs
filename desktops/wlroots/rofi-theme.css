@@ -1,0 +1,33 @@
+* {
+  bg0: #212121e0;
+  bg1: #2a2a2a;
+  bg2: #3d3d3d80;
+  bg3: #ab47bcf2;
+  fg0: #e6e6e6;
+  fg1: #ffffff;
+  fg2: #969696;
+  fg3: #3d3d3d;
+}
+
+* {
+  font: "Source Sans 3 14";
+
+  background-color: transparent;
+  text-color: @fg0;
+
+  /* margin:     0px; */
+  /* padding:    0px; */
+  /* spacing:    0px; */
+}
+
+window {
+  location: center;
+  /*  width: 480;*/
+  border-radius: 24px;
+
+  background-color: @bg0;
+}
+
+mainbox {
+  padding: 12px;
+}

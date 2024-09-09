@@ -71,7 +71,8 @@ in
       enable = true;
       package = my_rofi;
       terminal = "${pkgs.kitty}/bin/kitty";
-      theme = "arthur";
+      theme = ./rofi-theme.rasi;
+      catppuccin.enable = false;
     };
 
     programs.wlogout = {
@@ -160,5 +161,14 @@ in
         };
       };
     };
+
+    services.swaync = {
+      enable = true;
+      style = pkgs.fetchurl {
+        url = "https://github.com/catppuccin/swaync/releases/download/v0.2.3/macchiato.css";
+        hash = "sha256-LMm6nWn1JPPgj5YpppwFG3lXTtXem5atlIvqrDxd0bM=";
+      };
+    };
   };
+
 }
