@@ -87,3 +87,5 @@
 
 (package! jtsx)
 (package! s3ed)
+
+(package! catppuccin-theme)
