@@ -40,7 +40,7 @@ in
   ];
 
   catppuccin.enable = true;
-  catppuccin.flavor = "macchiato";
+  catppuccin.flavor = "mocha";
 
   home.packages = with pkgs; [
     cachix

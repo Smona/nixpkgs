@@ -10,6 +10,7 @@
 {
   imports = [
     inputs.home-manager.nixosModule
+    inputs.catppuccin.nixosModules.catppuccin
     ./samba.nix
     ./wlroots.nix
     ./boot.nix
@@ -54,6 +55,9 @@
         experimental-features = nix-command flakes
       '';
     };
+
+    catppuccin.enable = true;
+    catppuccin.flavor = "mocha";
 
     home-manager.useGlobalPkgs = true;
     home-manager.backupFileExtension = "bk";
