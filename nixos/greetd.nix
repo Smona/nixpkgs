@@ -25,6 +25,8 @@ in
 
               # regreet-specific
               windowrule=monitor ${config.smona.primaryMonitor}, .*
+              # disable all window animations
+              animation=global, 0
               monitor=DP-2, disable
               exec-once = ${lib.getExe pkgs.greetd.regreet}; hyprctl dispatch exit
             '';
