@@ -2,6 +2,8 @@
 
 let
   maxVolume = "1.2";
+  volumeStepPercent = "4";
+  brightnessStepPercent = "4";
   commonOptions = import ../../common.nix;
   playerctl = "${pkgs.playerctl}/bin/playerctl";
   brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
@@ -12,11 +14,11 @@ rec {
   # We need to handle our own media keys
 
   louder = pkgs.writeShellScript "louder" ''
-    ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 2%+ --limit ${maxVolume}
+    ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ ${volumeStepPercent}%+ --limit ${maxVolume}
     unmute
   '';
 
-  softer = pkgs.writeShellScript "softer" "${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 2%- --limit ${maxVolume}";
+  softer = pkgs.writeShellScript "softer" "${wpctl} set-volume @DEFAULT_AUDIO_SINK@ ${volumeStepPercent}%- --limit ${maxVolume}";
 
   mute = pkgs.writeShellScript "mute" "${wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle";
 
@@ -41,8 +43,8 @@ rec {
 
   # ...and brightness control
 
-  brighter = pkgs.writeShellScript "brighter" "${brightnessctl} s +2%";
-  darker = pkgs.writeShellScript "darker" "${brightnessctl} s 2%-";
+  brighter = pkgs.writeShellScript "brighter" "${brightnessctl} s +${brightnessStepPercent}%";
+  darker = pkgs.writeShellScript "darker" "${brightnessctl} s ${brightnessStepPercent}%-";
 
   # TODO: be smarter about this, use the right command per-wm
   screenOn = pkgs.writeShellScript "screenOn" "${hyprctl} dispatch dpms on";

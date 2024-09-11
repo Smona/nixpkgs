@@ -13,6 +13,7 @@ let
 in
 {
   imports = [
+    inputs.wayland-pipewire-idle-inhibit.homeModules.default
     ./waybar
     ./eww.nix
     ./sway.nix
@@ -60,58 +61,6 @@ in
       rot8
     ];
 
-    services.kanshi = {
-      enable = true;
-      systemdTarget = "hyprland-session.target";
-      profiles =
-        let
-          externalScale = 1.25;
-          verticalScale = 1.0;
-          builtinScale = 1.2;
-        in
-        {
-          undocked = {
-            outputs = [
-              {
-                criteria = "eDP-1";
-                scale = builtinScale;
-              }
-            ];
-          };
-          docked = {
-            outputs = with builtins; [
-              {
-                criteria = "eDP-1";
-                position = "${toString (ceil (960 / externalScale))},${toString (ceil (1600 / externalScale))}";
-                scale = builtinScale;
-              }
-              {
-                criteria = "Acer Technologies Acer XR382CQK 0x0000B7AA";
-                position = "0,0";
-                scale = externalScale;
-              }
-            ];
-          };
-          desktop = {
-            outputs = with builtins; [
-              {
-                criteria = "Acer Technologies Acer XR382CQK 0x9227A1AA";
-                # note that leaving a small gap here will keep the mouse trapped if moving slow, and
-                # require speedy movement to get to the other monitor. could come in handy!
-                position = "${toString (ceil (1080 / verticalScale))},0";
-                scale = externalScale;
-              }
-              {
-                criteria = "HP Inc. HP VH240a 6CM1290957";
-                position = "0,0";
-                scale = verticalScale;
-                transform = "90";
-              }
-            ];
-          };
-        };
-    };
-
     services.flameshot = {
       enable = true;
       # settings = {};
@@ -121,7 +70,8 @@ in
       enable = true;
       package = my_rofi;
       terminal = "${pkgs.kitty}/bin/kitty";
-      theme = "arthur";
+      theme = ./rofi-theme.rasi;
+      catppuccin.enable = false;
     };
 
     programs.wlogout = {
@@ -131,6 +81,20 @@ in
     # Keeps track of media players so playerctl always acts on the most
     # recently active one.
     services.playerctld.enable = true;
+
+    # inhibit idle lock when playing media
+    # NOTE: this will inhibit locking when music is playing. This is a quick fix, but it
+    # would be better to continue locking & screen blanking when music is playing, but provide
+    # music controls on the lock screen and disable suspend instead. locking should still be fully
+    # disabled when videos are playing.
+    services.wayland-pipewire-idle-inhibit = {
+      enable = true;
+      systemdTarget = "hyprland-session.target";
+      settings = {
+        verbosity = "INFO";
+        idle_inhibitor = "wayland";
+      };
+    };
 
     services.hypridle = {
       enable = true;
@@ -196,5 +160,14 @@ in
         };
       };
     };
+
+    services.swaync = {
+      enable = true;
+      style = pkgs.fetchurl {
+        url = "https://github.com/catppuccin/swaync/releases/download/v0.2.3/macchiato.css";
+        hash = "sha256-LMm6nWn1JPPgj5YpppwFG3lXTtXem5atlIvqrDxd0bM=";
+      };
+    };
   };
+
 }

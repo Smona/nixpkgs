@@ -16,7 +16,6 @@ in
 
   # My current preferred terminal
   programs.kitty = {
-    theme = "Tokyo Night";
     package = (nixGL pkgs.kitty);
     settings = {
       font_family = "MonoLisa Nerd Font";
@@ -57,12 +56,8 @@ in
       };
       font.size = 12.0;
       cursor = {
-        style = {
-          shape = "Beam";
-        };
-        vi_mode_style = {
-          shape = "Block";
-        };
+        style.shape = "Beam";
+        vi_mode_style.shape = "Block";
       };
     };
   };

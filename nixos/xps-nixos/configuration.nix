@@ -29,9 +29,6 @@
     "1.0.0.1"
   ];
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -89,8 +86,6 @@
     '';
   };
 
-  # Firmware update manager
-  services.fwupd.enable = true;
   services.flatpak.enable = true;
 
   # Open ports in the firewall.

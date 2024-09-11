@@ -20,9 +20,6 @@
   smona.wallpaper = ../../wallpapers/vibrant-paint-streaks.jpg;
   networking.hostName = "luma"; # Define your hostname.
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
   home-manager.users.mel =
     { pkgs, ... }:
     {

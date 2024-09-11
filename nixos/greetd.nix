@@ -19,10 +19,14 @@ in
             hyprConfig = pkgs.writeText "regreet-hyprland-config" ''
               ${import ../desktops/wlroots/hyprland_common_config.nix {
                 primaryMonitor = config.smona.primaryMonitor;
+                cursorThemeName = theme.cursor.name;
+                cursorSize = theme.cursorSize;
               }}
 
               # regreet-specific
               windowrule=monitor ${config.smona.primaryMonitor}, .*
+              # disable all window animations
+              animation=global, 0
               monitor=DP-2, disable
               exec-once = ${lib.getExe pkgs.greetd.regreet}; hyprctl dispatch exit
             '';

@@ -5,6 +5,7 @@
 
 (load! "doom-dashboard.el" doom-user-dir)
 (load! "org-config.el" doom-user-dir)
+(load! "../doom_vars.el")
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
@@ -63,7 +64,8 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function.
 ;; Other themes I like: doom-rouge, doom-challenger-deep, doom-monokai-spectrum, doom-monokai-octagon, doom-city-lights, doom-material, doom-palenight, doom-tokyo-night, doom-dracula
-(setq doom-theme 'doom-horizon)
+(load-theme 'catppuccin :no-confirm)
+(setq doom-theme 'catppuccin)
 ;; Use fixed-pitch font in treemacs
 (setq doom-themes-treemacs-enable-variable-pitch nil)
 

@@ -23,6 +23,12 @@
     musnix.url = "github:musnix/musnix";
     musnix.inputs.nixpkgs.follows = "nixpkgs";
 
+    wayland-pipewire-idle-inhibit = {
+      url = "github:rafaelrc7/wayland-pipewire-idle-inhibit";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    catppuccin.url = "github:catppuccin/nix";
+
     # Inputs I occasionally use temporarily
     # hyprland.url =
     #   "github:hyprwm/Hyprland?rev=1c460e98f870676b15871fe4e5bfeb1a32a3d6d8";

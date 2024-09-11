@@ -5,6 +5,7 @@
 {
   pkgs,
   lib,
+  config,
   inputs,
   ...
 }:
@@ -19,6 +20,7 @@ in
 {
   imports = [
     inputs.dCachix.homeManagerModules.declarative-cachix
+    inputs.catppuccin.homeManagerModules.catppuccin
     ./applications/shell.nix
     ./applications/tmux.nix
     ./applications/emacs.nix
@@ -49,6 +51,9 @@ in
       }
     ];
 
+    catppuccin.enable = true;
+    catppuccin.flavor = "mocha";
+
     # Configuration of the nix CLI
     # https://nixos.org/manual/nix/stable/command-ref/conf-file.html
     nix.settings = {
@@ -69,6 +74,7 @@ in
       ## NodeJS
       nodejs
       yarn
+      nodePackages.prettier
 
       # Fonts
       # Fonts I like, in order of preference: MonoLisa, Cascadia Code, FiraCode, Dank Mono, JetBrains Mono
@@ -184,8 +190,9 @@ in
         # NB: adding line-numbers feature breaks magit-delta
         # https://github.com/dandavison/magit-delta/issues/13
         options = {
-          features = "side-by-side decorations";
-          syntax-theme = "Sublime Snazzy";
+          features = lib.mkForce "side-by-side decorations catppuccin-${config.catppuccin.flavor}";
+          # TODO: remove this once confirmed looking good with catppuccin
+          # syntax-theme = "Sublime Snazzy";
           hyperlinks = true;
         };
       };

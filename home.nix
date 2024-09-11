@@ -3,6 +3,7 @@
 {
   config,
   pkgs,
+  lib,
   inputs,
   system,
   ...
@@ -36,6 +37,7 @@
     dmidecode
     wireplumber
     appimage-run
+    usbutils
 
     # Universal dev tools
     docker

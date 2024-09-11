@@ -9,13 +9,11 @@
   ...
 }:
 
-let
-  cfg = config.smona;
-in
 {
   imports = [
     inputs.home-manager.nixosModule
     ../common_configuration.nix
+    inputs.catppuccin.nixosModules.catppuccin
     ./samba.nix
     ./wlroots.nix
     ./boot.nix
@@ -35,14 +33,28 @@ in
   };
 
   config = {
+    catppuccin.enable = true;
+    catppuccin.flavor = "mocha";
+
+    # Set your time zone.
+    time.timeZone = "America/Chicago";
+
     # Select internationalisation properties.
     i18n.defaultLocale = "en_US.utf8";
 
+    # We don't need to instll X11. We are so wayland!!
+    # services.xserver.enable = true;
     # Configure keymap in X11
     services.xserver.xkb = {
       layout = "us";
       variant = "dvorak";
     };
+
+    # Enable the GNOME Desktop Environment.
+    # services.xserver.displayManager.gdm.enable = true;
+    # TODO: ensure that gnome is not enabled at the same time as wlroots.
+    # This should probably just be an enum configuration option to guarantee that.
+    # services.xserver.desktopManager.gnome.enable = true;
 
     # Configure console keymap
     console.keyMap = "dvorak";
@@ -80,6 +92,8 @@ in
     # Enable flashing ZSA keyboards.
     hardware.keyboard.zsa.enable = true;
 
+    services.fwupd.enable = true; # Firmware update manager
+
     # Enable CUPS to print documents.
     services.printing = {
       enable = true;
@@ -103,12 +117,6 @@ in
       ];
       packages = with pkgs; [ firefox ];
     };
-
-    # Enable the GNOME Desktop Environment.
-    # services.xserver.displayManager.gdm.enable = true;
-    # TODO: ensure that gnome is not enabled at the same time as wlroots.
-    # This should probably just be an enum configuration option to guarantee that.
-    # services.xserver.desktopManager.gnome.enable = true;
 
     # Some programs need SUID wrappers, can be configured further or are
     # started in user sessions.

@@ -52,9 +52,12 @@ in
     ];
 
     gtk.enable = true;
-    gtk.cursorTheme = (theme.cursor // { size = 24; });
-    gtk.theme = theme.gtk;
-    gtk.iconTheme = theme.icons;
+    # TODO integrate with greetd & theme file
+    gtk.catppuccin.enable = true;
+    gtk.catppuccin.icon.enable = true;
+    gtk.cursorTheme = (theme.cursor // { size = theme.cursorSize; });
+    # gtk.theme = theme.gtk;
+    # gtk.iconTheme = theme.icons;
 
     # TODO: install browsers with nix on darwin, maybe with
     programs.chromium = {

@@ -12,6 +12,12 @@
   programs.tmux = {
     enable = true;
     historyLimit = 500000;
+    catppuccin.extraConfig = ''
+      set -g @catppuccin_window_left_separator ""
+      set -g @catppuccin_window_right_separator " "
+      set -g @catppuccin_window_middle_separator "█ "
+      set -g @catppuccin_status_modules_right "application session host"
+    '';
     plugins = with pkgs.tmuxPlugins; [
       vim-tmux-navigator
       fpp
@@ -26,10 +32,10 @@
         plugin = continuum;
         extraConfig = "set -g @continuum-restore 'on'";
       }
-      {
-        plugin = onedark-theme;
-        extraConfig = ''set -g @onedark_date_format "%D"'';
-      }
+      # {
+      #   plugin = onedark-theme;
+      #   extraConfig = ''set -g @onedark_date_format "%D"'';
+      # }
       # {
       #   plugin = power-theme;
       #   extraConfig = "set -g @tmux_power_prefix_highlight_pos 'LR'";
