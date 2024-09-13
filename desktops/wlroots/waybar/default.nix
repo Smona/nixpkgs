@@ -65,7 +65,6 @@ in
             # modules-center = [];
             modules-right = [
               "custom/media"
-              "network"
               "pulseaudio"
               "backlight"
               "clock"
