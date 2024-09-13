@@ -364,3 +364,9 @@
 
 ;; Safe local variables
 (put 'python-pytest-executable 'safe-local-variable #'stringp)
+
+;; Blink the cursor while it's resting
+(blink-cursor-mode)
+(setq blink-cursor-delay 1.5)
+(setq blink-cursor-interval 1)
+(setq blink-cursor-blinks 0)
