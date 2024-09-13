@@ -77,6 +77,7 @@ in
         # (nixGL spotify)
         (nixGL libreoffice-fresh)
         (nixGL clapper)
+        (nixGL vlc)
         xournalpp
       ]
       ++ (lib.lists.optionals config.roles.work [ (nixGL gimp) ]);
