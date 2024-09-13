@@ -52,7 +52,7 @@ in
         {
           mainBar = {
             layer = "top";
-            position = "bottom";
+            position = "top";
             modules-left = [
               "battery"
               "memory"
