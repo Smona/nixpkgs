@@ -84,14 +84,6 @@ in
     # Fonts
     # Fonts I like, in order of preference: MonoLisa, Cascadia Code, FiraCode, Dank Mono, JetBrains Mono
     # Fonts to try: FantasqueSansMono, Inconsolata, Victor Mono
-    cascadia-code
-    # NerdFontsSymbolsOnly required by Emacs
-    (nerdfonts.override {
-      fonts = [
-        "CascadiaCode"
-        "NerdFontsSymbolsOnly"
-      ];
-    })
     noto-fonts-emoji # Required by Emacs
     source-serif # Required by Emacs
     rounded-mgenplus # Japanese font support
