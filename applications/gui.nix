@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 
@@ -17,6 +18,7 @@ in
     ./terminal.nix
     ./games.nix
     ./music.nix
+    inputs.spicetify-nix.homeManagerModules.default
   ];
 
   options.graphical = lib.mkEnableOption "install and configure graphical applications.";
@@ -71,7 +73,8 @@ in
         my-slack
 
         # Media apps
-        (nixGL spotify)
+        # TODO: restore nixGL?
+        # (nixGL spotify)
         (nixGL libreoffice-fresh)
         (nixGL clapper)
         xournalpp
@@ -93,6 +96,21 @@ in
     programs.firefox.enable = true;
     programs.kitty.enable = true;
     programs.alacritty.enable = true;
+
+    programs.spicetify =
+      let
+        spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+      in
+      {
+        enable = true;
+        # TODO: check out spicetify extensions
+        # enabledExtensions = with spicePkgs.extensions; [
+        #   hidePodcasts
+        #   shuffle # shuffle+ (special characters are sanitized out of extension names)
+        # ];
+        theme = spicePkgs.themes.catppuccin;
+        colorScheme = config.catppuccin.flavor;
+      };
 
     # Required for keybase-gui
     services.kbfs.enable = true;
