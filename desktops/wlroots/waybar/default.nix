@@ -28,6 +28,8 @@ in
           window_config = {
             format = "{title}";
             max-length = 50;
+            # Show title per-monitor
+            separate-outputs = true;
             rewrite = {
               "(.*) — Mozilla Firefox" = " $1";
               "(.*) — Firefox Developer Edition" = " $1";
@@ -58,13 +60,13 @@ in
               "idle_inhibitor"
               "sway/workspaces"
               "hyprland/workspaces"
-              "tray"
               "sway/window"
               "hyprland/window"
             ];
             # modules-center = [];
             modules-right = [
               "custom/media"
+              "tray"
               "pulseaudio"
               "backlight"
               "clock"
