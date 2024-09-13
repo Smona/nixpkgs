@@ -185,7 +185,7 @@ in
         }
 
         window#waybar {
-          background-color: alpha(@mantle, 0.85);
+          background-color: alpha(@crust, 0.85);
           /* border-top: 3px solid rgba(100, 114, 125, 0.5); */
           color: @text;
           transition-property: background-color;
