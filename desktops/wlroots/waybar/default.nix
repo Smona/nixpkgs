@@ -67,6 +67,7 @@ in
             modules-right = [
               "custom/media"
               "tray"
+              "custom/weather"
               "pulseaudio"
               "backlight"
               "clock"
@@ -175,6 +176,13 @@ in
               on-scroll-up = "playerctl next";
               on-scroll-down = "playerctl previous";
               exec = "${waybar}/bin/waybar-mediaplayer.py 2> /dev/null";
+            };
+            "custom/weather" = {
+              format = "{}°";
+              tooltip = true;
+              interval = 3600;
+              exec = "${pkgs.wttrbar}/bin/wttrbar --fahrenheit --mph  --date-format '%m/%d'";
+              return-type = "json";
             };
           };
         };
