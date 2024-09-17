@@ -14,7 +14,7 @@ let
   monolisa = builtins.fetchGit {
     url = "https://gitlab.com/Smona/monolisa.git";
     ref = "main";
-    rev = "aa8a79e698d1cc6548e9e507f675ad35f1b9c1fc";
+    rev = "537b8613fc850cf0c90bb240c3412bb30f1e7b44";
   };
 in
 {
