@@ -150,7 +150,7 @@
             config.allowUnfree = true;
           };
 
-          specialArgs = {
+          extraSpecialArgs = {
             inherit inputs;
           };
 
