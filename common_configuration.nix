@@ -27,7 +27,7 @@
       # Making legacy nix commands consistent as well, awesome!
       nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
 
-      # auto-optimise-store
+      # Periodically optimise the store
       optimise.automatic = true;
 
       settings = {

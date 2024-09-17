@@ -59,7 +59,9 @@ in
     nix.settings = {
       # Massively reduce disk usage by hard linking any duplicate files
       # to a single location on disk.
-      auto-optimise-store = true;
+      # FIXME: only enable this outside of nix-darwin & nixos.
+      # broken on darwin: https://github.com/NixOS/nix/issues/7273
+      # auto-optimise-store = true;
       # Enable nix command and nix flakes
       experimental-features = "nix-command flakes";
       # Always show failure traces
