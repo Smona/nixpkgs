@@ -40,22 +40,7 @@ let
   ];
 in
 {
-  imports = [ ../../applications/gui.nix ];
-
   options.gnome.enable = lib.mkEnableOption "gnome configuration management";
-  options.pkgsCompat = lib.mkOption {
-    type = lib.types.pkgs;
-    default = pkgs;
-    description = ''
-      A version of nixpkgs which lags behind the main package set, to preserve
-      compatibility with non-NixOS installs on distributions that have slower
-      release cycles (e.g. Ubuntu).
-
-      This is especially necessary for packages which integrate closely with the
-      system-supplied desktop environment (e.g. gnome extensions), but can come
-      up in other cases as well.
-    '';
-  };
 
   config = lib.mkIf config.gnome.enable {
     graphical = true;

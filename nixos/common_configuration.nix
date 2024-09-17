@@ -1,6 +1,7 @@
+# NixOS configuration shared between all NixOS machines
+
 {
   inputs,
-  system,
   config,
   pkgs,
   lib,
@@ -10,6 +11,7 @@
 {
   imports = [
     inputs.home-manager.nixosModule
+    ../common_configuration.nix
     inputs.catppuccin.nixosModules.catppuccin
     ./samba.nix
     ./wlroots.nix
@@ -19,10 +21,6 @@
   ];
 
   options.smona = with lib; {
-    username = mkOption {
-      type = types.str;
-      description = "smona's username on this system.";
-    };
     primaryMonitor = mkOption {
       description = "Which monitor ID represents the 'primary' monitor.";
       type = types.str;
@@ -34,36 +32,8 @@
   };
 
   config = {
-    nix = {
-      # This will add each flake input as a registry
-      # To make nix3 commands consistent with your flake
-      registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
-
-      # This will additionally add your inputs to the system's legacy channels
-      # Making legacy nix commands consistent as well, awesome!
-      nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
-      # auto-optimise-store
-      optimise.automatic = true;
-
-      # Users allowed to use additional binary caches and unsigned NARs.
-      settings.trusted-users = [
-        "root"
-        config.smona.username
-      ];
-
-      extraOptions = ''
-        experimental-features = nix-command flakes
-      '';
-    };
-
     catppuccin.enable = true;
     catppuccin.flavor = "mocha";
-
-    home-manager.useGlobalPkgs = true;
-    home-manager.backupFileExtension = "bk";
-    home-manager.extraSpecialArgs = {
-      inherit inputs system;
-    };
 
     # Set your time zone.
     time.timeZone = "America/Chicago";
@@ -89,7 +59,6 @@
     console.keyMap = "dvorak";
 
     # Set up zsh as the default user shell
-    programs.zsh.enable = true;
     users.defaultUserShell = pkgs.zsh;
 
     # Enable networking with networkmanager
@@ -113,8 +82,6 @@
 
     # Packages installed in the system profile
     environment.systemPackages = with pkgs; [
-      git
-      vim
       nautilus
       keymapp
     ];

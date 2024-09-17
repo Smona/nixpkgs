@@ -29,7 +29,7 @@ in
       visual_bell_duration = "0.3";
       visual_bell_color = "#777";
       update_check_interval = "0";
-      hide_window_decorations = "yes";
+      hide_window_decorations = pkgs.stdenv.isLinux;
       # This option is required to prevent breaking when used with quake-mode
       # https://github.com/repsac-by/gnome-shell-extension-quake-mode/issues/16
       remember_window_size = "no";

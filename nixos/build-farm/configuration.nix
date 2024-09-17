@@ -1,7 +1,16 @@
-{ config, lib, pkgs, system, modulesPath, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}:
+{
 
   imports = [ "${modulesPath}/virtualisation/amazon-image.nix" ];
-  nixpkgs = { hostPlatform = system; };
+  nixpkgs = {
+    hostPlatform = "x86_64-linux";
+  };
 
   services.gitlab-runner.enable = true;
   services.gitlab-runner.services = {
@@ -32,7 +41,15 @@
         . ${pkgs.nix}/etc/profile.d/nix.sh
 
         ${pkgs.nix}/bin/nix-env -i ${
-          builtins.concatStringsSep " " (with pkgs; [ nix cacert git openssh ])
+          builtins.concatStringsSep " " (
+            with pkgs;
+            [
+              nix
+              cacert
+              git
+              openssh
+            ]
+          )
         }
 
         ${pkgs.nix}/bin/nix-channel --add https://nixos.org/channels/nixpkgs-unstable
@@ -42,10 +59,8 @@
         ENV = "/etc/profile";
         USER = "root";
         NIX_REMOTE = "daemon";
-        PATH =
-          "/nix/var/nix/profiles/default/bin:/nix/var/nix/profiles/default/sbin:/bin:/sbin:/usr/bin:/usr/sbin";
-        NIX_SSL_CERT_FILE =
-          "/nix/var/nix/profiles/default/etc/ssl/certs/ca-bundle.crt";
+        PATH = "/nix/var/nix/profiles/default/bin:/nix/var/nix/profiles/default/sbin:/bin:/sbin:/usr/bin:/usr/sbin";
+        NIX_SSL_CERT_FILE = "/nix/var/nix/profiles/default/etc/ssl/certs/ca-bundle.crt";
       };
       tagList = [ "nix" ];
     };

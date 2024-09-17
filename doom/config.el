@@ -365,6 +365,14 @@
 ;; Safe local variables
 (put 'python-pytest-executable 'safe-local-variable #'stringp)
 
+;; This is needed to make bins installed from nixpkgs accessible to emacs when launched from the dock/spotlight on macos,
+;; even with emacs-homebrew-plus's path hacks. It should also make doom/env less necessary on Linux, although that isn't
+;; tested at time of writing.
+(use-package! exec-path-from-shell
+  :config
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
+
 ;; Blink the cursor while it's resting
 (blink-cursor-mode)
 (setq blink-cursor-delay 1.5)

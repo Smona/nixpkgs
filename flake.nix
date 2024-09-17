@@ -39,6 +39,31 @@
     # my-nixpkgs.url = "git+file:/home/smona/dev/nixpkgs-upstream";
 
     dCachix.url = "github:jonascarpay/declarative-cachix";
+
+    # Darwin stuff:
+    nix-darwin.url = "github:LnL7/nix-darwin";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+    nix-homebrew.inputs.nixpkgs.follows = "nixpkgs";
+    nix-homebrew.inputs.nix-darwin.follows = "nix-darwin";
+    # Optional: Declarative tap management
+    homebrew-core = {
+      url = "github:homebrew/homebrew-core";
+      flake = false;
+    };
+    homebrew-cask = {
+      url = "github:homebrew/homebrew-cask";
+      flake = false;
+    };
+    homebrew-bundle = {
+      url = "github:homebrew/homebrew-bundle";
+      flake = false;
+    };
+    homebrew-emacs-plus = {
+      url = "github:d12frosted/homebrew-emacs-plus";
+      flake = false;
+    };
+
     # Shameless plug: looking for a way to nixify your themes and make
     # everything match nicely? Try nix-colors!
     # nix-colors.url = "github:misterio77/nix-colors";
@@ -50,6 +75,7 @@
       home-manager,
       nixGL,
       nixos-wsl,
+      nix-darwin,
       ...
     }@inputs:
     rec {
@@ -81,7 +107,6 @@
           pkgs = legacyPackages.x86_64-linux;
           specialArgs = {
             inherit inputs;
-            system = "x86_64-linux";
           };
           modules = [ ./nixos/xps-nixos/configuration.nix ];
         };
@@ -102,18 +127,20 @@
           pkgs = legacyPackages.x86_64-linux;
           specialArgs = {
             inherit inputs;
-            system = "x86_64-linux";
           };
           modules = [ ./nixos/luma/configuration.nix ];
         };
         "build-farm" = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-            system = "x86_64-linux";
-          };
-
           modules = [ ./nixos/build-farm/configuration.nix ];
         };
+      };
+
+      darwinConfigurations."Mels-MacBook-Air" = nix-darwin.lib.darwinSystem {
+        # TODO: pass pkgs here
+        specialArgs = {
+          inherit inputs;
+        };
+        modules = [ ./darwin/configuration.nix ];
       };
 
       homeConfigurations = {
@@ -122,10 +149,11 @@
             system = "x86_64-linux";
             config.allowUnfree = true;
           };
+
           extraSpecialArgs = {
             inherit inputs;
-            system = "x86_64-linux";
           };
+
           modules = [
             ./home.nix
             (

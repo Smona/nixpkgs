@@ -2,16 +2,15 @@
   config,
   pkgs,
   inputs,
-  system,
   ...
 }:
 
 let
   emacs = pkgs.emacs29-pgtk;
   nixGL = import ./nixGL.nix { inherit pkgs config; };
-  pkgs-latest = import inputs.nixpkgs { inherit system; };
   my-emacs =
     (nixGL (
+      # TODO: replace with programs.emacs.extraPackages?
       (pkgs.emacsPackagesFor emacs).emacsWithPackages (epkgs: [
         epkgs.vterm
         epkgs.pdf-tools
@@ -29,7 +28,7 @@ let
 in
 {
   programs.emacs = {
-    enable = true;
+    enable = pkgs.stdenv.isLinux;
     package = my-emacs;
   };
 
@@ -58,6 +57,7 @@ in
     # Python
     python3Packages.debugpy # Required by dap-mode
     pyright
+    python310 # Required for advanced treemacs features
 
     # Nix
     nil # Required by (nix +lsp)
@@ -80,7 +80,7 @@ in
     nodePackages.typescript-language-server
     vscode-langservers-extracted
     nodePackages.dockerfile-language-server-nodejs
-    pkgs-latest.nodePackages.graphql-language-service-cli
+    nodePackages.graphql-language-service-cli
     python310Packages.grip # Required by grip-mode (markdown +grip)
 
     # Dirvish stuff

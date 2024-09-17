@@ -14,7 +14,6 @@ in
 {
   imports = [
     inputs.wayland-pipewire-idle-inhibit.homeModules.default
-    ../../applications/gui.nix
     ./waybar
     ./eww.nix
     ./sway.nix

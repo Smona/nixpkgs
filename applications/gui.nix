@@ -1,46 +1,27 @@
+# Configs specific to graphical linux systems
+
 {
   config,
   lib,
   pkgs,
-  inputs,
   ...
 }:
 
 let
   nixGL = import ./nixGL.nix { inherit pkgs config; };
-  my-slack = (nixGL pkgs.slack);
   theme = import ../theme.nix { inherit pkgs; };
 in
 {
   imports = [
+    ./common_gui.nix
     ./art.nix
-    ./firefox.nix
-    ./terminal.nix
     ./games.nix
     ./music.nix
-    inputs.spicetify-nix.homeManagerModules.default
   ];
 
-  options.graphical = lib.mkEnableOption "install and configure graphical applications.";
   options._1passwordBinary = lib.mkOption {
     type = lib.types.str;
     default = "/usr/bin/env 1password";
-  };
-  options.nixGLPrefix = lib.mkOption {
-    type = lib.types.str;
-    default = "";
-    description = ''
-      Will be prepended to commands which require working OpenGL.
-
-      This needs to be set to the right nixGL package on non-NixOS systems.
-    '';
-  };
-  # Roles are all defined here for ease of discoverability
-  options.roles = {
-    art = lib.mkEnableOption "set up computer for visual art creation";
-    gaming = lib.mkEnableOption "set up computer for gaming";
-    work = lib.mkEnableOption "set up computer for work";
-    music = lib.mkEnableOption "set up computer for music production";
   };
 
   config = lib.mkIf config.graphical {
@@ -50,37 +31,26 @@ in
     };
 
     # Graphical applications
-    home.packages =
-      with pkgs;
-      [
-        theme.uiFont.package
-        dconf-editor
+    home.packages = with pkgs; [
+      theme.uiFont.package
+      dconf-editor
 
-        gparted
-        gthumb
-        shotwell
-        file-roller
-        (nixGL keybase-gui)
-        gcolor3
+      gparted
+      gthumb
+      shotwell
+      file-roller
+      (nixGL keybase-gui)
+      gcolor3
 
-        # Messaging apps
-        (nixGL (
-          discord.override {
-            nss = nss_latest; # https://github.com/NixOS/nixpkgs/issues/78961
-          }
-        ))
-        (nixGL signal-desktop)
-        my-slack
+      # Messaging apps not supported on darwin
+      (nixGL signal-desktop)
 
-        # Media apps
-        # TODO: restore nixGL?
-        # (nixGL spotify)
-        (nixGL libreoffice-fresh)
-        (nixGL clapper)
-        (nixGL vlc)
-        xournalpp
-      ]
-      ++ (lib.lists.optionals config.roles.work [ (nixGL gimp) ]);
+      # Media apps
+      (nixGL libreoffice-fresh)
+      (nixGL clapper)
+      (nixGL vlc)
+      xournalpp
+    ];
 
     gtk.enable = true;
     # TODO integrate with greetd & theme file
@@ -90,42 +60,15 @@ in
     # gtk.theme = theme.gtk;
     # gtk.iconTheme = theme.icons;
 
+    # TODO: install browsers with nix on darwin, maybe with
     programs.chromium = {
       enable = true;
       package = (nixGL config.pkgsCompat.chromium);
     };
     programs.firefox.enable = true;
-    programs.kitty.enable = true;
-    programs.alacritty.enable = true;
-
-    programs.spicetify =
-      let
-        spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
-      in
-      {
-        enable = true;
-        # TODO: check out spicetify extensions
-        # enabledExtensions = with spicePkgs.extensions; [
-        #   hidePodcasts
-        #   shuffle # shuffle+ (special characters are sanitized out of extension names)
-        # ];
-        theme = spicePkgs.themes.catppuccin;
-        colorScheme = config.catppuccin.flavor;
-      };
 
     # Required for keybase-gui
     services.kbfs.enable = true;
-
-    # I like to have slack installed everywhere, but only auto-start it on work machines
-    systemd.user.services.slack = lib.mkIf config.roles.work {
-      Unit.Description = "Slack desktop application";
-      Install.WantedBy = [ "graphical-session.target" ];
-      Service = {
-        ExecStart = "${my-slack}/bin/slack";
-        Restart = "on-failure";
-        RestartSec = 2;
-      };
-    };
 
     # 1password has to be installed at the system level to integrate with polkit
     # and support system authentication / ssh agent / browser extension integration.
@@ -142,6 +85,7 @@ in
         RestartSec = 2;
       };
     };
+    # TODO: get this working on darwin
     xdg.configFile."1password-settings" = {
       target = "1Password/settings/settings.json";
       text = ''
