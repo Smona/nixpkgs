@@ -4,6 +4,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 
@@ -15,6 +16,7 @@ in
   imports = [
     ./firefox.nix
     ./terminal.nix
+    inputs.spicetify-nix.homeManagerModules.default
   ];
 
   options = with lib; {
@@ -59,8 +61,24 @@ in
         my-slack
 
         (nixGL spotify)
+        (nixGL vlc)
       ]
       ++ (lib.lists.optionals config.roles.work [ (nixGL gimp) ]);
+
+    programs.spicetify =
+      let
+        spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+      in
+      {
+        enable = true;
+        # TODO: check out spicetify extensions
+        # enabledExtensions = with spicePkgs.extensions; [
+        #   hidePodcasts
+        #   shuffle # shuffle+ (special characters are sanitized out of extension names)
+        # ];
+        theme = spicePkgs.themes.catppuccin;
+        colorScheme = config.catppuccin.flavor;
+      };
 
     # I like to have slack installed everywhere, but only auto-start it on work machines
     systemd.user.services.slack = lib.mkIf config.roles.work {

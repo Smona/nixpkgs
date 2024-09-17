@@ -30,7 +30,7 @@ in
     '';
     settings = {
       general = {
-        grace = 2;
+        grace = 5;
         hide_cursor = false;
       };
       background = {

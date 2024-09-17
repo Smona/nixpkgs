@@ -28,6 +28,8 @@ in
           window_config = {
             format = "{title}";
             max-length = 50;
+            # Show title per-monitor
+            separate-outputs = true;
             rewrite = {
               "(.*) — Mozilla Firefox" = " $1";
               "(.*) — Firefox Developer Edition" = " $1";
@@ -50,7 +52,7 @@ in
         {
           mainBar = {
             layer = "top";
-            position = "bottom";
+            position = "top";
             modules-left = [
               "battery"
               "memory"
@@ -58,14 +60,13 @@ in
               "idle_inhibitor"
               "sway/workspaces"
               "hyprland/workspaces"
-              "tray"
               "sway/window"
               "hyprland/window"
             ];
             # modules-center = [];
             modules-right = [
               "custom/media"
-              "network"
+              "tray"
               "pulseaudio"
               "backlight"
               "clock"
@@ -185,7 +186,7 @@ in
         }
 
         window#waybar {
-          background-color: alpha(@mantle, 0.85);
+          background-color: alpha(@crust, 0.85);
           /* border-top: 3px solid rgba(100, 114, 125, 0.5); */
           color: @text;
           transition-property: background-color;
