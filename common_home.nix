@@ -193,8 +193,6 @@ in
         # https://github.com/dandavison/magit-delta/issues/13
         options = {
           features = lib.mkForce "side-by-side decorations catppuccin-${config.catppuccin.flavor}";
-          # TODO: remove this once confirmed looking good with catppuccin
-          # syntax-theme = "Sublime Snazzy";
           hyperlinks = true;
         };
       };
