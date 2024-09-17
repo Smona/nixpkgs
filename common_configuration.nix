@@ -5,7 +5,6 @@
   lib,
   pkgs,
   inputs,
-  system,
   ...
 }:
 
@@ -48,7 +47,7 @@
     home-manager.backupFileExtension = "bk";
     # Pass additional arguments to home manager modules
     home-manager.extraSpecialArgs = {
-      inherit inputs system;
+      inherit inputs;
     };
 
     # Configure the system-wide /etc/zshrc, and install zsh for root on linux.

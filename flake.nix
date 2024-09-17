@@ -107,7 +107,6 @@
           pkgs = legacyPackages.x86_64-linux;
           specialArgs = {
             inherit inputs;
-            system = "x86_64-linux";
           };
           modules = [ ./nixos/xps-nixos/configuration.nix ];
         };
@@ -128,16 +127,10 @@
           pkgs = legacyPackages.x86_64-linux;
           specialArgs = {
             inherit inputs;
-            system = "x86_64-linux";
           };
           modules = [ ./nixos/luma/configuration.nix ];
         };
         "build-farm" = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-            system = "x86_64-linux";
-          };
-
           modules = [ ./nixos/build-farm/configuration.nix ];
         };
       };
@@ -146,7 +139,6 @@
         # TODO: pass pkgs here
         specialArgs = {
           inherit inputs;
-          system = "aarch64-darwin";
         };
         modules = [ ./darwin/configuration.nix ];
       };

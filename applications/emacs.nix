@@ -2,14 +2,12 @@
   config,
   pkgs,
   inputs,
-  system,
   ...
 }:
 
 let
   emacs = pkgs.emacs29-pgtk;
   nixGL = import ./nixGL.nix { inherit pkgs config; };
-  pkgs-latest = import inputs.nixpkgs { inherit system; };
   my-emacs =
     (nixGL (
       # TODO: replace with programs.emacs.extraPackages?
@@ -82,7 +80,7 @@ in
     nodePackages.typescript-language-server
     vscode-langservers-extracted
     nodePackages.dockerfile-language-server-nodejs
-    pkgs-latest.nodePackages.graphql-language-service-cli
+    nodePackages.graphql-language-service-cli
     python310Packages.grip # Required by grip-mode (markdown +grip)
 
     # Dirvish stuff
