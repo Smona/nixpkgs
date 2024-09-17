@@ -48,6 +48,7 @@ in
       # Media apps
       (nixGL libreoffice-fresh)
       (nixGL clapper)
+      (nixGL vlc)
       xournalpp
     ];
 

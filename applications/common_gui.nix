@@ -60,8 +60,9 @@ in
         ))
         my-slack
 
-        (nixGL spotify)
-        (nixGL vlc)
+        # Media apps
+        # TODO: restore nixGL?
+        # (nixGL spotify)
       ]
       ++ (lib.lists.optionals config.roles.work [ (nixGL gimp) ]);
 
