@@ -1,10 +1,9 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 let
   maxVolume = "1.2";
   volumeStepPercent = "4";
   brightnessStepPercent = "4";
-  commonOptions = import ../../common.nix;
   playerctl = "${pkgs.playerctl}/bin/playerctl";
   brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
   wpctl = "${pkgs.wireplumber}/bin/wpctl";
@@ -15,7 +14,7 @@ rec {
 
   louder = pkgs.writeShellScript "louder" ''
     ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ ${volumeStepPercent}%+ --limit ${maxVolume}
-    unmute
+    ${unmute}
   '';
 
   softer = pkgs.writeShellScript "softer" "${wpctl} set-volume @DEFAULT_AUDIO_SINK@ ${volumeStepPercent}%- --limit ${maxVolume}";
