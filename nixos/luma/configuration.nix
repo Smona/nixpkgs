@@ -16,7 +16,7 @@
   ];
 
   smona.username = "mel";
-  smona.primaryMonitor = "DP-3";
+  smona.primaryMonitor = "DP-1";
   smona.wallpaper = ../../wallpapers/vibrant-paint-streaks.jpg;
   networking.hostName = "luma"; # Define your hostname.
 
