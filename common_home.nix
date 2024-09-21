@@ -94,17 +94,6 @@ in
       source-sans
       rounded-mgenplus # Japanese font support
       (callPackage monolisa { })
-
-      dig
-      dua # disk usage analyzer
-      vulnix
-
-      # Fun
-      cowsay
-      ponysay
-      pridecat
-      nyancat
-      blahaj
     ];
 
     home.sessionVariables =

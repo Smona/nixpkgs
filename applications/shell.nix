@@ -8,11 +8,24 @@
     # Shell utilities
     curl
     jq # Format, slice and dice json on the command line.
+    dig
 
     ## cooler rust versions of basic GNU utilities
     fd # Better find
     ripgrep # Better grep
     eza # Better ls
+    dua # disk usage analyzer
+
+    # nix-specific utilities
+    vulnix
+    nix-tree
+
+    # Fun
+    cowsay
+    ponysay
+    pridecat
+    nyancat
+    blahaj
   ];
 
   home.shellAliases = {

@@ -47,6 +47,7 @@ in
       inotify-tools
       wofi
       swaybg
+      wl-clipboard
       # Needed for flameshot
       grim
       slurp
