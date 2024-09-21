@@ -73,10 +73,11 @@ in
       {
         enable = true;
         # TODO: check out spicetify extensions
-        # enabledExtensions = with spicePkgs.extensions; [
-        #   hidePodcasts
-        #   shuffle # shuffle+ (special characters are sanitized out of extension names)
-        # ];
+        enabledExtensions = with spicePkgs.extensions; [
+          #   hidePodcasts
+          shuffle # shuffle+ (special characters are sanitized out of extension names)
+          fullAppDisplay
+        ];
         theme = spicePkgs.themes.catppuccin;
         colorScheme = config.catppuccin.flavor;
       };
