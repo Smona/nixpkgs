@@ -45,6 +45,10 @@ in
       # Messaging apps not supported on darwin
       (nixGL signal-desktop)
 
+      # Creative apps
+      openscad
+      freecad
+
       # Media apps
       (nixGL libreoffice-fresh)
       (nixGL clapper)
