@@ -59,6 +59,9 @@ in
     gtk.cursorTheme = (theme.cursor // { size = theme.cursorSize; });
     # gtk.theme = theme.gtk;
     # gtk.iconTheme = theme.icons;
+    qt.enable = true;
+    qt.style.name = "kvantum";
+    qt.platformTheme.name = "kvantum";
 
     # TODO: install browsers with nix on darwin, maybe with
     programs.chromium = {
