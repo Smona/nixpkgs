@@ -378,3 +378,7 @@
 (setq blink-cursor-delay 1.5)
 (setq blink-cursor-interval 1)
 (setq blink-cursor-blinks 0)
+
+;; Enable ghost text for editing text inputs in chrome with emacs!
+(use-package! atomic-chrome
+  :init (atomic-chrome-start-server))

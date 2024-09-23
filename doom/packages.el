@@ -90,3 +90,5 @@
 
 (package! exec-path-from-shell)
 (package! catppuccin-theme)
+
+(package! atomic-chrome)
