@@ -213,10 +213,10 @@ in
         bind=${mod}_SHIFT,K,movewindow,u
         bind=${mod}_SHIFT,J,movewindow,d
 
-        binde=SUPER,H,resizeactive,-10 0
-        binde=SUPER,L,resizeactive,10 0
-        binde=SUPER,J,resizeactive,0 10
-        binde=SUPER,K,resizeactive,0 -10
+        binde=Control_L&Alt_L,H,resizeactive,-10 0
+        binde=Control_L&Alt_L,L,resizeactive,10 0
+        binde=Control_L&Alt_L,J,resizeactive,0 10
+        binde=Control_L&Alt_L,K,resizeactive,0 -10
 
         bind=${mod},1,workspace,1
         bind=${mod},2,workspace,2
