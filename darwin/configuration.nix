@@ -80,14 +80,25 @@
       autohide = true;
       # this is distracting and not super helpful for me
       show-recents = false;
-      persistent-apps = [
-        "/Applications/Firefox.app"
-        "${pkgs.spotify}/Applications/Spotify.app"
-        "${pkgs.slack}/Applications/Slack.app"
-        "${pkgs.kitty}/Applications/kitty.app"
-        "/opt/homebrew/Cellar/emacs-plus@29/29.4/Emacs.app"
-      ];
+      persistent-apps =
+        let
+          # So cool that you can reference this here!
+          # I found it by inspecting the structure of `config` with:
+          # nix repl --expr "builtins.getFlake \"$PWD\""
+          # which adds all the top-level outputs to the REPL as variables :muscle:
+          spotifyPackage =
+            builtins.head
+              config.home-manager.users.${config.smona.username}.programs.spicetify.createdPackages;
+        in
+        [
+          "/Applications/Firefox.app"
+          "${spotifyPackage}/Applications/Spotify.app"
+          "${pkgs.slack}/Applications/Slack.app"
+          "${pkgs.kitty}/Applications/kitty.app"
+          "/opt/homebrew/Cellar/emacs-plus@29/29.4/Emacs.app"
+        ];
     };
+
     # Defaults for which validation hasn't been added to nix-darwin yet
     CustomUserPreferences = {
       NSGlobalDomain = {
