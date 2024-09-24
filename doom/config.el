@@ -382,3 +382,8 @@
 ;; Enable ghost text for editing text inputs in chrome with emacs!
 (use-package! atomic-chrome
   :init (atomic-chrome-start-server))
+
+;; Undo doom hardcoding nerd fonts icons to "Symbols Nerd Font Mono"
+;; in doom-ui.el for powerline symbols so they line up.
+(add-hook! 'after-setting-font-hook (dolist (character '(#xe0b6 #xe0b4))
+        (set-fontset-font t character "MonoLisa Nerd Font")))
