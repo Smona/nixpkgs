@@ -52,7 +52,7 @@ rec {
   # ...and wm locking
   # Media should stay playing when the screen locks, otherwise the idle timeout
   # can pause remotely playing media (e.g. spotify connect).
-  lock = "hyprlock";
+  lock = "1password --lock; hyprlock";
   # Meant for when ending a session, so it does pause media.
   # note that pause will error if nothing is playing, so we can't use &&
   goodbye = "${pause} & ${lock}";
