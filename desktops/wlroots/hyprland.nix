@@ -103,8 +103,8 @@ in
         }
 
         general {
-            gaps_in=5
-            gaps_out=5
+            gaps_in=8
+            gaps_out=12
             border_size=2
             resize_on_border = yes
             col.active_border=rgba($lavenderAlphacc)
@@ -114,7 +114,7 @@ in
         }
 
         decoration {
-            rounding=10
+            rounding=12
             blur {
               passes=2 # minimum 1
               size=5 # minimum 1
@@ -185,7 +185,7 @@ in
               hk:
               let
                 bindCommand = "bind${if hk.repeat or false then "e" else ""}${
-                  if hk.allow_while_locked then "l" else ""
+                  if hk.allow_while_locked or false then "l" else ""
                 }";
               in
               "${bindCommand}=${
