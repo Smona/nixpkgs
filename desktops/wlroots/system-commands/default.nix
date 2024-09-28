@@ -50,6 +50,10 @@ rec {
   screenOff = pkgs.writeShellScript "screenOff" "${hyprctl} dispatch dpms off";
 
   # ...and wm locking
+  # Media should stay playing when the screen locks, otherwise the idle timeout
+  # can pause remotely playing media (e.g. spotify connect).
+  lock = "hyprlock";
+  # Meant for when ending a session, so it does pause media.
   # note that pause will error if nothing is playing, so we can't use &&
-  lock = "${pause}; hyprlock";
+  goodbye = "${pause} & ${lock}";
 }

@@ -184,7 +184,9 @@ in
             builtins.map (
               hk:
               let
-                bindCommand = if hk.repeat or false then "binde" else "bind";
+                bindCommand = "bind${if hk.repeat or false then "e" else ""}${
+                  if hk.allow_while_locked then "l" else ""
+                }";
               in
               "${bindCommand}=${
                 builtins.concatStringsSep "_" (

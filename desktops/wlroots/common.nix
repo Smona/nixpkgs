@@ -37,7 +37,7 @@ commonOptions
     {
       primaryMod = true;
       key = "End";
-      command = cmd.lock;
+      command = cmd.goodbye;
     }
     {
       secondaryMod = true;
@@ -102,59 +102,71 @@ commonOptions
       primaryMod = true;
       key = "XF86AudioLowerVolume";
       command = "${pkgs.playerctl}/bin/playerctl position 5-";
+      allow_while_locked = true;
     }
     {
       primaryMod = true;
       key = "XF86AudioRaiseVolume";
       command = "${pkgs.playerctl}/bin/playerctl position 5+";
+      allow_while_locked = true;
     }
     {
       secondaryMod = true;
       key = "XF86AudioLowerVolume";
       command = cmd.prev;
+      allow_while_locked = true;
     }
     {
       secondaryMod = true;
       key = "XF86AudioRaiseVolume";
       command = cmd.next;
+      allow_while_locked = true;
     }
     {
       ctrl = true;
       key = "XF86AudioLowerVolume";
       command = "${pkgs.playerctl}/bin/playerctl volume 0.02-";
       repeat = true;
+      allow_while_locked = true;
     }
     {
       ctrl = true;
       key = "XF86AudioRaiseVolume";
       command = "${pkgs.playerctl}/bin/playerctl volume 0.02+";
       repeat = true;
+      allow_while_locked = true;
     }
     {
       key = "XF86AudioLowerVolume";
       command = cmd.softer;
       repeat = true;
+      allow_while_locked = true;
     }
     {
       key = "XF86AudioRaiseVolume";
       command = cmd.louder;
       repeat = true;
+      allow_while_locked = true;
     }
     {
       key = "XF86AudioMute";
       command = cmd.mute;
+      allow_while_locked = true;
     }
     {
       key = "XF86AudioPlay";
       command = cmd.play;
+      allow_while_locked = true;
     }
     {
       key = "XF86AudioPrev";
       command = cmd.prev;
+      allow_while_locked = true;
     }
     {
       key = "XF86AudioNext";
       command = cmd.next;
+      allow_while_locked = true;
     }
   ];
 }
