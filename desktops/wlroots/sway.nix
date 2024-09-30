@@ -81,6 +81,8 @@ in {
 
       # Firefox PIP floating window
       for_window [title="^Picture-in-Picture$"] floating enable, sticky enable, move position 72 ppt 74 ppt, resize set 27 ppt 25 ppt
+
+      output HDMI-A-2 pos 3840 0 transform 270
     '';
   };
 }
