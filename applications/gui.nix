@@ -46,7 +46,6 @@ in
       (nixGL signal-desktop)
 
       # Creative apps
-      openscad
       freecad
 
       # Media apps
