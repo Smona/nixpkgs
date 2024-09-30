@@ -13,6 +13,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../common_configuration.nix
+    ../dualboot.nix
   ];
 
   smona.username = "mel";
