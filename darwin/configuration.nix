@@ -39,6 +39,9 @@
     tree
     unzip
     watch
+
+    # https://stackoverflow.com/questions/57591432/gpg-signing-failed-inappropriate-ioctl-for-device-on-macos-with-maven
+    pinentry_mac
   ];
 
   # Auto upgrade nix package and the daemon service.
