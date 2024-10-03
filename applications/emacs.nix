@@ -82,7 +82,7 @@ in
     vscode-langservers-extracted
     nodePackages.dockerfile-language-server-nodejs
     nodePackages.graphql-language-service-cli
-    python310Packages.grip # Required by grip-mode (markdown +grip)
+    python3Packages.grip # Required by grip-mode (markdown +grip)
 
     # Dirvish stuff
     ffmpegthumbnailer
@@ -100,5 +100,6 @@ in
     # Assorted Emacs dependencies
     wakatime
     jq # Used by restclient.el
+    awscli2 # Used by s3ed
   ];
 }
