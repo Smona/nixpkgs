@@ -126,10 +126,6 @@
 (map! :leader
       :desc "Repeat a recent search"
       "s R" #'vertico-repeat-select)
-(map! :map org-mode-map
-      :localleader
-      :desc "Open Org Roam UI"
-      "m u" #'org-roam-ui-open)
 
 (map! :localleader
       :desc "Run NPM script"
