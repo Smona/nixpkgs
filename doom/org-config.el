@@ -361,6 +361,8 @@
                                        ("#+begin_src python" . "")
                                        ("#+begin_src typescript" . "")
                                        ("#+RESULTS:" . "")
+                                       (":PROPERTIES:" . "")
+                                       (":LOGBOOK:" . "󱚈")
                                        ("#+begin_quote" . "")
                                        ("#+end_quote" . "")
                                        ("#+filetags:" . "󱈤")
