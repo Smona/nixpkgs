@@ -31,7 +31,7 @@
 
 (setq! doom-font (font-spec :family "MonoLisa Nerd Font" :size 12.0 :weight 'normal :width 'normal))
 (setq! doom-variable-pitch-font (font-spec :family "Source Serif 4" :size 20))
-(setq! doom-unicode-font doom-font)
+(setq! doom-symbols-font doom-font)
 ;; Use native unicode emoji rendering
 (setq! emojify-display-style 'unicode)
 ;; Override all emoji unicode block to Noto Color Emoji
