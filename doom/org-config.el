@@ -359,5 +359,7 @@
                                        ("#+begin_src" . "")
                                        ("#+end_src" . "")
                                        ("#+RESULTS:" . "")
+                                       ("#+begin_quote" . "")
+                                       ("#+end_quote" . "")
                                        ("lambda" . 955)))
 (add-hook 'org-mode-hook 'prettify-symbols-mode)
