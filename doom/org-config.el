@@ -44,12 +44,13 @@
 ;; track habits
 (add-to-list 'org-modules 'org-habit)
 
-(defun my/org-local-hook ()
-  (setq-local default-text-properties '(line-spacing 0.2 line-height 1.2))
+;; (defun my/org-local-hook ()
+  ;; (setq-local default-text-properties '(line-spacing 0.2 line-height 1.2))
    ;; Ensure saved code block results are always up to date, and speed up
    ;; iteration, without tempting going a while without saving 😉
    ;; The last argument makes it buffer-local.
-   (add-hook 'before-save-hook 'org-babel-execute-buffer nil t))
+   ;; DISABLED because this does _not_ work well with jupyter-style notebooks
+   ;; (add-hook 'before-save-hook 'org-babel-execute-buffer nil t))
 
  (use-package! valign
      :after org
@@ -65,7 +66,7 @@
 (after! org
         ;; Use non-monospace font by default in org mode
         (add-hook 'org-mode-hook 'variable-pitch-mode)
-        (add-hook 'org-mode-hook 'my/org-local-hook)
+        ;; (add-hook 'org-mode-hook 'my/org-local-hook)
         ;; TODO: make this a bit bigger
         (setq org-ellipsis "⤵")
         (setq org-hidden-keywords '(title))
