@@ -353,3 +353,11 @@
         (:name "Today" :time-grid t :scheduled today)
         (:name "Cobalt" :tag "cobalt")
 )))
+
+(setq-default prettify-symbols-alist '(("#+BEGIN_SRC" . "")
+                                       ("#+END_SRC" . "")
+                                       ("#+begin_src" . "")
+                                       ("#+end_src" . "")
+                                       ("#+RESULTS:" . "")
+                                       ("lambda" . 955)))
+(add-hook 'org-mode-hook 'prettify-symbols-mode)
