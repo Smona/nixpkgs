@@ -91,7 +91,12 @@
     # Enable flashing ZSA keyboards.
     hardware.keyboard.zsa.enable = true;
 
+    # Firmware
     services.fwupd.enable = true; # Firmware update manager
+    # Make sure we have the best firmware available.
+    # This is especially important for dual-booting, since firmware installed in
+    # Windows can break bluetooth or other features
+    hardware.enableAllFirmware = true;
 
     # Enable CUPS to print documents.
     services.printing = {
