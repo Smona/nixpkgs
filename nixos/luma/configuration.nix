@@ -50,6 +50,17 @@
   boot.initrd.kernelModules = [ "amdgpu" ];
   services.xserver.videoDrivers = [ "amdgpu" ];
 
+  # Radeon GPU
+  systemd.services.lact = {
+    description = "AMDGPU Control Daemon";
+    after = [ "multi-user.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.lact}/bin/lact daemon";
+    };
+    enable = true;
+  };
+
   # List services that you want to enable:
 
   services.hardware.openrgb = {
@@ -57,7 +68,10 @@
     package = pkgs.openrgb-with-all-plugins;
   };
   programs.coolercontrol.enable = true;
-  environment.systemPackages = with pkgs; [ liquidctl ];
+  environment.systemPackages = with pkgs; [
+    liquidctl
+    lact
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
