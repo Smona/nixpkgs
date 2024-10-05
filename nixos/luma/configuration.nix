@@ -40,8 +40,6 @@
       _1passwordBinary = "${pkgs._1password-gui}/bin/1password";
     };
 
-  # NVIDIA stuff
-
   # Enable OpenGL
   hardware.graphics = {
     enable = true;
