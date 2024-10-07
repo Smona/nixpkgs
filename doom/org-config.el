@@ -415,3 +415,6 @@
   (setq! org-tidy-properties-style 'fringe)
   :hook
   (org-mode . org-tidy-mode))
+
+;; Disable VC gutter in org files
+(add-hook 'org-mode-hook (lambda () (diff-hl-mode 0)))
