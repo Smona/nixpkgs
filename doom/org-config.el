@@ -35,6 +35,7 @@
         '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
         '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
         '(org-link ((t (:underline t))))
+        '(org-visual-indent-blank-pipe-face ((t (:background "#1e1e2e"))))
         '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
         '(org-property-value ((t (:inherit fixed-pitch))) t)
         '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
@@ -376,8 +377,38 @@
                                        ("#+begin_quote" . "")
                                        ("#+end_quote" . "")
                                        ("#+filetags:" . "󱈤")
+                                       (" TODO" . "")
+                                       (" IDEA" . "")
+                                       (" STRT" . "")
+                                       (" LOOP" . "")
+                                       (" DONE" . "")
+                                       (" KILL" . "")
+                                       (" PROJ" . "")
+                                       ("[ ]" . "")
+                                       ("[x]" . "")
+                                       ("[X]" . "")
                                        ("lambda" . 955)))
 (add-hook 'org-mode-hook 'prettify-symbols-mode)
+;; Hide bullets for headings with TODO states in favor of the prettified icon
+(setq! org-superstar-special-todo-items 'hide)
+(setq! org-superstar-remove-leading-stars t)
+(setq! org-hide-leading-stars nil)
+(setq! org-startup-indented nil)
+(setq! org-indent-mode-turns-on-hiding-stars nil)
+(use-package! org-visual-indent
+  :config
+  (setq! org-visual-indent-color-indent '(
+                                         ;; TODO: tie these to variables, either the same way catppuccin-theme does or referencing the relevant heading faces.
+                                         (1 (:background "#f38ba8" :foreground "#f38ba8" :height .1))
+                                         (2 (:background "#fab387" :foreground "#fab387" :height .1))
+                                         (3 (:background "#f9e2af" :foreground "#f9e2af" :height .1))
+                                         (4 (:background "#a6e3a1" :foreground "#a6e3a1" :height .1))
+                                         (5 (:background "#74c7ec" :foreground "#74c7ec" :height .1))
+                                         (6 (:background "#b4befe" :foreground "#b4befe" :height .1))
+                                         (7 (:background "#cba6f7" :foreground "#cba6f7" :height .1))
+                                         (8 (:background "#eba0ac" :foreground "#eba0ac" :height .1))
+                                         ))
+(add-hook 'org-mode-hook #'org-visual-indent-mode))
 
 (defun org-hide-properties ()
   "Hide all org-mode headline property drawers in buffer. Could be slow if it has a lot of overlays."
