@@ -15,8 +15,8 @@
       "m u" #'org-roam-ui-open)
 (map! :map org-mode-map
       :localleader
-      :desc "Toggle property drawers"
-      "m p" #'org-toggle-properties)
+      :desc "Show property drawers"
+      "m p" #'org-tidy-untidy-buffer)
 
 ;; The below was borrowed from https://zzamboni.org/post/beautifying-org-mode-in-emacs/
 (defun my/org-mode-hook ()
@@ -69,7 +69,7 @@
         (add-hook 'org-mode-hook 'variable-pitch-mode)
         ;; (add-hook 'org-mode-hook 'my/org-local-hook)
         ;; TODO: make this a bit bigger
-        (setq org-ellipsis "⤵")
+        (setq org-ellipsis "⊕")
         (setq org-hidden-keywords '(title))
         ;;
         ;; TODO: add author & date in preamble: https://emacs.stackexchange.com/questions/45191/how-to-place-author-and-date-under-title
@@ -410,31 +410,8 @@
                                          ))
 (add-hook 'org-mode-hook #'org-visual-indent-mode))
 
-(defun org-hide-properties ()
-  "Hide all org-mode headline property drawers in buffer. Could be slow if it has a lot of overlays."
-  (interactive)
-  (save-excursion
-    (goto-char (point-min))
-    (while (re-search-forward
-            "^ *:properties:\n\\( *:.+?:.*\n\\)+ *:end:\n" nil t)
-      (let ((ov_this (make-overlay (match-beginning 0) (match-end 0))))
-        (overlay-put ov_this 'display "")
-        (overlay-put ov_this 'hidden-prop-drawer t))))
-  (put 'org-toggle-properties-hide-state 'state 'hidden))
-
-(defun org-show-properties ()
-  "Show all org-mode property drawers hidden by org-hide-properties."
-  (interactive)
-  (remove-overlays (point-min) (point-max) 'hidden-prop-drawer t)
-  (put 'org-toggle-properties-hide-state 'state 'shown))
-
-(defun org-toggle-properties ()
-  "Toggle visibility of property drawers."
-  (interactive)
-  (if (eq (get 'org-toggle-properties-hide-state 'state) 'hidden)
-      (org-show-properties)
-    (org-hide-properties)))
-
-;; call org-hide-properties after inserting a new node or opening a file
-(add-hook 'org-roam-post-node-insert-hook 'org-hide-properties)
-(add-hook 'org-mode-hook 'org-hide-properties)
+(use-package! org-tidy
+  :config
+  (setq! org-tidy-properties-style 'fringe)
+  :hook
+  (org-mode . org-tidy-mode))
