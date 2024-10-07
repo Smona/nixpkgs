@@ -391,3 +391,8 @@
 ;; in doom-ui.el for powerline symbols so they line up.
 (add-hook! 'after-setting-font-hook (dolist (character '(#xe0b6 #xe0b4))
         (set-fontset-font t character "MonoLisa Nerd Font")))
+
+(use-package! company-posframe
+  :config
+  (setq! company-posframe-quickhelp-delay 0.3)
+  (company-posframe-mode 1))
