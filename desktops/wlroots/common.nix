@@ -168,5 +168,11 @@ commonOptions
       command = cmd.next;
       allow_while_locked = true;
     }
+    {
+      primaryMod = true;
+      shift = true;
+      key = "a";
+      command = cmd.tao;
+    }
   ];
 }
