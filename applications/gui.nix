@@ -91,18 +91,19 @@ in
       };
     };
     # TODO: get this working on darwin
-    xdg.configFile."1password-settings" = {
-      target = "1Password/settings/settings.json";
-      text = ''
-        {
-          "app.double": false,
-          "security.authenticatedUnlock.enabled": true,
-          "sshAgent.enabled": true,
-          "sshAgent.storeKeyTitles": true,
-          "sshAgent.sshAuthorizatonModel": "application"
-        }
-      '';
-    };
+    # FIXME: this is breaking 1password settings currently
+    # xdg.configFile."1password-settings" = {
+    #   target = "1Password/settings/settings.json";
+    #   text = ''
+    #     {
+    #       "app.double": false,
+    #       "security.authenticatedUnlock.enabled": true,
+    #       "sshAgent.enabled": true,
+    #       "sshAgent.storeKeyTitles": true,
+    #       "sshAgent.sshAuthorizatonModel": "application"
+    #     }
+    #   '';
+    # };
 
     xdg.mimeApps = {
       enable = true;
