@@ -11,6 +11,7 @@ let
   cfg = config.smona.wlroots;
 in
 {
+  config = lib.mkIf cfg.enable {
   programs.hyprlock = {
     enable = true;
     extraConfig = ''
@@ -244,4 +245,5 @@ in
         bind=SUPER,mouse_up,workspace,e-1
       '';
   };
+};
 }
