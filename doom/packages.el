@@ -52,6 +52,7 @@
 (package! org-roam-ui)
 (package! org-super-agenda)
 (package! org-visual-outline :recipe (:host github :repo "legalnonsense/org-visual-outline" :branch "master"))
+(package! org-tidy :recipe (:host github :repo "jxq0/org-tidy" :branch "main"))
 (package! company-posframe :recipe (:host github :repo "tumashu/company-posframe" :branch "master"))
 
 (package! ox-slack)
