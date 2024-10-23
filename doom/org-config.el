@@ -371,6 +371,7 @@
                                        ("#+begin_src js" . "")
                                        ("#+begin_src bash" . "")
                                        ("#+begin_src python" . "")
+                                       ("#+begin_src jupyter-python" . "󰺂")
                                        ("#+begin_src typescript" . "")
                                        ("#+RESULTS:" . "")
                                        (":LOGBOOK:" . "󱚈")
