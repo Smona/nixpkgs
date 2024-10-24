@@ -12,6 +12,22 @@ let
 in
 {
   config = lib.mkIf cfg.enable {
+    services.hyprpaper = {
+      enable = true;
+      settings = {
+        ipc = "on";
+        splash = false;
+      };
+    };
+    # Add item to nautilus context menu to set the desktop bg dynamically.
+    home.file.".local/share/nautilus/scripts/Set as Desktop Background" = {
+      text = ''
+        #!/usr/bin/env bash
+        hyprctl hyprpaper reload $(echo ",$NAUTILUS_SCRIPT_SELECTED_URIS" | sed 's/file:\/\///') > ~/desktop_background_script_result.txt
+      '';
+      executable = true;
+    };
+
     programs.hyprlock = {
       enable = true;
       extraConfig = ''
