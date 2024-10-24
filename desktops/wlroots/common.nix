@@ -25,6 +25,8 @@ commonOptions
     # TODO: handle this properly, it's specific to xps-nixos
     # It looks like xps-nixos's mic clips above 50%
     "wpctl set-volume 43 50%"
+    "firefox"
+    "emacs"
   ] ++ (pkgs.lib.lists.optional hasBuiltinDisplay "rot8");
   execAlways = [ "swaybg -i ${cfg.wallpaper} -m fill" ];
   keyBinds = [
