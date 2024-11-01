@@ -16,6 +16,10 @@
       };
     };
 
+    boot.plymouth = {
+      enable = true;
+    };
+
     # Silent boot
     boot.initrd.verbose = false;
     boot.initrd.systemd.enable = true;
