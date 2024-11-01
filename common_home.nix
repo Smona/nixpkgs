@@ -261,7 +261,6 @@ in
         vim-commentary
         vim-repeat
         vim-surround
-        vim-wakatime
       ];
       extraConfig = ''
         set nocompatible              " be iMproved

@@ -98,7 +98,6 @@ in
     nodePackages.mermaid-cli
 
     # Assorted Emacs dependencies
-    wakatime
     jq # Used by restclient.el
     awscli2 # Used by s3ed
   ];

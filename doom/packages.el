@@ -57,8 +57,6 @@
 
 (package! ox-slack)
 
-(package! wakatime-mode)
-
 ;; (package! magit-delta)
 
 (package! dirvish)

@@ -216,17 +216,6 @@
   (setq grip-github-user "Smona^grip")
   (setq grip-github-password (load-password "api.github.com" "Smona^grip")))
 
-
-(defun my/wakatime-hook () (setq wakatime-api-key (load-password "wakatime" "smona")))
-(use-package! wakatime-mode
-  :after (auth-source epa)
-  :config
-  (global-wakatime-mode)
-  ;; This seems to reliably decrypt and load the secret without crashing startup 😵
-  ;; If you see an error with startup hooks saying "void-function nil", it's probably this
-  ;; hook running before necessary stuff has initialized to decrypt the authinfo file.
-  (add-hook! 'doom-first-buffer-hook 'my/wakatime-hook))
-
 (use-package! prettier
   :config
   (global-prettier-mode)
