@@ -165,7 +165,7 @@
                 roles = {
                   work = true;
                 };
-                nixGL.prefix = "${nixGL.packages.x86_64-linux.nixGLIntel}/bin/nixGLIntel ";
+                nixGL.packages = nixGL.packages;
                 pkgsCompat = import inputs.nixpkgs-ubuntu {
                   system = "x86_64-linux";
                   config.allowUnfree = true;

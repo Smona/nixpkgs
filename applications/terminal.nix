@@ -5,9 +5,6 @@
   ...
 }:
 
-let
-  nixGL = import ./nixGL.nix { inherit pkgs config; };
-in
 {
   home.shellAliases = {
     # Convenience SSH alias for installing kitty terminfo on servers
@@ -16,7 +13,7 @@ in
 
   # My current preferred terminal
   programs.kitty = {
-    package = (nixGL pkgs.kitty);
+    package = (config.lib.nixGL.wrap pkgs.kitty);
     settings = {
       font_family = "MonoLisa Nerd Font";
       background_opacity = "0.9";
@@ -40,7 +37,7 @@ in
 
   # Alacritty seems nice, but it's lacking some features and kept crashing gnome-shell
   programs.alacritty = {
-    package = (nixGL pkgs.alacritty);
+    package = (config.lib.nixGL.wrap pkgs.alacritty);
     settings = {
       window = {
         decorations = "none";

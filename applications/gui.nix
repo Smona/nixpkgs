@@ -8,7 +8,6 @@
 }:
 
 let
-  nixGL = import ./nixGL.nix { inherit pkgs config; };
   theme = import ../theme.nix { inherit pkgs; };
 in
 {
@@ -39,18 +38,18 @@ in
       gthumb
       shotwell
       file-roller
-      (nixGL keybase-gui)
+      (config.lib.nixGL.wrap keybase-gui)
       gcolor3
 
       # Messaging apps not supported on darwin
-      (nixGL signal-desktop)
+      (config.lib.nixGL.wrap signal-desktop)
 
       # Creative apps
       freecad
 
       # Media apps
-      (nixGL libreoffice-fresh)
-      (nixGL vlc)
+      (config.lib.nixGL.wrap libreoffice-fresh)
+      (config.lib.nixGL.wrap vlc)
       xournalpp
     ];
 
@@ -68,7 +67,7 @@ in
     # TODO: install browsers with nix on darwin, maybe with
     programs.chromium = {
       enable = true;
-      package = (nixGL config.pkgsCompat.chromium);
+      package = (config.lib.nixGL.wrap config.pkgsCompat.chromium);
     };
     programs.firefox.enable = true;
 

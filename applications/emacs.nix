@@ -7,9 +7,8 @@
 
 let
   emacs = pkgs.emacs29-pgtk;
-  nixGL = import ./nixGL.nix { inherit pkgs config; };
   my-emacs =
-    (nixGL (
+    (config.lib.nixGL.wrap (
       # TODO: replace with programs.emacs.extraPackages?
       (pkgs.emacsPackagesFor emacs).emacsWithPackages (epkgs: [
         epkgs.vterm

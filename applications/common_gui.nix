@@ -9,8 +9,7 @@
 }:
 
 let
-  nixGL = import ./nixGL.nix { inherit pkgs config; };
-  my-slack = (nixGL pkgs.slack);
+  my-slack = (config.lib.nixGL.wrap pkgs.slack);
 in
 {
   imports = [
@@ -30,16 +29,6 @@ in
       work = mkEnableOption "set up computer for work";
       music = mkEnableOption "set up computer for music production";
     };
-
-    nixGLPrefix = mkOption {
-      type = types.str;
-      default = "";
-      description = ''
-        Will be prepended to commands which require working OpenGL.
-
-        This needs to be set to the right nixGL package on non-NixOS systems.
-      '';
-    };
   };
 
   config = lib.mkIf config.graphical {
@@ -50,7 +39,7 @@ in
       with pkgs;
       [
         # Messaging apps
-        (nixGL (
+        (config.lib.nixGL.wrap (
           if pkgs.stdenv.isDarwin then
             discord
           else
@@ -64,7 +53,7 @@ in
         # TODO: restore nixGL?
         # (nixGL spotify)
       ]
-      ++ (lib.lists.optionals config.roles.work [ (nixGL gimp) ]);
+      ++ (lib.lists.optionals config.roles.work [ (config.lib.nixGL.wrap gimp) ]);
 
     programs.spicetify =
       let
