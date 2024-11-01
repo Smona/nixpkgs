@@ -19,13 +19,14 @@
       "m p" #'org-tidy-untidy-buffer)
 
 ;; The below was borrowed from https://zzamboni.org/post/beautifying-org-mode-in-emacs/
-(defun my/org-mode-hook ()
-  (set-face-attribute 'org-level-4 nil :height 1.1)
-  (set-face-attribute 'org-level-3 nil :height 1.2)
-  (set-face-attribute 'org-level-2 nil :height 1.3)
-  (set-face-attribute 'org-level-1 nil :height 1.4)
-  (set-face-attribute 'org-document-title nil :height 2.0 :underline nil))
-(add-hook 'org-load-hook #'my/org-mode-hook)
+;; Disabled for now b/c catppuccin theme handles header sizes nicely
+;; (defun my/org-mode-hook ()
+;;   (set-face-attribute 'org-level-4 nil :height 1.1)
+;;   (set-face-attribute 'org-level-3 nil :height 1.2)
+;;   (set-face-attribute 'org-level-2 nil :height 1.3)
+;;   (set-face-attribute 'org-level-1 nil :height 1.4)
+;;   (set-face-attribute 'org-document-title nil :height 2.0 :underline nil))
+;; (add-hook 'org-load-hook #'my/org-mode-hook)
 
 (custom-theme-set-faces
         'user
