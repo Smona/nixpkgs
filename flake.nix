@@ -6,11 +6,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     hardware.url = "github:nixos/nixos-hardware";
 
-    # Last known commit (to me) which is compatible with Ubuntu 22 and gnome 44
-    nixpkgs-ubuntu.url = "github:nixos/nixpkgs?rev=5ba549eafcf3e33405e5f66decd1a72356632b96";
-    hm-ubuntu.url = "github:Smona/home-manager?rev=66702ccb53a7cc7f84c94e8e571658e1f6b7da69";
-    # hm-ubuntu.inputs.nixpkgs.follows = "nixpkgs-ubuntu";
-
     # Home manager
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -21,6 +16,7 @@
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
 
     musnix.url = "github:musnix/musnix";
+
     musnix.inputs.nixpkgs.follows = "nixpkgs";
 
     wayland-pipewire-idle-inhibit = {
@@ -144,7 +140,7 @@
       };
 
       homeConfigurations = {
-        "cobalt@remotestation376" = inputs.hm-ubuntu.lib.homeManagerConfiguration {
+        "cobalt@remotestation376" = home-manager.lib.homeManagerConfiguration {
           pkgs = import inputs.nixpkgs {
             system = "x86_64-linux";
             config.allowUnfree = true;
@@ -166,10 +162,12 @@
                   work = true;
                 };
                 nixGL.packages = nixGL.packages;
-                pkgsCompat = import inputs.nixpkgs-ubuntu {
-                  system = "x86_64-linux";
-                  config.allowUnfree = true;
-                };
+
+                # Ubuntu 24 currently seems pretty compatible with nixpkgs unstable
+                # pkgsCompat = import inputs.nixpkgs-ubuntu {
+                #   system = "x86_64-linux";
+                #   config.allowUnfree = true;
+                # };
               }
             )
           ];
