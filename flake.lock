@@ -339,11 +339,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1685908677,
-        "narHash": "sha256-E4zUPEUFyVWjVm45zICaHRpfGepfkE9Z2OECV9HXfA4=",
+        "lastModified": 1713543440,
+        "narHash": "sha256-lnzZQYG0+EXl/6NkGpyIz+FEOc/DSEG57AP1VsdeNrM=",
         "owner": "guibou",
         "repo": "nixGL",
-        "rev": "489d6b095ab9d289fe11af0219a9ff00fe87c7c5",
+        "rev": "310f8e49a149e4c9ea52f1adf70cdc768ec53f8a",
         "type": "github"
       },
       "original": {
