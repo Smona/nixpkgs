@@ -42,6 +42,8 @@
     tfp = "tf plan";
     tfi = "tf init";
     tfd = "tf destroy";
+    # Better kubernetes
+    k = "kubectl";
   };
 
   # Better 🐱
