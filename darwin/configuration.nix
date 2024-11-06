@@ -15,6 +15,21 @@
 
   smona.username = "mel";
 
+  # Enable building linux packages with matching CPU architecture automatically on darwin.
+  nix = {
+    linux-builder = {
+      enable = true;
+      systems = [ "aarch64-linux" ];
+      maxJobs = 4;
+    };
+
+    # This line is a prerequisite
+    settings.trusted-users = [ "@admin" ];
+
+    # Not strictly necessary, but this will reduce your disk utilization
+    # builders-use-substitutes = true;
+  };
+
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
