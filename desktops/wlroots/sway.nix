@@ -55,15 +55,17 @@ in
         # allow windows to steal focus and switch to their workspace
         newWindow = "focus";
       };
-      startup = [
-        { command = "dbus-sway-environment"; }
-        { command = "configure-gtk"; }
-        {
-          # Enable dynamic tiling
-          command = "${pkgs.autotiling}/bin/autotiling";
-          always = true;
-        }
-      ] ++ (builtins.map (cmd: { command = cmd; }) commonOptions.execStart)
+      startup =
+        [
+          { command = "dbus-sway-environment"; }
+          { command = "configure-gtk"; }
+          {
+            # Enable dynamic tiling
+            command = "${pkgs.autotiling}/bin/autotiling";
+            always = true;
+          }
+        ]
+        ++ (builtins.map (cmd: { command = cmd; }) commonOptions.execStart)
         ++ (builtins.map (cmd: {
           command = cmd;
           always = true;
