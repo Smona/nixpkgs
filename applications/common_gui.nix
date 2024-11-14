@@ -35,25 +35,23 @@ in
     programs.kitty.enable = true;
     # programs.alacritty.enable = true;
 
-    home.packages =
-      with pkgs;
-      [
-        # Messaging apps
-        (config.lib.nixGL.wrap (
-          if pkgs.stdenv.isDarwin then
-            discord
-          else
-            discord.override {
-              nss = nss_latest; # https://github.com/NixOS/nixpkgs/issues/78961
-            }
-        ))
-        my-slack
+    home.packages = with pkgs; [
+      # Messaging apps
+      (config.lib.nixGL.wrap (
+        if pkgs.stdenv.isDarwin then
+          discord
+        else
+          discord.override {
+            nss = nss_latest; # https://github.com/NixOS/nixpkgs/issues/78961
+          }
+      ))
+      my-slack
 
-        # Media apps
-        # TODO: restore nixGL?
-        # (nixGL spotify)
-      ]
-      ++ (lib.lists.optionals config.roles.work [ (config.lib.nixGL.wrap gimp) ]);
+      # Media apps
+      # TODO: restore nixGL?
+      # (nixGL spotify)
+      (config.lib.nixGL.wrap gimp)
+    ];
 
     programs.spicetify =
       let
