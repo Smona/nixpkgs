@@ -52,7 +52,7 @@ in
 
     # Configuration of the nix CLI
     # https://nixos.org/manual/nix/stable/command-ref/conf-file.html
-    nix.package = pkgs.nix;
+    nix.package = lib.mkDefault pkgs.nix;
     nix.settings = {
       # Massively reduce disk usage by hard linking any duplicate files
       # to a single location on disk.
