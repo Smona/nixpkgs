@@ -85,10 +85,6 @@ commonOptions
       command = "kitty";
     }
     {
-      key = "Print";
-      command = "grimshot --notify copy area";
-    }
-    {
       key = "XF86MonBrightnessUp";
       command = cmd.brighter;
       repeat = true;

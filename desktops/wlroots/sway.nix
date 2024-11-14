@@ -1,8 +1,15 @@
-{ config, lib, pkgs, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 
 let
   commonOptions = import ./common.nix { inherit pkgs inputs config; };
-in {
+in
+{
   wayland.windowManager.sway = {
     config = {
       terminal = "kitty";
@@ -24,10 +31,15 @@ in {
         smartBorders = "on";
       };
       input = {
-        "*" = { natural_scroll = "enabled"; };
+        "*" = {
+          natural_scroll = "enabled";
+        };
         "type:keyboard" = {
           xkb_layout = "us(dvorak),us";
           xkb_options = builtins.concatStringsSep "," commonOptions.xkbOptions;
+        };
+        "type:pointer" = {
+          pointer_accel = "0.8";
         };
         "type:touchpad" = {
           tap = "enabled";
@@ -58,21 +70,31 @@ in {
         }) commonOptions.execAlways);
 
       modifier = "Mod4";
-      keybindings = let
-        modifier = config.wayland.windowManager.sway.config.modifier;
-        secondaryMod = "Mod1";
-      in lib.mkOptionDefault ({
-        # Allow org-mode to use this hotkey
-        "${modifier}+Return" = null;
-        # "${secondarymod}+h" = "workspace prev";
-        # "${secondaryMod}+l" = "workspace next";
-      } // (builtins.listToAttrs (builtins.map (hk: {
-        name = (if hk.ctrl or false then "Ctrl+" else "")
-          + (if hk.secondaryMod or false then "${secondaryMod}+" else "")
-          + (if hk.primaryMod or false then "${modifier}+" else "")
-          + (if hk.shift or false then "Shift+" else "") + hk.key;
-        value = "exec ${hk.command}";
-      }) commonOptions.keyBinds)));
+      keybindings =
+        let
+          modifier = config.wayland.windowManager.sway.config.modifier;
+          secondaryMod = "Mod1";
+        in
+        lib.mkOptionDefault (
+          {
+            # Allow org-mode to use this hotkey
+            "${modifier}+Return" = null;
+            Print = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot --notify savecopy area";
+            # "${secondarymod}+h" = "workspace prev";
+            # "${secondaryMod}+l" = "workspace next";
+          }
+          // (builtins.listToAttrs (
+            builtins.map (hk: {
+              name =
+                (if hk.ctrl or false then "Ctrl+" else "")
+                + (if hk.secondaryMod or false then "${secondaryMod}+" else "")
+                + (if hk.primaryMod or false then "${modifier}+" else "")
+                + (if hk.shift or false then "Shift+" else "")
+                + hk.key;
+              value = "exec ${hk.command}";
+            }) commonOptions.keyBinds
+          ))
+        );
     };
     extraConfig = ''
       ################

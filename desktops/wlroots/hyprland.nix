@@ -232,6 +232,7 @@ in
           bind=${mod},P,pseudo,
           bind=${mod},S,togglesplit,
           bind=${mod}_SHIFT,Q,killactive,
+          bind=,Print,exec,${pkgs.grimblast}/bin/grimblast --notify copysave area
 
           bind=Control_L&Alt_L,C,exec,~/.emacs.d/bin/org-capture
 
