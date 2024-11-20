@@ -163,25 +163,6 @@
         "type": "github"
       }
     },
-    "hm-ubuntu": {
-      "inputs": {
-        "nixpkgs": "nixpkgs"
-      },
-      "locked": {
-        "lastModified": 1714972850,
-        "narHash": "sha256-yrHYi/Ohf5u0YFtjCs85bHdGAitfaBBeShqvCtcjEiA=",
-        "owner": "Smona",
-        "repo": "home-manager",
-        "rev": "66702ccb53a7cc7f84c94e8e571658e1f6b7da69",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Smona",
-        "repo": "home-manager",
-        "rev": "66702ccb53a7cc7f84c94e8e571658e1f6b7da69",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -335,7 +316,7 @@
       "inputs": {
         "flake-utils": "flake-utils_2",
         "nixpkgs": [
-          "nixpkgs-ubuntu"
+          "nixpkgs"
         ]
       },
       "locked": {
@@ -356,7 +337,7 @@
       "inputs": {
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils_3",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs"
       },
       "locked": {
         "lastModified": 1706071294,
@@ -374,16 +355,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1714253743,
-        "narHash": "sha256-mdTQw2XlariysyScCv2tTE45QSU9v/ezLcHJ22f0Nxc=",
+        "lastModified": 1705774713,
+        "narHash": "sha256-j6ADaDH9XiumUzkTPlFyCBcoWYhO83lfgiSqEJF2zcs=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "58a1abdbae3217ca6b702f03d3b35125d88a2994",
+        "rev": "1b64fc1287991a9cce717a01c1973ef86cb1af0b",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixos-unstable",
+        "ref": "nixos-23.11",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -406,39 +387,7 @@
         "type": "github"
       }
     },
-    "nixpkgs-ubuntu": {
-      "locked": {
-        "lastModified": 1695145219,
-        "narHash": "sha256-Eoe9IHbvmo5wEDeJXKFOpKUwxYJIOxKUesounVccNYk=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "5ba549eafcf3e33405e5f66decd1a72356632b96",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "5ba549eafcf3e33405e5f66decd1a72356632b96",
-        "type": "github"
-      }
-    },
     "nixpkgs_2": {
-      "locked": {
-        "lastModified": 1705774713,
-        "narHash": "sha256-j6ADaDH9XiumUzkTPlFyCBcoWYhO83lfgiSqEJF2zcs=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "1b64fc1287991a9cce717a01c1973ef86cb1af0b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-23.11",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_3": {
       "locked": {
         "lastModified": 1730200266,
         "narHash": "sha256-l253w0XMT8nWHGXuXqyiIC/bMvh1VRszGXgdpQlfhvU=",
@@ -459,7 +408,6 @@
         "catppuccin": "catppuccin",
         "dCachix": "dCachix",
         "hardware": "hardware",
-        "hm-ubuntu": "hm-ubuntu",
         "home-manager": "home-manager",
         "homebrew-bundle": "homebrew-bundle",
         "homebrew-cask": "homebrew-cask",
@@ -470,8 +418,7 @@
         "nix-homebrew": "nix-homebrew",
         "nixGL": "nixGL",
         "nixos-wsl": "nixos-wsl",
-        "nixpkgs": "nixpkgs_3",
-        "nixpkgs-ubuntu": "nixpkgs-ubuntu",
+        "nixpkgs": "nixpkgs_2",
         "spicetify-nix": "spicetify-nix",
         "wayland-pipewire-idle-inhibit": "wayland-pipewire-idle-inhibit"
       }
