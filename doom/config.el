@@ -302,6 +302,10 @@
 (after! nix-mode
         (add-hook! 'before-save-hook 'nix-format-before-save))
 
+;; Terraform support
+(after! terraform-mode
+        (setq terraform-format-on-save t))
+
 ;; Tailwind CSS support
 (use-package! lsp-tailwindcss
   :init
