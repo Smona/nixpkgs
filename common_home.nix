@@ -85,6 +85,9 @@ in
       source-sans
       rounded-mgenplus # Japanese font support
       monolisa
+      # M$ fonts
+      corefonts
+      vistafonts
     ];
 
     home.sessionVariables =
