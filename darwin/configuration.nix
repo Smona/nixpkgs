@@ -195,6 +195,7 @@
 
     casks = [
       "firefox"
+      "caffeine"
       "chromium"
       "floorp"
       "1password"
