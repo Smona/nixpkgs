@@ -78,8 +78,8 @@ in
       # Fonts
       # Fonts I like, in order of preference: MonoLisa, Cascadia Code, FiraCode, Dank Mono, JetBrains Mono
       # Fonts to try: FantasqueSansMono, Inconsolata, Victor Mono
-      # NerdFontsSymbolsOnly required by Emacs for monospaced icons
-      (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
+      # required by Emacs for monospaced icons
+      nerd-fonts.symbols-only
       noto-fonts-emoji # Required by Emacs
       source-serif # Required by Emacs
       source-sans

@@ -8,7 +8,7 @@ let
   builtinScale = 1.2;
 in
 ''
-  exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+  exec-once=dbus-update-activation-environment --systemd --all
   exec-once=systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
   exec-once=hyprctl setcursor ${cursorThemeName} ${toString cursorSize}
 

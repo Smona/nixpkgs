@@ -56,7 +56,7 @@ in
           # TODO: try again after i switch off novideo
           path = "screenshot";
           blur_passes = 5;
-          blur_size = 8;
+          blur_size = 1;
         };
         input-field = [
           {
@@ -144,11 +144,6 @@ in
                 passes=2 # minimum 1
                 size=5 # minimum 1
               }
-
-              drop_shadow = yes
-              shadow_range = 4
-              shadow_render_power = 3
-              col.shadow = 0xee1a1a1a
           }
 
           animations {
@@ -161,7 +156,6 @@ in
 
           dwindle {
               pseudotile=0 # enable pseudotiling on dwindle
-              no_gaps_when_only = no
               preserve_split = yes
           }
 
