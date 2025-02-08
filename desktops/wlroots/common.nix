@@ -58,7 +58,7 @@ commonOptions
     }
     {
       primaryMod = true;
-      key = "n";
+      key = "m";
       command = "swaync-client -t";
     }
 
@@ -81,7 +81,7 @@ commonOptions
     }
     {
       primaryMod = true;
-      key = "t";
+      key = "k";
       command = "kitty";
     }
     {
