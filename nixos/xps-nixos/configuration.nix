@@ -22,12 +22,6 @@
   smona.wallpaper = ../../wallpapers/neon-highway-wallpaper.jpg;
   networking.hostName = "xps-nixos"; # Define your hostname.
 
-  # Always use Cloudflare nameservers
-  networking.nameservers = [
-    "1.1.1.1"
-    "1.0.0.1"
-  ];
-
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 

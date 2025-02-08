@@ -145,6 +145,11 @@
     # https://nixos.wiki/wiki/Spotify
     networking.firewall.allowedTCPPorts = [ 57621 ];
     networking.firewall.allowedUDPPorts = [ 5353 ];
+    # Always use Cloudflare nameservers
+    networking.nameservers = [
+      "1.1.1.1"
+      "1.0.0.1"
+    ];
 
     # FIXME: now that MLS is retired we're using google location services, and
     # just borrowing Arch's geolocation API key, 💙
