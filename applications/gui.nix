@@ -33,6 +33,7 @@ in
     home.packages = with pkgs; [
       theme.uiFont.package
       dconf-editor
+      obsidian
 
       gparted
       gthumb
