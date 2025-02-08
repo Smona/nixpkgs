@@ -374,6 +374,7 @@
                                        ("#+begin_src python" . "")
                                        ("#+begin_src jupyter-python" . "󰺂")
                                        ("#+begin_src typescript" . "")
+                                       (":exports" . "󰶭")
                                        ("#+RESULTS:" . "")
                                        (":LOGBOOK:" . "󱚈")
                                        ("#+begin_quote" . "")
