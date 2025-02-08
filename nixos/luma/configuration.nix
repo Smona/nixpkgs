@@ -14,6 +14,7 @@
     ./hardware-configuration.nix
     ../common_configuration.nix
     ../dualboot.nix
+    ../graphics/amd.nix
   ];
 
   smona.username = "mel";
@@ -40,26 +41,6 @@
       _1passwordBinary = "${pkgs._1password-gui}/bin/1password";
     };
 
-  # Enable OpenGL
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
-
-  # Load AMD driver for Xorg and Wayland
-  boot.initrd.kernelModules = [ "amdgpu" ];
-  services.xserver.videoDrivers = [ "amdgpu" ];
-
-  # Radeon GPU
-  systemd.services.lact = {
-    description = "AMDGPU Control Daemon";
-    after = [ "multi-user.target" ];
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      ExecStart = "${pkgs.lact}/bin/lact daemon";
-    };
-    enable = true;
-  };
 
   # List services that you want to enable:
 
@@ -70,7 +51,6 @@
   programs.coolercontrol.enable = true;
   environment.systemPackages = with pkgs; [
     liquidctl
-    lact
   ];
 
   # This value determines the NixOS release from which the default
