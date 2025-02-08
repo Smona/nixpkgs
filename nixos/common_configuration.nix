@@ -41,7 +41,7 @@
     # Select internationalisation properties.
     i18n.defaultLocale = "en_US.utf8";
 
-    # We don't need to instll X11. We are so wayland!!
+    # We don't need to install X11. We are so wayland!!
     # services.xserver.enable = true;
     # Configure keymap in X11
     services.xserver.xkb = {
