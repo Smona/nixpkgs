@@ -182,6 +182,7 @@
 ;; Various editor enhancements
 
 ;; LSP config
+(setq lsp-use-plists t)
 
 (after! lsp-mode
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.node_modules\\'")
@@ -367,6 +368,7 @@
 ;; tested at time of writing.
 (use-package! exec-path-from-shell
   :config
+  (add-to-list 'exec-path-from-shell-variables "LSP_USE_PLISTS")
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize)))
 

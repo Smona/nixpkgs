@@ -41,7 +41,7 @@ in
   };
   home.file.".authinfo.gpg".source = ../dotfiles/authinfo.gpg;
   home.shellAliases = {
-    doom = "~/.emacs.d/bin/doom";
+    doom = "LSP_USE_PLISTS=true ~/.emacs.d/bin/doom";
     org-capture = "~/.emacs.d/bin/org-capture";
   };
 
