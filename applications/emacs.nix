@@ -77,6 +77,7 @@ in
     shfmt
 
     # Language servers
+    emacs-lsp-booster
     nodePackages.typescript-language-server
     vscode-langservers-extracted
     nodePackages.dockerfile-language-server-nodejs

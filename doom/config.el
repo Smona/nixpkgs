@@ -5,6 +5,7 @@
 
 (load! "doom-dashboard.el" doom-user-dir)
 (load! "org-config.el" doom-user-dir)
+(load! "lsp.el" doom-user-dir)
 (load! "../doom_vars.el")
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
