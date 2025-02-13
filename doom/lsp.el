@@ -33,6 +33,7 @@
 (after! lsp-mode
         (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.node_modules\\'")
         (setq lsp-clients-typescript-prefer-use-project-ts-server t)
+        (setq lsp-clients-typescript-tls-path "vtsls")
         (advice-add (if (progn (require 'json)
                         (fboundp 'json-parse-buffer))
                         'json-parse-buffer

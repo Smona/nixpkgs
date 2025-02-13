@@ -78,7 +78,7 @@ in
 
     # Language servers
     emacs-lsp-booster
-    nodePackages.typescript-language-server
+    vtsls # VSCode typescript language server
     vscode-langservers-extracted
     nodePackages.dockerfile-language-server-nodejs
     nodePackages.graphql-language-service-cli
