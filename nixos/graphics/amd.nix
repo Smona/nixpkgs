@@ -11,6 +11,9 @@
 
   # Load AMD driver for Xorg and Wayland
   boot.initrd.kernelModules = [ "amdgpu" ];
+  # fix occasional green artifacts in Hyprland:
+  # https://github.com/hyprwm/Hyprland/issues/2385
+  boot.kernelParams = [ "amdgpu.dcdebugmask=0x10" ];
   services.xserver.videoDrivers = [ "amdgpu" ];
 
   # Radeon GPU
