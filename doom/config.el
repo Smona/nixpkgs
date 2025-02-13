@@ -182,16 +182,6 @@
 
 ;; Various editor enhancements
 
-;; LSP config
-(setq lsp-use-plists t)
-
-(after! lsp-mode
-  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.node_modules\\'")
-  (setq lsp-clients-typescript-prefer-use-project-ts-server t))
-
-;; Format with prettier rather than ts-ls, for example
-(setq +format-with-lsp nil)
-
 ;; The following functions make it simpler to run syncthing in the background on systems that don't
 ;; have an init system, such as WSL.
 
