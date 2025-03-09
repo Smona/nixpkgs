@@ -267,7 +267,7 @@ in
         #mode,
         #idle_inhibitor,
         #mpd {
-          padding: 2px 10px;
+          padding: 0 10px;
           color: @text;
         }
 
