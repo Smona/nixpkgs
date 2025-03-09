@@ -154,7 +154,7 @@ in
               };
             };
             tray = {
-              spacing = 8;
+              spacing = 4;
             };
             "sway/window" = window_config;
             "hyprland/window" = window_config;
