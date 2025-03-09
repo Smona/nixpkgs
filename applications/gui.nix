@@ -35,12 +35,14 @@ in
       dconf-editor
       obsidian
 
+      # System utilities
       gparted
       gthumb
       shotwell
       file-roller
       (config.lib.nixGL.wrap keybase-gui)
       gcolor3
+      font-manager
 
       # Messaging apps not supported on darwin
       (config.lib.nixGL.wrap signal-desktop)
