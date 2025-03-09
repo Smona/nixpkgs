@@ -114,7 +114,7 @@
 
           modules = [
             nixos-wsl.nixosModules.wsl
-            home-manager.nixosModule
+            home-manager.nixosModules.home-manager
             ./nixos/luma-nixos/configuration.nix
           ];
         };

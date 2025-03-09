@@ -10,7 +10,7 @@
 
 {
   imports = [
-    inputs.home-manager.nixosModule
+    inputs.home-manager.nixosModules.home-manager
     ../common_configuration.nix
     inputs.catppuccin.nixosModules.catppuccin
     ./samba.nix
@@ -65,8 +65,8 @@
     networking.networkmanager.enable = true;
 
     # Enable sound with pipewire.
-    hardware.pulseaudio.enable = false;
     security.rtkit.enable = true;
+    services.pulseaudio.enable = false;
     services.pipewire = {
       enable = true;
       alsa.enable = true;

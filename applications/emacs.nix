@@ -6,24 +6,16 @@
 }:
 
 let
-  emacs = pkgs.emacs29-pgtk;
-  my-emacs =
-    (config.lib.nixGL.wrap (
+  emacs = pkgs.emacs-pgtk;
+  my-emacs = (
+    config.lib.nixGL.wrap (
       # TODO: replace with programs.emacs.extraPackages?
       (pkgs.emacsPackagesFor emacs).emacsWithPackages (epkgs: [
         epkgs.vterm
         epkgs.pdf-tools
       ])
-    )).overrideAttrs
-      (oldAttrs: {
-        # Temporarily working around this issue: https://github.com/NixOS/nixpkgs/issues/66706
-        # TODO: submit upstream fix
-        buildCommand =
-          oldAttrs.buildCommand
-          + ''
-            ln -s $emacs/share/emacs $out/share/emacs
-          '';
-      });
+    )
+  );
 in
 {
   programs.emacs = {
@@ -81,7 +73,6 @@ in
     vtsls # VSCode typescript language server
     vscode-langservers-extracted
     nodePackages.dockerfile-language-server-nodejs
-    nodePackages.graphql-language-service-cli
     python3Packages.grip # Required by grip-mode (markdown +grip)
 
     # Dirvish stuff
