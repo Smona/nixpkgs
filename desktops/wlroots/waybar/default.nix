@@ -35,7 +35,6 @@ in
               "(.*) — Firefox Developer Edition" = " $1";
               "(.*) – Doom Emacs" = " $1";
               "(.*) - vim" = " $1";
-              # "(.*) - kitty" = " $1";
             };
           };
           vertical_bar_icons = [
@@ -189,7 +188,7 @@ in
       style = ''
         * {
           /* `otf-font-awesome` is required to be installed for icons */
-          font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+          font-family: Symbols Nerd Font Mono, Roboto, Helvetica, Arial, sans-serif;
           font-size: 15px;
         }
 
