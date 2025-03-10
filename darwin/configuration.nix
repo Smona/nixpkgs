@@ -164,6 +164,7 @@
       # TODO: errors from homebrew on uninstall, programs aren't actually cleaned up.
       # This can likely be fixed by using nixpkgs emacs
       cleanup = "uninstall";
+      autoUpdate = true;
       upgrade = true;
     };
 
@@ -179,7 +180,7 @@
       {
         # TODO: emacs has to be manually aliased to /Applications for now:
         # osascript -e 'tell application "Finder" to make alias file to posix file "/opt/homebrew/opt/emacs-plus@29/Emacs.app" at POSIX file "/Applications"'
-        name = "emacs-plus@29";
+        name = "emacs-plus@30";
         args = [
           "with-xwidgets"
           "with-imagemagick"
