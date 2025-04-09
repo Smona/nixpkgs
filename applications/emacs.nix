@@ -37,14 +37,6 @@ in
     org-capture = "~/.emacs.d/bin/org-capture";
   };
 
-  systemd.user.services."emacs" = {
-    Unit.Description = "Start emacs at login";
-    Install.WantedBy = [ "graphical-session.target" ];
-    Service = {
-      ExecStart = "${my-emacs}/bin/emacs";
-    };
-  };
-
   home.packages = with pkgs; [
     # Python
     python3Packages.debugpy # Required by dap-mode
