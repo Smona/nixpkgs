@@ -10,6 +10,8 @@
     work = true;
   };
 
+  home.packages = with pkgs; [ colima ];
+
   # Set up the 1password SSH agent
   programs.ssh.extraConfig = ''
     IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
