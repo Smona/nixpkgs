@@ -75,6 +75,11 @@ in
       yarn
       nodePackages.prettier
 
+      # Universal dev tools
+      docker
+      docker-compose
+      kubectl
+
       # Fonts
       # Fonts I like, in order of preference: MonoLisa, Cascadia Code, FiraCode, Dank Mono, JetBrains Mono
       # Fonts to try: FantasqueSansMono, Inconsolata, Victor Mono
