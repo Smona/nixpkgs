@@ -113,7 +113,7 @@
           "${spotifyPackage}/Applications/Spotify.app"
           "${pkgs.slack}/Applications/Slack.app"
           "${pkgs.kitty}/Applications/kitty.app"
-          "/opt/homebrew/Cellar/emacs-plus@29/29.4/Emacs.app"
+          "/opt/homebrew/Cellar/emacs-plus@30/30.0.60/Emacs.app"
         ];
     };
 
