@@ -122,6 +122,11 @@
       NSGlobalDomain = {
         "com.apple.trackpad.scrolling" = 1.0;
       };
+      "com.apple.symbolichotkeys".AppleSymbolicHotKeys = {
+        # Disable ctrl+space for switching languages so it doesn't interfere with autocomplete.
+        "60".enabled = false;
+        "61".enabled = false;
+      };
     };
   };
 
