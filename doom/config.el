@@ -143,8 +143,6 @@
 (map! "<Forward>" #'next-buffer)
 
 ;; Scrolling customization
-(setq scroll-margin 6)
-
 ;; Enable horizontal scrolling
 (setq mouse-wheel-tilt-scroll t)
 (setq mouse-wheel-flip-direction nil)
@@ -262,7 +260,6 @@
 (setq warning-minimum-level :error)
 
 (add-to-list 'default-frame-alist '(alpha-background . 95))
-(pixel-scroll-precision-mode)
 
 (use-package! yuck-mode)
 
@@ -382,3 +379,10 @@
   :config
   (setq! company-posframe-quickhelp-delay 0.3)
   (company-posframe-mode 1))
+
+(use-package! ultra-scroll
+  :init
+  (setq scroll-conservatively 101 ; important!
+        scroll-margin 0)
+  :config
+  (ultra-scroll-mode 1))

@@ -93,3 +93,4 @@
 (package! catppuccin-theme)
 
 (package! atomic-chrome)
+(package! ultra-scroll :recipe (:host github :repo "jdtsmith/ultra-scroll"))
