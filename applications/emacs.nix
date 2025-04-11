@@ -56,7 +56,10 @@ in
     shfmt
 
     # Language servers
-    emacs-lsp-booster
+    # Overridden to enable building on darwin without building emacs from scratch.
+    ((emacs-lsp-booster.override { emacs = nil; }).overrideAttrs (prev: {
+      doCheck = false;
+    }))
     vtsls # VSCode typescript language server
     vscode-langservers-extracted
     nodePackages.dockerfile-language-server-nodejs
