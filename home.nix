@@ -37,10 +37,6 @@
     wireplumber
     appimage-run
     usbutils
-
-    # Universal dev tools
-    docker
-    docker-compose
   ];
 
   # Set up the 1password SSH agent
