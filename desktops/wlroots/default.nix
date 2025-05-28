@@ -52,7 +52,8 @@ in
       grim
       slurp
       playerctl
-      (rofimoji.override { rofi = my_rofi; })
+      my_rofi
+      rofimoji
       fusuma
       swaynotificationcenter
 
