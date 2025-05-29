@@ -16,7 +16,7 @@ in
 {
   imports = [
     inputs.dCachix.homeManagerModules.declarative-cachix
-    inputs.catppuccin.homeManagerModules.catppuccin
+    inputs.catppuccin.homeModules.catppuccin
     ./applications/shell.nix
     ./applications/tmux.nix
     ./applications/emacs.nix
@@ -125,7 +125,7 @@ in
       e = "$EDITOR";
       upgrade =
         if pkgs.stdenv.isDarwin then
-          "darwin-rebuild switch --flake ~/.config/nixpkgs"
+          "sudo darwin-rebuild switch --flake ~/.config/nixpkgs"
         else
           "sudo nixos-rebuild --flake ~/.config/nixpkgs";
       update = "cd ~/.config/nixpkgs && nix flake lock --update-input nixpkgs --update-input home-manager --update-input spicetify-nix && upgrade boot";

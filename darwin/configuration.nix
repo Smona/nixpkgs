@@ -59,10 +59,6 @@
     pinentry_mac
   ];
 
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
-  # nix.package = pkgs.nix;
-
   # Set Git commit hash for darwin-version.
   system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
 
@@ -78,6 +74,7 @@
   # Below: stuff added by me #
   ############################
 
+  system.primaryUser = config.smona.username;
   home-manager.users.${config.smona.username} = import ./home.nix;
 
   system.keyboard.enableKeyMapping = true;
@@ -113,7 +110,7 @@
           "${spotifyPackage}/Applications/Spotify.app"
           "${pkgs.slack}/Applications/Slack.app"
           "${pkgs.kitty}/Applications/kitty.app"
-          "/opt/homebrew/Cellar/emacs-plus@30/30.0.60/Emacs.app"
+          "/opt/homebrew/opt/emacs-plus/Emacs.app"
         ];
     };
 
@@ -131,7 +128,7 @@
   };
 
   # Enable TouchID sudo authentication
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   users.users.${config.smona.username} = {
     description = "Mel Bourgeois";
