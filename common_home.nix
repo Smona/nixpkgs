@@ -76,6 +76,8 @@ in
       nodePackages.prettier
 
       # Universal dev tools
+      git
+      git-filter-repo
       docker
       docker-compose
       kubectl
