@@ -91,6 +91,14 @@
     trackpad.Clicking = true;
     trackpad.Dragging = true;
 
+    # Make finder actually somewhat useful
+    finder = {
+      ShowPathbar = true;
+      ShowStatusBar = true;
+      # Default search to the current folder
+      FXDefaultSearchScope = "SCcf";
+    };
+
     dock = {
       autohide = true;
       # this is distracting and not super helpful for me
