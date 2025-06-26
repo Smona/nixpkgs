@@ -9,6 +9,7 @@
     curl
     jq # Format, slice and dice json on the command line.
     dig
+    whois
 
     ## cooler rust versions of basic GNU utilities
     fd # Better find
