@@ -183,7 +183,7 @@ in
           windowrulev2=pin,class:^(vlc)$
 
           # Float windows
-          windowrule=float,1Password
+          windowrule=float,title:1Password
           windowrule=float,class:xdg-desktop-portal-gtk
           # windowrule=size 20% 20%,title:(Extension: \(fx_cast\))
           # windowrule=center,title:(Extension: \(fx_cast\))
