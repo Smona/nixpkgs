@@ -72,8 +72,8 @@ in
       package = my_rofi;
       terminal = "${pkgs.kitty}/bin/kitty";
       theme = ./rofi-theme.rasi;
-      catppuccin.enable = false;
     };
+    catppuccin.rofi.enable = false;
 
     programs.wlogout = {
       enable = true;

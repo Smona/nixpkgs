@@ -9,15 +9,16 @@
     tmn = "tmux new -s";
   };
 
+  catppuccin.tmux.extraConfig = ''
+    set -g @catppuccin_window_left_separator ""
+    set -g @catppuccin_window_right_separator " "
+    set -g @catppuccin_window_middle_separator "█ "
+    set -g @catppuccin_status_modules_right "application session host"
+  '';
+
   programs.tmux = {
     enable = true;
     historyLimit = 500000;
-    catppuccin.extraConfig = ''
-      set -g @catppuccin_window_left_separator ""
-      set -g @catppuccin_window_right_separator " "
-      set -g @catppuccin_window_middle_separator "█ "
-      set -g @catppuccin_status_modules_right "application session host"
-    '';
     plugins = with pkgs.tmuxPlugins; [
       vim-tmux-navigator
       fpp

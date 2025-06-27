@@ -16,7 +16,7 @@
     ./samba.nix
     ./wlroots.nix
     ./boot.nix
-    ./greetd.nix
+    # ./greetd.nix
     ./realtime_audio.nix
   ];
 
@@ -50,7 +50,7 @@
     };
 
     # Enable the GNOME Desktop Environment.
-    # services.xserver.displayManager.gdm.enable = true;
+    services.displayManager.gdm.enable = true;
     # TODO: ensure that gnome is not enabled at the same time as wlroots.
     # This should probably just be an enum configuration option to guarantee that.
     # services.xserver.desktopManager.gnome.enable = true;

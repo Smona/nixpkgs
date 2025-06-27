@@ -58,8 +58,10 @@ in
 
     gtk.enable = true;
     # TODO integrate with greetd & theme file
-    gtk.catppuccin.enable = true;
-    gtk.catppuccin.icon.enable = true;
+    catppuccin.gtk = {
+      enable = true;
+      icon.enable = true;
+    };
     gtk.cursorTheme = (theme.cursor // { size = theme.cursorSize; });
     # gtk.theme = theme.gtk;
     # gtk.iconTheme = theme.icons;
