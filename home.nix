@@ -27,11 +27,6 @@
     # Programming languages
     gcc # required to compile some packages, e.g. emacsqlite
 
-    ## Rust
-    cargo
-    cargo-watch
-    rustc
-
     # system tools
     dmidecode
     wireplumber

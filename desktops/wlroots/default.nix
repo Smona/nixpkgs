@@ -52,7 +52,6 @@ in
       grim
       slurp
       playerctl
-      my_rofi
       rofimoji
       fusuma
       swaynotificationcenter
@@ -165,10 +164,6 @@ in
 
     services.swaync = {
       enable = true;
-      style = pkgs.fetchurl {
-        url = "https://github.com/catppuccin/swaync/releases/download/v0.2.3/macchiato.css";
-        hash = "sha256-LMm6nWn1JPPgj5YpppwFG3lXTtXem5atlIvqrDxd0bM=";
-      };
     };
   };
 
