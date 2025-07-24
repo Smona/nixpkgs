@@ -10,7 +10,10 @@
     work = true;
   };
 
-  home.packages = with pkgs; [ colima ];
+  home.packages = with pkgs; [
+    colima
+    vlc-bin
+  ];
 
   # Set up the 1password SSH agent
   programs.ssh.extraConfig = ''
