@@ -75,13 +75,6 @@ in
       yarn
       nodePackages.prettier
 
-      # Universal dev tools
-      git
-      git-filter-repo
-      docker
-      docker-compose
-      kubectl
-
       # Fonts
       # Fonts I like, in order of preference: MonoLisa, Cascadia Code, FiraCode, Dank Mono, JetBrains Mono
       # Fonts to try: FantasqueSansMono, Inconsolata, Victor Mono
@@ -107,64 +100,6 @@ in
         EDITOR = editor;
         GIT_EDITOR = editor;
       };
-
-    home.shellAliases = {
-      # Natural language commands
-      backup =
-        "sudo rsync -av --delete "
-        + "-e 'ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-rsa' "
-        + "--exclude-from='${./dotfiles/rsync-ignore.txt}' "
-        + "/ smona@192.168.0.198::NetBackup/$(hostname)";
-      diskspace = "df -P -kHl";
-      fonts = "fc-list";
-      bios = "sudo dmidecode -t bios";
-      fucking = "sudo";
-
-      # Shortcuts
-      c = "bat";
-      cat = "bat";
-      g = "git";
-      e = "$EDITOR";
-      upgrade =
-        if pkgs.stdenv.isDarwin then
-          "sudo darwin-rebuild switch --flake ~/.config/nixpkgs"
-        else
-          "NH_FLAKE=~/.config/nixpkgs nh os";
-      update = "cd ~/.config/nixpkgs && nix flake lock --update-input nixpkgs --update-input home-manager --update-input spicetify-nix && upgrade boot";
-      generations = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
-      hm = "home-manager --flake ~/.config/nixpkgs";
-      hms = "hm switch --max-jobs 4";
-      hmn = "hm news";
-      arch = "archive";
-      larch = "lsarchive";
-      uarch = "unarchive";
-
-      # Nix aliases
-      nd = "nix develop -c $SHELL";
-      ndp = "nix develop";
-      nb = "nix build";
-      ncg = "sudo nix-collect-garbage";
-
-      # Git aliases
-      gb = "git branch";
-      gcl = "git clone";
-      gd = "git diff";
-      gl = "git log";
-      gp = "git push -u origin HEAD";
-      gpu = "git pull --prune";
-      gs = "git status";
-      gss = "git status -s";
-      gst = "git stash";
-      gstp = "git stash pop";
-      gstl = "git stash list";
-
-      # Docker aliases
-      dcu = "docker compose up";
-      dcd = "docker compose down";
-      dce = "docker compose exec";
-      dcl = "docker compose logs -f";
-      dcr = "docker compose restart";
-    };
 
     programs.git = {
       enable = true;
