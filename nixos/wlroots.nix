@@ -84,4 +84,9 @@ in
   services.gnome.gnome-keyring.enable = true;
   programs.seahorse.enable = true;
   security.pam.services.gdm-password.enableGnomeKeyring = true;
+
+  # Auto-mount (and unmount) removable drives
+  services.devmon.enable = true;
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
 }

@@ -18,6 +18,7 @@ commonOptions
     "tablet_mode_switch"
     "gammastep-indicator -t 6500K:3200K -b 1.0:0.8"
     "swaync"
+    "${pkgs.udiskie}/bin/udiskie" # drive auto-mounting notifications via udisks2
     # Mostly just needed for 1password system authentication, so I can use the SSH agent
     # I used to use the gnome agent, but the deepin one just looks nicer, and appears to
     # be better maintained.
