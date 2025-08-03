@@ -98,6 +98,8 @@
     # Windows can break bluetooth or other features
     hardware.enableAllFirmware = true;
 
+    services.flatpak.enable = true;
+
     # Enable CUPS to print documents.
     services.printing = {
       enable = true;
