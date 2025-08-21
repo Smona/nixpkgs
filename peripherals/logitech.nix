@@ -16,7 +16,7 @@ in
       Unit.Description = "Unofficial userland driver for logitech devices";
       Install.WantedBy = [ "graphical-session.target" ];
       Service = {
-        ExecStart = "${pkgs.logiops}/bin/logid -c ${../dotfiles/logid.cfg}";
+        ExecStart = "${pkgs.logiops_0_2_3}/bin/logid -c ${../dotfiles/logid.cfg}";
         Restart = "on-failure";
         RestartSec = 2;
       };
