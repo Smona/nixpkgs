@@ -32,6 +32,7 @@
     wireplumber
     appimage-run
     usbutils
+    pciutils
   ];
 
   # Set up the 1password SSH agent
