@@ -59,7 +59,7 @@
     };
 
     # Set the system timezone
-    time.timeZone = "America/Chicago";
+    time.timeZone = "America/Denver";
 
     environment.systemPackages = with pkgs; [
       git
