@@ -60,11 +60,7 @@
     cat = "bat";
     g = "git";
     e = "$EDITOR";
-    upgrade =
-      if pkgs.stdenv.isDarwin then
-        "sudo darwin-rebuild switch --flake ~/.config/nixpkgs"
-      else
-        "NH_FLAKE=~/.config/nixpkgs nh os";
+    upgrade = if pkgs.stdenv.isDarwin then "nh darwin" else "nh os";
     update = "cd ~/.config/nixpkgs && nix flake lock --update-input nixpkgs --update-input home-manager --update-input spicetify-nix && upgrade boot";
     generations = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
     hm = "home-manager --flake ~/.config/nixpkgs";

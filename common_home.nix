@@ -101,6 +101,12 @@ in
         GIT_EDITOR = editor;
       };
 
+    # Enable nix CLI helper
+    programs.nh = {
+      enable = true;
+      flake = "$HOME/.config/nixpkgs";
+    };
+
     programs.git = {
       enable = true;
       userName = "Mel Bourgeois";

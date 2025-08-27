@@ -54,10 +54,6 @@
     # Note that this is required on darwin, since it loads the nix-darwin environment in the default shell on macos.
     programs.zsh.enable = true;
 
-    programs.nh = {
-      enable = true;
-    };
-
     # Set the system timezone
     time.timeZone = "America/Denver";
 
