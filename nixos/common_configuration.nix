@@ -97,6 +97,17 @@
 
     services.flatpak.enable = true;
 
+    # Better experience under high RAM pressure:
+
+    # Use compressed RAM as swap
+    zramSwap.enable = true;
+    # Enable systemd-oomd, matching fedora's options
+    systemd.oomd = {
+      enable = true;
+      enableRootSlice = true;
+      enableSystemSlice = true;
+    };
+
     # Enable CUPS to print documents.
     services.printing = {
       enable = true;
