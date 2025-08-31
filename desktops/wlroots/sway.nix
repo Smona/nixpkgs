@@ -93,7 +93,7 @@ in
                 + (if hk.primaryMod or false then "${modifier}+" else "")
                 + (if hk.shift or false then "Shift+" else "")
                 + hk.key;
-              value = "exec ${hk.command}";
+              value = "exec ${builtins.concatStringsSep " " hk.command}";
             }) commonOptions.keyBinds
           ))
         );

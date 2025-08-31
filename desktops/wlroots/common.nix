@@ -35,32 +35,41 @@ commonOptions
       primaryMod = true;
       shift = true;
       key = "e";
-      command = "wlogout";
+      command = [ "wlogout" ];
     }
     {
       primaryMod = true;
       key = "End";
-      command = cmd.goodbye;
+      command = [ cmd.goodbye ];
     }
     {
       secondaryMod = true;
       key = "space";
-      command = "rofi -show combi -combi-modes 'drun,ssh,run' -show-icons";
+      command = [
+        "rofi"
+        "-show"
+        "combi"
+        "-combi-modes"
+        "drun,ssh,run"
+        "-show-icons"
+      ];
     }
     {
       primaryMod = true;
       key = "period";
-      command = "exec rofimoji --skin-tone light";
-    }
-    {
-      secondaryMod = true;
-      key = "tab";
-      command = "rofi -show window -show-icons";
+      command = [
+        "rofimoji"
+        "--skin-tone"
+        "light"
+      ];
     }
     {
       primaryMod = true;
       key = "m";
-      command = "swaync-client -t";
+      command = [
+        "swaync-client"
+        "-t"
+      ];
     }
 
     # Application shortcuts
@@ -68,31 +77,34 @@ commonOptions
       ctrl = true;
       shift = true;
       key = "space";
-      command = "1password --quick-access";
+      command = [
+        "1password"
+        "--quick-access"
+      ];
     }
     {
       primaryMod = true;
       key = "e";
-      command = "nautilus";
+      command = [ "nautilus" ];
     }
     {
       primaryMod = true;
       key = "b";
-      command = "firefox";
+      command = [ "firefox" ];
     }
     {
       primaryMod = true;
       key = "k";
-      command = "kitty";
+      command = [ "kitty" ];
     }
     {
       key = "XF86MonBrightnessUp";
-      command = cmd.brighter;
+      command = [ cmd.brighter ];
       repeat = true;
     }
     {
       key = "XF86MonBrightnessDown";
-      command = cmd.darker;
+      command = [ cmd.darker ];
       repeat = true;
     }
 
@@ -100,78 +112,94 @@ commonOptions
     {
       primaryMod = true;
       key = "XF86AudioLowerVolume";
-      command = "${pkgs.playerctl}/bin/playerctl position 5-";
+      command = [
+        "${pkgs.playerctl}/bin/playerctl"
+        "position"
+        "5-"
+      ];
       allow_while_locked = true;
     }
     {
       primaryMod = true;
       key = "XF86AudioRaiseVolume";
-      command = "${pkgs.playerctl}/bin/playerctl position 5+";
+      command = [
+        "${pkgs.playerctl}/bin/playerctl"
+        "position"
+        "5+"
+      ];
       allow_while_locked = true;
     }
     {
       secondaryMod = true;
       key = "XF86AudioLowerVolume";
-      command = cmd.prev;
+      command = [ cmd.prev ];
       allow_while_locked = true;
     }
     {
       secondaryMod = true;
       key = "XF86AudioRaiseVolume";
-      command = cmd.next;
+      command = [ cmd.next ];
       allow_while_locked = true;
     }
     {
       ctrl = true;
       key = "XF86AudioLowerVolume";
-      command = "${pkgs.playerctl}/bin/playerctl volume 0.02-";
+      command = [
+        "${pkgs.playerctl}/bin/playerctl"
+        "volume"
+        "0.02-"
+      ];
       repeat = true;
       allow_while_locked = true;
     }
     {
       ctrl = true;
       key = "XF86AudioRaiseVolume";
-      command = "${pkgs.playerctl}/bin/playerctl volume 0.02+";
+      command = [
+        "${pkgs.playerctl}/bin/playerctl"
+        "volume"
+        "0.02+"
+      ];
       repeat = true;
       allow_while_locked = true;
     }
     {
       key = "XF86AudioLowerVolume";
-      command = cmd.softer;
+      command = [ cmd.softer ];
       repeat = true;
       allow_while_locked = true;
     }
     {
       key = "XF86AudioRaiseVolume";
-      command = cmd.louder;
+      command = [ cmd.louder ];
       repeat = true;
       allow_while_locked = true;
     }
     {
       key = "XF86AudioMute";
-      command = cmd.mute;
+      command = [ cmd.mute ];
       allow_while_locked = true;
     }
     {
       key = "XF86AudioPlay";
-      command = cmd.play;
+      command = [ cmd.play ];
       allow_while_locked = true;
     }
     {
       key = "XF86AudioPrev";
-      command = cmd.prev;
+      command = [ cmd.prev ];
       allow_while_locked = true;
     }
     {
       key = "XF86AudioNext";
-      command = cmd.next;
+      command = [ cmd.next ];
       allow_while_locked = true;
     }
     {
       primaryMod = true;
       shift = true;
       key = "a";
-      command = cmd.tao;
+      command = [ cmd.tao ];
     }
   ];
 }

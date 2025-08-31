@@ -444,7 +444,7 @@ in
                     ++ (lib.lists.optional hk.secondaryMod or false "Alt")
                     ++ [ hk.key ]
                   )
-                } { spawn \"bash\" \"-c\" \"${hk.command}\"; }"
+                } { spawn ${builtins.concatStringsSep " " (builtins.map (arg: "\"${arg}\"") hk.command)}; }"
               ) commonOptions.keyBinds
             ))
           }

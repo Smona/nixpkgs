@@ -217,7 +217,7 @@ in
                     ++ (lib.lists.optional hk.primaryMod or false mod)
                     ++ (lib.lists.optional hk.secondaryMod or false "ALT")
                   )
-                },${hk.key},exec,${hk.command}"
+                },${hk.key},exec,${builtins.concatStringsSep " " hk.command}"
               ) commonOptions.keyBinds
             ))
           }
