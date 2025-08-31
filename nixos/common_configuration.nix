@@ -161,15 +161,6 @@
       "1.0.0.1"
     ];
 
-    # FIXME: now that MLS is retired we're using google location services, and
-    # just borrowing Arch's geolocation API key, 💙
-    # TODO: get filesystem secret deployment set up with our own API key,
-    # or find a suitable public alternative
-    # https://github.com/NixOS/nixpkgs/issues/321121
-    services.geoclue2.geoProviderUrl = ''
-      https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDwr302FpOSkGRpLlUpPThNTDPbXcIn_FM
-    '';
-
     # Required for fx_cast, and possible geoclue
     services.avahi = {
       enable = true;
