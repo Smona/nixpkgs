@@ -126,7 +126,8 @@ in
     };
 
     wayland.windowManager.sway.enable = true;
-    wayland.windowManager.hyprland.enable = true;
+    # disabled as it interferes with niri screenshare
+    # wayland.windowManager.hyprland.enable = true;
 
     services.fusuma = {
       enable = true;
