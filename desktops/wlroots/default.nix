@@ -16,6 +16,7 @@ in
     inputs.wayland-pipewire-idle-inhibit.homeModules.default
     ./waybar
     ./eww.nix
+    ./niri.nix
     ./sway.nix
     ./hyprland.nix
   ];

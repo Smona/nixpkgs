@@ -62,6 +62,7 @@ in
 
   programs.hyprland.enable = true;
   programs.sway.enable = true;
+  programs.niri.enable = true;
   programs.hyprlock.enable = true;
   programs.nm-applet.enable = true; # GUI WIFI tool for WMs
 
