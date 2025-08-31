@@ -76,7 +76,7 @@ in
   xdg.portal = {
     enable = true;
     # fix GTK theming in hyprland
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
     wlr.enable = true;
   };
 
