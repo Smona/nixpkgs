@@ -4,7 +4,16 @@
   lib,
   ...
 }:
-{
+let
+  # Aliases that only work and/or are needed outside of nushell:
+  posixAliases = {
+    l = "ls -1a";
+    ls = "eza -gHh --git --group-directories-first";
+    ll = "ls -l --icons"; # icons mess up alignment in grid view
+    nd = "nix develop -c $SHELL";
+    update = "cd ~/.config/nixpkgs && nix flake lock --update-input nixpkgs --update-input home-manager --update-input spicetify-nix && upgrade switch";
+  };
+in {
   programs.fzf.enable = true;
   programs.zoxide.enable = true;
   programs.less.enable = true;
@@ -30,7 +39,6 @@
     dua # disk usage analyzer
 
     # nix-specific utilities
-    vulnix
     nix-tree
 
     # Fun
@@ -59,9 +67,7 @@
     c = "bat";
     cat = "bat";
     g = "git";
-    e = "$EDITOR";
     upgrade = if pkgs.stdenv.isDarwin then "nh darwin" else "nh os";
-    update = "cd ~/.config/nixpkgs && nix flake lock --update-input nixpkgs --update-input home-manager --update-input spicetify-nix && upgrade boot";
     generations = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
     hm = "home-manager --flake ~/.config/nixpkgs";
     hms = "hm switch --max-jobs 4";
@@ -71,7 +77,6 @@
     uarch = "unarchive";
 
     # Nix aliases
-    nd = "nix develop -c $SHELL";
     ndp = "nix develop";
     nb = "nix build";
     ncg = "sudo nix-collect-garbage";
@@ -97,10 +102,7 @@
     dcr = "docker compose restart";
 
     # Better ls
-    l = "ls -1a";
-    ls = "eza -gHh --git --group-directories-first";
     la = "ls -a";
-    ll = "ls -l --icons"; # icons mess up alignment in grid view
     lla = "ll -a";
     lal = "ll -a";
     # Better terraform
@@ -111,6 +113,11 @@
     tfd = "tf destroy";
     # Better kubernetes
     k = "kubectl";
+  };
+  programs.bash.shellAliases = posixAliases;
+  programs.zsh.shellAliases = posixAliases;
+  programs.nushell.shellAliases = {
+    ll = "ls -l";
   };
 
   # Better 🐱
