@@ -44,6 +44,8 @@ in
       gcolor3
       font-manager
 
+      electricsheep
+
       # Messaging apps not supported on darwin
       (config.lib.nixGL.wrap signal-desktop)
 
