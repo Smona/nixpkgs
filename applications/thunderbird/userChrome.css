@@ -1,0 +1,8 @@
+/* remove ugly selected thing on left of selection in folder pane */
+:is(ul, ol)[role="tree"] {
+    & .container {
+        &::before {
+            display: none !important;
+        }
+    }
+}

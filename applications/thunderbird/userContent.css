@@ -1,0 +1,64 @@
+:root {
+    font-size: 17px;
+}
+
+.moz-text-html {
+    line-height: 1.6;
+    padding: 1.5em 0.5em;
+    font-size: 1.1rem;
+}
+
+.moz-text-html img {
+    display: block;
+    height: auto !important;
+    margin-bottom: 1em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.moz-text-html figcaption {
+    text-align: center;
+}
+
+.moz-text-html figure {
+    margin-block: 2em;
+    margin-inline: 0;
+}
+
+.moz-text-html h1,
+.moz-text-html h2,
+.moz-text-html h3,
+.moz-text-html h4,
+.moz-text-html h5,
+.moz-text-html h6,
+.moz-text-html ul,
+.moz-text-html ol,
+.moz-text-html hr,
+.moz-text-html p {
+    max-width: 50rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+.moz-text-html li {
+    margin-bottom: 0.5em;
+}
+
+/* Only targeting direct ancestors so we don't mess up reply chain styling. */
+.moz-text-html > blockquote {
+    max-width: 45rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0.25rem 3rem;
+    font-style: italic;
+    font-weight: bold;
+    position: relative;
+}
+.moz-text-html > blockquote::before {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 100%;
+    left: 2rem;
+    top: 0;
+    background-color: LinkText;
+}

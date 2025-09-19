@@ -15,6 +15,7 @@ in
   imports = [
     ./firefox.nix
     ./terminal.nix
+    ./thunderbird
     inputs.spicetify-nix.homeManagerModules.default
   ];
 
