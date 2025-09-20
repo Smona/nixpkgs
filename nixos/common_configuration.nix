@@ -166,5 +166,8 @@
       enable = true;
       nssmdns4 = true;
     };
+
+    # Set the system timezone automatically
+    services.automatic-timezoned.enable = true;
   };
 }
