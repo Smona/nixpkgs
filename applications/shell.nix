@@ -143,8 +143,6 @@ in
     };
   };
 
-  home.file.".p10k.zsh".source = config.lib.file.mkOutOfStoreSymlink ../dotfiles/p10k.zsh;
-
   # This is required to properly set up the login shell on some linux systems,
   # even if I don't really use bash.
   programs.bash.enable = true;
@@ -153,6 +151,10 @@ in
     enable = true;
     configFile.source = ./config.nu;
   };
+  programs.oh-my-posh = {
+    enable = true;
+    settings = builtins.fromTOML (builtins.readFile ./oh-my-posh.config.toml);
+  };
 
   programs.zsh = {
     enable = true;
@@ -160,44 +162,30 @@ in
       extended = true;
       size = 1000000000; # Probably enough 😉
     };
-    initContent = lib.mkMerge [
-      (lib.mkBefore ''
-        # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-        # Initialization code that may require console input (password prompts, [y/n]
-        # confirmations, etc.) must go above this block; everything else may go below.
-        if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
-          source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
-        fi
-      '')
-      ''
-        export SSH_AUTH_SOCK=${config.home.homeDirectory}/.1password/agent.sock
+    initContent = ''
+      export SSH_AUTH_SOCK=${config.home.homeDirectory}/.1password/agent.sock
 
-        # Set up nix paths
-        if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+      # Set up nix paths
+      if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
-        # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-        [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-        (( ! ''${+functions[p10k]} )) || p10k finalize
+      # Automatically list directory contents on `cd`.
+      auto-ls () {
+        emulate -L zsh;
+        eza --group-directories-first
+      }
+      chpwd_functions=( auto-ls $chpwd_functions )
 
-        # Automatically list directory contents on `cd`.
-        auto-ls () {
-          emulate -L zsh;
-          eza --group-directories-first
-        }
-        chpwd_functions=( auto-ls $chpwd_functions )
+      # Create a new directory and enter it
+      function md() {
+        mkdir -p "$@" && cd "$@"
+      }
 
-        # Create a new directory and enter it
-        function md() {
-          mkdir -p "$@" && cd "$@"
-        }
+      # Prevent extended glob from breaking nix flake URLs
+      alias nix="noglob nix"
 
-        # Prevent extended glob from breaking nix flake URLs
-        alias nix="noglob nix"
-
-        ## Source local extra (private) settings specific to machine if it exists
-        [ -f ~/.zsh.local ] && source ~/.zsh.local
-      ''
-    ];
+      ## Source local extra (private) settings specific to machine if it exists
+      [ -f ~/.zsh.local ] && source ~/.zsh.local
+    '';
     plugins = [
       {
         # Use zsh for nix-shell
@@ -234,6 +222,5 @@ in
       # Expand ... -> ../.. recursively
       dotExpansion = true;
     };
-    prompt.theme = "powerlevel10k";
   };
 }

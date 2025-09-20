@@ -1,0 +1,173 @@
+"$schema" = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json"
+final_space = true
+version = 3
+
+[[blocks]]
+alignment = "left"
+type = "prompt"
+
+    # Just to put a newline above the prompt
+    [[blocks.segments]]
+    type = "text"
+    template = "\n"
+    background = "p:surface"
+
+    [[blocks.segments]]
+    type = "status"
+    template = " {{ .String }}  "
+    foreground = "p:red"
+
+    [[blocks.segments]]
+    type = "executiontime"
+    template = " {{ .FormattedMs }} "
+    foreground = "p:yellow"
+    [blocks.segments.properties]
+    threshold = 1500
+
+[[blocks]]
+alignment = "left"
+newline = true
+type = "prompt"
+
+    # Just to put a newline above the prompt
+    [[blocks.segments]]
+    type = "text"
+    template = "\n"
+    background = "p:surface"
+
+    [[blocks.segments]]
+    type = "os"
+    template = " {{.Icon}} "
+    foreground = "p:os"
+    background = "p:surface"
+    style = "diamond"
+    leading_diamond = ""
+
+    [[blocks.segments]]
+    type = "session"
+    template = "{{ .UserName }}<p:os>@</>{{ .HostName }}"
+    foreground = "p:blue"
+    background = "p:surface"
+    style = "powerline"
+
+    [[blocks.segments]]
+    type = "time"
+    background = "p:surface"
+    style = "powerline"
+
+    [[blocks.segments]]
+    type = "path"
+    template = "{{ .Path }}"
+    foreground = "p:pink"
+    background = "p:surface"
+    style = "powerline"
+    powerline_symbol = ""
+
+        [blocks.segments.properties]
+        folder_icon = ""
+        # folder_separator_icon = " "
+        home_icon = "~"
+        style = "fish"
+        dir_length = 4
+        full_length_dirs = 2
+        max_width = 80
+
+    [[blocks.segments]]
+    type = "git"
+    template = "<p:os>on</> {{ if .UpstreamIcon }}{{ .UpstreamIcon }} {{ end}}{{ .HEAD }} {{ .Working.String }}{{ if gt .StashCount 0 }} {{ end }} "
+    foreground = "p:lavender"
+    background = "p:surface"
+    style = "powerline"
+    powerline_symbol = ""
+
+        [blocks.segments.properties]
+        branch_icon = ""
+        cherry_pick_icon = ""
+        commit_icon = ""
+        fetch_status = true
+        fetch_upstream_icon = true
+        merge_icon = ""
+        no_commits_icon = ""
+        rebase_icon = ""
+        revert_icon = ""
+        tag_icon = ""
+
+    [[blocks.segments]]
+    type = "nix-shell"
+    template = '{{ if eq .Type "pure" }}{{ end }} '
+    foreground = "p:sapphire"
+    background = "p:surface"
+    style = "powerline"
+    powerline_symbol = ""
+
+    [[blocks.segments]]
+    type = "node"
+    template = " 󰎙 {{.Full}} {{.PackageManagerIcon}} "
+    foreground = "p:green"
+
+        [blocks.segments.properties]
+        fetch_package_manager = true
+
+    [[blocks.segments]]
+    type = "python"
+    template = "  {{ .Full }}{{ if .Venv }} {{ .Venv }}{{ end }} "
+    foreground = "p:yellow"
+
+        [blocks.segments.properties]
+        display_mode = "context"
+
+    [[blocks.segments]]
+    type = "rust"
+    template = "  {{ .Full }}{{ if .Prerelease }} {{ .Prerelease }} {{ end }} "
+    foreground = "p:peach"
+
+    [[blocks.segments]]
+    type = "terraform"
+    template = "  {{.WorkspaceName}}{{.Version}} "
+    foreground = "p:mauve"
+
+        [blocks.segments.properties]
+        # TODO: doesn't seem to be working, at least with local execution
+        fetch_version = true
+
+    [[blocks.segments]]
+    type = "docker"
+    template = "  {{ .Context }} "
+    foreground = "p:blue"
+
+    [[blocks.segments]]
+    type = "aws"
+    template = "  {{.Profile}}{{if .Region}}@{{.Region}}{{end}}"
+    foreground = "p:maroon"
+
+        [blocks.segments.properties]
+        display_default = false
+
+[[blocks]]
+alignment = "left"
+newline = true
+type = "prompt"
+
+    [[blocks.segments]]
+    type = "text"
+    foreground = "p:red"
+    foreground_templates = ["{{ if eq .Code 0 }}p:green{{ end }}"]
+    template = ""
+
+# Catppuccin Mocha
+[palette]
+os = "#ACB0BE"
+closer = "p:os"
+pink = "#F5C2E7"
+lavender = "#B4BEFE"
+blue = "#89B4FA"
+green = "#a6e3a1"
+red = "#f38ba8"
+sky = "#89dceb"
+sapphire = "#74c7ec"
+mauve = "#cba6f7"
+maroon = "#eba0ac"
+peach = "#fab387"
+yellow = "#f9e2af"
+
+surface = "#313244"
