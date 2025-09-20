@@ -13,7 +13,8 @@ let
     nd = "nix develop -c $SHELL";
     update = "cd ~/.config/nixpkgs && nix flake lock --update-input nixpkgs --update-input home-manager --update-input spicetify-nix && upgrade switch";
   };
-in {
+in
+{
   programs.fzf.enable = true;
   programs.zoxide.enable = true;
   programs.less.enable = true;
@@ -118,6 +119,7 @@ in {
   programs.zsh.shellAliases = posixAliases;
   programs.nushell.shellAliases = {
     ll = "ls -l";
+    fg = "job unfreeze";
   };
 
   # Better 🐱
@@ -147,7 +149,10 @@ in {
   # even if I don't really use bash.
   programs.bash.enable = true;
 
-  programs.nushell.enable = true;
+  programs.nushell = {
+    enable = true;
+    configFile.source = ./config.nu;
+  };
 
   programs.zsh = {
     enable = true;
