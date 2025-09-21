@@ -126,6 +126,7 @@ in
           "text/html" = browser;
           "application/xhtml+xml" = browser;
           "x-scheme-handler/https" = browser;
+          "x-scheme-handler/mailto" = "thunderbird.desktop";
           "image/png" = imageViewer;
           "image/jpeg" = imageViewer;
         };
