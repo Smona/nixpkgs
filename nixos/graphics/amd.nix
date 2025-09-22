@@ -26,6 +26,7 @@
     };
     enable = true;
   };
+  hardware.amdgpu.overdrive.enable = true;
 
   environment.systemPackages = [ pkgs.lact ];
 }
