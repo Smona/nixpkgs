@@ -76,7 +76,19 @@
         address = "mel@cobaltai.com";
         flavor = "gmail.com";
         realName = "Mel Bourgeois";
-        thunderbird.enable = true;
+        thunderbird = {
+          enable = true;
+          settings = id: {
+            # Enable HTML in signature
+            "mail.identity.id_${id}.htmlSigFormat" = true;
+            # Include signature on forwards
+            "mail.identity.id_${id}.sig_on_fwd" = true;
+          };
+        };
+        signature = {
+          text = (builtins.readFile ./cobalt_signature.html);
+          showSignature = "append";
+        };
       };
     };
 
@@ -151,5 +163,4 @@
       };
     };
   };
-
 }
