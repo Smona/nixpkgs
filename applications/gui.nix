@@ -61,11 +61,18 @@ in
 
     gtk.enable = true;
     # TODO integrate with greetd & theme file
-    catppuccin.gtk = {
-      enable = true;
-      icon.enable = true;
-    };
+    catppuccin.gtk.icon.enable = true;
     gtk.cursorTheme = (theme.cursor // { size = theme.cursorSize; });
+    # de-deprecate catppuccin.gtk.enable 😁
+    gtk.theme = {
+      name = "catppuccin-mocha-mauve-standard";
+      package = pkgs.catppuccin-gtk.override {
+        size = "standard";
+        accents = [ "mauve" ];
+        variant = "mocha";
+      };
+    };
+
     # gtk.theme = theme.gtk;
     # gtk.iconTheme = theme.icons;
     qt.enable = true;

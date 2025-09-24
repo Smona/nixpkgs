@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 
 {
+  # This requires declarative extensions, and i already found a theme i like.
+  catppuccin.firefox.enable = false;
   programs.firefox = {
     package = (config.lib.nixGL.wrap config.pkgsCompat.firefox);
     nativeMessagingHosts = [ pkgs.fx_cast_bridge ];
