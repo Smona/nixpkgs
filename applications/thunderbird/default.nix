@@ -83,6 +83,10 @@
             "mail.identity.id_${id}.htmlSigFormat" = true;
             # Include signature on forwards
             "mail.identity.id_${id}.sig_on_fwd" = true;
+            # Reply before the quoted text (gmail style)
+            "mail.identity.id_${id}.reply_on_top" = 1;
+            # Signature before the quoted text (gmail style)
+            "mail.identity.id_${id}.sig_bottom" = false;
           };
         };
         signature = {
