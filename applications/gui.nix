@@ -136,6 +136,7 @@ in
           "x-scheme-handler/mailto" = "thunderbird.desktop";
           "image/png" = imageViewer;
           "image/jpeg" = imageViewer;
+          "inode/directory" = "org.gnome.Nautilus.desktop";
         };
       associations.added =
         let
