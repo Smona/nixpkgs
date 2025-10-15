@@ -77,6 +77,13 @@
   system.primaryUser = config.smona.username;
   home-manager.users.${config.smona.username} = import ./home.nix;
 
+  # Set default apps for media types
+  system.activationScripts.setDefaultApps = {
+    text = ''
+      ${pkgs.duti}/bin/duti -s org.nixos.thunderbird mailto
+    '';
+  };
+
   system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToEscape = true;
   system.defaults = {
