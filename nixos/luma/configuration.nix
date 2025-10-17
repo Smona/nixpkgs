@@ -15,6 +15,7 @@
     ../common_configuration.nix
     ../dualboot.nix
     ../graphics/amd.nix
+    ../cpu/amd.nix
   ];
 
   smona.username = "mel";
