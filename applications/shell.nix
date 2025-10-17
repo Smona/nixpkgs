@@ -120,6 +120,7 @@ in
   programs.nushell.shellAliases = {
     ll = "ls -l";
     fg = "job unfreeze";
+    unixstamp = "into datetime -f %s";
   };
 
   # Better 🐱
