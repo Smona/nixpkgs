@@ -392,10 +392,13 @@
                                        ("[X]" . "")
                                        ("lambda" . 955)))
 (add-hook 'org-mode-hook 'prettify-symbols-mode)
-;; Hide bullets for headings with TODO states in favor of the prettified icon
-(setq! org-superstar-special-todo-items 'hide)
-(setq! org-superstar-remove-leading-stars t)
-(setq! org-hide-leading-stars nil)
+(use-package! org-superstar
+  :config
+        ;; Hide bullets for headings with TODO states in favor of the prettified icon
+        (setq! org-superstar-special-todo-items 'hide)
+        (setq! org-superstar-remove-leading-stars t)
+        (add-hook 'org-mode-hook 'org-superstar-mode)
+  )
 (setq! org-startup-indented nil)
 (setq! org-indent-mode-turns-on-hiding-stars nil)
 (use-package! org-visual-indent
