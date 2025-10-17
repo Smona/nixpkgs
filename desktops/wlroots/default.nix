@@ -63,11 +63,6 @@ in
       rot8
     ];
 
-    services.flameshot = {
-      enable = true;
-      # settings = {};
-    };
-
     programs.rofi = {
       enable = true;
       package = my_rofi;
