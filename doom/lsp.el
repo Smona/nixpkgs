@@ -41,3 +41,10 @@
                 :around
                 #'lsp-booster--advice-json-parse)
         (advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command))
+
+;; Tailwind CSS support
+(use-package! lsp-tailwindcss
+  :init
+  (setq lsp-tailwindcss-add-on-mode t
+        lsp-tailwindcss-server-path (executable-find "tailwindcss-language-server")
+        ))

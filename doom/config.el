@@ -295,11 +295,6 @@
 (after! terraform-mode
         (setq terraform-format-on-save t))
 
-;; Tailwind CSS support
-(use-package! lsp-tailwindcss
-  :init
-  (setq lsp-tailwindcss-add-on-mode t))
-
 (use-package! jtsx
    :mode (("\\.jsx?\\'" . jtsx-jsx-mode)
          ("\\.tsx\\'" . jtsx-tsx-mode)

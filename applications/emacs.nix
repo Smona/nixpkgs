@@ -65,6 +65,7 @@ in
     nodePackages.dockerfile-language-server-nodejs
     python3Packages.grip # Required by grip-mode (markdown +grip)
     glslang # glsl-mode intellisense
+    tailwindcss-language-server
 
     # Dirvish stuff
     ffmpegthumbnailer
