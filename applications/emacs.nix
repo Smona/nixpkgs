@@ -62,7 +62,7 @@ in
     }))
     vtsls # VSCode typescript language server
     vscode-langservers-extracted
-    nodePackages.dockerfile-language-server-nodejs
+    nodePackages.dockerfile-language-server
     python3Packages.grip # Required by grip-mode (markdown +grip)
     glslang # glsl-mode intellisense
     tailwindcss-language-server
