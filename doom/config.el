@@ -163,15 +163,8 @@
 ;; Always use indentation of 2 for JSON
 (add-hook! 'json-mode-hook (setq-local js-indent-level 2))
 
-;; (after! magit
-;; magit-delta is disabled until they fix the performance on large diffs:
-;; https://github.com/dandavison/magit-delta/issues/9
-;; (add-hook 'magit-mode-hook (lambda () (magit-delta-mode +1)))
-
-;; Performance optimizations
-;; https://magit.vc/manual/magit/Performance.html
-;; Disabled since magit-delta was causing most of the performance issues
-;; (setq magit-refresh-status-buffer nil))
+(after! magit
+(add-hook 'magit-mode-hook (lambda () (magit-delta-mode +1))))
 
 ;; Don't require saving a file to update the git gutters.
 ;; NOTE: keep an eye on the performance of this convenience feature.

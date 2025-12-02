@@ -58,7 +58,7 @@
 
 (package! ox-slack)
 
-;; (package! magit-delta)
+(package! magit-delta)
 
 (package! dirvish)
 
