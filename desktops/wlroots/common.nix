@@ -28,6 +28,7 @@ commonOptions
     "wpctl set-volume 43 50%"
     "firefox"
     "emacs"
+    "thunderbird"
   ] ++ (pkgs.lib.lists.optional hasBuiltinDisplay "rot8");
   execAlways = [ "swaybg -i ${cfg.wallpaper} -m fill" ];
   keyBinds = [
