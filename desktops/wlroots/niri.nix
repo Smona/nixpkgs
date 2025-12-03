@@ -433,9 +433,6 @@ in
             (builtins.concatStringsSep "\n" (
               builtins.map (
                 hk:
-                # bindCommand = "bind${if hk.repeat or false then "e" else ""}${
-                #   if hk.allow_while_locked or false then "l" else ""
-                # }";
                 "${
                   builtins.concatStringsSep "+" (
                     (lib.lists.optional hk.ctrl or false "Ctrl")
@@ -444,6 +441,8 @@ in
                     ++ (lib.lists.optional hk.secondaryMod or false "Alt")
                     ++ [ hk.key ]
                   )
+                } ${
+                  if hk.allow_while_locked or false then "allow-when-locked=true" else ""
                 } { spawn ${builtins.concatStringsSep " " (builtins.map (arg: "\"${arg}\"") hk.command)}; }"
               ) commonOptions.keyBinds
             ))
