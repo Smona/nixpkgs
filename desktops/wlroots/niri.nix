@@ -615,8 +615,8 @@ in
         // * adjust width as a percentage of screen width: "-10%" or "+10%"
         // Pixel sizes use logical, or scaled, pixels. I.e. on an output with scale 2.0,
         // set-column-width "100" will make the column occupy 200 physical screen pixels.
-        Mod+Minus { set-column-width "-10%"; }
-        Mod+Equal { set-column-width "+10%"; }
+        Mod+Minus { set-column-width "-5%"; }
+        Mod+Equal { set-column-width "+5%"; }
 
         // Finer height adjustments when in column with other windows.
         Mod+Shift+Minus { set-window-height "-10%"; }
