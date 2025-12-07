@@ -59,7 +59,10 @@
     users.defaultUserShell = pkgs.zsh;
 
     # Enable networking with networkmanager
-    networking.networkmanager.enable = true;
+    networking.networkmanager = {
+      enable = true;
+      plugins = with pkgs; [ networkmanager-openvpn ];
+    };
 
     # Enable sound with pipewire.
     security.rtkit.enable = true;
