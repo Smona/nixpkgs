@@ -34,13 +34,9 @@
         isDefault = true;
         userChrome = builtins.readFile ./userChrome.css;
         userContent = builtins.readFile ./userContent.css;
-        feedAccounts = {
-          "RSS Feeds" = { };
-        };
         accountsOrder = [
           "Personal"
           "Work"
-          "RSS Feeds"
         ];
         # Config reference: https://kb.mozillazine.org/Mail_and_news_settings
         settings = {
