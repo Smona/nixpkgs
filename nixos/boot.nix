@@ -1,7 +1,11 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   config = {
+  # Use latest kernel for more stable WiFi connection
+  # https://forums.linuxmint.com/viewtopic.php?t=450654
+  boot.kernelPackages = pkgs.linuxPackages_6_18;
+
     # Bootloader.
     boot.loader = {
       efi = {

@@ -61,6 +61,8 @@
     # Enable networking with networkmanager
     networking.networkmanager = {
       enable = true;
+      # Can improve WiFi connection reliability
+      wifi.powersave = false;
       plugins = with pkgs; [ networkmanager-openvpn ];
     };
 
