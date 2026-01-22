@@ -53,6 +53,7 @@ in
       freecad
 
       # Media apps
+      newsflash # RSS feed reader
       (config.lib.nixGL.wrap libreoffice-fresh)
       (config.lib.nixGL.wrap vlc)
       xournalpp
