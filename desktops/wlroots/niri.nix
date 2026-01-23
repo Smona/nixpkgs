@@ -373,6 +373,7 @@ in
     window-rule {
         match title="doom-capture"
         open-floating true
+        open-focused true
     }
 
     // Open the Firefox picture-in-picture player as floating by default.
@@ -607,10 +608,7 @@ in
         // Makes the column "fill the rest of the space".
         Mod+Ctrl+F { expand-column-to-available-width; }
 
-        Mod+C { center-column; }
-
-        // Center all fully visible columns on screen.
-        Mod+Ctrl+C { center-visible-columns; }
+        Mod+Shift+C { center-column; }
 
         // Finer width adjustments.
         // This command can also:

@@ -202,5 +202,10 @@ commonOptions
       key = "a";
       command = [ cmd.tao ];
     }
+    {
+      primaryMod = true;
+      key = "c";
+      command = [ "~/.emacs.d/bin/org-capture" ];
+    }
   ];
 }

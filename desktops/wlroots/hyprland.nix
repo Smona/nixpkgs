@@ -101,8 +101,6 @@ in
           ${(builtins.concatStringsSep "\n" (builtins.map (cmd: "exec-once=${cmd}") commonOptions.execStart))}
           ${(builtins.concatStringsSep "\n" (builtins.map (cmd: "exec=${cmd}") commonOptions.execAlways))}
 
-          bind=SUPER,C,killactive,
-
           input {
               kb_file=
               kb_layout=us,us
@@ -227,8 +225,6 @@ in
           bind=${mod},S,togglesplit,
           bind=${mod}_SHIFT,Q,killactive,
           bind=,Print,exec,${pkgs.grimblast}/bin/grimblast --notify copysave area
-
-          bind=Control_L&Alt_L,C,exec,~/.emacs.d/bin/org-capture
 
           bind=${mod},${left},movefocus,l
           bind=${mod},${right},movefocus,r
