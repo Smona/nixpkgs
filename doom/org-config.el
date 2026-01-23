@@ -66,6 +66,9 @@
       :ni "C-<return>" #'org-insert-heading-respect-content)
 
 (after! org
+        ;; properly define stuck projects
+        (setq org-stuck-projects
+                '("+TODO=\"PROJ\"" ("TODO" "STRT") nil "") )
         ;; Use non-monospace font by default in org mode
         (add-hook 'org-mode-hook 'variable-pitch-mode)
         ;; (add-hook 'org-mode-hook 'my/org-local-hook)
