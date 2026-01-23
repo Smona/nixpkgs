@@ -370,6 +370,11 @@ in
         default-column-width {}
     }
 
+    window-rule {
+        match title="doom-capture"
+        open-floating true
+    }
+
     // Open the Firefox picture-in-picture player as floating by default.
     window-rule {
         // This app-id regular expression will work for both:
