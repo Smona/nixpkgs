@@ -305,6 +305,17 @@
         ;; Hide text formatting characters in org mode
         (setq org-hide-emphasis-markers t))
 
+       (setq org-agenda-custom-commands
+        '(
+        ;; ("i" "Inbox" tags-todo "+TODO=\"TODO\""
+        ;;         ((org-agenda-files (file-expand-wildcards "~/pim/gtd/inbox.org"))))
+        ("n" "Next actions" tags-todo "+TODO=\"TODO\"|TODO=\"STRT\"")
+        ("p" "Projects" tags-todo "+TODO=\"PROJ\"")
+        ("w" "Waiting" tags-todo "+TODO=\"WAIT\"")
+        ("i" "Ideas for Someday" tags-todo "+TODO=\"IDEA\"")
+        ;; ("o" "Actions and Projects" tags-todo "+TODO=\"TODO\"|TODO=\"PROJ\"")
+        ))
+
 
 (after! org-roam
         (org-roam-db-autosync-mode)
