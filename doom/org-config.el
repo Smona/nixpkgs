@@ -303,7 +303,7 @@
         (setq org-log-into-drawer t)
 
         ;; Hide text formatting characters in org mode
-        (setq org-hide-emphasis-markers t))
+        (setq org-hide-emphasis-markers t)
 
        (setq org-agenda-custom-commands
         '(
@@ -315,6 +315,33 @@
         ("i" "Ideas for Someday" tags-todo "+TODO=\"IDEA\"")
         ;; ("o" "Actions and Projects" tags-todo "+TODO=\"TODO\"|TODO=\"PROJ\"")
         ))
+
+        (setq +org-capture-todo-file "inbox.org")
+        (setq org-capture-templates '(
+                ("t" "Personal todo" entry (file +org-capture-todo-file)
+                "* TODO %?\n%i\n%a")
+                ("n" "Personal notes" entry (file+headline +org-capture-notes-file "Inbox")
+                "* %u %?\n%i\n%a" :prepend t)
+                ("j" "Journal" entry (file+olp+datetree +org-capture-journal-file)
+                "* %U %?\n%i\n%a" :prepend t)
+                ("p" "Templates for projects")
+                ;; NOTE: using only centralized project TODOs currently, but here's doom's default:
+                ;; ("pt" "Project-local todo" entry
+                ;; (file+headline +org-capture-project-todo-file "Inbox") "* TODO %?\n%i\n%a"
+                ;; :prepend t)
+                ;; ("pn" "Project-local notes" entry
+                ;; (file+headline +org-capture-project-notes-file "Inbox") "* %U %?\n%i\n%a"
+                ;; :prepend t)
+                ;; ("pc" "Project-local changelog" entry
+                ;; (file+headline +org-capture-project-changelog-file "Unreleased")
+                ;; "* %U %?\n%i\n%a" :prepend t)
+                ;; ("o" "Centralized templates for projects")
+                ("pt" "Project todo" entry #'+org-capture-central-project-todo-file
+                "* TODO %?\n %i\n %a" :heading "Tasks" :prepend nil)
+                ("pn" "Project notes" entry #'+org-capture-central-project-notes-file
+                "* %U %?\n %i\n %a" :heading "Notes" :prepend t)
+                ("pc" "Project changelog" entry #'+org-capture-central-project-changelog-file
+                "* %U %?\n %i\n %a" :heading "Changelog" :prepend t))))
 
 
 (after! org-roam
@@ -341,7 +368,7 @@
         (evil-normal-state)))))
 
 (after! org-roam-dailies
-        ;; Customizations to road dailies capture templates
+        ;; Customizations to roam dailies capture templates
         (setq org-roam-dailies-capture-templates '(
                 ("d" "default" entry "* %<%H:%M> %?"
                 :if-new  (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>")
