@@ -403,16 +403,47 @@
 (use-package! ox-slack
         :after org)
 
+;; AI-generated:
+(defun my/org-deadline-display ()
+  "Return deadline in \"In X days\" format."
+  (let ((deadline (org-entry-get nil "DEADLINE")))
+    (if deadline
+        (let* ((deadline-time (org-time-string-to-time deadline))
+               (today (org-today))
+               (deadline-day (time-to-days deadline-time))
+               (days-left (- deadline-day today)))
+          (cond
+           ((< days-left 0)
+            (format "%dd ago" (abs days-left)))
+           ((= days-left 0)
+            "Today")
+           ((= days-left 1)
+            "Tomorrow")
+           ((< days-left 7)
+            (format "In %dd" days-left))
+           (t
+            (format "In %dd" days-left))))
+      "")))
+
 (use-package! org-super-agenda
   :after org
   :config
   (org-super-agenda-mode)
   (setq org-super-agenda-header-map (make-sparse-keymap)) ;; Prevent conflicts with doom keybinds
+  (setq org-super-agenda-unmatched-name "Next Actions")
+  (setq org-agenda-prefix-format 
+        '((agenda . " %i %-22:c% s")
+          (todo . " %i %-22:c%?-9 (my/org-deadline-display)")
+          (tags . " %i %-22:c%?-9 (my/org-deadline-display)")
+          (search . " %i %-22:c%?-9 (my/org-deadline-display)")))
   (setq org-super-agenda-groups '(
-        (:name "Habits" :habit t)
-        (:name "Important" :priority>= "B")
-        (:name "Today" :time-grid t :scheduled today)
-        (:name "Cobalt" :tag "cobalt")
+        (:name "Habits" :order 0 :habit t)
+        (:name "Important" :order 5 :priority>= "B")
+        (:name "Today" :order 4 :time-grid t :scheduled today)
+        (:name "Cleaning" :order 8 :tag "cleaning")
+        (:name "Due Now" :order 2 :face org-upcoming-deadline :deadline past :deadline today)
+        (:name "Due Soon" :order 3 :face org-imminent-deadline :deadline t)
+        (:name "Clock's Ticking" :order 7 :scheduled t)
 )))
 
 (setq-default prettify-symbols-alist '(("#+begin_src" . "")
