@@ -53,7 +53,7 @@
 (package! org-super-agenda)
 (package! org-superstar)
 (package! org-visual-outline :recipe (:host github :repo "legalnonsense/org-visual-outline" :branch "master"))
-(package! org-tidy :recipe (:host github :repo "jxq0/org-tidy" :branch "main"))
+(package! org-hide-drawers)
 (package! company-posframe :recipe (:host github :repo "tumashu/company-posframe" :branch "master"))
 
 (package! ox-slack)

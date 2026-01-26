@@ -464,11 +464,17 @@
                                          ))
 (add-hook 'org-mode-hook #'org-visual-indent-mode))
 
-(use-package! org-tidy
+(use-package! org-hide-drawers
   :config
-  (setq! org-tidy-properties-style 'fringe)
+  (setopt org-hide-drawers-display-strings '(
+            (top-level-property-drawer #("#" 0 1 (face shadow)))
+            (property-drawer-regexp #(" " 0 2 (face shadow)) "STYLE")
+            (property-drawer-regexp #(" " 0 2 (face shadow)) "LAST_REPEAT")
+            (property-drawer-regexp #(" #" 0 2 (face shadow)) "[^z-a]*")
+            (drawer-regexp nil "[^z-a]*"))
+          )
   :hook
-  (org-mode . org-tidy-mode))
+  (org-mode . org-hide-drawers-mode))
 
 ;; Disable VC gutter in org files
 (add-hook 'org-mode-hook (lambda () (diff-hl-mode 0)))
