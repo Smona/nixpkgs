@@ -80,14 +80,14 @@ in
       # Fonts to try: FantasqueSansMono, Inconsolata, Victor Mono
       # required by Emacs for monospaced icons
       nerd-fonts.symbols-only
-      noto-fonts-emoji # Required by Emacs
+      noto-fonts-color-emoji # Required by Emacs
       source-serif # Required by Emacs
       source-sans
       rounded-mgenplus # Japanese font support
       monolisa
       # M$ fonts
       corefonts
-      vistafonts
+      vista-fonts
     ];
 
     home.sessionVariables =

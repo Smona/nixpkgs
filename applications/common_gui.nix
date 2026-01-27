@@ -51,7 +51,8 @@ in
       # Media apps
       # TODO: restore nixGL?
       # (nixGL spotify)
-      (config.lib.nixGL.wrap gimp)
+      # TODO: upgrade once gimp3 is supported on darwin.
+      (config.lib.nixGL.wrap gimp2)
     ];
 
     programs.spicetify =
