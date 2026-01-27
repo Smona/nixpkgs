@@ -482,6 +482,7 @@
 (setq! org-startup-indented nil)
 (setq! org-indent-mode-turns-on-hiding-stars nil)
 (use-package! org-visual-indent
+  :after org
   :config
   (setq! org-visual-indent-color-indent '(
                                          ;; TODO: tie these to variables, either the same way catppuccin-theme does or referencing the relevant heading faces.
