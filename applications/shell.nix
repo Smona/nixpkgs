@@ -159,6 +159,8 @@ in
 
   programs.zsh = {
     enable = true;
+    # Use XDG config dir for zsh dotfiles
+    dotDir = "${config.xdg.configHome}/zsh";
     history = {
       extended = true;
       size = 1000000000; # Probably enough 😉

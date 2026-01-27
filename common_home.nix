@@ -109,8 +109,6 @@ in
 
     programs.git = {
       enable = true;
-      userName = "Mel Bourgeois";
-      userEmail = "mason.bourgeois@gmail.com";
       signing = {
         signByDefault = true;
         key = "290FCF081AEDB3EC";
@@ -119,16 +117,11 @@ in
         # Use separate file for username / github token / etc
         { path = "~/.gitconfig.local"; }
       ];
-      delta = {
-        enable = true;
-        # NB: adding line-numbers feature breaks magit-delta
-        # https://github.com/dandavison/magit-delta/issues/13
-        options = {
-          features = lib.mkForce "side-by-side decorations catppuccin-${config.catppuccin.flavor}";
-          hyperlinks = true;
+      settings = {
+        user = {
+            name = "Mel Bourgeois";
+            email = "mason.bourgeois@gmail.com";
         };
-      };
-      extraConfig = {
         core.autocrlf = "input";
         init.defaultBranch = "main";
         pull.rebase = true;
@@ -174,6 +167,17 @@ in
         ".idea"
         ".log"
       ];
+    };
+    # Fancier git diffs
+    programs.delta = {
+      enable = true;
+      enableGitIntegration = true;
+      # NB: adding line-numbers feature breaks magit-delta
+      # https://github.com/dandavison/magit-delta/issues/13
+      options = {
+        features = lib.mkForce "side-by-side decorations catppuccin-${config.catppuccin.flavor}";
+        hyperlinks = true;
+      };
     };
 
     # Dotfiles

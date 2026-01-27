@@ -45,7 +45,7 @@ in
 
     # Nix
     nil # Required by (nix +lsp)
-    nixfmt-rfc-style # For emacs code formatting
+    nixfmt # For emacs code formatting
 
     # C
     cmake-language-server
@@ -62,7 +62,7 @@ in
     }))
     vtsls # VSCode typescript language server
     vscode-langservers-extracted
-    nodePackages.dockerfile-language-server-nodejs
+    dockerfile-language-server
     python3Packages.grip # Required by grip-mode (markdown +grip)
     glslang # glsl-mode intellisense
     tailwindcss-language-server
