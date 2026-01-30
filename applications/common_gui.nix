@@ -52,7 +52,7 @@ in
       # TODO: restore nixGL?
       # (nixGL spotify)
       # TODO: upgrade once gimp3 is supported on darwin.
-      (config.lib.nixGL.wrap gimp2)
+      (config.lib.nixGL.wrap (if pkgs.stdenv.isDarwin then gimp2 else gimp))
     ];
 
     programs.spicetify =
