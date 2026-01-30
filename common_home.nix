@@ -119,8 +119,8 @@ in
       ];
       settings = {
         user = {
-            name = "Mel Bourgeois";
-            email = "mason.bourgeois@gmail.com";
+          name = "Mel Bourgeois";
+          email = "mason.bourgeois@gmail.com";
         };
         core.autocrlf = "input";
         init.defaultBranch = "main";
@@ -141,6 +141,7 @@ in
         };
         # Forges
         github.user = "Smona";
+        gitlab.user = "Smona";
       };
       attributes = [ "*.lockb binary diff=lockb" ];
       ignores = [
