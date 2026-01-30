@@ -305,14 +305,39 @@
         ;; Hide text formatting characters in org mode
         (setq org-hide-emphasis-markers t)
 
+        ;; Save room for the future
+        (setq org-agenda-start-day "0d")
+
        (setq org-agenda-custom-commands
         '(
         ;; ("i" "Inbox" tags-todo "+TODO=\"TODO\""
         ;;         ((org-agenda-files (file-expand-wildcards "~/pim/gtd/inbox.org"))))
-        ("n" "Next actions" tags-todo "+TODO=\"TODO\"|TODO=\"STRT\"")
+        ("n" "Next actions" (
+          (agenda "" ((org-agenda-span 'day)))
+          (tags-todo "-cobalt+TODO=\"TODO\"|-cobalt+TODO=\"STRT\"" (
+                (org-agenda-overriding-header "Unscheduled Tasks:")
+                (org-agenda-skip-function #'my/org-filter-non-agenda)
+          ))
+        ))
+        ("l" "Work" (
+          (agenda "" (
+                      (org-agenda-span 'day)
+                     (org-agenda-skip-function '(lambda ()
+                (let ((tags (org-get-tags)))
+                  (unless (member "cobalt" tags)
+                    (org-end-of-subtree t)))))
+          ))
+          (tags-todo "cobalt+TODO=\"TODO\"|cobalt+TODO=\"STRT\")" (
+                (org-agenda-overriding-header "Unscheduled Tasks:")
+                (org-agenda-skip-function #'my/org-filter-non-agenda)
+          ))
+        ))
         ("p" "Projects" tags-todo "+TODO=\"PROJ\"")
         ("w" "Waiting" tags-todo "+TODO=\"WAIT\"")
-        ("i" "Someday/Maybe" tags-todo "+TODO=\"IDEA\"")
+        ("i" "Someday/Maybe" tags-todo "+TODO=\"IDEA\"" (
+                ;; These are scheduled specifically to bubble up at a later date.
+                (org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled 'deadline))
+        ))
         ;; ("o" "Actions and Projects" tags-todo "+TODO=\"TODO\"|TODO=\"PROJ\"")
         ))
 
@@ -404,6 +429,16 @@
         :after org)
 
 ;; AI-generated:
+(defun my/org-filter-non-agenda ()
+  "org-agenda-skip-function to filter down to entries not in the agenda"
+(let ((scheduled (org-entry-get nil "SCHEDULED"))
+          (deadline (org-entry-get nil "DEADLINE")))
+      (when (or scheduled
+                (and deadline
+                     (let ((days (org-time-stamp-to-now deadline))) (< days 3)
+                       )))  ; deadlines more than 3 days away
+        (org-end-of-subtree t))))
+
 (defun my/org-deadline-display ()
   "Return deadline in \"In X days\" format."
   (let ((deadline (org-entry-get nil "DEADLINE")))
@@ -441,9 +476,10 @@
         (:name "Important" :order 5 :priority>= "B")
         (:name "Today" :order 4 :time-grid t :scheduled today)
         (:name "Cleaning" :order 8 :tag "cleaning")
-        (:name "Due Now" :order 2 :face org-upcoming-deadline :deadline past :deadline today)
-        (:name "Due Soon" :order 3 :face org-imminent-deadline :deadline t)
-        (:name "Clock's Ticking" :order 7 :scheduled t)
+        (:name "Due Now" :order 2 :deadline past :deadline today)
+        (:name "Upcoming" :order 3 :deadline t)
+        (:name "Clock's Ticking" :order 7 :scheduled past)
+        (:name "Scheduled" :order 9 :scheduled future)
 )))
 
 (setq-default prettify-symbols-alist '(("#+begin_src" . "")
