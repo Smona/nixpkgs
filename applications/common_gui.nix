@@ -38,14 +38,7 @@ in
 
     home.packages = with pkgs; [
       # Messaging apps
-      (config.lib.nixGL.wrap (
-        if pkgs.stdenv.isDarwin then
-          discord
-        else
-          discord.override {
-            nss = nss_latest; # https://github.com/NixOS/nixpkgs/issues/78961
-          }
-      ))
+      vesktop
       my-slack
 
       # Media apps
