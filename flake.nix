@@ -30,6 +30,10 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    roon-mpris = {
+      url = "github:Smona/roon-mpris";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Inputs I occasionally use temporarily
     # hyprland.url =

@@ -14,6 +14,9 @@ in
 commonOptions
 // {
   execStart = [
+    "${
+      inputs.roon-mpris.packages.${pkgs.system}.default
+    }/bin/roon-mpris --host 192.168.0.198 --port 9330 --zone Luma"
     "squeekboard"
     "tablet_mode_switch"
     "gammastep-indicator -t 6500K:3200K -b 1.0:0.8"
