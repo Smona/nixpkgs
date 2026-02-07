@@ -520,6 +520,18 @@
 (use-package! org-visual-indent
   :after org
   :config
+  (setq org-visual-indent-color-indent
+      (cl-loop for x from 1 to 8
+               with color = nil
+               do (setq color (or (face-foreground
+                                   (intern 
+                                    (concat "org-level-"
+                                            (number-to-string x))))
+                                  (face-foreground 'org-level-1)))
+               collect `(,x ,(list
+                              :background color
+                              :foreground color
+                              :height .1))))
   (setq! org-visual-indent-color-indent '(
                                          ;; TODO: tie these to variables, either the same way catppuccin-theme does or referencing the relevant heading faces.
                                          (1 (:background "#f38ba8" :foreground "#f38ba8" :height .1))
