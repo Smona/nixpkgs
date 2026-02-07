@@ -111,6 +111,8 @@
       };
     };
 
+    # NOTE: to add new google calendars, go to the calendar's "settings and sharing" page and grab the
+    # calendar ID. Then interpolate: "https://apidata.googleusercontent.com/caldav/v2/${calendar_id}/events/"
     calendar.accounts = {
       Personal = {
         primary = true;
@@ -145,8 +147,8 @@
         };
         thunderbird = {
           enable = true;
-          # Catppuccin mocha red
-          color = "#f38ba8";
+          # Catppuccin mocha green
+          color = "#a6e3a1";
         };
       };
       "Cobalt Team" = {
@@ -159,6 +161,18 @@
           enable = true;
           # Catppuccin mocha blue
           color = "#89b4fa";
+        };
+      };
+      "On Call" = {
+        remote = {
+          type = "caldav";
+          url = "https://apidata.googleusercontent.com/caldav/v2/jc180ekkn5ba5klpeb8hnrgnljditnqr@import.calendar.google.com/events/";
+          userName = "mel@cobaltai.com";
+        };
+        thunderbird = {
+          enable = true;
+          # Catppuccin mocha red
+          color = "#f38ba8";
         };
       };
     };
