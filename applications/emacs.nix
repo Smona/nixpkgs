@@ -16,6 +16,19 @@ let
       ])
     )
   );
+  claude-agent-acp = pkgs.buildNpmPackage (finalAttrs: {
+    pname = "@zed-industries/claude-agent-acp";
+    version = "0.21.0";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "zed-industries";
+      repo = "claude-agent-acp";
+      tag = "v${finalAttrs.version}";
+      hash = "sha256-6c6bHuso3diW5ZfHiM2xcxGDTNG0LIL0TZd0MFVpW/E=";
+    };
+
+    npmDepsHash = "sha256-UtiIcjgNCYMFrRpO5AlUbOyutJ3ipwIbcpMi2BqawEk=";
+  });
 in
 {
   programs.emacs = {
@@ -83,5 +96,6 @@ in
     # Assorted Emacs dependencies
     jq # Used by restclient.el
     awscli2 # Used by s3ed
+    claude-agent-acp # Used by agent-shell
   ];
 }

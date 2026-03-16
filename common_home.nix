@@ -167,6 +167,7 @@ in
         # IDEs stuff
         ".idea"
         ".log"
+        ".agent-shell"
       ];
     };
     # Fancier git diffs

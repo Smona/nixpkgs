@@ -95,3 +95,8 @@
 
 (package! atomic-chrome)
 (package! ultra-scroll :recipe (:host github :repo "jdtsmith/ultra-scroll"))
+
+;; claude code workflow
+(package! shell-maker)
+(package! acp)
+(package! agent-shell)
