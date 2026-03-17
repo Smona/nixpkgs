@@ -43,22 +43,20 @@
     margin-bottom: 0.5em;
 }
 
-/* Only targeting direct ancestors so we don't mess up reply chain styling. */
-.moz-text-html > blockquote {
+.moz-text-html blockquote {
     max-width: 45rem;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0.25rem 3rem;
+    margin: 0 !important;
+    padding: 0.5rem 1rem !important;
     font-style: italic;
-    font-weight: bold;
     position: relative;
+    border: none;
 }
-.moz-text-html > blockquote::before {
+.moz-text-html blockquote::before {
     content: "";
     position: absolute;
-    width: 4px;
+    width: 2px;
     height: 100%;
-    left: 2rem;
+    left: 0;
     top: 0;
     background-color: LinkText;
 }
