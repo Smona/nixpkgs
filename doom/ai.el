@@ -20,6 +20,8 @@
   (setq agent-shell-preferred-agent-config (agent-shell-anthropic-make-claude-code-config))
   (setq agent-shell-prefer-viewport-interaction t)
   (setq agent-shell-session-strategy 'prompt)
+  ;; Prefer compact usage since we use a narrower window than the detailed one allows
+  (setq agent-shell-show-context-usage-indicator t)
   ;; Evil state-specific RET behavior: insert mode = newline, normal mode = send
   (evil-define-key 'insert agent-shell-mode-map (kbd "RET") #'comint-send-input)
   (evil-define-key 'normal agent-shell-mode-map
