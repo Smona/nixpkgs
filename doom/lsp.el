@@ -3,6 +3,9 @@
 ;; LSP config
 
 (setq lsp-use-plists t)
+(setq lsp-inlay-hint-enable t)
+(setq lsp-rust-analyzer-display-chaining-hints t)
+(setq lsp-rust-analyzer-max-inlay-hint-length 40)
 
 ;; Format with prettier rather than ts-ls, for example
 (setq +format-with-lsp nil)
