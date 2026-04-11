@@ -165,7 +165,10 @@
 (add-hook! 'json-mode-hook (setq-local js-indent-level 2))
 
 (after! magit
-(add-hook 'magit-mode-hook (lambda () (magit-delta-mode +1))))
+  (add-hook 'magit-mode-hook (lambda () (magit-delta-mode +1)))
+  (map! :leader
+        :desc "Worktree"
+        "g w" #'magit-worktree))
 
 ;; Don't require saving a file to update the git gutters.
 ;; NOTE: keep an eye on the performance of this convenience feature.
