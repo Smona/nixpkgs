@@ -18,16 +18,16 @@ let
   );
   claude-agent-acp = pkgs.buildNpmPackage (finalAttrs: {
     pname = "@zed-industries/claude-agent-acp";
-    version = "0.21.0";
+    version = "0.29.0";
 
     src = pkgs.fetchFromGitHub {
       owner = "zed-industries";
       repo = "claude-agent-acp";
       tag = "v${finalAttrs.version}";
-      hash = "sha256-6c6bHuso3diW5ZfHiM2xcxGDTNG0LIL0TZd0MFVpW/E=";
+      hash = "sha256-L2Kq4Lk5gHqE9rpBnrKcWXMaSQqEZHtcayjGnK4fYEQ=";
     };
 
-    npmDepsHash = "sha256-UtiIcjgNCYMFrRpO5AlUbOyutJ3ipwIbcpMi2BqawEk=";
+    npmDepsHash = "sha256-CEB4zgWC+jVpqmwbSCwE9xWoi+XiVkpNiXpDzsvbhII=";
   });
 in
 {
