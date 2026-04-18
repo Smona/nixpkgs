@@ -73,7 +73,7 @@ in
       ## NodeJS
       nodejs
       yarn
-      nodePackages.prettier
+      prettier
 
       # Fonts
       # Fonts I like, in order of preference: MonoLisa, Cascadia Code, FiraCode, Dank Mono, JetBrains Mono

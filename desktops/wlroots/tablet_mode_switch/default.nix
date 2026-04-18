@@ -1,7 +1,12 @@
-{ pkgs ? import <nixpkgs> { }, ... }:
+{
+  pkgs ? import <nixpkgs> { },
+  ...
+}:
 
-let python = pkgs.python310;
-in pkgs.stdenv.mkDerivation {
+let
+  python = pkgs.python3;
+in
+pkgs.stdenv.mkDerivation {
   pname = "tablet_mode_switch";
   version = "latest";
 

@@ -1,12 +1,23 @@
-{ pkgs ? import <nixpkgs> { }, ... }:
+{
+  pkgs ? import <nixpkgs> { },
+  ...
+}:
 
-let python = pkgs.python310.withPackages (p: with p; [ pygobject3 ]);
-in pkgs.stdenv.mkDerivation {
+let
+  python = pkgs.python3.withPackages (p: with p; [ pygobject3 ]);
+in
+pkgs.stdenv.mkDerivation {
   pname = "hypr_info";
   version = "1.0";
 
-  nativeBuildInputs = with pkgs; [ gobject-introspection wrapGAppsHook ];
-  buildInputs = [ python pkgs.gtk3 ];
+  nativeBuildInputs = with pkgs; [
+    gobject-introspection
+    wrapGAppsHook
+  ];
+  buildInputs = [
+    python
+    pkgs.gtk3
+  ];
 
   src = ./.;
 

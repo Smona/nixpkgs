@@ -54,7 +54,7 @@ in
     # Python
     python3Packages.debugpy # Required by dap-mode
     pyright
-    python310 # Required for advanced treemacs features
+    python3 # Required for advanced treemacs features
 
     # Nix
     nil # Required by (nix +lsp)
@@ -64,7 +64,7 @@ in
     cmake-language-server
 
     # Code Formatters
-    nodePackages.prettier
+    prettier
     black
     shfmt
 
@@ -91,7 +91,7 @@ in
     graphviz
 
     # mermaid-mode
-    nodePackages.mermaid-cli
+    mermaid-cli
 
     # Assorted Emacs dependencies
     jq # Used by restclient.el
