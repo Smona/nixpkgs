@@ -66,6 +66,8 @@
       plugins = with pkgs; [ networkmanager-openvpn ];
     };
 
+    powerManagement.cpuFreqGovernor = lib.mkForce "schedutil";
+
     # Enable sound with pipewire.
     security.rtkit.enable = true;
     services.pulseaudio.enable = false;
