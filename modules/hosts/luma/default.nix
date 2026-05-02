@@ -26,7 +26,7 @@
         ../../../nixos/common_configuration.nix
         ../../../nixos/dualboot.nix
         self.nixosModules.amdgpu
-        ../../../nixos/cpu/amd.nix
+        self.nixosModules.amd-cpu
       ];
 
       smona.username = "mel";
