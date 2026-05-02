@@ -17,7 +17,6 @@
     ./wlroots.nix
     ./boot.nix
     # ./greetd.nix
-    ./realtime_audio.nix
   ];
 
   options.smona = with lib; {

@@ -27,6 +27,7 @@
         ../../../nixos/dualboot.nix
         self.nixosModules.amdgpu
         self.nixosModules.amd-cpu
+        self.nixosModules.music
       ];
 
       smona.username = "mel";

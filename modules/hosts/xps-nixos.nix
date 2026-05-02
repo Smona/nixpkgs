@@ -5,6 +5,9 @@
     specialArgs = {
       inherit inputs;
     };
-    modules = [ ../../nixos/xps-nixos/configuration.nix ];
+    modules = [
+      ../../nixos/xps-nixos/configuration.nix
+      self.nixosModules.music
+    ];
   };
 }
