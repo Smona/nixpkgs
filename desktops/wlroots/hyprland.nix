@@ -9,6 +9,7 @@
 let
   commonOptions = import ./common.nix { inherit pkgs inputs config; };
   cfg = config.smona.wlroots;
+  wallpaperPath = "~/.config/wallpaper";
 in
 {
   config = lib.mkIf cfg.enable {
@@ -23,7 +24,10 @@ in
     home.file.".local/share/nautilus/scripts/Set as Desktop Background" = {
       text = ''
         #!/usr/bin/env bash
-        hyprctl hyprpaper reload $(echo ",$NAUTILUS_SCRIPT_SELECTED_URIS" | sed 's/file:\/\///') > ~/desktop_background_script_result.txt
+        SOURCE_PATH=$(echo "$NAUTILUS_SCRIPT_SELECTED_URIS" | sed 's/file:\/\///')
+        hyprctl hyprpaper reload ,$SOURCE_PATH
+        rm -f ~/.config/wallpaper
+        cp $SOURCE_PATH ${wallpaperPath}
       '';
       executable = true;
     };
@@ -52,8 +56,7 @@ in
         };
         background = {
           color = "rgba(25, 20, 50, 1.0)";
-          # path = builtins.toString cfg.wallpaper;
-          # TODO: try again after i switch off novideo
+          # path = wallpaperPath;
           path = "screenshot";
           blur_passes = 5;
           blur_size = 1;
@@ -105,7 +108,6 @@ in
               kb_file=
               kb_layout=us,us
               kb_variant=dvorak,
-              kb_options=grp:win_space_toggle
               kb_model=
               kb_options=${builtins.concatStringsSep "," commonOptions.xkbOptions}
               kb_rules=
@@ -187,6 +189,7 @@ in
           # windowrule=center,title:(Extension: \(fx_cast\))
           windowrule=float,title:^(flameshot)$
           windowrule=float,title:^(doom-capture)$
+          windowrulev2=float,class:org.gnome.NautilusPreviewer
 
           # Firefox PIP floating window
           windowrule=float,title:^(Picture-in-Picture)$
