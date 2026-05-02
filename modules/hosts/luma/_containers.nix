@@ -108,7 +108,7 @@ in
                     cmd = "${pkgs.llama-cpp-vulkan}/bin/llama-server --hf-repo 'mradermacher/WeirdCompound-v1.7-24b-GGUF' --ctx-size 132000 ${baseArgs}";
                   };
                   "gemma-4-26B-A4B-it" = {
-                    cmd = "${pkgs.llama-cpp-vulkan}/bin/llama-server --hf-repo 'unsloth/gemma-4-26B-A4B-it-GGUF:UD-Q6_K' --ctx-size 256000 ${baseArgs}";
+                    cmd = "${pkgs.llama-cpp-vulkan}/bin/llama-server --hf-repo 'unsloth/gemma-4-26B-A4B-it-GGUF:UD-Q5_K_XL' --ctx-size 128000 ${baseArgs}";
                     filters = {
                       setParams = {
                         temperature = 1.0;
