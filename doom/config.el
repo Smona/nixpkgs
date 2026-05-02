@@ -67,9 +67,9 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function.
-;; Other themes I like: doom-rouge, doom-challenger-deep, doom-monokai-spectrum, doom-monokai-octagon, doom-city-lights, doom-material, doom-palenight, doom-tokyo-night, doom-dracula
-(load-theme 'catppuccin :no-confirm)
-(setq doom-theme 'catppuccin)
+;; Other themes I like: catppuccin (via catppuccin-nix), doom-rouge, doom-challenger-deep, doom-monokai-spectrum, doom-monokai-octagon, doom-city-lights, doom-material, doom-palenight, doom-tokyo-night, doom-dracula
+(load-theme 'noctalia t)
+(setq doom-theme 'noctalia)
 ;; Use fixed-pitch font in treemacs
 (setq doom-themes-treemacs-enable-variable-pitch nil)
 

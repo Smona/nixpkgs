@@ -91,7 +91,6 @@
 (package! s3ed)
 
 (package! exec-path-from-shell)
-(package! catppuccin-theme)
 
 (package! atomic-chrome)
 (package! ultra-scroll :recipe (:host github :repo "jdtsmith/ultra-scroll"))

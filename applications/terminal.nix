@@ -33,7 +33,11 @@
       initial_window_width = 800;
       initial_window_height = 600;
     };
+    extraConfig = ''
+      include themes/noctalia.conf
+    '';
   };
+  catppuccin.kitty.enable = false;
 
   # Alacritty seems nice, but it's lacking some features and kept crashing gnome-shell
   programs.alacritty = {
