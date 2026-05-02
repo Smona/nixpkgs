@@ -28,5 +28,5 @@
   };
   hardware.amdgpu.overdrive.enable = true;
 
-  environment.systemPackages = [ pkgs.lact ];
+  environment.systemPackages = [ pkgs.lact pkgs.amdgpu_top ];
 }
