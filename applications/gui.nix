@@ -61,7 +61,6 @@ in
     ];
 
     gtk.enable = true;
-    # TODO integrate with greetd & theme file
     catppuccin.gtk.icon.enable = true;
     gtk.cursorTheme = (theme.cursor // { size = theme.cursorSize; });
     # de-deprecate catppuccin.gtk.enable 😁

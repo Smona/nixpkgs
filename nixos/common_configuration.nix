@@ -16,7 +16,6 @@
     ./samba.nix
     ./wlroots.nix
     ./boot.nix
-    # ./greetd.nix
   ];
 
   options.smona = with lib; {

@@ -99,7 +99,6 @@ in
             cursorSize = config.gtk.cursorTheme.size;
           }}
 
-          # TODO: try starting in greetd again, config path was wrong before
           exec-once=${pkgs.openrgb}/bin/openrgb --startminimized -p ~/.config/OpenRGB/Default.orp
           ${(builtins.concatStringsSep "\n" (builtins.map (cmd: "exec-once=${cmd}") commonOptions.execStart))}
           ${(builtins.concatStringsSep "\n" (builtins.map (cmd: "exec=${cmd}") commonOptions.execAlways))}
