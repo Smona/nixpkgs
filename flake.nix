@@ -6,6 +6,9 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     hardware.url = "github:nixos/nixos-hardware";
 
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
+
     # Home manager
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -42,7 +45,6 @@
     # Inputs I occasionally use temporarily
     # hyprland.url =
     #   "github:hyprwm/Hyprland?rev=1c460e98f870676b15871fe4e5bfeb1a32a3d6d8";
-    # my-nixpkgs.url = "git+file:/home/smona/dev/nixpkgs-upstream";
 
     dCachix.url = "github:jonascarpay/declarative-cachix";
 
@@ -74,126 +76,130 @@
   };
 
   outputs =
-    {
+    inputs@{
+      self,
+      flake-parts,
       nixpkgs,
       home-manager,
       nixGL,
       nixos-wsl,
       nix-darwin,
       ...
-    }@inputs:
-    rec {
-      legacyPackages =
-        nixpkgs.lib.genAttrs
-          [
-            "x86_64-linux"
-            "x86_64-darwin"
-          ]
-          (
-            system:
-            import inputs.nixpkgs {
-              inherit system;
-              # overlays = [
-              #   (final: prev: {
-              #     hyprland = inputs.hyprland.packages.${system}.hyprland;
-              #   })
-              # ];
+    }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [
+        "x86_64-linux"
+        "x86_64-darwin"
+      ];
 
-              # NOTE: Using `nixpkgs.config` in your NixOS config won't work
-              # Instead, you should set nixpkgs configs here
-              # (https://nixos.org/manual/nixpkgs/stable/#idm140737322551056)
-              config.allowUnfree = true;
-            }
-          );
+      perSystem =
+        { system, ... }:
+        {
+          legacyPackages = import nixpkgs {
+            inherit system;
+            # overlays = [
+            #   (final: prev: {
+            #     hyprland = inputs.hyprland.packages.${system}.hyprland;
+            #   })
+            # ];
 
-      nixosConfigurations = {
-        "xps-nixos" = nixpkgs.lib.nixosSystem {
-          pkgs = legacyPackages.x86_64-linux;
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [ ./nixos/xps-nixos/configuration.nix ];
-        };
-        # WSL installation
-        "luma-nixos" = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-          };
-
-          modules = [
-            nixos-wsl.nixosModules.wsl
-            home-manager.nixosModules.home-manager
-            ./nixos/luma-nixos/configuration.nix
-          ];
-        };
-        # Baremetal installation
-        "luma" = nixpkgs.lib.nixosSystem {
-          pkgs = legacyPackages.x86_64-linux;
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [ ./nixos/luma/configuration.nix ];
-        };
-        "build-farm" = nixpkgs.lib.nixosSystem {
-          modules = [ ./nixos/build-farm/configuration.nix ];
-        };
-      };
-
-      darwinConfigurations."Mels-MacBook-Air" = nix-darwin.lib.darwinSystem {
-        # TODO: pass pkgs here
-        specialArgs = {
-          inherit inputs;
-        };
-        modules = [ ./darwin/configuration.nix ];
-      };
-
-      homeConfigurations = {
-        "cobalt@remotestation376" = home-manager.lib.homeManagerConfiguration {
-          pkgs = import inputs.nixpkgs {
-            system = "x86_64-linux";
+            # NOTE: Using `nixpkgs.config` in your NixOS config won't work
+            # Instead, you should set nixpkgs configs here
+            # (https://nixos.org/manual/nixpkgs/stable/#idm140737322551056)
             config.allowUnfree = true;
           };
-
-          extraSpecialArgs = {
-            inherit inputs;
-          };
-
-          modules = [
-            ./home.nix
-            (
-              { ... }:
-              {
-                home.username = "cobalt";
-                gnome.enable = true;
-                logitech.enabled = true;
-                roles = {
-                  work = true;
-                };
-                nixGL.packages = nixGL.packages;
-
-                # Ubuntu 24 currently seems pretty compatible with nixpkgs unstable
-                # pkgsCompat = import inputs.nixpkgs-ubuntu {
-                #   system = "x86_64-linux";
-                #   config.allowUnfree = true;
-                # };
-              }
-            )
-          ];
         };
-        "smona@DESKTOP-9F9VN3S" = home-manager.lib.homeManagerConfiguration {
-          pkgs = legacyPackages.x86_64-linux;
-          extraSpecialArgs = {
+
+      flake = {
+        nixosConfigurations = {
+          "xps-nixos" = nixpkgs.lib.nixosSystem {
+            pkgs = self.legacyPackages.x86_64-linux;
+            specialArgs = {
+              inherit inputs;
+            };
+            modules = [ ./nixos/xps-nixos/configuration.nix ];
+          };
+          # WSL installation
+          "luma-nixos" = nixpkgs.lib.nixosSystem {
+            specialArgs = {
+              inherit inputs;
+            };
+
+            modules = [
+              nixos-wsl.nixosModules.wsl
+              home-manager.nixosModules.home-manager
+              ./nixos/luma-nixos/configuration.nix
+            ];
+          };
+          # Baremetal installation
+          "luma" = nixpkgs.lib.nixosSystem {
+            pkgs = self.legacyPackages.x86_64-linux;
+            specialArgs = {
+              inherit inputs;
+            };
+            modules = [ ./nixos/luma/configuration.nix ];
+          };
+          "build-farm" = nixpkgs.lib.nixosSystem {
+            modules = [ ./nixos/build-farm/configuration.nix ];
+          };
+        };
+
+        darwinConfigurations."Mels-MacBook-Air" = nix-darwin.lib.darwinSystem {
+          # TODO: pass pkgs here
+          specialArgs = {
             inherit inputs;
           };
-          modules = [
-            ./home.nix
-            (
-              { ... }:
-              {
-                home.username = "smona";
-              }
-            )
-          ];
+          modules = [ ./darwin/configuration.nix ];
+        };
+
+        homeConfigurations = {
+          "cobalt@remotestation376" = home-manager.lib.homeManagerConfiguration {
+            pkgs = import inputs.nixpkgs {
+              system = "x86_64-linux";
+              config.allowUnfree = true;
+            };
+
+            extraSpecialArgs = {
+              inherit inputs;
+            };
+
+            modules = [
+              ./home.nix
+              (
+                { ... }:
+                {
+                  home.username = "cobalt";
+                  gnome.enable = true;
+                  logitech.enabled = true;
+                  roles = {
+                    work = true;
+                  };
+                  nixGL.packages = nixGL.packages;
+
+                  # Ubuntu 24 currently seems pretty compatible with nixpkgs unstable
+                  # pkgsCompat = import inputs.nixpkgs-ubuntu {
+                  #   system = "x86_64-linux";
+                  #   config.allowUnfree = true;
+                  # };
+                }
+              )
+            ];
+          };
+          "smona@DESKTOP-9F9VN3S" = home-manager.lib.homeManagerConfiguration {
+            pkgs = self.legacyPackages.x86_64-linux;
+            extraSpecialArgs = {
+              inherit inputs;
+            };
+            modules = [
+              ./home.nix
+              (
+                { ... }:
+                {
+                  home.username = "smona";
+                }
+              )
+            ];
+          };
         };
       };
     };
