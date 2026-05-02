@@ -9,6 +9,8 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
 
+    import-tree.url = "github:vic/import-tree";
+
     # Home manager
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -79,14 +81,16 @@
     inputs@{
       self,
       flake-parts,
+      import-tree,
       nixpkgs,
       home-manager,
       nixGL,
-      nixos-wsl,
       nix-darwin,
       ...
     }:
     flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [ (import-tree ./modules) ];
+
       systems = [
         "x86_64-linux"
         "x86_64-darwin"
@@ -111,39 +115,6 @@
         };
 
       flake = {
-        nixosConfigurations = {
-          "xps-nixos" = nixpkgs.lib.nixosSystem {
-            pkgs = self.legacyPackages.x86_64-linux;
-            specialArgs = {
-              inherit inputs;
-            };
-            modules = [ ./nixos/xps-nixos/configuration.nix ];
-          };
-          # WSL installation
-          "luma-nixos" = nixpkgs.lib.nixosSystem {
-            specialArgs = {
-              inherit inputs;
-            };
-
-            modules = [
-              nixos-wsl.nixosModules.wsl
-              home-manager.nixosModules.home-manager
-              ./nixos/luma-nixos/configuration.nix
-            ];
-          };
-          # Baremetal installation
-          "luma" = nixpkgs.lib.nixosSystem {
-            pkgs = self.legacyPackages.x86_64-linux;
-            specialArgs = {
-              inherit inputs;
-            };
-            modules = [ ./nixos/luma/configuration.nix ];
-          };
-          "build-farm" = nixpkgs.lib.nixosSystem {
-            modules = [ ./nixos/build-farm/configuration.nix ];
-          };
-        };
-
         darwinConfigurations."Mels-MacBook-Air" = nix-darwin.lib.darwinSystem {
           # TODO: pass pkgs here
           specialArgs = {
