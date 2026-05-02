@@ -1,7 +1,7 @@
 # Baremetal installation
 { inputs, self, ... }:
 {
-  flake.nixosConfigurations."luma" = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations.luma = inputs.nixpkgs.lib.nixosSystem {
     pkgs = self.legacyPackages.x86_64-linux;
     specialArgs = {
       inherit inputs;
@@ -25,7 +25,7 @@
         ./_containers.nix
         ../../../nixos/common_configuration.nix
         ../../../nixos/dualboot.nix
-        ../../../nixos/graphics/amd.nix
+        self.nixosModules.amdgpu
         ../../../nixos/cpu/amd.nix
       ];
 
@@ -42,7 +42,6 @@
           home.username = "mel";
           smona.wlroots.enable = true;
           smona.wlroots.primaryMonitor = config.smona.primaryMonitor;
-          smona.wlroots.wallpaper = config.smona.wallpaper;
           # gnome.enable = true;
           roles = {
             gaming = true;
