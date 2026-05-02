@@ -11,7 +11,7 @@
       # Include the results of the hardware scan.
       ./_hardware-configuration.nix
       self.nixosModules.llm-server
-      ../../../nixos/common_configuration.nix
+      self.nixosModules.pc
       ../../../nixos/dualboot.nix
       self.nixosModules.amdgpu
       self.nixosModules.amd-cpu

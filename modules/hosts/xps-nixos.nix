@@ -7,6 +7,7 @@
     };
     modules = [
       ../../nixos/xps-nixos/configuration.nix
+      self.nixosModules.pc
       self.nixosModules.music
     ];
   };

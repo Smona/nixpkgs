@@ -13,7 +13,6 @@
 {
   imports = [
     ./hardware-configuration.nix # Include the results of the hardware scan.
-    ../common_configuration.nix
     inputs.hardware.nixosModules.dell-xps-13-7390
   ];
 
