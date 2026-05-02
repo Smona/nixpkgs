@@ -2,7 +2,7 @@
 
 let
   maxVolume = "1.2";
-  volumeStepPercent = "4";
+  volumeStepPercent = "3";
   brightnessStepPercent = "4";
   playerctl = "${pkgs.playerctl}/bin/playerctl";
   brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
