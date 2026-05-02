@@ -35,7 +35,6 @@
         enable = true;
         builtInDisplay = "eDP-1";
         primaryMonitor = config.smona.primaryMonitor;
-        wallpaper = config.smona.wallpaper;
       };
       roles = {
         art = true;
