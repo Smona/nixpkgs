@@ -14,22 +14,6 @@ let
   right = "n";
 in
 {
-  programs.niriswitcher.enable = true;
-  programs.niriswitcher.settings = {
-    # keys = {
-    #   modifier = "Super";
-    #   switch = {
-    #     next = "Tab";
-    #     prev = "Shift+Tab";
-    #   };
-    # };
-    # center_on_focus = true;
-    appearance = {
-      system_theme = "dark";
-      icon_size = 64;
-    };
-  };
-
   home.file.".config/niri/config.kdl".text = ''
     // This config is in the KDL format: https://kdl.dev
     // "/-" comments out the following node.
@@ -156,7 +140,7 @@ in
         background-color "transparent"
 
         // Set gaps around windows in logical pixels.
-        gaps 12
+        gaps 8
 
         // When to center a column when changing focus, options are:
         // - "never", default behavior, focusing an off-screen column will keep at the left
@@ -423,6 +407,16 @@ in
         match namespace="^wallpaper$"
         place-within-backdrop true
     }
+    // Set the regular wallpaper on the backdrop.
+    layer-rule {
+        match namespace="^noctalia-wallpaper*"
+        place-within-backdrop true
+    }
+
+    debug {
+        // fix focusing on notification click for some apps
+        honor-xdg-activation-with-invalid-serial
+    }
 
     binds {
         // Keys consist of modifiers separated by + signs, followed by an XKB key name
@@ -447,9 +441,9 @@ in
                     ++ (lib.lists.optional hk.secondaryMod or false "Alt")
                     ++ [ hk.key ]
                   )
-                } ${
-                  if hk.allow_while_locked or false then "allow-when-locked=true" else ""
-                } { spawn ${builtins.concatStringsSep " " (builtins.map (arg: "\"${arg}\"") hk.command)}; }"
+                } ${if hk.allow_while_locked or false then "allow-when-locked=true" else ""} { spawn ${
+                  builtins.concatStringsSep " " (builtins.map (arg: "\"${arg}\"") hk.command)
+                }; }"
               ) commonOptions.keyBinds
             ))
           }
@@ -584,9 +578,6 @@ in
         // Alternatively, there are commands to move just a single window:
         // Mod+Ctrl+1 { move-window-to-workspace 1; }
 
-        // Switches focus between the current and the previous workspace.
-        // Mod+Tab { focus-workspace-previous; }
-
         // The following binds move the focused window in and out of a column.
         // If the window is alone, they will consume it into the nearby column to the side.
         // If the window is already in a column, they will expel it out.
@@ -656,5 +647,7 @@ in
         // moving the mouse or pressing any other key.
         Mod+Shift+P { power-off-monitors; }
     }
+
+    include optional=true "noctalia.kdl"
   '';
 }
