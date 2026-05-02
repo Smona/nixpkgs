@@ -8,6 +8,14 @@
     };
     modules = [
       self.nixosModules.luma
+      # Include the results of the hardware scan.
+      ./_hardware-configuration.nix
+      self.nixosModules.llm-server
+      ../../../nixos/common_configuration.nix
+      ../../../nixos/dualboot.nix
+      self.nixosModules.amdgpu
+      self.nixosModules.amd-cpu
+      self.nixosModules.music
     ];
   };
 
@@ -15,21 +23,9 @@
     {
       config,
       pkgs,
-      inputs,
       ...
     }:
     {
-      imports = [
-        # Include the results of the hardware scan.
-        ./_hardware-configuration.nix
-        ./_containers.nix
-        ../../../nixos/common_configuration.nix
-        ../../../nixos/dualboot.nix
-        self.nixosModules.amdgpu
-        self.nixosModules.amd-cpu
-        self.nixosModules.music
-      ];
-
       smona.username = "mel";
       smona.primaryMonitor = "DP-1";
       smona.wallpaper = ../../../wallpapers/vibrant-paint-streaks.jpg;

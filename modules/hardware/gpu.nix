@@ -46,7 +46,6 @@ in
       imports = [ common ];
 
       # Load nvidia driver for Xorg and Wayland
-      services.xserver.enable = true;
       services.xserver.videoDrivers = [ "nvidia" ];
 
       hardware.nvidia = {
