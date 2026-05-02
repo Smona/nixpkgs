@@ -17,7 +17,11 @@
   :after acp
   :config
   ;; Set claude as default agent
-  (setq agent-shell-preferred-agent-config (agent-shell-anthropic-make-claude-code-config))
+  ;; disabling this since opencode is sweet
+  ;; (setq agent-shell-preferred-agent-config (agent-shell-anthropic-make-claude-code-config))
+  (setq agent-shell-opencode-default-model-id "llama-server/Qwen3.6-35B-A3B")
+  (setq agent-shell-opencode-environment (agent-shell-make-environment-variables
+         "OPENCODE_ENABLE_EXA" "1"))
   (setq agent-shell-prefer-viewport-interaction t)
   (setq agent-shell-session-strategy 'prompt)
   ;; Prefer compact usage since we use a narrower window than the detailed one allows
