@@ -95,6 +95,9 @@
 (package! atomic-chrome)
 (package! ultra-scroll :recipe (:host github :repo "jdtsmith/ultra-scroll"))
 
+;; Presentations
+(package! org-present)
+(package! visual-fill-column)
 ;; claude code workflow
 (package! shell-maker)
 (package! acp)

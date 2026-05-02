@@ -559,3 +559,60 @@
 
 ;; Disable VC gutter in org files
 (add-hook 'org-mode-hook (lambda () (diff-hl-mode 0)))
+(use-package! visual-fill-column
+  :config
+  (setq visual-fill-column-width 80
+        visual-fill-column-center-text t))
+
+;; Org-present: presentation mode for org files
+(use-package! org-present
+  :commands org-present
+  :after visual-fill-column
+  :config
+  (setopt org-present-text-scale 4)
+
+  (add-hook! 'org-present-mode-hook
+    (visual-line-mode 1)
+    (org-visual-indent-mode 0)
+    ;; Set a blank header line string to create blank space at the top
+    (setq header-line-format " ")
+    (org-present-hide-cursor)
+    (hide-mode-line-mode 1)
+    (setq-local face-remapping-alist '((default (:height 1.5) variable-pitch)
+                                       (header-line (:height 4.0) variable-pitch)
+                                       (org-document-title (:height 1.75) org-document-title)
+                                       (org-code (:height 1.55) org-code)
+                                       (org-verbatim (:height 1.55) org-verbatim)
+                                       (org-block (:height 1.25) org-block)
+                                       (org-block-begin-line (:height 0.7) org-block)))
+    (display-line-numbers-mode 0))
+  (add-hook! 'org-present-mode-quit-hook
+    (org-visual-indent-mode 1)
+    (hide-mode-line-mode 0)
+    ;; Clear the header line format by setting to `nil'
+    (setq header-line-format nil)
+    (org-present-show-cursor)
+    (setq-local face-remapping-alist '((default variable-pitch default))))
+
+  ;; Re-hide cursor after every command since it keeps re-appearing
+  (defun +org-present-keep-cursor-hidden ()
+    (when org-present-mode
+      (org-present-hide-cursor)))
+  (add-hook! 'org-present-mode-hook
+    (add-hook 'post-command-hook #'+org-present-keep-cursor-hidden nil t))
+  (add-hook! 'org-present-mode-quit-hook
+    (remove-hook 'post-command-hook #'+org-present-keep-cursor-hidden t))
+
+  ;; Keybindings while presenting
+  (evil-define-minor-mode-key 'normal 'org-present-mode
+    "n" #'org-present-next
+    "p" #'org-present-prev
+    "q" #'org-present-quit
+    "G" #'org-present-end
+    "gg" #'org-present-beginning))
+
+(after! org
+  (map! :map org-mode-map
+        :leader
+        :desc "Presentation mode"
+        "t p" #'org-present))
