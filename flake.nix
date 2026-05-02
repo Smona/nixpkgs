@@ -30,6 +30,10 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     roon-mpris = {
       url = "github:Smona/roon-mpris";
       inputs.nixpkgs.follows = "nixpkgs";

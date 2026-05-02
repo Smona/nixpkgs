@@ -21,7 +21,6 @@ in
       enable = true;
       systemd = {
         enable = true;
-        target = "hyprland-session.target";
       };
       settings =
         let
@@ -59,8 +58,10 @@ in
               "idle_inhibitor"
               "sway/workspaces"
               "hyprland/workspaces"
+              "niri/workspaces"
               "sway/window"
               "hyprland/window"
+              "niri/window"
             ];
             # modules-center = [];
             modules-right = [
@@ -133,7 +134,7 @@ in
               on-scroll-up = cmd.softer;
               on-scroll-down = cmd.louder;
               on-click = cmd.mute;
-              on-click-right = cmd.tao;
+              on-click-right = "${cmd.tao}/bin/tao";
               scroll-step = 0;
               smooth-scrolling-threshold = 1;
               format = "{icon} {volume}";
@@ -157,6 +158,7 @@ in
             };
             "sway/window" = window_config;
             "hyprland/window" = window_config;
+            "niri/window" = window_config;
             "hyprland/workspaces" = {
               on-scroll-up = "hyprctl dispatch workspace e+1";
               on-scroll-down = "hyprctl dispatch workspace e-1";

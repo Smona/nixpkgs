@@ -5,7 +5,7 @@
   catppuccin.firefox.enable = false;
   programs.firefox = {
     package = (config.lib.nixGL.wrap config.pkgsCompat.firefox);
-    nativeMessagingHosts = [ pkgs.fx_cast_bridge ];
+    nativeMessagingHosts = [ pkgs.fx-cast-bridge ];
     profiles = {
       Smona = {
         settings = {

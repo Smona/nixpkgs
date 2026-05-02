@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 let
   maxVolume = "1.2";
@@ -35,8 +35,9 @@ rec {
     buildInputs = [ pkgs.python3 ];
     unpackPhase = "true";
     installPhase = ''
-      cp ${./toggle_audio_output.py} $out
-      substituteInPlace $out --replace 'wpctl' '${wpctl}'
+      mkdir -p $out/bin
+      cp ${./toggle_audio_output.py} $out/bin/tao
+      substituteInPlace $out/bin/tao --replace 'wpctl' '${wpctl}'
     '';
   };
 
@@ -52,8 +53,12 @@ rec {
   # ...and wm locking
   # Media should stay playing when the screen locks, otherwise the idle timeout
   # can pause remotely playing media (e.g. spotify connect).
-  lock = "1password --lock; hyprlock";
+  # lock = "1password --lock; hyprlock";
+  lock = "1password --lock; noctalia-shell ipc call lockScreen lock";
   # Meant for when ending a session, so it does pause media.
   # note that pause will error if nothing is playing, so we can't use &&
   goodbye = "${pause} & ${lock}";
+
+  # Forward system D-Bus notifications (e.g. from earlyoom) to noctalia toasts
+  systembus-notify = import ./systembus-notify.nix { inherit pkgs inputs; };
 }

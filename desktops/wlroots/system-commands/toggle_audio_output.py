@@ -21,7 +21,7 @@ for line in status.splitlines():
             found_sinks = True
         continue
 
-    match = re.match(r"[│\s]+(\*\s*)?(\d+)\.", line)
+    match = re.match(r"[│\s]+(\*\s*)?(\d+)\. (.*)\[", line)
     if match:
         sinks.append(match.groups())
     else:
@@ -32,4 +32,15 @@ for i in range(len(sinks)):
     if is_default:
         next_index = (i + 1) % len(sinks)
         next_default = sinks[next_index]
+        subprocess.call(
+            [
+                "noctalia-shell",
+                "ipc",
+                "call",
+                "toast",
+                "send",
+                f'{{ "title": "Audio output changed", "icon": "device-speaker", "body": "{next_default[2].strip()}" }}',
+            ]
+        )
+
         exit(subprocess.call(f"wpctl set-default {next_default[1]}", shell=True))

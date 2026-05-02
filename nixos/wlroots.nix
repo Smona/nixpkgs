@@ -63,15 +63,12 @@ in
   programs.hyprland.enable = true;
   programs.sway.enable = true;
   programs.niri.enable = true;
-  programs.hyprlock.enable = true;
-  programs.nm-applet.enable = true; # GUI WIFI tool for WMs
 
   services.dbus.enable = true;
   # Location service provider, required for gammastep
   services.geoclue2.enable = true;
 
   hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
 
   xdg.portal = {
     enable = true;
@@ -90,4 +87,7 @@ in
   services.devmon.enable = true;
   services.gvfs.enable = true;
   services.udisks2.enable = true;
+
+  # support for calendar events in noctalia
+  services.gnome.evolution-data-server.enable = true;
 }

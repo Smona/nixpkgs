@@ -66,12 +66,14 @@ in
     gtk.cursorTheme = (theme.cursor // { size = theme.cursorSize; });
     # de-deprecate catppuccin.gtk.enable 😁
     gtk.theme = {
-      name = "catppuccin-mocha-mauve-standard";
-      package = pkgs.catppuccin-gtk.override {
-        size = "standard";
-        accents = [ "mauve" ];
-        variant = "mocha";
-      };
+      name = "adw-gtk3";
+      package = pkgs.adw-gtk3;
+    };
+    # hack noctalia theme to work with gtk4
+    gtk.gtk4.enable = false;
+    xdg.configFile = {
+      "gtk-4.0/gtk.css".text = "@import url('noctalia.css')";
+      "gtk-4.0/gtk-dark.css".text = "@import url('noctalia.css')";
     };
 
     # gtk.theme = theme.gtk;
