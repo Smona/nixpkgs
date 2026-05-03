@@ -1,5 +1,5 @@
 # NixOS configuration shared across all personal computers
-{ inputs, ... }:
+{ inputs, self, ... }:
 {
   flake.nixosModules.pc =
     {
@@ -13,7 +13,7 @@
         inputs.home-manager.nixosModules.home-manager
         ../common_configuration.nix
         inputs.catppuccin.nixosModules.catppuccin
-        ../nixos/samba.nix
+        self.nixosModules.lilnasx
         ../nixos/wlroots.nix
         ../nixos/boot.nix
       ];
