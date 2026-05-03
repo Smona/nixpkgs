@@ -15,6 +15,7 @@
         inputs.catppuccin.nixosModules.catppuccin
         self.nixosModules.lilnasx
         self.nixosModules.oom-handling
+        self.nixosModules.printing
         ../nixos/wlroots.nix
         ../nixos/boot.nix
       ];
@@ -115,16 +116,6 @@
         hardware.enableAllFirmware = true;
 
         services.flatpak.enable = true;
-
-        # Enable CUPS to print documents.
-        services.printing = {
-          enable = true;
-          # Necessary drivers for Canon MX860
-          drivers = with pkgs; [
-            cups-bjnp
-            gutenprint
-          ];
-        };
 
         # Define a user account. Don't forget to set a password with ‘passwd’.
         users.users.${config.smona.username} = {
