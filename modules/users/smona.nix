@@ -17,11 +17,11 @@ let
         inputs.catppuccin.homeModules.catppuccin
         self.homeModules.fonts
         self.homeModules.git
+        self.homeModules.opencode
         self.homeModules.vim
         ../../applications/shell.nix
         ../../applications/tmux.nix
         ../../applications/emacs.nix
-        ../../applications/agents.nix
         ../../applications/common_gui.nix
       ];
 
