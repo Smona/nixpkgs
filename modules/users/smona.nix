@@ -131,7 +131,6 @@ in
         ../../applications/gui.nix
         ../../desktops/gnome
         ../../desktops/wlroots
-        ../../peripherals/logitech.nix
       ];
 
       # Home Manager needs a bit of information about you and the

@@ -17,7 +17,6 @@
         {
           home.username = "cobalt";
           gnome.enable = true;
-          logitech.enabled = true;
           roles = {
             work = true;
           };
