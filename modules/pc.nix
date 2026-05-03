@@ -1,9 +1,8 @@
 # NixOS configuration shared across all personal computers
-{ ... }:
+{ inputs, ... }:
 {
   flake.nixosModules.pc =
     {
-      inputs,
       config,
       pkgs,
       lib,
