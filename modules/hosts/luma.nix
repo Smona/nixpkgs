@@ -12,7 +12,7 @@
       self.nixosModules.luma-hardware
       self.nixosModules.llm-server
       self.nixosModules.pc
-      ../../nixos/dualboot.nix
+      self.nixosModules.dualboot
       self.nixosModules.amdgpu
       self.nixosModules.amd-cpu
       self.nixosModules.music
