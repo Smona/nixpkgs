@@ -44,10 +44,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Inputs I occasionally use temporarily
-    # hyprland.url =
-    #   "github:hyprwm/Hyprland?rev=1c460e98f870676b15871fe4e5bfeb1a32a3d6d8";
-
     dCachix.url = "github:jonascarpay/declarative-cachix";
 
     # Darwin stuff:
@@ -105,12 +101,6 @@
         {
           legacyPackages = import nixpkgs {
             inherit system;
-            # overlays = [
-            #   (final: prev: {
-            #     hyprland = inputs.hyprland.packages.${system}.hyprland;
-            #   })
-            # ];
-
             # NOTE: Using `nixpkgs.config` in your NixOS config won't work
             # Instead, you should set nixpkgs configs here
             # (https://nixos.org/manual/nixpkgs/stable/#idm140737322551056)
