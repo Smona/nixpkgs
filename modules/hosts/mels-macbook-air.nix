@@ -237,7 +237,6 @@
           "proxy-audio-device" # enable using system volume controls w/ external audio interfaces
           "raycast"
           "dozer"
-          "logitech-options"
         ];
       };
     };

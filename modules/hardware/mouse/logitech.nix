@@ -14,4 +14,10 @@
         };
       };
     };
+
+  flake.darwinModules.logitech =
+    { ... }:
+    {
+      homebrew.casks = [ "logitech-options" ];
+    };
 }

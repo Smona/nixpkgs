@@ -85,8 +85,31 @@
       imports = [
         # Support specifying homeConfigurations & homeModules in flake modules.
         home-manager.flakeModules.home-manager
-        # Support specifying darwinConfigurations & darwinModules in flake modules.
+        # Support specifying darwinConfigurations in flake modules.
+        # (nix-darwin only declares darwinConfigurations; we add darwinModules below.)
+        # TODO: update & remove once this is merged: https://github.com/nix-darwin/nix-darwin/pull/1690
         inputs.nix-darwin.flakeModules.default
+        (
+          { lib, ... }:
+          {
+            options.flake.darwinModules = lib.mkOption {
+              type = lib.types.lazyAttrsOf lib.types.deferredModule;
+              default = { };
+              apply = lib.mapAttrs (
+                k: v: {
+                  _class = "darwin";
+                  _file = "flake.darwinModules.${k}";
+                  imports = [ v ];
+                }
+              );
+              description = ''
+                nix-darwin modules.
+
+                You may use this for reusable pieces of configuration, service modules, etc.
+              '';
+            };
+          }
+        )
         (import-tree ./modules)
       ];
 
