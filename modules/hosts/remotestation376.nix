@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, self, ... }:
 {
   flake.homeConfigurations."cobalt@remotestation376" = inputs.home-manager.lib.homeManagerConfiguration {
     pkgs = import inputs.nixpkgs {
@@ -11,7 +11,7 @@
     };
 
     modules = [
-      ../../home.nix
+      self.homeModules.linux-pc
       (
         { ... }:
         {

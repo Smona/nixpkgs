@@ -65,7 +65,7 @@
       home-manager.users.smona =
         { pkgs, config, ... }:
         {
-          imports = [ ../../home.nix ];
+          imports = [ self.homeModules.linux-pc ];
 
           home.username = "smona";
           home.homeDirectory = "/home/smona";

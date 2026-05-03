@@ -35,7 +35,7 @@
       home-manager.users.mel =
         { pkgs, ... }:
         {
-          imports = [ ../../home.nix ];
+          imports = [ self.homeModules.linux-pc ];
 
           home.username = "mel";
           smona.wlroots.enable = true;

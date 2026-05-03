@@ -8,7 +8,7 @@
           inherit inputs;
         };
         modules = [
-          ../../home.nix
+          self.homeModules.linux-pc
           {
             home.username = "smona";
           }
