@@ -83,19 +83,21 @@
       import-tree,
       nixpkgs,
       home-manager,
-      nix-darwin,
       ...
     }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         # Support specifying homeConfigurations & homeModules in flake modules.
         home-manager.flakeModules.home-manager
+        # Support specifying darwinConfigurations & darwinModules in flake modules.
+        inputs.nix-darwin.flakeModules.default
         (import-tree ./modules)
       ];
 
       systems = [
         "x86_64-linux"
         "x86_64-darwin"
+        "aarch64-darwin"
       ];
 
       perSystem =
@@ -116,14 +118,5 @@
           };
         };
 
-      flake = {
-        darwinConfigurations."Mels-MacBook-Air" = nix-darwin.lib.darwinSystem {
-          # TODO: pass pkgs here
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [ ./darwin/configuration.nix ];
-        };
-      };
     };
 }
