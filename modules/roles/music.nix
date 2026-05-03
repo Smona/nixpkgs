@@ -1,7 +1,7 @@
 # Modules for music & audio production computers
 { inputs, ... }:
 {
-  flake.nixosModules.music =
+  flake.nixosModules.realtime-audio =
     {
       config,
       pkgs,

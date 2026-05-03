@@ -16,7 +16,7 @@
       self.nixosModules.amdgpu
       self.nixosModules.amd-cpu
       self.nixosModules.gaming
-      self.nixosModules.music
+      self.nixosModules.realtime-audio
     ];
   };
 

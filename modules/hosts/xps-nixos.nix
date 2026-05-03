@@ -12,7 +12,7 @@
       self.nixosModules.xps-nixos
       self.nixosModules.pc
       self.nixosModules.gaming
-      self.nixosModules.music
+      self.nixosModules.realtime-audio
     ];
   };
 
