@@ -15,6 +15,7 @@
       self.nixosModules.dualboot
       self.nixosModules.amdgpu
       self.nixosModules.amd-cpu
+      self.nixosModules.gaming
       self.nixosModules.music
     ];
   };

@@ -11,6 +11,7 @@
       inputs.hardware.nixosModules.dell-xps-13-7390
       self.nixosModules.xps-nixos
       self.nixosModules.pc
+      self.nixosModules.gaming
       self.nixosModules.music
     ];
   };
