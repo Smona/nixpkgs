@@ -1,5 +1,7 @@
 #+title: Smona's Home Configuration
 
+Now with more dendrites!
+
 * Installation
 1. If installing NixOS, go ahead and complete the installation with a generated
    configuration, and login with your user account.
