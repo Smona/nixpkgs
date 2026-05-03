@@ -68,6 +68,21 @@
         primary = true;
         thunderbird.enable = true;
       };
+      Syne = {
+        address = "mel@syne.studio";
+        userName = "mel@syne.studio";
+        realName = "Mel Bourgeois";
+        # TODO: declarative archive folder
+        thunderbird.enable = true;
+        imap = {
+          host = "mail.hover.com";
+          port = 993;
+        };
+        smtp = {
+          host = "mail.hover.com";
+          port = 465;
+        };
+      };
       Work = {
         address = "mel@cobaltai.com";
         flavor = "gmail.com";
