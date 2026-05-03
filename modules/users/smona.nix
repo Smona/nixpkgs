@@ -11,13 +11,11 @@ let
       config,
       ...
     }:
-    let
-      monolisa = pkgs.callPackage (import ../../pkgs/monolisa.nix) { };
-    in
     {
       imports = [
         inputs.dCachix.homeManagerModules.declarative-cachix
         inputs.catppuccin.homeModules.catppuccin
+        self.homeModules.fonts
         self.homeModules.git
         self.homeModules.vim
         ../../applications/shell.nix
@@ -78,20 +76,6 @@ let
           nodejs
           yarn
           prettier
-
-          # Fonts
-          # Fonts I like, in order of preference: MonoLisa, Cascadia Code, FiraCode, Dank Mono, JetBrains Mono
-          # Fonts to try: FantasqueSansMono, Inconsolata, Victor Mono
-          # required by Emacs for monospaced icons
-          nerd-fonts.symbols-only
-          noto-fonts-color-emoji # Required by Emacs
-          source-serif # Required by Emacs
-          source-sans
-          rounded-mgenplus # Japanese font support
-          monolisa
-          # M$ fonts
-          corefonts
-          vista-fonts
         ];
 
         home.sessionVariables =
