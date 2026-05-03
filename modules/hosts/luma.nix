@@ -35,17 +35,18 @@
       home-manager.users.mel =
         { pkgs, ... }:
         {
-          imports = [ self.homeModules.linux-pc ];
+          imports = [
+            self.homeModules.linux-pc
+            self.homeModules.gaming
+          ];
 
           home.username = "mel";
           smona.wlroots.enable = true;
           smona.wlroots.primaryMonitor = config.smona.primaryMonitor;
           # gnome.enable = true;
           roles = {
-            gaming = true;
             music = true;
           };
-          logitech.enabled = true;
           # Should apply to any NixOS machine
           _1passwordBinary = "${pkgs._1password-gui}/bin/1password";
         };

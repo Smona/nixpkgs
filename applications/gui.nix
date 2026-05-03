@@ -14,7 +14,6 @@ in
   imports = [
     ./common_gui.nix
     ./art.nix
-    ./games.nix
     ./music.nix
   ];
 

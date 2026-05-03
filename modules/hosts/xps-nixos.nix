@@ -34,7 +34,10 @@
       home-manager.users.smona =
         { pkgs, ... }:
         {
-          imports = [ self.homeModules.linux-pc ];
+          imports = [
+            self.homeModules.linux-pc
+            self.homeModules.gaming
+          ];
 
           home.username = "smona";
           smona.wlroots = {
@@ -44,7 +47,6 @@
           };
           roles = {
             art = true;
-            gaming = true;
             music = true;
           };
           # Should apply to any NixOS machine
