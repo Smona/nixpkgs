@@ -14,6 +14,7 @@
         ../common_configuration.nix
         inputs.catppuccin.nixosModules.catppuccin
         self.nixosModules.lilnasx
+        self.nixosModules.oom-handling
         ../nixos/wlroots.nix
         ../nixos/boot.nix
       ];
@@ -114,21 +115,6 @@
         hardware.enableAllFirmware = true;
 
         services.flatpak.enable = true;
-
-        # Better experience under high RAM pressure:
-        # Use compressed RAM as swap
-        zramSwap.enable = true;
-        # earlyoom handles OOM more gracefully than systemd-oomd.
-        # might just need to find the right systemd-oomd configuration.
-        services.earlyoom = {
-          enable = true;
-          freeMemThreshold = 7;
-          freeSwapThreshold = 50;
-          enableNotifications = true;
-        };
-        # https://github.com/NixOS/nixpkgs/issues/374959
-        systemd.services.earlyoom.serviceConfig.DynamicUser = false;
-        systemd.oomd.enable = false;
 
         # Enable CUPS to print documents.
         services.printing = {
