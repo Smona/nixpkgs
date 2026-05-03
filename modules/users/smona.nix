@@ -18,9 +18,9 @@ let
         self.homeModules.fonts
         self.homeModules.git
         self.homeModules.opencode
+        self.homeModules.tmux
         self.homeModules.vim
         ../../applications/shell.nix
-        ../../applications/tmux.nix
         ../../applications/emacs.nix
         ../../applications/common_gui.nix
       ];
