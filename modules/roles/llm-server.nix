@@ -11,6 +11,7 @@
     }:
     let
       llamaSwapPort = 57680;
+      openWebuiPort = 8082;
     in
     {
       config = {
@@ -24,8 +25,11 @@
           externalInterface = "wlp16s0";
         };
 
-        # Llama-swap
-        networking.firewall.allowedTCPPorts = [ llamaSwapPort ];
+        # Llama-swap + Open-WebUI (colocated so open-webui can reach llama-swap on localhost)
+        networking.firewall.allowedTCPPorts = [
+          llamaSwapPort
+          openWebuiPort
+        ];
         containers.llamaswap = {
           autoStart = true;
           privateNetwork = true;
@@ -41,6 +45,11 @@
               protocol = "udp";
               hostPort = llamaSwapPort;
               containerPort = llamaSwapPort;
+            }
+            {
+              protocol = "tcp";
+              hostPort = openWebuiPort;
+              containerPort = openWebuiPort;
             }
           ];
 
@@ -60,6 +69,9 @@
           config =
             { pkgs, ... }:
             {
+              # open-webui is unfree; containers don't inherit the host's nixpkgs config.
+              nixpkgs.config.allowUnfree = true;
+
               hardware.graphics.enable = true;
 
               services.llama-swap = {
@@ -133,6 +145,21 @@
                 environment.XDG_CACHE_HOME = "/var/cache/llama.cpp";
                 serviceConfig.CacheDirectory = "llama.cpp";
               };
+
+              services.open-webui = {
+                enable = true;
+                openFirewall = true;
+                # Bind on the container's interfaces for forwardPorts to reach it.
+                host = "0.0.0.0";
+                port = openWebuiPort;
+                environment = {
+                  # Talk to the llama-swap instance running in this same container.
+                  ENABLE_OLLAMA_API = "False";
+                  OPENAI_API_BASE_URL = "http://127.0.0.1:${toString llamaSwapPort}/v1";
+                  OPENAI_API_KEY = "none";
+                };
+              };
+
               system.stateVersion = "25.01";
             };
         };
