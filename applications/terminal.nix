@@ -37,6 +37,11 @@
       include themes/noctalia.conf
     '';
   };
+  xdg.configFile."kitty/quick-access-terminal.conf".text = ''
+    margin_left 14
+    margin_right 14
+    background_opacity 0.95
+  '';
   catppuccin.kitty.enable = false;
 
   # Alacritty seems nice, but it's lacking some features and kept crashing gnome-shell
