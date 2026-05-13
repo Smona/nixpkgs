@@ -50,6 +50,7 @@ in
 
       # Creative apps
       freecad
+      (config.lib.nixGL.wrap gimp)
 
       # Media apps
       newsflash # RSS feed reader

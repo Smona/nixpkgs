@@ -237,6 +237,7 @@
           "proxy-audio-device" # enable using system volume controls w/ external audio interfaces
           "raycast"
           "dozer"
+          "gimp" # Seems to be pretty broken on darwin right now
         ];
       };
     };
