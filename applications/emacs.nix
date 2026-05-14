@@ -97,5 +97,7 @@ in
     jq # Used by restclient.el
     awscli2 # Used by s3ed
     claude-agent-acp # Used by agent-shell
+
+    texliveMedium # needed for latex inline previews & export in org mode
   ];
 }
