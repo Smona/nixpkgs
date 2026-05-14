@@ -19,7 +19,7 @@
 ;; Make movement keys work like they should
 (setq evil-respect-visual-line-mode t)
 ; Make horizontal movement cross lines                                    
-(setq-default evil-cross-lines t)
+(setq evil-cross-lines t)
 
 (doom! :input
        ;;bidi              ; (tfel ot) thgir etirw uoy gnipleh
