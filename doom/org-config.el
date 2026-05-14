@@ -28,20 +28,18 @@
 ;;   (set-face-attribute 'org-document-title nil :height 2.0 :underline nil))
 ;; (add-hook 'org-load-hook #'my/org-mode-hook)
 
-(custom-theme-set-faces
-        'user
-        '(org-block ((t (:inherit fixed-pitch))))
-        '(org-code ((t (:inherit (shadow fixed-pitch)))))
-        '(org-document-info ((t (:foreground "dark orange"))))
-        '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
-        '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
-        '(org-link ((t (:underline t))))
-        '(org-visual-indent-blank-pipe-face ((t (:background "#1e1e2e"))))
-        '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-        '(org-property-value ((t (:inherit fixed-pitch))) t)
-        '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-        '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
-        '(org-verbatim ((t (:inherit (shadow fixed-pitch))))))
+(custom-set-faces!
+        '(org-block :inherit fixed-pitch)
+        '(org-code :inherit (shadow fixed-pitch))
+        ;; '(org-document-info ((t (:foreground "dark orange"))))
+        '(org-document-info-keyword :inherit (shadow fixed-pitch))
+        '(org-indent :inherit (org-hide fixed-pitch))
+        '(org-link :underline t)
+        '(org-meta-line :inherit (font-lock-comment-face fixed-pitch))
+        '(org-property-value :inherit fixed-pitch)
+        '(org-special-keyword :inherit (font-lock-comment-face fixed-pitch))
+        '(org-modern-tag :inherit (shadow fixed-pitch) :weight bold :height 0.8)
+        '(org-verbatim :inherit (shadow fixed-pitch)))
 
 ;; track habits
 (add-to-list 'org-modules 'org-habit)
@@ -257,8 +255,6 @@
         </style>
         ")
 
-        ;; hard wrap org mode
-        (add-hook 'org-mode-hook 'auto-fill-mode)
         ;; disable line numbers in org mode
         (add-hook 'org-mode-hook (lambda () (setq-local display-line-numbers nil)))
 
@@ -509,41 +505,21 @@
                                        ("lambda" . 955)))
 (add-hook 'org-mode-hook 'prettify-symbols-mode)
 (use-package! org-superstar
-  :config
-        ;; Hide bullets for headings with TODO states in favor of the prettified icon
-        (setq! org-superstar-special-todo-items 'hide)
-        (setq! org-superstar-remove-leading-stars t)
-        (add-hook 'org-mode-hook 'org-superstar-mode)
-  )
-(setq! org-startup-indented nil)
-(setq! org-indent-mode-turns-on-hiding-stars nil)
-(use-package! org-visual-indent
   :after org
   :config
-  (setq org-visual-indent-color-indent
-      (cl-loop for x from 1 to 8
-               with color = nil
-               do (setq color (or (face-foreground
-                                   (intern 
-                                    (concat "org-level-"
-                                            (number-to-string x))))
-                                  (face-foreground 'org-level-1)))
-               collect `(,x ,(list
-                              :background color
-                              :foreground color
-                              :height .1))))
-  (setq! org-visual-indent-color-indent '(
-                                         ;; TODO: tie these to variables, either the same way catppuccin-theme does or referencing the relevant heading faces.
-                                         (1 (:background "#f38ba8" :foreground "#f38ba8" :height .1))
-                                         (2 (:background "#fab387" :foreground "#fab387" :height .1))
-                                         (3 (:background "#f9e2af" :foreground "#f9e2af" :height .1))
-                                         (4 (:background "#a6e3a1" :foreground "#a6e3a1" :height .1))
-                                         (5 (:background "#74c7ec" :foreground "#74c7ec" :height .1))
-                                         (6 (:background "#b4befe" :foreground "#b4befe" :height .1))
-                                         (7 (:background "#cba6f7" :foreground "#cba6f7" :height .1))
-                                         (8 (:background "#eba0ac" :foreground "#eba0ac" :height .1))
-                                         ))
-(add-hook 'org-mode-hook #'org-visual-indent-mode))
+  ;; Use bullet character for +, to avoid having to insert a space before using * for plain lists
+  (setq org-superstar-item-bullet-alist '((42 . 8226) (43 . 8226) (45 . 8211)))
+  (add-hook 'org-mode-hook (lambda ()
+        ;; Hide bullets for headings with TODO states in favor of the prettified icon
+        (setq! org-superstar-special-todo-items 'hide)
+        (setq! org-superstar-leading-bullet 8192)
+        (setq! org-indent-mode-turns-on-hiding-stars nil)
+        (setq! org-hide-leading-stars nil)
+        ;; Disabled since it breaks org-indent-mode spacing
+        ;; (setq! org-superstar-remove-leading-stars t)
+        (add-hook 'org-mode-hook 'org-superstar-mode)
+        ))
+  )
 
 (use-package! org-hide-drawers
   :config
@@ -558,7 +534,8 @@
   (org-mode . org-hide-drawers-mode))
 
 ;; Disable VC gutter in org files
-(add-hook 'org-mode-hook (lambda () (diff-hl-mode 0)))
+(add-hook 'org-mode-hook (lambda () (diff-hl-mode 0) (visual-fill-column-mode) (setq visual-fill-column-center-text t) (setq visual-fill-column-width 80)))
+
 (use-package! visual-fill-column
   :config
   (setq visual-fill-column-width 80
@@ -572,8 +549,6 @@
   (setopt org-present-text-scale 4)
 
   (add-hook! 'org-present-mode-hook
-    (visual-line-mode 1)
-    (org-visual-indent-mode 0)
     ;; Set a blank header line string to create blank space at the top
     (setq header-line-format " ")
     (org-present-hide-cursor)
@@ -587,7 +562,6 @@
                                        (org-block-begin-line (:height 0.7) org-block)))
     (display-line-numbers-mode 0))
   (add-hook! 'org-present-mode-quit-hook
-    (org-visual-indent-mode 1)
     (hide-mode-line-mode 0)
     ;; Clear the header line format by setting to `nil'
     (setq header-line-format nil)
