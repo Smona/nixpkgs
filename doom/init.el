@@ -15,6 +15,12 @@
 ;;      directory (for easy access to its source code).
 (setenv "LSP_USE_PLISTS" "1")
 
+;; These have to be set before evil is loaded
+;; Make movement keys work like they should
+(setq evil-respect-visual-line-mode t)
+; Make horizontal movement cross lines                                    
+(setq-default evil-cross-lines t)
+
 (doom! :input
        ;;bidi              ; (tfel ot) thgir etirw uoy gnipleh
        ;;chinese
