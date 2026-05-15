@@ -512,7 +512,8 @@
   (add-hook 'org-mode-hook (lambda ()
         ;; Hide bullets for headings with TODO states in favor of the prettified icon
         (setq! org-superstar-special-todo-items 'hide)
-        (setq! org-superstar-leading-bullet 8192)
+        ;; FOUR-PER-EM SPACE (mid space), calibrated to line up with org-indent on deeply nested headings
+        (setq! org-superstar-leading-bullet 8197)
         (setq! org-indent-mode-turns-on-hiding-stars nil)
         (setq! org-hide-leading-stars nil)
         ;; Disabled since it breaks org-indent-mode spacing
