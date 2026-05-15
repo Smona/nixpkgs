@@ -65,6 +65,7 @@ let
           experimental-features = "nix-command flakes";
           # Always show failure traces
           show-trace = true;
+          netrc-file = "${config.home.homeDirectory}/.config/nix/netrc";
         };
 
         home.language.base = "en_US.UTF-8";
