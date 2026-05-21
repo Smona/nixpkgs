@@ -71,7 +71,7 @@
         (add-hook 'org-mode-hook 'variable-pitch-mode)
         ;; (add-hook 'org-mode-hook 'my/org-local-hook)
         ;; TODO: make this a bit bigger
-        (setq org-ellipsis "⊕")
+        (setq org-ellipsis " ⊕")
         (setq org-hidden-keywords '(title))
         ;;
         ;; TODO: add author & date in preamble: https://emacs.stackexchange.com/questions/45191/how-to-place-author-and-date-under-title
@@ -491,14 +491,14 @@
                                        ("#+begin_quote" . "")
                                        ("#+end_quote" . "")
                                        ("#+filetags:" . "󱈤")
-                                       (" TODO" . "")
-                                       (" IDEA" . "")
-                                       (" STRT" . "")
-                                       (" WAIT" . "")
-                                       (" LOOP" . "")
-                                       (" DONE" . "")
-                                       (" KILL" . "")
-                                       (" PROJ" . "")
+                                       ("TODO" . "")
+                                       ("IDEA" . "")
+                                       ("STRT" . "")
+                                       ("WAIT" . "")
+                                       ("LOOP" . "")
+                                       ("DONE" . "")
+                                       ("KILL" . "")
+                                       ("PROJ" . "")
                                        ("[ ]" . "")
                                        ("[x]" . "")
                                        ("[X]" . "")
@@ -509,15 +509,18 @@
   :config
   ;; Use bullet character for +, to avoid having to insert a space before using * for plain lists
   (setq org-superstar-item-bullet-alist '((42 . 8226) (43 . 8226) (45 . 8211)))
+  ;; Largest value that doesn't add extra asterisks with the org-hide face, which show
+  ;; up on a transparent window
+  (setq org-indent-indentation-per-level 1)
+  (setq! org-indent-mode-turns-on-hiding-stars nil)
+  (setq! org-hide-leading-stars nil)
+  ;; Disabled since it breaks org-indent-mode spacing
+  (setq! org-superstar-remove-leading-stars nil)
   (add-hook 'org-mode-hook (lambda ()
-        ;; Hide bullets for headings with TODO states in favor of the prettified icon
-        (setq! org-superstar-special-todo-items 'hide)
         ;; FOUR-PER-EM SPACE (mid space), calibrated to line up with org-indent on deeply nested headings
         (setq! org-superstar-leading-bullet 8197)
-        (setq! org-indent-mode-turns-on-hiding-stars nil)
+        (setq! org-superstar-special-todo-items nil)
         (setq! org-hide-leading-stars nil)
-        ;; Disabled since it breaks org-indent-mode spacing
-        ;; (setq! org-superstar-remove-leading-stars t)
         (add-hook 'org-mode-hook 'org-superstar-mode)
         ))
   )
