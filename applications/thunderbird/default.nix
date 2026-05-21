@@ -180,8 +180,8 @@
       };
       "On Call" = {
         remote = {
-          type = "caldav";
-          url = "https://apidata.googleusercontent.com/caldav/v2/jc180ekkn5ba5klpeb8hnrgnljditnqr@import.calendar.google.com/events/";
+          type = "http";
+          url = "https://cobalt-robotics.pagerduty.com/private/63171301a02ea41df494e83ee5bab87345353fc7f42ade942b7ec112a5323189/feed";
           userName = "mel@cobaltai.com";
         };
         thunderbird = {
