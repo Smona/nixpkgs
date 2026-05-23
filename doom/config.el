@@ -82,6 +82,10 @@
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
+(add-hook! 'markdown-mode-hook
+  (visual-fill-column-mode)
+  (setq visual-fill-column-center-text t)
+  (display-line-numbers-mode -1))
 
 ;; Make doom/goto-private-config-file et al point to the source rather than the
 ;; built nix store object
