@@ -20,6 +20,16 @@ in
       swaybg
     ];
 
+    smona.wlroots.execStart = [
+      "gammastep-indicator -t 6500K:3200K -b 1.0:0.8"
+      "swaync"
+    ];
+    # TODO: initialize wallpaper file if it doesn't exist
+    # TODO: try using hyprpaper, test on sway
+    smona.wlroots.execAlways = [
+      "swaybg -i ~/.config/wallpaper -m fill"
+    ];
+
     programs.wlogout = {
       enable = true;
     };

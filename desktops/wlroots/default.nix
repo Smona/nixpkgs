@@ -21,7 +21,7 @@ in
     ./niri.nix
     ./sway.nix
     ./hyprland.nix
-    ./noctalia.nix
+    ./noctalia
     ./waybar
     ./custom-shell.nix
   ];
@@ -35,6 +35,16 @@ in
     primaryMonitor = mkOption {
       description = "Which monitor ID represents the 'primary' monitor.";
       type = types.str;
+    };
+    execStart = mkOption {
+      description = "Extra commands to spawn once when the wlroots session starts.";
+      type = types.listOf types.str;
+      default = [ ];
+    };
+    execAlways = mkOption {
+      description = "Extra commands to spawn on every wlroots session reload.";
+      type = types.listOf types.str;
+      default = [ ];
     };
   };
 

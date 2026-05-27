@@ -45,6 +45,8 @@
           smona.wlroots = {
             builtInDisplay = "eDP-1";
             primaryMonitor = config.smona.primaryMonitor;
+            # xps-nixos's mic clips above 50%
+            execStart = [ "wpctl set-volume 43 50%" ];
           };
           roles = {
             art = true;

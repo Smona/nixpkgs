@@ -17,6 +17,7 @@ commonOptions
     "${
       inputs.roon-mpris.packages.${pkgs.system}.default
     }/bin/roon-mpris --host 192.168.0.198 --port 9330 --zone Luma"
+    # TODO: move remaining laptop-specific programs and their installation to xps-nixos
     "squeekboard"
     "tablet_mode_switch"
     "${pkgs.udiskie}/bin/udiskie" # drive auto-mounting notifications via udisks2
@@ -24,27 +25,13 @@ commonOptions
     # I used to use the gnome agent, but the deepin one just looks nicer, and appears to
     # be better maintained.
     "${pkgs.pantheon.pantheon-agent-polkit}/libexec/policykit-1-pantheon/io.elementary.desktop.agent-polkit"
-    # TODO: handle this properly, it's specific to xps-nixos
-    # It looks like xps-nixos's mic clips above 50%
-    "wpctl set-volume 43 50%"
     "firefox"
     "emacs"
     "thunderbird"
   ]
   ++ (pkgs.lib.lists.optional hasBuiltinDisplay "rot8")
-  ++ (pkgs.lib.lists.optionals (config.smona.desktop.shell == "noctalia") [
-    "${cmd.systembus-notify.packages.noctalia-systembus-notify}/bin/noctalia-systembus-notify"
-    "noctalia-shell"
-  ])
-  ++ (pkgs.lib.lists.optionals (config.smona.desktop.shell == "custom") [
-    "gammastep-indicator -t 6500K:3200K -b 1.0:0.8"
-    "swaync"
-  ]);
-  # TODO: initialize wallpaper file if it doesn't exist
-  # TODO: try using hyprpaper, test on sway
-  execAlways = pkgs.lib.lists.optionals (config.smona.desktop.shell == "custom") [
-    "swaybg -i ~/.config/wallpaper -m fill"
-  ];
+  ++ cfg.execStart;
+  execAlways = cfg.execAlways;
   keyBinds = [
     {
       primaryMod = true;

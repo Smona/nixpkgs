@@ -6,6 +6,9 @@
   ...
 }:
 
+let
+  systembus-notify = (import ./systembus-notify.nix { inherit pkgs; }).packages.noctalia-systembus-notify;
+in
 {
   imports = [
     inputs.noctalia.homeModules.default
@@ -23,5 +26,10 @@
         }
       );
     };
+
+    smona.wlroots.execStart = [
+      "${systembus-notify}/bin/noctalia-systembus-notify"
+      "noctalia-shell"
+    ];
   };
 }
