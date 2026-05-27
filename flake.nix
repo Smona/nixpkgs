@@ -39,10 +39,13 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # using /next to fix missing package.json error: https://github.com/SteamClientHomebrew/Millennium/issues/551
+    millennium.url = "github:SteamClientHomebrew/Millennium/next?dir=packages/nix";
     roon-mpris = {
       url = "github:Smona/roon-mpris";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
 
     dCachix.url = "github:jonascarpay/declarative-cachix";
 
@@ -128,6 +131,7 @@
             # Instead, you should set nixpkgs configs here
             # (https://nixos.org/manual/nixpkgs/stable/#idm140737322551056)
             config.allowUnfree = true;
+            overlays = [ inputs.millennium.overlays.default ];
           };
         };
     };
