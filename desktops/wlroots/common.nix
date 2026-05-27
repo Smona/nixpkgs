@@ -12,9 +12,16 @@ let
   commonOptions = (import ../common.nix);
   cmd = import ./system-commands { inherit pkgs inputs; };
   cfg = config.smona.wlroots;
+  # Media should stay playing when the screen locks, otherwise the idle timeout
+  # can pause remotely playing media (e.g. spotify connect).
+  lock = "1password --lock; ${cfg.lockCommand}";
+  # Meant for when ending a session, so it does pause media.
+  # note that pause will error if nothing is playing, so we can't use &&
+  goodbye = "${cmd.pause} & ${lock}";
 in
 commonOptions
 // {
+  inherit lock goodbye;
   execStart = [
     "${
       inputs.roon-mpris.packages.${pkgs.system}.default
@@ -37,7 +44,7 @@ commonOptions
     {
       primaryMod = true;
       key = "End";
-      command = [ cmd.goodbye ];
+      command = [ goodbye ];
     }
     {
       secondaryMod = true;

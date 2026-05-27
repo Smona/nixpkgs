@@ -51,6 +51,7 @@ in
         "notifications"
         "toggleHistory"
       ];
+      lockCommand = "noctalia-shell ipc call lockScreen lock";
       keyBinds = [
         {
           primaryMod = true;

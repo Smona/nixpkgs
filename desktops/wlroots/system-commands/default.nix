@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 let
   maxVolume = "1.2";
@@ -50,12 +50,4 @@ rec {
   screenOn = pkgs.writeShellScript "screenOn" "${hyprctl} dispatch dpms on";
   screenOff = pkgs.writeShellScript "screenOff" "${hyprctl} dispatch dpms off";
 
-  # ...and wm locking
-  # Media should stay playing when the screen locks, otherwise the idle timeout
-  # can pause remotely playing media (e.g. spotify connect).
-  # lock = "1password --lock; hyprlock";
-  lock = "1password --lock; noctalia-shell ipc call lockScreen lock";
-  # Meant for when ending a session, so it does pause media.
-  # note that pause will error if nothing is playing, so we can't use &&
-  goodbye = "${pause} & ${lock}";
 }

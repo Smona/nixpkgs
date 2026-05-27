@@ -43,6 +43,7 @@ in
         "swaync-client"
         "-t"
       ];
+      lockCommand = "hyprlock";
       keyBinds = [
         {
           secondaryMod = true;

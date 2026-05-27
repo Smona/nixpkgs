@@ -8,6 +8,7 @@
 
 let
   cmd = import ./system-commands { inherit pkgs inputs; };
+  commonOptions = import ./common.nix { inherit pkgs inputs config; };
   inWlroots = builtins.elem config.smona.desktop.compositor [
     "hyprland"
     "niri"
@@ -62,6 +63,13 @@ in
       } (types.listOf types.str);
       default = [ ];
     };
+    lockCommand = mkOption {
+      description = "Shell-specific lock command, will run after 1password --lock.";
+      type = types.unique {
+        message = "smona.wlroots.lockCommand may only be set by one module.";
+      } types.str;
+      default = "";
+    };
     keyBinds = mkOption {
       description = "Extra shell-specific keybindings to add to the wlroots session.";
       type = types.listOf (types.attrsOf types.anything);
@@ -108,14 +116,14 @@ in
       enable = true;
       settings = {
         general = {
-          lock_cmd = cmd.lock;
-          before_sleep_cmd = "${cmd.lock} --immediate";
+          lock_cmd = commonOptions.lock;
+          before_sleep_cmd = commonOptions.lock;
         };
         listener = [
           {
             timeout = 240;
             # Locking should come before screen off to prevent FOIC (flash of insecure content)
-            on-timeout = cmd.lock;
+            on-timeout = commonOptions.lock;
           }
           {
             timeout = 480;
