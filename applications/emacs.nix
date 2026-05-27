@@ -31,7 +31,16 @@ let
   });
 in
 {
-  smona.wlroots.execStart = [ "emacs" ];
+  smona.wlroots = {
+    execStart = [ "emacs" ];
+    keyBinds = [
+      {
+        primaryMod = true;
+        key = "c";
+        command = [ "~/.emacs.d/bin/org-capture" ];
+      }
+    ];
+  };
 
   programs.emacs = {
     enable = pkgs.stdenv.isLinux;

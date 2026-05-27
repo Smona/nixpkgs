@@ -81,11 +81,6 @@ commonOptions
     }
     {
       primaryMod = true;
-      key = "b";
-      command = [ "firefox" ];
-    }
-    {
-      primaryMod = true;
       key = "k";
       command = [
         "kitten"
@@ -195,11 +190,6 @@ commonOptions
       shift = true;
       key = "a";
       command = [ "${cmd.tao}/bin/tao" ];
-    }
-    {
-      primaryMod = true;
-      key = "c";
-      command = [ "~/.emacs.d/bin/org-capture" ];
     }
   ]
   ++ cfg.keyBinds;
