@@ -46,6 +46,32 @@ in
       type = types.listOf types.str;
       default = [ ];
     };
+    sessionMenuCommand = mkOption {
+      description = "Command spawned by Mod+Shift+e to open the session menu.";
+      type = types.unique {
+        message = "smona.wlroots.sessionMenuCommand may only be set by one module.";
+      } (types.listOf types.str);
+      default = [ ];
+    };
+    launcherCommand = mkOption {
+      description = "Command spawned by Alt+space to open the application launcher.";
+      type = types.unique {
+        message = "smona.wlroots.launcherCommand may only be set by one module.";
+      } (types.listOf types.str);
+      default = [ ];
+    };
+    notificationsCommand = mkOption {
+      description = "Command spawned by Mod+m to toggle the notifications panel.";
+      type = types.unique {
+        message = "smona.wlroots.notificationsCommand may only be set by one module.";
+      } (types.listOf types.str);
+      default = [ ];
+    };
+    keyBinds = mkOption {
+      description = "Extra shell-specific keybindings to add to the wlroots session.";
+      type = types.listOf (types.attrsOf types.anything);
+      default = [ ];
+    };
   };
 
   config = lib.mkIf inWlroots {

@@ -7,7 +7,8 @@
 }:
 
 let
-  systembus-notify = (import ./systembus-notify.nix { inherit pkgs; }).packages.noctalia-systembus-notify;
+  systembus-notify =
+    (import ./systembus-notify.nix { inherit pkgs; }).packages.noctalia-systembus-notify;
 in
 {
   imports = [
@@ -15,9 +16,6 @@ in
   ];
 
   config = lib.mkIf (config.smona.desktop.shell == "noctalia") {
-    home.packages = with pkgs; [
-      # networkmanagerapplet # for VPN configuration
-    ];
     programs.noctalia-shell = {
       enable = true;
       package = (
@@ -27,9 +25,45 @@ in
       );
     };
 
-    smona.wlroots.execStart = [
-      "${systembus-notify}/bin/noctalia-systembus-notify"
-      "noctalia-shell"
-    ];
+    smona.wlroots = {
+      execStart = [
+        "${systembus-notify}/bin/noctalia-systembus-notify"
+        "noctalia-shell"
+      ];
+      sessionMenuCommand = [
+        "noctalia-shell"
+        "ipc"
+        "call"
+        "sessionMenu"
+        "toggle"
+      ];
+      launcherCommand = [
+        "noctalia-shell"
+        "ipc"
+        "call"
+        "launcher"
+        "toggle"
+      ];
+      notificationsCommand = [
+        "noctalia-shell"
+        "ipc"
+        "call"
+        "notifications"
+        "toggleHistory"
+      ];
+      keyBinds = [
+        {
+          primaryMod = true;
+          key = "s";
+          command = [
+            "noctalia-shell"
+            "ipc"
+            "call"
+            "settings"
+            "toggle"
+          ];
+        }
+      ];
+    };
   };
 }

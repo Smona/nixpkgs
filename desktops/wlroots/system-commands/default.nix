@@ -58,7 +58,4 @@ rec {
   # Meant for when ending a session, so it does pause media.
   # note that pause will error if nothing is playing, so we can't use &&
   goodbye = "${pause} & ${lock}";
-
-  # Forward system D-Bus notifications (e.g. from earlyoom) to noctalia toasts
-  systembus-notify = import ./systembus-notify.nix { inherit pkgs inputs; };
 }

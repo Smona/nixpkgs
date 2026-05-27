@@ -1,3 +1,6 @@
+# Common options across wlroots compositors, factoring in global configuration
+# and per-shell or per-machine customizations
+
 {
   pkgs,
   inputs,
@@ -37,17 +40,7 @@ commonOptions
       primaryMod = true;
       shift = true;
       key = "e";
-      command =
-        if config.smona.desktop.shell == "noctalia" then
-          [
-            "noctalia-shell"
-            "ipc"
-            "call"
-            "sessionMenu"
-            "toggle"
-          ]
-        else
-          [ "wlogout" ];
+      command = cfg.sessionMenuCommand;
     }
     {
       primaryMod = true;
@@ -57,24 +50,7 @@ commonOptions
     {
       secondaryMod = true;
       key = "space";
-      command =
-        if config.smona.desktop.shell == "noctalia" then
-          [
-            "noctalia-shell"
-            "ipc"
-            "call"
-            "launcher"
-            "toggle"
-          ]
-        else
-          [
-            "rofi"
-            "-show"
-            "combi"
-            "-combi-modes"
-            "drun,ssh,run"
-            "-show-icons"
-          ];
+      command = cfg.launcherCommand;
     }
     {
       primaryMod = true;
@@ -88,20 +64,7 @@ commonOptions
     {
       primaryMod = true;
       key = "m";
-      command =
-        if config.smona.desktop.shell == "noctalia" then
-          [
-            "noctalia-shell"
-            "ipc"
-            "call"
-            "notifications"
-            "toggleHistory"
-          ]
-        else
-          [
-            "swaync-client"
-            "-t"
-          ];
+      command = cfg.notificationsCommand;
     }
 
     # Application shortcuts
@@ -242,25 +205,5 @@ commonOptions
       command = [ "~/.emacs.d/bin/org-capture" ];
     }
   ]
-  ++ (pkgs.lib.lists.optional (config.smona.desktop.shell == "noctalia") {
-    primaryMod = true;
-    key = "s";
-    command = [
-      "noctalia-shell"
-      "ipc"
-      "call"
-      "settings"
-      "toggle"
-    ];
-  })
-  ++ (pkgs.lib.lists.optional (config.smona.desktop.shell == "custom") {
-    secondaryMod = true;
-    key = "tab";
-    command = [
-      "rofi"
-      "-show"
-      "window"
-      "-show-icons"
-    ];
-  });
+  ++ cfg.keyBinds;
 }

@@ -20,15 +20,42 @@ in
       swaybg
     ];
 
-    smona.wlroots.execStart = [
-      "gammastep-indicator -t 6500K:3200K -b 1.0:0.8"
-      "swaync"
-    ];
-    # TODO: initialize wallpaper file if it doesn't exist
-    # TODO: try using hyprpaper, test on sway
-    smona.wlroots.execAlways = [
-      "swaybg -i ~/.config/wallpaper -m fill"
-    ];
+    smona.wlroots = {
+      execStart = [
+        "gammastep-indicator -t 6500K:3200K -b 1.0:0.8"
+        "swaync"
+      ];
+      # TODO: initialize wallpaper file if it doesn't exist
+      # TODO: try using hyprpaper, test on sway
+      execAlways = [
+        "swaybg -i ~/.config/wallpaper -m fill"
+      ];
+      sessionMenuCommand = [ "wlogout" ];
+      launcherCommand = [
+        "rofi"
+        "-show"
+        "combi"
+        "-combi-modes"
+        "drun,ssh,run"
+        "-show-icons"
+      ];
+      notificationsCommand = [
+        "swaync-client"
+        "-t"
+      ];
+      keyBinds = [
+        {
+          secondaryMod = true;
+          key = "tab";
+          command = [
+            "rofi"
+            "-show"
+            "window"
+            "-show-icons"
+          ];
+        }
+      ];
+    };
 
     programs.wlogout = {
       enable = true;
