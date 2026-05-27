@@ -11,7 +11,7 @@
     inputs.noctalia.homeModules.default
   ];
 
-  config = {
+  config = lib.mkIf (config.smona.desktop.shell == "noctalia") {
     home.packages = with pkgs; [
       # networkmanagerapplet # for VPN configuration
     ];

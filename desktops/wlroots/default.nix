@@ -23,7 +23,7 @@ in
     ./hyprland.nix
     ./noctalia.nix
     ./waybar
-    # ./custom-shell.nix
+    ./custom-shell.nix
   ];
 
   options.smona.wlroots = with lib; {

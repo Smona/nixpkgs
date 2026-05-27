@@ -31,6 +31,7 @@
       smona.primaryMonitor = "DP-1";
       smona.wallpaper = ../../wallpapers/vibrant-paint-streaks.jpg;
       smona.desktop.compositor = "niri";
+      smona.desktop.shell = "noctalia";
       networking.hostName = "luma"; # Define your hostname.
 
       home-manager.users.mel =
