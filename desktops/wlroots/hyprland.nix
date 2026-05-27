@@ -13,6 +13,11 @@ let
 in
 {
   config = lib.mkIf (config.smona.desktop.compositor == "hyprland") {
+    smona.wlroots = {
+      screenOnCommand = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
+      screenOffCommand = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
+    };
+
     services.hyprpaper = {
       enable = true;
       settings = {

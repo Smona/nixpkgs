@@ -15,6 +15,11 @@ let
 in
 {
   config = lib.mkIf (config.smona.desktop.compositor == "niri") {
+    smona.wlroots = {
+      screenOnCommand = "niri msg action power-on-monitors";
+      screenOffCommand = "niri msg action power-off-monitors";
+    };
+
     home.file.".config/niri/config.kdl".text = ''
     // This config is in the KDL format: https://kdl.dev
     // "/-" comments out the following node.

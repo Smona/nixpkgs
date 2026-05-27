@@ -36,6 +36,11 @@ let
 in
 {
   config = lib.mkIf (config.smona.desktop.compositor == "sway") {
+    smona.wlroots = {
+      screenOnCommand = ''${pkgs.sway}/bin/swaymsg "output * dpms on"'';
+      screenOffCommand = ''${pkgs.sway}/bin/swaymsg "output * dpms off"'';
+    };
+
     wayland.windowManager.sway = {
       enable = true;
       config = {

@@ -9,6 +9,7 @@
 let
   cmd = import ./system-commands { inherit pkgs inputs; };
   commonOptions = import ./common.nix { inherit pkgs inputs config; };
+  cfg = config.smona.wlroots;
   inWlroots = builtins.elem config.smona.desktop.compositor [
     "hyprland"
     "niri"
@@ -70,6 +71,20 @@ in
       } types.str;
       default = "";
     };
+    screenOnCommand = mkOption {
+      description = "Shell-specific command to power monitors back on.";
+      type = types.unique {
+        message = "smona.wlroots.screenOnCommand may only be set by one module.";
+      } types.str;
+      default = "";
+    };
+    screenOffCommand = mkOption {
+      description = "Shell-specific command to power monitors off.";
+      type = types.unique {
+        message = "smona.wlroots.screenOffCommand may only be set by one module.";
+      } types.str;
+      default = "";
+    };
     keyBinds = mkOption {
       description = "Extra shell-specific keybindings to add to the wlroots session.";
       type = types.listOf (types.attrsOf types.anything);
@@ -127,8 +142,8 @@ in
           }
           {
             timeout = 480;
-            on-timeout = builtins.toString cmd.screenOff;
-            on-resume = builtins.toString cmd.screenOn;
+            on-timeout = cfg.screenOffCommand;
+            on-resume = cfg.screenOnCommand;
           }
           # FIXME: re-enable on laptop but not desktop
           # {

@@ -7,7 +7,6 @@ let
   playerctl = "${pkgs.playerctl}/bin/playerctl";
   brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
   wpctl = "${pkgs.wireplumber}/bin/wpctl";
-  hyprctl = "${pkgs.hyprland}/bin/hyprctl";
 in
 rec {
   # We need to handle our own media keys
@@ -45,9 +44,4 @@ rec {
 
   brighter = pkgs.writeShellScript "brighter" "${brightnessctl} s +${brightnessStepPercent}%";
   darker = pkgs.writeShellScript "darker" "${brightnessctl} s ${brightnessStepPercent}%-";
-
-  # TODO: be smarter about this, use the right command per-wm
-  screenOn = pkgs.writeShellScript "screenOn" "${hyprctl} dispatch dpms on";
-  screenOff = pkgs.writeShellScript "screenOff" "${hyprctl} dispatch dpms off";
-
 }
