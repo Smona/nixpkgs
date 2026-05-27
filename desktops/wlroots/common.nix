@@ -12,7 +12,6 @@ let
   commonOptions = (import ../common.nix);
   cmd = import ./system-commands { inherit pkgs inputs; };
   cfg = config.smona.wlroots;
-  hasBuiltinDisplay = cfg.builtInDisplay != "";
 in
 commonOptions
 // {
@@ -26,7 +25,6 @@ commonOptions
     # be better maintained.
     "${pkgs.pantheon.pantheon-agent-polkit}/libexec/policykit-1-pantheon/io.elementary.desktop.agent-polkit"
   ]
-  ++ (pkgs.lib.lists.optional hasBuiltinDisplay "rot8")
   ++ cfg.execStart;
   execAlways = cfg.execAlways;
   keyBinds = [

@@ -27,11 +27,6 @@ in
   ];
 
   options.smona.wlroots = with lib; {
-    builtInDisplay = mkOption {
-      description = "Which monitor ID represents the builtin screen. Get the ID via `swaymsg -t get_outputs`";
-      type = types.str;
-      default = "";
-    };
     primaryMonitor = mkOption {
       description = "Which monitor ID represents the 'primary' monitor.";
       type = types.str;
@@ -88,7 +83,6 @@ in
       rofimoji
       fusuma
 
-      rot8
       cmd.tao
     ];
 
