@@ -105,8 +105,8 @@ in
 
           input {
               kb_file=
-              kb_layout=us,us
-              kb_variant=dvorak,
+              kb_layout=${commonOptions.kbLayout}
+              kb_variant=${commonOptions.kbVariant}
               kb_model=
               kb_options=${builtins.concatStringsSep "," commonOptions.xkbOptions}
               kb_rules=

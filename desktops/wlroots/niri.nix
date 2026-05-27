@@ -32,8 +32,8 @@ in
                 // For example:
                 // layout "us,ru"
                 // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
-                layout "us,us"
-                variant "dvorak,"
+                layout "${commonOptions.kbLayout}"
+                variant "${commonOptions.kbVariant}"
                 options "${builtins.concatStringsSep "," commonOptions.xkbOptions}"
             }
 
