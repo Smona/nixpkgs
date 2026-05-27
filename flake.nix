@@ -29,7 +29,7 @@
       url = "github:rafaelrc7/wayland-pipewire-idle-inhibit";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    catppuccin.url = "github:catppuccin/nix";
+    catppuccin.url = "github:catppuccin/nix?ref=175eb40";
     catppuccin.inputs.nixpkgs.follows = "nixpkgs";
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
