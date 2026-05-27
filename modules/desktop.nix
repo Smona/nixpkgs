@@ -1,11 +1,12 @@
 # Desktop environment / compositor selection.
-{ ... }:
+{ self, ... }:
 {
   flake.nixosModules.desktop =
     { config, lib, ... }:
     {
       imports = [
         ../nixos/wlroots.nix
+        self.nixosModules.custom-shell
       ];
 
       # This uses an enum since having multiple enabled at once can cause
@@ -54,6 +55,7 @@
       imports = [
         ../desktops/gnome
         ../desktops/wlroots
+        self.homeModules.custom-shell
       ];
 
       options.smona.desktop.compositor = lib.mkOption {
