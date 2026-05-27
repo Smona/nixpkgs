@@ -63,7 +63,16 @@
           enable = true;
           # Can improve WiFi connection reliability
           wifi.powersave = false;
+          wifi.backend = "iwd";
           plugins = with pkgs; [ networkmanager-openvpn ];
+        };
+
+        # IWD is much quicker to connect IME.
+        networking.wireless.iwd = {
+          enable = true;
+          # Fixes an issue where luma would randomly disconnect from home wifi
+          # by roaming to nowhere.
+          settings.Scan.DisableRoamingScan = true;
         };
 
         powerManagement.cpuFreqGovernor = lib.mkForce "schedutil";
