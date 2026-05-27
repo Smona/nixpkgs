@@ -126,7 +126,13 @@ in
   # Better 🐱
   programs.bat.enable = true;
   # System monitor
-  programs.btop.enable = true;
+  programs.btop = {
+    enable = true;
+    settings = lib.mkIf (config.smona.desktop.shell == "noctalia") {
+      color_theme = "noctalia";
+    };
+  };
+  catppuccin.btop.enable = config.smona.desktop.shell != "noctalia";
 
   programs.direnv.enable = true;
   # https://github.com/nix-community/nix-direnv
