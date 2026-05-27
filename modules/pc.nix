@@ -16,6 +16,7 @@
         self.nixosModules.lilnasx
         self.nixosModules.oom-handling
         self.nixosModules.printing
+        self.nixosModules.spotify
         ../nixos/wlroots.nix
         ../nixos/boot.nix
       ];
@@ -153,10 +154,6 @@
           polkitPolicyOwners = [ config.smona.username ];
         };
 
-        # Ports required by spotify connect:
-        # https://nixos.wiki/wiki/Spotify
-        networking.firewall.allowedTCPPorts = [ 57621 ];
-        networking.firewall.allowedUDPPorts = [ 5353 ];
         # Always use Cloudflare nameservers
         networking.nameservers = [
           "1.1.1.1"
