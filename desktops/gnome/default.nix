@@ -40,9 +40,7 @@ let
   ];
 in
 {
-  options.gnome.enable = lib.mkEnableOption "gnome configuration management";
-
-  config = lib.mkIf config.gnome.enable {
+  config = lib.mkIf (config.smona.desktop.compositor == "gnome") {
     graphical = true;
     home.packages = extensions ++ [ theme.gnome.package ];
 

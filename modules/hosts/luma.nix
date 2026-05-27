@@ -30,6 +30,7 @@
       smona.username = "mel";
       smona.primaryMonitor = "DP-1";
       smona.wallpaper = ../../wallpapers/vibrant-paint-streaks.jpg;
+      smona.desktop.compositor = "niri";
       networking.hostName = "luma"; # Define your hostname.
 
       home-manager.users.mel =
@@ -41,9 +42,7 @@
           ];
 
           home.username = "mel";
-          smona.wlroots.enable = true;
           smona.wlroots.primaryMonitor = config.smona.primaryMonitor;
-          # gnome.enable = true;
           roles = {
             music = true;
           };

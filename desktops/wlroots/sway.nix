@@ -10,8 +10,10 @@ let
   commonOptions = import ./common.nix { inherit pkgs inputs config; };
 in
 {
-  wayland.windowManager.sway = {
-    config = {
+  config = lib.mkIf (config.smona.desktop.compositor == "sway") {
+    wayland.windowManager.sway = {
+      enable = true;
+      config = {
       terminal = "kitty";
       # Let's let waybar handle the bars...
       bars = [ ];
@@ -108,5 +110,6 @@ in
 
       output HDMI-A-2 pos 3840 0 transform 270
     '';
+    };
   };
 }

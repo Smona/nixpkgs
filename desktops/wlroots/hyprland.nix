@@ -12,7 +12,7 @@ let
   wallpaperPath = "~/.config/wallpaper";
 in
 {
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf (config.smona.desktop.compositor == "hyprland") {
     services.hyprpaper = {
       enable = true;
       settings = {
@@ -84,6 +84,7 @@ in
     };
 
     wayland.windowManager.hyprland = {
+      enable = true;
       extraConfig =
         let
           mod = "SUPER";

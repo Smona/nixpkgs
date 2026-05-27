@@ -7,8 +7,12 @@
 }:
 
 let
-  cfg = config.smona.wlroots;
   cmd = import ./system-commands { inherit pkgs inputs; };
+  inWlroots = builtins.elem config.smona.desktop.compositor [
+    "hyprland"
+    "niri"
+    "sway"
+  ];
 in
 {
   imports = [
@@ -23,7 +27,6 @@ in
   ];
 
   options.smona.wlroots = with lib; {
-    enable = mkEnableOption "wlroots window managers";
     builtInDisplay = mkOption {
       description = "Which monitor ID represents the builtin screen. Get the ID via `swaymsg -t get_outputs`";
       type = types.str;
@@ -35,7 +38,7 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf inWlroots {
     graphical = true;
 
     home.packages = with pkgs; [
@@ -100,9 +103,6 @@ in
       };
     };
 
-    wayland.windowManager.sway.enable = true;
-    # disabled as it interferes with niri screenshare
-    # wayland.windowManager.hyprland.enable = true;
   };
 
 }

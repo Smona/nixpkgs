@@ -14,7 +14,8 @@ let
   right = "n";
 in
 {
-  home.file.".config/niri/config.kdl".text = ''
+  config = lib.mkIf (config.smona.desktop.compositor == "niri") {
+    home.file.".config/niri/config.kdl".text = ''
     // This config is in the KDL format: https://kdl.dev
     // "/-" comments out the following node.
     // Check the wiki for a full description of the configuration:
@@ -676,4 +677,5 @@ in
 
     include optional=true "noctalia.kdl"
   '';
+  };
 }

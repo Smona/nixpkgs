@@ -131,8 +131,7 @@ in
       imports = [
         common
         ../../applications/gui.nix
-        ../../desktops/gnome
-        ../../desktops/wlroots
+        self.homeModules.desktop
       ];
 
       # Home Manager needs a bit of information about you and the

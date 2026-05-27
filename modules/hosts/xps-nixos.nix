@@ -26,6 +26,7 @@
       smona.username = "smona";
       smona.primaryMonitor = "eDP-1";
       smona.wallpaper = ../../wallpapers/neon-highway-wallpaper.jpg;
+      smona.desktop.compositor = "niri";
       networking.hostName = "xps-nixos"; # Define your hostname.
 
       # Enable touchpad support (enabled default in most desktopManager).
@@ -41,7 +42,6 @@
 
           home.username = "smona";
           smona.wlroots = {
-            enable = true;
             builtInDisplay = "eDP-1";
             primaryMonitor = config.smona.primaryMonitor;
           };

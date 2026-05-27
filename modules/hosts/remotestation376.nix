@@ -16,7 +16,7 @@
         { ... }:
         {
           home.username = "cobalt";
-          gnome.enable = true;
+          smona.desktop.compositor = "gnome";
           roles = {
             work = true;
           };

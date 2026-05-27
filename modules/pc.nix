@@ -13,11 +13,11 @@
         inputs.home-manager.nixosModules.home-manager
         ../common_configuration.nix
         inputs.catppuccin.nixosModules.catppuccin
+        self.nixosModules.desktop
         self.nixosModules.lilnasx
         self.nixosModules.oom-handling
         self.nixosModules.printing
         self.nixosModules.spotify
-        ../nixos/wlroots.nix
         ../nixos/boot.nix
       ];
 
