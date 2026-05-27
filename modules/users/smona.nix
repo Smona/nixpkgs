@@ -18,6 +18,7 @@ let
         self.homeModules.fonts
         self.homeModules.git
         self.homeModules.opencode
+        self.homeModules.spotify
         self.homeModules.tmux
         self.homeModules.vim
         ../../applications/shell.nix
