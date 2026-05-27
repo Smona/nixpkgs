@@ -11,6 +11,7 @@
       programs.git = {
         enable = true;
         signing = {
+          format = "openpgp";
           signByDefault = true;
           key = "290FCF081AEDB3EC";
         };
