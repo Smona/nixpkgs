@@ -31,6 +31,8 @@ let
   });
 in
 {
+  smona.wlroots.execStart = [ "emacs" ];
+
   programs.emacs = {
     enable = pkgs.stdenv.isLinux;
     package = my-emacs;

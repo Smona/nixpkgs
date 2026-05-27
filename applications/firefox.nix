@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 
 {
+  smona.wlroots.execStart = [ "firefox" ];
+
   # This requires declarative extensions, and i already found a theme i like.
   catppuccin.firefox.enable = false;
   programs.firefox = {

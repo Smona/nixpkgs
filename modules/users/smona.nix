@@ -15,6 +15,7 @@ let
       imports = [
         inputs.dCachix.homeManagerModules.declarative-cachix
         inputs.catppuccin.homeModules.catppuccin
+        self.homeModules.desktop
         self.homeModules.fonts
         self.homeModules.git
         self.homeModules.opencode
@@ -131,7 +132,6 @@ in
       imports = [
         common
         ../../applications/gui.nix
-        self.homeModules.desktop
       ];
 
       # Home Manager needs a bit of information about you and the

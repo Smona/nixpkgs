@@ -28,9 +28,6 @@ commonOptions
     # I used to use the gnome agent, but the deepin one just looks nicer, and appears to
     # be better maintained.
     "${pkgs.pantheon.pantheon-agent-polkit}/libexec/policykit-1-pantheon/io.elementary.desktop.agent-polkit"
-    "firefox"
-    "emacs"
-    "thunderbird"
   ]
   ++ (pkgs.lib.lists.optional hasBuiltinDisplay "rot8")
   ++ cfg.execStart;

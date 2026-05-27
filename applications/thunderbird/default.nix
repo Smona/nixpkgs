@@ -6,6 +6,8 @@
 }:
 
 {
+  smona.wlroots.execStart = [ "thunderbird" ];
+
   programs.thunderbird = {
     enable = true;
     package = pkgs.thunderbird.override {
