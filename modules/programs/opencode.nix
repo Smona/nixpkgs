@@ -38,6 +38,17 @@
                                 }
                             }
                         },
+                        "Qwen3.6-27B": {
+                            "name": "Qwen3.6 Dense",
+                            "options": {
+                                "chat_template_kwargs": {
+                                    "preserve_thinking": true
+                                }
+                            }
+                        },
+                        "gemma-4-26B-A4B-it": {
+                            "name": "Gemma 4"
+                        },
                     }
                 }
             }
