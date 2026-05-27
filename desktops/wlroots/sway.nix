@@ -8,6 +8,31 @@
 
 let
   commonOptions = import ./common.nix { inherit pkgs inputs config; };
+
+  # Let dbus know about important env variables and propagate them to
+  # relevant services run at the end of sway config. See:
+  # https://github.com/emersion/xdg-desktop-portal-wlr/wiki/"It-doesn't-work"-Troubleshooting-Checklist
+  # Pretty much the same as /etc/sway/config.d/nixos.conf but also restarts
+  # some user services to make sure they have the correct environment variables.
+  dbus-sway-environment = pkgs.writeShellScript "dbus-sway-environment" ''
+    dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+    systemctl --user stop pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
+    systemctl --user start pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
+  '';
+
+  # There is some friction between sway and gtk:
+  # https://github.com/swaywm/sway/wiki/GTK-3-settings-on-Wayland
+  # The suggested way to set gtk settings is with gsettings; for gsettings
+  # to work, we need to tell it where the schemas are using XDG_DATA_DIRS.
+  configure-gtk =
+    let
+      schema = pkgs.gsettings-desktop-schemas;
+      datadir = "${schema}/share/gsettings-schemas/${schema.name}";
+    in
+    pkgs.writeShellScript "configure-gtk" ''
+      export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
+      gnome_schema=org.gnome.desktop.interface
+    '';
 in
 {
   config = lib.mkIf (config.smona.desktop.compositor == "sway") {
@@ -57,21 +82,20 @@ in
         # allow windows to steal focus and switch to their workspace
         newWindow = "focus";
       };
-      startup =
-        [
-          { command = "dbus-sway-environment"; }
-          { command = "configure-gtk"; }
-          {
-            # Enable dynamic tiling
-            command = "${pkgs.autotiling}/bin/autotiling";
-            always = true;
-          }
-        ]
-        ++ (builtins.map (cmd: { command = cmd; }) commonOptions.execStart)
-        ++ (builtins.map (cmd: {
-          command = cmd;
+      startup = [
+        { command = "${dbus-sway-environment}"; }
+        { command = "${configure-gtk}"; }
+        {
+          # Enable dynamic tiling
+          command = "${pkgs.autotiling}/bin/autotiling";
           always = true;
-        }) commonOptions.execAlways);
+        }
+      ]
+      ++ (builtins.map (cmd: { command = cmd; }) commonOptions.execStart)
+      ++ (builtins.map (cmd: {
+        command = cmd;
+        always = true;
+      }) commonOptions.execAlways);
 
       modifier = "Mod4";
       keybindings =
@@ -89,12 +113,15 @@ in
           }
           // (builtins.listToAttrs (
             builtins.map (hk: {
-              name =
-                (if hk.ctrl or false then "Ctrl+" else "")
-                + (if hk.secondaryMod or false then "${secondaryMod}+" else "")
-                + (if hk.primaryMod or false then "${modifier}+" else "")
-                + (if hk.shift or false then "Shift+" else "")
-                + hk.key;
+              name = (
+                builtins.concatStringsSep "+" (
+                  (lib.lists.optional hk.ctrl or false "Ctrl")
+                  ++ (lib.lists.optional hk.shift or false "Shift")
+                  ++ (lib.lists.optional hk.primaryMod or false modifier)
+                  ++ (lib.lists.optional hk.secondaryMod or false secondaryMod)
+                  ++ [ hk.key ]
+                )
+              );
               value = "exec ${builtins.concatStringsSep " " hk.command}";
             }) commonOptions.keyBinds
           ))
