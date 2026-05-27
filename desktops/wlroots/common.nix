@@ -19,9 +19,6 @@ commonOptions
     }/bin/roon-mpris --host 192.168.0.198 --port 9330 --zone Luma"
     "squeekboard"
     "tablet_mode_switch"
-    # TODO: set up in custom-shell.nix
-    # "gammastep-indicator -t 6500K:3200K -b 1.0:0.8"
-    # "swaync"
     "${pkgs.udiskie}/bin/udiskie" # drive auto-mounting notifications via udisks2
     # Mostly just needed for 1password system authentication, so I can use the SSH agent
     # I used to use the gnome agent, but the deepin one just looks nicer, and appears to
@@ -33,14 +30,37 @@ commonOptions
     "firefox"
     "emacs"
     "thunderbird"
-  ] ++ (pkgs.lib.lists.optional hasBuiltinDisplay "rot8");
-  execAlways = [ "swaybg -i ${cfg.wallpaper} -m fill" ];
+  ]
+  ++ (pkgs.lib.lists.optional hasBuiltinDisplay "rot8")
+  ++ (pkgs.lib.lists.optionals (config.smona.desktop.shell == "noctalia") [
+    "${cmd.systembus-notify.packages.noctalia-systembus-notify}/bin/noctalia-systembus-notify"
+    "noctalia-shell"
+  ])
+  ++ (pkgs.lib.lists.optionals (config.smona.desktop.shell == "custom") [
+    "gammastep-indicator -t 6500K:3200K -b 1.0:0.8"
+    "swaync"
+  ]);
+  # TODO: initialize wallpaper file if it doesn't exist
+  # TODO: try using hyprpaper, test on sway
+  execAlways = pkgs.lib.lists.optionals (config.smona.desktop.shell == "custom") [
+    "swaybg -i ~/.config/wallpaper -m fill"
+  ];
   keyBinds = [
     {
       primaryMod = true;
       shift = true;
       key = "e";
-      command = [ "wlogout" ];
+      command =
+        if config.smona.desktop.shell == "noctalia" then
+          [
+            "noctalia-shell"
+            "ipc"
+            "call"
+            "sessionMenu"
+            "toggle"
+          ]
+        else
+          [ "wlogout" ];
     }
     {
       primaryMod = true;
@@ -50,14 +70,24 @@ commonOptions
     {
       secondaryMod = true;
       key = "space";
-      command = [
-        "rofi"
-        "-show"
-        "combi"
-        "-combi-modes"
-        "drun,ssh,run"
-        "-show-icons"
-      ];
+      command =
+        if config.smona.desktop.shell == "noctalia" then
+          [
+            "noctalia-shell"
+            "ipc"
+            "call"
+            "launcher"
+            "toggle"
+          ]
+        else
+          [
+            "rofi"
+            "-show"
+            "combi"
+            "-combi-modes"
+            "drun,ssh,run"
+            "-show-icons"
+          ];
     }
     {
       primaryMod = true;
@@ -71,10 +101,20 @@ commonOptions
     {
       primaryMod = true;
       key = "m";
-      command = [
-        "swaync-client"
-        "-t"
-      ];
+      command =
+        if config.smona.desktop.shell == "noctalia" then
+          [
+            "noctalia-shell"
+            "ipc"
+            "call"
+            "notifications"
+            "toggleHistory"
+          ]
+        else
+          [
+            "swaync-client"
+            "-t"
+          ];
     }
 
     # Application shortcuts
@@ -100,7 +140,10 @@ commonOptions
     {
       primaryMod = true;
       key = "k";
-      command = [ "kitty" ];
+      command = [
+        "kitten"
+        "quick-access-terminal"
+      ];
     }
     {
       key = "XF86MonBrightnessUp";
@@ -204,12 +247,33 @@ commonOptions
       primaryMod = true;
       shift = true;
       key = "a";
-      command = [ cmd.tao ];
+      command = [ "${cmd.tao}/bin/tao" ];
     }
     {
       primaryMod = true;
       key = "c";
       command = [ "~/.emacs.d/bin/org-capture" ];
     }
-  ];
+  ]
+  ++ (pkgs.lib.lists.optional (config.smona.desktop.shell == "noctalia") {
+    primaryMod = true;
+    key = "s";
+    command = [
+      "noctalia-shell"
+      "ipc"
+      "call"
+      "settings"
+      "toggle"
+    ];
+  })
+  ++ (pkgs.lib.lists.optional (config.smona.desktop.shell == "custom") {
+    secondaryMod = true;
+    key = "tab";
+    command = [
+      "rofi"
+      "-show"
+      "window"
+      "-show-icons"
+    ];
+  });
 }
