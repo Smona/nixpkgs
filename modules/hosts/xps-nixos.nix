@@ -42,11 +42,19 @@
           ];
 
           home.username = "smona";
+          home.packages = [
+            pkgs.squeekboard
+            (import ../../desktops/wlroots/tablet_mode_switch { inherit pkgs; })
+          ];
           smona.wlroots = {
             builtInDisplay = "eDP-1";
             primaryMonitor = config.smona.primaryMonitor;
-            # xps-nixos's mic clips above 50%
-            execStart = [ "wpctl set-volume 43 50%" ];
+            execStart = [
+              # xps-nixos's mic clips above 50%
+              "wpctl set-volume 43 50%"
+              "squeekboard"
+              "tablet_mode_switch"
+            ];
           };
           roles = {
             art = true;
