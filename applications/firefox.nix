@@ -15,6 +15,9 @@
   # This requires declarative extensions, and i already found a theme i like.
   catppuccin.firefox.enable = false;
   programs.firefox = {
+    # I like the old default, since the .mozilla directory has to exist anyways
+    # it's nice to have one less folder.
+    configPath = ".mozilla/firefox";
     package = (config.lib.nixGL.wrap config.pkgsCompat.firefox);
     nativeMessagingHosts = [ pkgs.fx-cast-bridge ];
     profiles = {
