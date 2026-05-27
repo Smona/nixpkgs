@@ -7,6 +7,7 @@
       imports = [
         ../nixos/wlroots.nix
         self.nixosModules.custom-shell
+        self.nixosModules.noctalia
       ];
 
       # This uses an enum since having multiple enabled at once can cause
@@ -56,6 +57,7 @@
         ../desktops/gnome
         ../desktops/wlroots
         self.homeModules.custom-shell
+        self.homeModules.noctalia
       ];
 
       options.smona.desktop.compositor = lib.mkOption {

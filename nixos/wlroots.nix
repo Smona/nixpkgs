@@ -14,8 +14,6 @@ let
 in
 {
   config = lib.mkIf inWlroots {
-    environment.systemPackages = [
-    ];
     environment.sessionVariables = {
       # Force electron apps to run in wayland natively. This is required for
       # them to display on scaled monitors without getting blurry.
@@ -47,8 +45,5 @@ in
     services.devmon.enable = true;
     services.gvfs.enable = true;
     services.udisks2.enable = true;
-
-    # support for calendar events in noctalia
-    services.gnome.evolution-data-server.enable = true;
   };
 }

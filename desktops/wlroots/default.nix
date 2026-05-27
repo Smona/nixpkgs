@@ -23,9 +23,7 @@ in
     ./niri.nix
     ./sway.nix
     ./hyprland.nix
-    ./noctalia
     ./waybar
-    ./custom-shell.nix
   ];
 
   options.smona.wlroots = with lib; {
