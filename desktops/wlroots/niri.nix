@@ -402,6 +402,30 @@ in
         default-floating-position x=0 y=0 relative-to="bottom-right"
     }
 
+    // Blur config
+    /* Apps: blur them all without xray for a better look */
+    window-rule {
+        background-effect {
+            blur true
+            xray false
+        }
+    }
+    /* Noctalia: blur everywhere without xray for a better look */
+    layer-rule {
+        match namespace="^noctalia-(background|launcher-overlay|dock)-.*$"
+        background-effect {
+            blur true
+            xray false
+        }
+    }
+    layer-rule {
+        match namespace="kitty-quick-access"
+        background-effect {
+            blur true
+            xray false
+        }
+    }
+
     // Put wallpaper inside the overview backdrop.
     layer-rule {
         match namespace="^wallpaper$"
@@ -647,6 +671,8 @@ in
         // moving the mouse or pressing any other key.
         Mod+Shift+P { power-off-monitors; }
     }
+
+
 
     include optional=true "noctalia.kdl"
   '';
