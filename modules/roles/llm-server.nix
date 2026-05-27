@@ -22,7 +22,8 @@
           # allow all privateNetwork containers internet access.
           internalInterfaces = [ "ve-+" ];
           # the external interface this traffic goes through.
-          externalInterface = "wlp16s0";
+          # changed from "wlp16s0" when i switched to iwd
+          externalInterface = "wlan0";
         };
 
         # Llama-swap + Open-WebUI (colocated so open-webui can reach llama-swap on localhost)
@@ -113,20 +114,27 @@
                     in
                     {
                       "Qwen3.6-35B-A3B" = {
-                        cmd = "${pkgs.llama-cpp-vulkan}/bin/llama-server --hf-repo 'unsloth/Qwen3.6-35B-A3B-GGUF:UD-Q4_K_XL' ${qwenArgs} ${baseArgs}";
+                        cmd = "${pkgs.llama-cpp-vulkan}/bin/llama-server --hf-repo 'unsloth/Qwen3.6-35B-A3B-GGUF:UD-Q6_K_XL' ${qwenArgs} ${baseArgs}";
                         filters = qwenFilters;
                       };
                       "Qwen3.6-27B" = {
-                        cmd = "${pkgs.llama-cpp-vulkan}/bin/llama-server --hf-repo 'unsloth/Qwen3.6-27B-GGUF:UD-Q4_K_XL' ${qwenArgs} ${baseArgs}";
+                        cmd = "${pkgs.llama-cpp-vulkan}/bin/llama-server --hf-repo 'unsloth/Qwen3.6-27B-GGUF:IQ4_NL' ${qwenArgs} ${baseArgs}";
                         filters = qwenFilters;
+                      };
+                      "Cydonia-24B-v4.3" = {
+                        cmd = "${pkgs.llama-cpp-vulkan}/bin/llama-server --hf-repo 'TheDrummer/Cydonia-24B-v4.3-GGUF:Q6_K' --ctx-size 32000 ${baseArgs}";
                       };
                       "WeirdCompound-v1.7-24b" = {
                         cmd = "${pkgs.llama-cpp-vulkan}/bin/llama-server --hf-repo 'mradermacher/WeirdCompound-v1.7-24b-GGUF' --ctx-size 132000 ${baseArgs}";
                       };
+                      # Q5_K_S runs super fast, but writing quality is significantly degraded compared to the XL. it seems XL variants can really be much better.
                       "gemma-4-26B-A4B-it" = {
-                        cmd = "${pkgs.llama-cpp-vulkan}/bin/llama-server --hf-repo 'unsloth/gemma-4-26B-A4B-it-GGUF:UD-Q5_K_XL' --ctx-size 128000 ${baseArgs}";
+                        cmd = "${pkgs.llama-cpp-vulkan}/bin/llama-server --hf-repo 'unsloth/gemma-4-26B-A4B-it-GGUF:UD-Q5_K_XL' --ctx-size 64000 ${baseArgs}";
                         filters = {
                           setParams = {
+                            chat_template_kwargs = {
+                              enable_thinking = true;
+                            };
                             temperature = 1.0;
                             top_p = 0.95;
                             top_k = 64;
