@@ -154,6 +154,8 @@
           polkitPolicyOwners = [ config.smona.username ];
         };
 
+        programs.kdeconnect.enable = true;
+
         # Always use Cloudflare nameservers
         networking.nameservers = [
           "1.1.1.1"
