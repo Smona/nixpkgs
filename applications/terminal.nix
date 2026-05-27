@@ -16,7 +16,7 @@
     package = (config.lib.nixGL.wrap pkgs.kitty);
     settings = {
       font_family = "MonoLisa Nerd Font";
-      background_opacity = "0.9";
+      background_opacity = "0.8";
       font_size = "12";
       window_padding_width = "4";
       touch_scroll_multiplier = "2";
@@ -38,10 +38,13 @@
     '';
   };
   xdg.configFile."kitty/quick-access-terminal.conf".text = ''
-    margin_left 14
-    margin_right 14
-    background_opacity 0.95
-  '';
+    edge center
+    margin_top 10
+    margin_bottom 8
+    background_opacity 0.6
+    focus_policy exclusive
+    include themes/noctalia.conf
+  ''; 
   catppuccin.kitty.enable = false;
 
   # Alacritty seems nice, but it's lacking some features and kept crashing gnome-shell
