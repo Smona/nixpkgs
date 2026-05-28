@@ -27,6 +27,10 @@
           );
         };
 
+        home.packages = with pkgs; [
+          fd # required for file search plugin: https://noctalia.dev/plugins/file-search
+        ];
+
         smona.wlroots = {
           execStart = [
             "${systembus-notify}/bin/noctalia-systembus-notify"
