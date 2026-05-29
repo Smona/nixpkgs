@@ -14,6 +14,7 @@
         ../common_configuration.nix
         inputs.catppuccin.nixosModules.catppuccin
         self.nixosModules.desktop
+        self.nixosModules.keychron
         self.nixosModules.lilnasx
         self.nixosModules.oom-handling
         self.nixosModules.printing
