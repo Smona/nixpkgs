@@ -5,6 +5,9 @@
   ...
 }:
 
+let
+  isNoctalia = config.smona.desktop.shell == "noctalia";
+in
 {
   home.shellAliases = {
     # Convenience SSH alias for installing kitty terminfo on servers
@@ -33,7 +36,7 @@
       initial_window_width = 800;
       initial_window_height = 600;
     };
-    extraConfig = ''
+    extraConfig = lib.optionalString isNoctalia ''
       include themes/noctalia.conf
     '';
   };
@@ -43,9 +46,9 @@
     margin_bottom 8
     background_opacity 0.6
     focus_policy exclusive
-    include themes/noctalia.conf
-  ''; 
-  catppuccin.kitty.enable = false;
+    ${lib.optionalString isNoctalia "include themes/noctalia.conf"}
+  '';
+  catppuccin.kitty.enable = !isNoctalia;
 
   # Alacritty seems nice, but it's lacking some features and kept crashing gnome-shell
   programs.alacritty = {
