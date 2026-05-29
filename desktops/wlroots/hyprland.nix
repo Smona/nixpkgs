@@ -16,6 +16,11 @@ in
     smona.wlroots = {
       screenOnCommand = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
       screenOffCommand = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
+      execStart = [
+        # work around steam keyboard layout workaround in desktops/common.nix
+        # NOTE: untested
+        "${pkgs.hyprland}/bin/hyprctl dispatch switchxkblayout next"
+      ];
     };
 
     services.hyprpaper = {

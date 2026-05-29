@@ -18,6 +18,10 @@ in
     smona.wlroots = {
       screenOnCommand = "niri msg action power-on-monitors";
       screenOffCommand = "niri msg action power-off-monitors";
+      execStart = [
+        # work around steam keyboard layout workaround in desktops/common.nix
+        "niri msg action switch-layout next"
+      ];
     };
 
     home.file.".config/niri/config.kdl".text = ''
