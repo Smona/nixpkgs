@@ -19,7 +19,7 @@
         self.nixosModules.oom-handling
         self.nixosModules.printing
         self.nixosModules.spotify
-        ../nixos/boot.nix
+        self.nixosModules.boot
       ];
 
       options.smona = with lib; {
