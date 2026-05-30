@@ -21,7 +21,7 @@
       ...
     }:
     {
-      imports = [ ../../common_configuration.nix ];
+      imports = [ self.darwinModules.pc ];
 
       smona.username = "mel";
 
