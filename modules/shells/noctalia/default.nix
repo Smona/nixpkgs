@@ -29,6 +29,9 @@
 
         home.packages = with pkgs; [
           fd # required for file search plugin: https://noctalia.dev/plugins/file-search
+
+          # TODO: declaratively add to firefox native extensions
+          pywalfox-native # support firefox & thunderbird themes
         ];
 
         smona.wlroots = {
