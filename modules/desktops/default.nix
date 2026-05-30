@@ -5,7 +5,7 @@
     { config, lib, ... }:
     {
       imports = [
-        ../nixos/wlroots.nix
+        self.nixosModules.wlroots-system
         self.nixosModules.custom-shell
         self.nixosModules.noctalia
       ];
@@ -54,8 +54,8 @@
     { lib, ... }:
     {
       imports = [
-        ../desktops/gnome
-        ../desktops/wlroots
+        ../../desktops/gnome
+        ../../desktops/wlroots
         self.homeModules.custom-shell
         self.homeModules.noctalia
       ];
