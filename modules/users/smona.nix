@@ -22,7 +22,7 @@ let
         self.homeModules.spotify
         self.homeModules.tmux
         self.homeModules.vim
-        ../../applications/shell.nix
+        self.homeModules.shells
         ../../applications/emacs.nix
         ../../applications/common_gui.nix
       ];
