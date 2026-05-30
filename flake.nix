@@ -3,7 +3,9 @@
 
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # TODO: unpin commit once this issue is fixed:
+    # https://github.com/NixOS/nixpkgs/issues/523332
+    nixpkgs.url = "github:nixos/nixpkgs?rev=550326b1163ce8a954bb54e1a937cb1edc295a22";
     hardware.url = "github:nixos/nixos-hardware";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
