@@ -19,6 +19,24 @@
           devices = [ "nodev" ];
           efiSupport = true;
           useOSProber = true;
+          # Full RAM testing with no bootable flash drive!
+          # Working around an issue where the entry doesn't work with a customized efiSysMountPoint
+          # WARNING: LLM-generated workaround, validated by this comment:
+          # https://discourse.nixos.org/t/options-to-install-and-configure-memtest86plus-seem-inconsistent-and-broken/64130/5
+          memtest86.enable = false;
+          # Copy the EFI build of memtest86+ onto the ESP.
+          # With efiSysMountPoint = "/boot/efi", this lands at /boot/efi/memtest.efi,
+          # which is simply /memtest.efi at the root of the FAT32 ESP.
+          extraFiles."memtest.efi" = pkgs.memtest86plus.efi;
+
+          extraEntries = ''
+            menuentry "Memtest86+" {
+                # Locate whichever partition actually contains the file, make it $root.
+                search --set=root --no-floppy --file /memtest.efi
+                # Chainload the native EFI binary.
+                chainloader /memtest.efi
+            }
+          '';
         };
       };
 
