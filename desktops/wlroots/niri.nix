@@ -370,13 +370,11 @@ in
         open-focused true
     }
 
-    // Open the Firefox picture-in-picture player as floating by default.
+    // Open the Firefox/Zen picture-in-picture player as floating by default.
     window-rule {
-        // This app-id regular expression will work for both:
-        // - host Firefox (app-id is "firefox")
-        // - Flatpak Firefox (app-id is "org.mozilla.firefox")
-        match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+        match title="^Picture-in-Picture$"
         open-floating true
+        default-floating-position x=0 y=0 relative-to="bottom-right"
     }
 
     // Example: block out two password managers from screen capture.
