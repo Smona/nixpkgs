@@ -8,6 +8,11 @@
       # https://forums.linuxmint.com/viewtopic.php?t=450654
       boot.kernelPackages = pkgs.linuxPackages_6_18;
 
+      boot.kernel.sysctl = {
+        # Double the default file watchers for big TS projects
+        "fs.inotify.max_user_watches" = 1048576;
+      };
+
       # Bootloader.
       boot.loader = {
         efi = {
