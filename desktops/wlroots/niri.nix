@@ -501,15 +501,15 @@ in
 
         Mod+Shift+Q { close-window; }
 
-        Mod+${left}  { focus-column-left; }
+        Mod+${left}  { focus-column-or-monitor-left; }
         Mod+${down}  { focus-window-or-workspace-down; }
         Mod+${up}    { focus-window-or-workspace-up; }
-        Mod+${right} { focus-column-right; }
+        Mod+${right} { focus-column-or-monitor-right; }
 
-        Mod+Alt+${left}  { move-column-left; }
+        Mod+Alt+${left}  { move-column-left-or-to-monitor-left; }
         Mod+Alt+${down}  { move-window-down-or-to-workspace-down; }
         Mod+Alt+${up}    { move-window-up-or-to-workspace-up; }
-        Mod+Alt+${right} { move-column-right; }
+        Mod+Alt+${right} { move-column-right-or-to-monitor-right; }
 
         Mod+Home { focus-column-first; }
         // Mod+End  { focus-column-last; }
