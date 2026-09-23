@@ -55,15 +55,6 @@
   (push '("Symbols and Pictographs Extended-A" ("Noto Color Emoji")) unicode-fonts-block-font-mapping)
   )
 
-;; Give lines more space, while keeping text centered.
-;; FIXME: disabled because it now makes the git gutter dashed.
-;; More compact text doesn't look too bad tho!
-;; Source: https://github.com/syl20bnr/spacemacs/issues/10502#issuecomment-404453194
-;; (setq-default default-text-properties '(line-spacing 0.05 line-height 1.05))
-;; No extra line spacing in vterm, where it can make text taller than powerline symbols & break continuity.
-;; (add-hook! 'vterm-mode-hook (setq-local default-text-properties '(line-spacing 0 line-height 1)))
-;; (add-hook! 'org-mode-hook (setq-local default-text-properties '(line-spacing 0 line-height 1)))
-
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function.
