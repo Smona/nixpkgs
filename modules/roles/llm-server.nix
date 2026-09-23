@@ -149,10 +149,6 @@
                   includeAliasesInList = true;
                 };
               };
-              systemd.services.llama-swap = {
-                environment.XDG_CACHE_HOME = "/var/cache/llama.cpp";
-                serviceConfig.CacheDirectory = "llama.cpp";
-              };
 
               services.open-webui = {
                 enable = true;
