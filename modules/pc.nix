@@ -84,6 +84,7 @@ in
         self.nixosModules.printing
         self.nixosModules.spotify
         self.nixosModules.boot
+        self.nixosModules.embedded-dev
       ];
 
       options.smona = with lib; {
