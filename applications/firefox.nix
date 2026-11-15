@@ -25,7 +25,63 @@
         settings = {
           # Disable pointer lock warning popup
           "pointer-lock-api.warning.timeout" = 0;
+
+          # Fix "Back to Close WE" extension, at the cost of allowing history stuffing.
+          "browser.navigation.requireUserInteraction" = false;
+
+          # Betterfox Smoothfox natural smooth scrolling v3:
+          # https://github.com/yokoffing/Betterfox/blob/main/Smoothfox.js
           "general.smoothScroll" = true;
+          "apz.overscroll.enabled" = true;
+          "general.smoothScroll.msdPhysics.continuousMotionMaxDeltaMS" = 12;
+          "general.smoothScroll.msdPhysics.enabled" = true;
+          "general.smoothScroll.msdPhysics.motionBeginSpringConstant" = 600;
+          "general.smoothScroll.msdPhysics.regularSpringConstant" = 650;
+          "general.smoothScroll.msdPhysics.slowdownMinDeltaMS" = 25;
+          "general.smoothScroll.msdPhysics.slowdownMinDeltaRatio" = "2";
+          "general.smoothScroll.msdPhysics.slowdownSpringConstant" = 250;
+          "general.smoothScroll.currentVelocityWeighting" = "1";
+          "general.smoothScroll.stopDecelerationWeighting" = "1";
+
+          "mousewheel.default.delta_multiplier_y" = 275;
+          "mousewheel.default.delta_multiplier_x" = 275;
+
+          # Selected Peskyfox
+          #
+          # SECTION: AI
+          # PREF: AI default controls
+          # [1] https://blog.mozilla.org/en/firefox/how-to-use-ai-controls/
+          "browser.ai.control.default" = "blocked";
+          "browser.ml.enable" = false;
+          # PREF: Translations
+          # user_pref("browser.ai.control.translations", "blocked");
+          # PREF: Image alt text in Nightly PDF viewer
+          #user_pref("browser.ai.control.pdfjsAltText", "blocked");
+          # PREF: Tab group suggestions
+          # [1] https://support.mozilla.org/kb/how-use-ai-enhanced-tab-groups
+          #user_pref("browser.ai.control.smartTabGroups", "blocked");
+          "browser.tabs.groups.smart.enabled" = false;
+          # PREF: Key points in link previews
+          #user_pref("browser.ai.control.linkPreviewKeyPoints", "blocked");
+          "browser.ml.linkPreview.enabled" = false;
+          # PREF: Chatbot in sidebar
+          #user_pref("browser.ai.control.sidebarChatbot", "blocked");
+          "browser.ml.chat.enabled" = false;
+          "browser.ml.chat.menu" = false;
+
+          # SECTION: FULLSCREEN NOTICE
+          # PREF: remove fullscreen delay
+          "full-screen-api.transition-duration.enter" = "0 0"; # default=200 200
+          "full-screen-api.transition-duration.leave" = "0 0"; # default=200 200
+          # PREF: disable fullscreen notice
+          # [NOTE] Adjust to a sensible value, like 1250, if you have security concerns.
+          # I don't, I think I can handle some unexpected fullscreen
+          "full-screen-api.warning.timeout" = 0; # default=3000; alt=1250
+          "full-screen-api.warning.delay" = -1; # default=500
+
+          # PREF: show all matches in Findbar
+          "findbar.highlightAll" = true;
+
           # Don't show warning when opening about:config
           "browser.aboutConfig.showWarning" = false;
           "browser.toolbars.bookmarks.visibility" = "newtab";
