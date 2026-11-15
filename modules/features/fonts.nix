@@ -19,6 +19,7 @@
         (with pkgs; [
           # required by Emacs for monospaced icons
           nerd-fonts.symbols-only
+          noto-fonts # Current obsidian font
           noto-fonts-color-emoji # Required by Emacs
           source-serif # Required by Emacs
           source-sans
@@ -26,6 +27,7 @@
           # M$ fonts
           corefonts
           vista-fonts
+          maple-mono.NF-unhinted
         ])
         ++ [ self.packages.${pkgs.stdenv.hostPlatform.system}.monolisa ];
     };
