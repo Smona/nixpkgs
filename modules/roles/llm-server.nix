@@ -85,9 +85,42 @@
                   healthCheckTimeout = 500;
                   models =
                     let
-                      baseArgs = "--jinja --n-gpu-layers 999 --threads 12 --port \${PORT}";
-                      qwenArgs = "--ctx-size 131072 --reasoning-format deepseek";
-                      qwenFilters = {
+                      llama-cpp-with-repo = "${pkgs.llama-cpp-vulkan}/bin/llama-server --hf-repo";
+                      # using speculative decoding to try and speed up models
+                      # --no-mmap strictly improves model loading speed, and has no negative effect on
+                      #   RAM usage because we are always aiming to fit everything on the GPU.
+                      #   WIP: disabling no-mmap since i actually do want to push it to the limit ^ ^
+                      baseArgs = "--verbosity 4 --jinja --n-gpu-layers 999 --threads 12 --kv-unified --port \${PORT}";
+                      # conservatively quantize the KV cache
+                      quantizeArgs = "-ctk q8_0 -ctv q8_0";
+                      # q8_0 KV quantization unlocks a ton more context, and doesn't seem to have downsides on dense models tested so far.
+                      # My card is compute-bound with dense models, so parallel execution doesn't really work.
+                      # TODO: figure out how to avoid invalidating entire context with pi-observational-memory
+                      denseArgs = "--parallel 1 ${quantizeArgs} ${baseArgs}";
+                      # do not use KV quantization on moe models, it slows ones tested down by ~4x
+                      # https://www.reddit.com/r/LocalLLaMA/comments/1ng0fmv/comment/ne0gwx3/
+                      # --parallel 2 to free up a little bit of VRAM for context, but keep unified KV
+                      # My card is VRAM-bound with MoE models, so they can handle some parallelism.
+                      # TODO: confirm that models can handle 2 parallel queries with decent performance
+                      moeArgs = "--parallel 2 ${baseArgs}";
+                      # --no-mmproj disables image processing to free up VRAM.
+                      qwenArgs = "--no-mmproj --reasoning-format deepseek";
+                      # Enable multi-token prediction (requires a model with MTP support).
+                      # spec-draft-n-max not optimized, just using unsloth's recommendation.
+                      # it seems like dense models benefit more from mtp
+                      mtpArgs = "--spec-type draft-mtp --spec-draft-n-max 2";
+                      nonMtpArgs = "--spec-default";
+                      gemmaFilters = {
+                        setParams = {
+                          chat_template_kwargs = {
+                            enable_thinking = true;
+                          };
+                          temperature = 1.0;
+                          top_p = 0.95;
+                          top_k = 64;
+                        };
+                      };
+                      qwenFilters = { thinkingTemp ? 0.6 }: {
                         stripParams = "temperature, top_k, top_p, repeat_penalty, min_p, presence_penalty";
                         setParams = {
                           top_k = 20;
@@ -97,9 +130,10 @@
                         setParamsByID."\${MODEL_ID}" = {
                           chat_template_kwargs = {
                             preserve_thinking = true;
+                            reasoning_effort = "medium";
                           };
                           top_p = 0.95;
-                          temperature = 0.6;
+                          temperature = thinkingTemp;
                           presence_penalty = 0.0;
                         };
                         setParamsByID."\${MODEL_ID}:instruct" = {
@@ -113,39 +147,52 @@
                       };
                     in
                     {
+                      # This model spills out of VRAM a bit, but seems to be able to tolerate <1GB of overflow without slowdown.
                       "Qwen3.6-35B-A3B" = {
-                        cmd = "${pkgs.llama-cpp-vulkan}/bin/llama-server --hf-repo 'unsloth/Qwen3.6-35B-A3B-GGUF:UD-Q6_K_XL' ${qwenArgs} ${baseArgs}";
-                        filters = qwenFilters;
+                        cmd = "${llama-cpp-with-repo} unsloth/Qwen3.6-35B-A3B-GGUF:UD-Q4_K_XL --ctx-size 32000 ${nonMtpArgs} ${qwenArgs} ${moeArgs}";
+                        filters = qwenFilters {};
                       };
-                      "Qwen3.6-27B" = {
-                        cmd = "${pkgs.llama-cpp-vulkan}/bin/llama-server --hf-repo 'unsloth/Qwen3.6-27B-GGUF:IQ4_NL' ${qwenArgs} ${baseArgs}";
-                        filters = qwenFilters;
+                      "Qwen3.8-27B" = {
+                        cmd = "${llama-cpp-with-repo} unsloth/Qwen3.8-27B-GGUF:UD-Q4_K_XL --ctx-size 100000 ${mtpArgs} ${qwenArgs} ${denseArgs}";
+                        filters = qwenFilters { thinkingTemp = 1.0; };
                       };
                       "Cydonia-24B-v4.3" = {
-                        cmd = "${pkgs.llama-cpp-vulkan}/bin/llama-server --hf-repo 'TheDrummer/Cydonia-24B-v4.3-GGUF:Q6_K' --ctx-size 32000 ${baseArgs}";
+                        cmd = "${llama-cpp-with-repo} TheDrummer/Cydonia-24B-v4.3-GGUF:Q6_K --ctx-size 36000 ${nonMtpArgs} ${denseArgs}";
                       };
-                      "WeirdCompound-v1.7-24b" = {
-                        cmd = "${pkgs.llama-cpp-vulkan}/bin/llama-server --hf-repo 'mradermacher/WeirdCompound-v1.7-24b-GGUF' --ctx-size 132000 ${baseArgs}";
-                      };
-                      # Q5_K_S runs super fast, but writing quality is significantly degraded compared to the XL. it seems XL variants can really be much better.
+                      # Q5_K_S runs super fast, but writing quality is significantly degraded compared to the XL.
+                      # it seems XL variants can really be much better.
                       "gemma-4-26B-A4B-it" = {
-                        cmd = "${pkgs.llama-cpp-vulkan}/bin/llama-server --hf-repo 'unsloth/gemma-4-26B-A4B-it-GGUF:UD-Q5_K_XL' --ctx-size 64000 ${baseArgs}";
-                        filters = {
-                          setParams = {
-                            chat_template_kwargs = {
-                              enable_thinking = true;
-                            };
-                            temperature = 1.0;
-                            top_p = 0.95;
-                            top_k = 64;
-                          };
-                        };
+                        cmd = "${llama-cpp-with-repo} unsloth/gemma-4-26B-A4B-it-GGUF:UD-Q5_K_XL --no-mmproj --ctx-size 90000 --no-warmup ${nonMtpArgs} ${moeArgs}";
+                        filters = gemmaFilters;
                       };
+                      "gemma-4-31b" = {
+                        cmd = "${llama-cpp-with-repo} unsloth/gemma-4-26B-A4B-it-GGUF:UD-Q6_K_XL --no-mmproj --ctx-size 60000 --no-warmup ${nonMtpArgs} ${denseArgs}";
+                        filters = gemmaFilters;
+                      };
+                      "gemma-4-Gembrain-31b" = {
+                        cmd = "${llama-cpp-with-repo} mradermacher/Gemma-4-Gembrain-31B-i1-GGUF:Q5_K_S --no-mmproj --ctx-size 40000 ${nonMtpArgs} ${denseArgs}";
+                        filters = gemmaFilters;
+                      };
+                      "Gemsicle-31b" = {
+                        cmd = "${llama-cpp-with-repo} mradermacher/Gemma-4-Gemsicle-31B-i1-GGUF:Q4_K_M --no-mmproj --ctx-size 64000 ${nonMtpArgs} ${denseArgs}";
+                        filters = gemmaFilters;
+                      };
+                      "G4-MeroMero-31B" = {
+                        cmd = "${llama-cpp-with-repo} zerofata/G4-MeroMero-31B-gguf:Q5_K_M --no-mmproj --ctx-size 60000 --no-warmup ${nonMtpArgs} ${denseArgs}";
+                        filters = gemmaFilters;
+                      };
+                      "G4-MeroMero-26B-A4B" = {
+                        cmd = "${llama-cpp-with-repo} zerofata/G4-MeroMero-26B-A4B-gguf:Q6_K --ctx-size 64000 ${nonMtpArgs} ${moeArgs}";
+                      };
+                      "Skyfall-31B-v.2" = {
+                        cmd = "${llama-cpp-with-repo} bartowski/TheDrummer_Skyfall-31B-v4.2-GGUF:Q5_K_M --no-mmproj --ctx-size 90000 ${nonMtpArgs} ${denseArgs}";
+                      };
+                      # TODO: find better-optimized variant, or pick a better abliterated model
                       "Qwen3.6-35B-A3B-Abliterated-Heretic" = {
-                        cmd = "${pkgs.llama-cpp-vulkan}/bin/llama-server --hf-repo Youssofal/Qwen3.6-35B-A3B-Abliterated-Heretic-GGUF:Q4_K_M ${qwenArgs} ${baseArgs}";
-                        filters = qwenFilters;
+                        cmd = "${llama-cpp-with-repo} Youssofal/Qwen3.6-35B-A3B-Abliterated-Heretic-GGUF:Q4_K_M --ctx-size 64000 ${nonMtpArgs} ${qwenArgs} ${moeArgs}";
                       };
                     };
+                  # Enable selecting instruct variants in model list.
                   includeAliasesInList = true;
                 };
               };
