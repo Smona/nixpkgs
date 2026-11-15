@@ -24,7 +24,6 @@ in
     # They're all defined here for ease of discoverability
     roles = {
       art = mkEnableOption "set up computer for visual art creation";
-      gaming = mkEnableOption "set up computer for gaming";
       work = mkEnableOption "set up computer for work";
       music = mkEnableOption "set up computer for music production";
     };
