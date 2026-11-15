@@ -49,7 +49,10 @@ in
 
   xdg = {
     enable = true;
-    configFile."doom".source = config.lib.file.mkOutOfStoreSymlink ../doom;
+    configFile."doom" = {
+      source = ../doom;
+      recursive = true;
+    };
     # Pass config from nix into doom emacs configuration
     configFile."doom_vars.el".text = ''
       (setq catppuccin-flavor '${config.catppuccin.flavor})
@@ -110,5 +113,7 @@ in
     claude-agent-acp # Used by agent-shell
 
     texliveMedium # needed for latex inline previews & export in org mode
+    # TODO: figure out minimal necessary set
+    # (texlive.combine { inherit (texlive) scheme-small wrapfig capt-of; }) # pdflatex
   ];
 }
