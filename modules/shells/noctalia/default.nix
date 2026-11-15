@@ -1,5 +1,5 @@
 # Noctalia wlroots shell. https://noctalia.dev/
-{ inputs, ... }:
+{ ... }:
 {
   flake.homeModules.noctalia =
     {
@@ -13,18 +13,10 @@
         (import ./_systembus-notify.nix { inherit pkgs; }).packages.noctalia-systembus-notify;
     in
     {
-      imports = [
-        inputs.noctalia.homeModules.default
-      ];
-
       config = lib.mkIf (config.smona.desktop.shell == "noctalia") {
-        programs.noctalia-shell = {
+        programs.noctalia = {
           enable = true;
-          package = (
-            inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default.override {
-              calendarSupport = true;
-            }
-          );
+          systemd.enable = true;
         };
 
         home.packages = with pkgs; [
@@ -40,18 +32,16 @@
             "noctalia-shell"
           ];
           sessionMenuCommand = [
-            "noctalia-shell"
-            "ipc"
-            "call"
-            "sessionMenu"
-            "toggle"
+            "noctalia"
+            "msg"
+            "panel-toggle"
+            "session"
           ];
           launcherCommand = [
-            "noctalia-shell"
-            "ipc"
-            "call"
+            "noctalia"
+            "msg"
+            "panel-toggle"
             "launcher"
-            "toggle"
           ];
           notificationsCommand = [
             "noctalia-shell"

@@ -4,6 +4,6 @@
 }
 
 /* Hide sidebar header */
-#sidebar-box #sidebar-header {
+#sidebar-box #sidebar-panel-header {
   display: none !important;
 }
