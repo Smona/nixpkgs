@@ -245,45 +245,6 @@
         "type": "github"
       }
     },
-    "millennium": {
-      "inputs": {
-        "millennium-src": "millennium-src",
-        "nixpkgs": "nixpkgs_2"
-      },
-      "locked": {
-        "dir": "packages/nix",
-        "lastModified": 1788314063,
-        "narHash": "sha256-Bo1+WbgacFL7oQXXFs3E8kpYccpq9wr8ZT4sR0u3xLQ=",
-        "owner": "SteamClientHomebrew",
-        "repo": "Millennium",
-        "rev": "ad917139dd0531ac2a6fc10fd0b6d02e605e3d94",
-        "type": "github"
-      },
-      "original": {
-        "dir": "packages/nix",
-        "owner": "SteamClientHomebrew",
-        "ref": "next",
-        "repo": "Millennium",
-        "type": "github"
-      }
-    },
-    "millennium-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1787082953,
-        "narHash": "sha256-zgr4cdJfye4qunpD3ClNnZ9D1WPGQAXV0CnYwEbB52s=",
-        "owner": "SteamClientHomebrew",
-        "repo": "Millennium",
-        "rev": "513b02e809b0eb120ecf0ae12e548798dd756323",
-        "type": "github"
-      },
-      "original": {
-        "owner": "SteamClientHomebrew",
-        "repo": "Millennium",
-        "rev": "513b02e809b0eb120ecf0ae12e548798dd756323",
-        "type": "github"
-      }
-    },
     "musnix": {
       "inputs": {
         "nixpkgs": [
@@ -399,22 +360,6 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1781577229,
-        "narHash": "sha256-lrp67w8AulE9Ks53n27I45ADSzbOCn4H+CNW1Ck8B+8=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "567a49d1913ce81ac6e9582e3553dd90a955875f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "567a49d1913ce81ac6e9582e3553dd90a955875f",
-        "type": "github"
-      }
-    },
-    "nixpkgs_3": {
-      "locked": {
         "lastModified": 1788881743,
         "narHash": "sha256-2V9GZGvPfrNzxFozhI9dcqV+c3QdA8YZrvAAzqEB+dI=",
         "owner": "nixos",
@@ -505,13 +450,12 @@
         "homebrew-core": "homebrew-core",
         "homebrew-emacs-plus": "homebrew-emacs-plus",
         "import-tree": "import-tree",
-        "millennium": "millennium",
         "musnix": "musnix",
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",
         "nixGL": "nixGL",
         "nixos-wsl": "nixos-wsl",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_2",
         "noctalia": "noctalia",
         "roon-mpris": "roon-mpris",
         "spicetify-nix": "spicetify-nix",
