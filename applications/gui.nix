@@ -56,7 +56,7 @@ in
 
       # Media apps
       newsflash # RSS feed reader
-      (config.lib.nixGL.wrap libreoffice-fresh)
+      (config.lib.nixGL.wrap libreoffice-stable)
       (config.lib.nixGL.wrap vlc)
       xournalpp
       plexamp

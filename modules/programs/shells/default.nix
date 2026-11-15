@@ -71,7 +71,7 @@
         c = "bat";
         cat = "bat";
         g = "git";
-        upgrade = if pkgs.stdenv.isDarwin then "nh darwin" else "nh os";
+        upgrade = if pkgs.stdenv.hostPlatform.isDarwin then "nh darwin" else "nh os";
         generations = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
         hm = "home-manager --flake ~/.config/nixpkgs";
         hms = "hm switch --max-jobs 4";

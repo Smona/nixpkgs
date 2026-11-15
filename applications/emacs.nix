@@ -43,7 +43,7 @@ in
   };
 
   programs.emacs = {
-    enable = pkgs.stdenv.isLinux;
+    enable = pkgs.stdenv.hostPlatform.isLinux;
     package = my-emacs;
   };
 
