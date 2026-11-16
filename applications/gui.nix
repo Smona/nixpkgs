@@ -54,6 +54,7 @@ in
       prusa-slicer
 
       # Media apps
+      music-assistant-desktop
       newsflash # RSS feed reader
       (config.lib.nixGL.wrap libreoffice-stable)
       (config.lib.nixGL.wrap vlc)
