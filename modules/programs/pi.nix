@@ -56,7 +56,6 @@
       );
 
       # Hardened sandbox to restrict pi agent to what it needs
-      # TODO: re-use for opencode.
       # TODO: install command-filtering extension to ask for sudo and other harmful commands
       safe-pi = pkgs.writeShellApplication {
         name = "pi";

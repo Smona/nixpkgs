@@ -18,7 +18,6 @@ let
         self.homeModules.desktop
         self.homeModules.fonts
         self.homeModules.git
-        self.homeModules.opencode
         self.homeModules.pi
         self.homeModules.spotify
         self.homeModules.tmux
