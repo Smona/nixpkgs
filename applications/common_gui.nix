@@ -49,20 +49,5 @@ in
         RestartSec = 2;
       };
     };
-    # Roon playback target on this computer
-    systemd.user.services.squeezelite = {
-      Install.WantedBy = [ "default.target" ];
-      Service = {
-        Type = "exec";
-        ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p .local/share/squeezelite";
-
-        ExecStart = "${pkgs.squeezelite}/bin/squeezelite -s 192.168.0.198 -N .local/share/squeezelite/player-name";
-      };
-      Unit = {
-        Description = "Squeezelite headless streaming music client";
-        Wants = [ "sound.target" ];
-        After = [ "pipewire-pulse.service" ];
-      };
-    };
   };
 }

@@ -23,9 +23,6 @@ commonOptions
 // {
   inherit lock goodbye;
   execStart = [
-    "${
-      inputs.roon-mpris.packages.${pkgs.stdenv.hostPlatform.system}.default
-    }/bin/roon-mpris --host 192.168.0.198 --port 9330 --zone Luma"
     "${pkgs.udiskie}/bin/udiskie" # drive auto-mounting notifications via udisks2
     # Mostly just needed for 1password system authentication, so I can use the SSH agent
     # I used to use the gnome agent, but the deepin one just looks nicer, and appears to

@@ -35,10 +35,6 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    roon-mpris = {
-      url = "github:Smona/roon-mpris";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     # nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
 
     dCachix.url = "github:jonascarpay/declarative-cachix";

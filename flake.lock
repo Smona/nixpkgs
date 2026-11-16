@@ -374,26 +374,6 @@
         "type": "github"
       }
     },
-    "roon-mpris": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1771284612,
-        "narHash": "sha256-Fjag8qmqyPDebZEK4lOHuKFoKY9G4uYKjOV/UpkXAFc=",
-        "owner": "Smona",
-        "repo": "roon-mpris",
-        "rev": "3f2d1d872130d907a1e77a2c15147176242f8ce1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Smona",
-        "repo": "roon-mpris",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "catppuccin": "catppuccin",
@@ -412,7 +392,6 @@
         "nixGL": "nixGL",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_2",
-        "roon-mpris": "roon-mpris",
         "spicetify-nix": "spicetify-nix",
         "wayland-pipewire-idle-inhibit": "wayland-pipewire-idle-inhibit"
       }
