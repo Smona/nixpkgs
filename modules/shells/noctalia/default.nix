@@ -40,12 +40,6 @@
             "panel-toggle"
             "session"
           ];
-          launcherCommand = [
-            "noctalia"
-            "msg"
-            "panel-toggle"
-            "launcher"
-          ];
           notificationsCommand = [
             "noctalia-shell"
             "ipc"

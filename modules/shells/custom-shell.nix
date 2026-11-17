@@ -35,14 +35,6 @@
             "swaybg -i ~/.config/wallpaper -m fill"
           ];
           sessionMenuCommand = [ "wlogout" ];
-          launcherCommand = [
-            "rofi"
-            "-show"
-            "combi"
-            "-combi-modes"
-            "drun,ssh,run"
-            "-show-icons"
-          ];
           notificationsCommand = [
             "swaync-client"
             "-t"

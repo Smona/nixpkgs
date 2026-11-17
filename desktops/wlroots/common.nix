@@ -46,7 +46,10 @@ commonOptions
     {
       secondaryMod = true;
       key = "space";
-      command = cfg.launcherCommand;
+      command = [
+        "vicinae"
+        "toggle"
+      ];
     }
     {
       primaryMod = true;
