@@ -31,6 +31,7 @@ in
 
   config = lib.mkIf config.graphical {
     programs.kitty.enable = true;
+    programs.firefox.enable = true;
     # programs.alacritty.enable = true;
 
     home.packages = with pkgs; [

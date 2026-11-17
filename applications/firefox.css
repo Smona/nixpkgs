@@ -3,7 +3,11 @@
   visibility: collapse;
 }
 
-/* Hide sidebar header */
+/* Hide sidebar header and left padding */
+#sidebar-box {
+    padding: 0 !important;
+}
+
 #sidebar-box #sidebar-panel-header {
   display: none !important;
 }

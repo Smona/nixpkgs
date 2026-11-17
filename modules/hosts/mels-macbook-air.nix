@@ -131,9 +131,11 @@
                   config.home-manager.users.${config.smona.username}.programs.spicetify.createdPackages;
               thunderbirdPackage =
                 config.home-manager.users.${config.smona.username}.programs.thunderbird.package;
+              firefoxPackage =
+                config.home-manager.users.${config.smona.username}.programs.firefox.package;
             in
             [
-              "/Applications/Firefox.app"
+              "${firefoxPackage}/Applications/Firefox.app"
               "${thunderbirdPackage}/Applications/Thunderbird.app"
               "${spotifyPackage}/Applications/Spotify.app"
               "${pkgs.slack}/Applications/Slack.app"
@@ -230,7 +232,6 @@
         ];
 
         casks = [
-          "firefox"
           "caffeine"
           "chromium"
           "floorp"

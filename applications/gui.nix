@@ -87,7 +87,6 @@ in
       enable = true;
       package = (config.lib.nixGL.wrap config.pkgsCompat.chromium);
     };
-    programs.firefox.enable = true;
 
     # Required for keybase-gui
     services.kbfs.enable = true;
