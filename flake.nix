@@ -31,6 +31,9 @@
     };
     catppuccin.url = "github:catppuccin/nix?ref=175eb40";
     catppuccin.inputs.nixpkgs.follows = "nixpkgs";
+
+    vicinae.url = "github:vicinaehq/vicinae";
+
     # nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
 
     # Darwin stuff:

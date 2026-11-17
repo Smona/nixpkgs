@@ -84,6 +84,7 @@ in
         self.nixosModules.printing
         self.nixosModules.boot
         self.nixosModules.embedded-dev
+        self.nixosModules.vicinae
       ];
 
       options.smona = with lib; {
