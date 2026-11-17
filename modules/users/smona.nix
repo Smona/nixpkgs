@@ -13,7 +13,6 @@ let
     }:
     {
       imports = [
-        inputs.dCachix.homeManagerModules.declarative-cachix
         inputs.catppuccin.homeModules.catppuccin
         self.homeModules.desktop
         self.homeModules.fonts
@@ -42,13 +41,6 @@ let
       };
 
       config = {
-        caches.cachix = [
-          {
-            name = "nix-community";
-            sha256 = "sha256:0m6kb0a0m3pr6bbzqz54x37h5ri121sraj1idfmsrr6prknc7q3x";
-          }
-        ];
-
         catppuccin.enable = true;
         catppuccin.flavor = "mocha";
 
@@ -65,6 +57,13 @@ let
           experimental-features = "nix-command flakes";
           # Always show failure traces
           show-trace = true;
+          substituters = [
+            "https://cache.nixos.org"
+            "https://nix-community.cachix.org"
+          trusted-public-keys = [
+            "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+            "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+          ];
           netrc-file = "${config.home.homeDirectory}/.config/nix/netrc";
         };
 

@@ -33,8 +33,6 @@
     catppuccin.inputs.nixpkgs.follows = "nixpkgs";
     # nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
 
-    dCachix.url = "github:jonascarpay/declarative-cachix";
-
     # Darwin stuff:
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
