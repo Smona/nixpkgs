@@ -100,8 +100,9 @@
             };
           }
         )
-        (import-tree ./modules)
         (import-tree ./hosts)
+        (import-tree ./modules)
+        (import-tree ./packages)
       ];
 
       systems = [
