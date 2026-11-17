@@ -14,7 +14,7 @@
         ls = "eza -gHh --git --group-directories-first";
         ll = "ls -l --icons"; # icons mess up alignment in grid view
         nd = "nix develop -c $SHELL";
-        update = "cd ~/.config/nixpkgs && nix flake lock --update-input nixpkgs --update-input home-manager --update-input spicetify-nix";
+        update = "cd ~/.config/nixpkgs && nix flake update nixpkgs home-manager spicetify-nix nix-darwin homebrew-core homebrew-cask homebrew-bundle homebrew-emacs-plus";
       };
     in
     {

@@ -138,6 +138,7 @@
               "${spotifyPackage}/Applications/Spotify.app"
               "${pkgs.slack}/Applications/Slack.app"
               "${pkgs.kitty}/Applications/kitty.app"
+              "${pkgs.music-assistant-desktop}/Applications/Music Assistant.app"
               "/opt/homebrew/opt/emacs-plus/Emacs.app"
             ];
         };
@@ -200,7 +201,10 @@
 
         # Prevent tap management conflicts b/w nix-homebrew & nix-darwin
         # https://github.com/zhaofengli/nix-homebrew/issues/5#issuecomment-1878798641
-        taps = builtins.attrNames config.nix-homebrew.taps;
+        taps = map (name: {
+          inherit name;
+          trusted = true;
+        }) (builtins.attrNames config.nix-homebrew.taps);
 
         # Stop being annoyed by Apple "protecting" me
         caskArgs.no_quarantine = true;
@@ -210,7 +214,7 @@
           {
             # TODO: emacs has to be manually aliased to /Applications for now:
             # osascript -e 'tell application "Finder" to make alias file to posix file "/opt/homebrew/opt/emacs-plus@29/Emacs.app" at POSIX file "/Applications"'
-            name = "emacs-plus@30";
+            name = "emacs-plus@31";
             args = [
               "with-xwidgets"
               "with-imagemagick"
@@ -222,6 +226,7 @@
           # Emacs dependencies that aren't getting referenced by emacs-plus
           "gnupg"
           "cmake" # Needed to compile vterm
+          "libtool" # Needed to compile vterm
         ];
 
         casks = [

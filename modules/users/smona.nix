@@ -18,7 +18,6 @@ let
         self.homeModules.desktop
         self.homeModules.fonts
         self.homeModules.git
-        self.homeModules.pi
         self.homeModules.spotify
         self.homeModules.tmux
         self.homeModules.vim
@@ -132,6 +131,7 @@ in
       imports = [
         common
         ../../applications/gui.nix
+        self.homeModules.pi # Currently unsupported on Darwin because bubblewrap doesn't work there, and our sandboxing mechanism requires it.
       ];
 
       # Home Manager needs a bit of information about you and the

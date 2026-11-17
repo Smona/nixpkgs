@@ -37,6 +37,9 @@ in
       # Messaging apps
       vesktop
       my-slack
+
+      # Media apps
+      music-assistant-desktop
     ];
 
     # I like to have slack installed everywhere, but only auto-start it on work machines
