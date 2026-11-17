@@ -34,12 +34,10 @@ for i in range(len(sinks)):
         next_default = sinks[next_index]
         subprocess.call(
             [
-                "noctalia-shell",
-                "ipc",
-                "call",
-                "toast",
-                "send",
-                f'{{ "title": "Audio output changed", "icon": "device-speaker", "body": "{next_default[2].strip()}" }}',
+                "noctalia",
+                "msg",
+                "notification-show",
+                f'{{ "summary": "Audio output changed", "icon": "device-speaker", "body": "{next_default[2].strip()}", "timeout_ms": 1000 }}',
             ]
         )
 
