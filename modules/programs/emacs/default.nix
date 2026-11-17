@@ -42,7 +42,7 @@
           (setq catppuccin-flavor '${config.catppuccin.flavor})
         '';
       };
-      home.file.".authinfo.gpg".source = ../../dotfiles/authinfo.gpg;
+      home.file.".authinfo.gpg".source = ./authinfo.gpg;
       home.shellAliases = {
         doom = "LSP_USE_PLISTS=true ~/.emacs.d/bin/doom";
         org-capture = "~/.emacs.d/bin/org-capture";
