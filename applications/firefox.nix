@@ -45,6 +45,10 @@
             "devtools.chrome.enabled" = true;
             "devtools.debugger.remote-enabled" = true;
 
+            # Disable GTK native emoji picker, since its hotkey (Ctrl+.) conflicts with the
+            # 1password browser extension.
+            "widget.gtk.native-emoji-dialog" = false;
+
             # Betterfox Smoothfox natural smooth scrolling v3:
             # https://github.com/yokoffing/Betterfox/blob/main/Smoothfox.js
             "general.smoothScroll" = true;
