@@ -21,7 +21,7 @@ let
         self.homeModules.tmux
         self.homeModules.vim
         self.homeModules.shells
-        ../../applications/emacs.nix
+        self.homeModules.emacs
         ../../applications/common_gui.nix
       ];
 
