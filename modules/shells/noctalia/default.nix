@@ -24,6 +24,9 @@
 
           # TODO: declaratively add to firefox native extensions
           pywalfox-native # support firefox & thunderbird themes
+
+          # gdbus required for Phone Connect plugin
+          glib
         ];
 
         smona.wlroots = {
@@ -50,7 +53,7 @@
             "notifications"
             "toggleHistory"
           ];
-          lockCommand = "noctalia-shell ipc call lockScreen lock";
+          lockCommand = "noctalia msg session lock";
           keyBinds = [
             {
               primaryMod = true;
