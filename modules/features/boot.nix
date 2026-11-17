@@ -9,8 +9,8 @@
       boot.kernelPackages = pkgs.linuxPackages_6_18;
 
       boot.kernel.sysctl = {
-        # Double the default file watchers for big TS projects
-        "fs.inotify.max_user_watches" = 1048576;
+        # Quadruple the default file watchers for big TS projects
+        "fs.inotify.max_user_watches" = 1048576 * 2;
       };
 
       # Bootloader.
