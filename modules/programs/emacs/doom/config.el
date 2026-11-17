@@ -380,3 +380,35 @@
         scroll-margin 0)
   :config
   (ultra-scroll-mode 1))
+
+;; Major mode for .c4 / .likec4 files
+(define-derived-mode likec4-mode prog-mode "LikeC4"
+  "Major mode for LikeC4 architecture diagram files."
+  (setq-local comment-start "// ")
+  (setq-local comment-start-skip "//+ *")
+  (setq-local comment-end "")
+  ;; We have no other way to provide syntax highlighting for likec4 files
+  (setq-local lsp-semantic-tokens-enable t))
+
+(add-to-list 'auto-mode-alist '("\\.c4\\'"     . likec4-mode))
+(add-to-list 'auto-mode-alist '("\\.likec4\\'" . likec4-mode))
+
+(after! lsp-mode
+  (add-hook 'likec4-mode-hook 'lsp)
+(add-to-list 'lsp-language-id-configuration
+               '(likec4-mode . "likec4"))
+  (lsp-register-client
+   (make-lsp-client
+    :new-connection (lsp-stdio-connection '("likec4" "lsp" "--stdio"))
+    :activation-fn (lsp-activate-on "likec4")
+    :server-id 'likec4-lsp))
+  )
+
+;; auto-format hook for likec4
+(defun likec4-format-buffer ()
+  "Run `likec4 format' on the current buffer's file."
+  (when (and (eq major-mode 'likec4-mode) buffer-file-name)
+    (call-process "likec4" nil nil nil "format" "--files" buffer-file-name)
+   (revert-buffer t t t))
+  )
+(add-hook! 'after-save-hook 'likec4-format-buffer)

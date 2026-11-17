@@ -94,6 +94,7 @@
           python3Packages.grip # Required by grip-mode (markdown +grip)
           glslang # glsl-mode intellisense
           tailwindcss-language-server
+          self.packages.${pkgs.stdenv.hostPlatform.system}.likec4
 
           # Dirvish stuff
           ffmpegthumbnailer
