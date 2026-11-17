@@ -63,8 +63,8 @@
             "general.smoothScroll.currentVelocityWeighting" = "1";
             "general.smoothScroll.stopDecelerationWeighting" = "1";
 
-            "mousewheel.default.delta_multiplier_y" = 275;
-            "mousewheel.default.delta_multiplier_x" = 275;
+            "mousewheel.default.delta_multiplier_y" = 200;
+            "mousewheel.default.delta_multiplier_x" = 200;
 
             # Selected Peskyfox
             #
