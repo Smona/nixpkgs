@@ -34,7 +34,7 @@
         enable = true;
         configFile."doom" = {
           # TODO: move into directory with this module.
-          source = ../../doom;
+          source = ./doom;
           recursive = true;
         };
         # Pass config from nix into doom emacs configuration
