@@ -82,7 +82,6 @@ in
         self.nixosModules.lilnasx
         self.nixosModules.oom-handling
         self.nixosModules.printing
-        self.nixosModules.spotify
         self.nixosModules.boot
         self.nixosModules.embedded-dev
       ];

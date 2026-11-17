@@ -13,7 +13,7 @@ let
   cmd = import ./system-commands { inherit pkgs inputs; };
   cfg = config.smona.wlroots;
   # Media should stay playing when the screen locks, otherwise the idle timeout
-  # can pause remotely playing media (e.g. spotify connect).
+  # can pause remotely playing media controlled from this device.
   lock = "1password --lock; ${cfg.lockCommand}";
   # Meant for when ending a session, so it does pause media.
   # note that pause will error if nothing is playing, so we can't use &&

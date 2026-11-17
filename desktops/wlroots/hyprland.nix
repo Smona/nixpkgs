@@ -188,7 +188,6 @@ in
           layerrule = ignorezero,rofi
           layerrule = blur,swaync-control-center
 
-          windowrule=tile,class:^(Spotify)$
           windowrulev2=stayfocused,title:(Quick Access — 1Password)
           windowrulev2=pin,class:^(vlc)$
 

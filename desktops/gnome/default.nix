@@ -57,7 +57,6 @@ in
           favorite-apps = [
             "emacs.desktop"
             "firefox.desktop"
-            "spotify.desktop"
             "discord.desktop"
             "steam.desktop"
           ];

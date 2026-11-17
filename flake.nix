@@ -31,10 +31,6 @@
     };
     catppuccin.url = "github:catppuccin/nix?ref=175eb40";
     catppuccin.inputs.nixpkgs.follows = "nixpkgs";
-    spicetify-nix = {
-      url = "github:Gerg-L/spicetify-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     # nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
 
     dCachix.url = "github:jonascarpay/declarative-cachix";
