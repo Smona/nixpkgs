@@ -58,7 +58,6 @@ in
       (config.lib.nixGL.wrap libreoffice-stable)
       (config.lib.nixGL.wrap vlc)
       xournalpp
-      plexamp
     ];
 
     gtk.enable = true;
