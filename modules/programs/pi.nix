@@ -146,7 +146,13 @@
                   "id": "Qwen3.8-27B",
                   "name": "Qwen3.8 Dense",
                   "reasoning": true,
-                  "contextWindow": 100000
+                  "contextWindow": 100000,
+                  "thinkingLevelMap": {
+                    "minimal": null,
+                    "high": null,
+                    "xhigh": "xhigh",
+                    "off": "none"
+                  }
                 },
                 {
                   "id": "gemma-4-26B-A4B-it",
