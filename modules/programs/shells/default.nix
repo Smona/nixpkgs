@@ -14,7 +14,6 @@
         ls = "eza -gHh --git --group-directories-first";
         ll = "ls -l --icons"; # icons mess up alignment in grid view
         nd = "nix develop -c $SHELL";
-        update = "cd ~/.config/nixpkgs && nix flake update";
       };
     in
     {
@@ -80,11 +79,15 @@
         # Count lines in a git repo by language
         lines = "eza --code";
 
+        # Nix management shortcuts
+        upgrade = if pkgs.stdenv.hostPlatform.isDarwin then "nh darwin" else "nh os";
+        update = "nix flake update --flake ~/.config/nixpkgs";
+        clean = "nh clean all --keep 20 --keep-since 4w --ask --no-direnv";
+
         # Shortcuts
         c = "bat";
         cat = "bat";
         g = "git";
-        upgrade = if pkgs.stdenv.hostPlatform.isDarwin then "nh darwin" else "nh os";
         generations = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
         hm = "home-manager --flake ~/.config/nixpkgs";
         hms = "hm switch --max-jobs 4";
