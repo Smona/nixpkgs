@@ -44,7 +44,7 @@
         # nix-specific utilities
         nix-tree
         (pkgs.writeShellScriptBin "upgrade" ''
-          ${if pkgs.stdenv.hostPlatform.isDarwin then "nh darwin" else "nh os"}
+          ${if pkgs.stdenv.hostPlatform.isDarwin then "nh darwin" else "nh os"} $@
         '')
         (pkgs.writeShellScriptBin "update" ''
           nix flake update --flake ~/.config/nixpkgs
