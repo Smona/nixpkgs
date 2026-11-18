@@ -22,7 +22,6 @@ let
         self.homeModules.shells
         self.homeModules.emacs
         self.homeModules.vicinae
-        ../../applications/common_gui.nix
       ];
 
       options = with lib; {
@@ -176,7 +175,10 @@ in
   flake.homeModules.darwin-pc =
     { pkgs, ... }:
     {
-      imports = [ common ];
+      imports = [
+        common
+        self.homeModules.darwin-gui
+      ];
 
       graphical = true;
       roles = {

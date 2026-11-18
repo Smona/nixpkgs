@@ -1,10 +1,10 @@
-# Baseline configs specific to graphical linux systems
 {
   self,
   ...
 }:
 
 {
+  # Baseline configs specific to graphical linux systems
   flake.homeModules.linux-gui =
     {
       config,
@@ -197,5 +197,17 @@
             };
         };
       };
+    };
+
+  # Baseline configs specific to graphical darwin systems
+  flake.homeModules.darwin-gui =
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
+    {
+      imports = [ ../../applications/common_gui.nix ];
     };
 }
