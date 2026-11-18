@@ -34,7 +34,7 @@
 (setq! doom-font (font-spec :family "Maple Mono NF" :size 13.0 :weight 'normal :width 'normal))
 ;; Relax line height with text vertically centered.
 ;; Requires Emacs 31+ for the (ABOVE . BELOW) cons form of line-spacing.
-(setq-default line-spacing '(0.06 . 0.06))
+(setq-default line-spacing '(0.03 . 0.03))
 ;; Undo doom hardcoding nerd fonts icons to "Symbols Nerd Font Mono"
 ;; in doom-ui.el for powerline symbols so they line up.
 (add-hook! 'after-setting-font-hook (dolist (character '(#xe0b6 #xe0b4))
