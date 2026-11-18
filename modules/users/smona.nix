@@ -123,7 +123,7 @@ in
     {
       imports = [
         common
-        ../../applications/gui.nix
+        self.homeModules.linux-gui
         self.homeModules.pi # Currently unsupported on Darwin because bubblewrap doesn't work there, and our sandboxing mechanism requires it.
       ];
 
