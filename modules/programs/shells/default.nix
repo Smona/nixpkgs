@@ -43,6 +43,15 @@
 
         # nix-specific utilities
         nix-tree
+        (pkgs.writeShellScriptBin "upgrade" ''
+          ${if pkgs.stdenv.hostPlatform.isDarwin then "nh darwin" else "nh os"}
+        '')
+        (pkgs.writeShellScriptBin "update" ''
+          nix flake update --flake ~/.config/nixpkgs
+        '')
+        (pkgs.writeShellScriptBin "clean" ''
+          nh clean all --keep 20 --keep-since 4w --ask --no-direnv
+        '')
 
         # Fun
         cowsay
@@ -78,11 +87,6 @@
         fucking = "sudo";
         # Count lines in a git repo by language
         lines = "eza --code";
-
-        # Nix management shortcuts
-        upgrade = if pkgs.stdenv.hostPlatform.isDarwin then "nh darwin" else "nh os";
-        update = "nix flake update --flake ~/.config/nixpkgs";
-        clean = "nh clean all --keep 20 --keep-since 4w --ask --no-direnv";
 
         # Shortcuts
         c = "bat";
