@@ -18,7 +18,7 @@ in
   programs.kitty = {
     package = (config.lib.nixGL.wrap pkgs.kitty);
     settings = {
-      font_family = "MonoLisa Nerd Font";
+      font_family = "Maple Mono NF";
       background_opacity = "0.8";
       font_size = "12";
       window_padding_width = "4";
@@ -44,7 +44,7 @@ in
     edge center
     margin_top 10
     margin_bottom 8
-    background_opacity 0.6
+    background_opacity 0.75
     focus_policy exclusive
     ${lib.optionalString isNoctalia "include themes/noctalia.conf"}
   '';

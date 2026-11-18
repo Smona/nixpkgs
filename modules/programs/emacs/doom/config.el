@@ -31,12 +31,51 @@
 ;; refresh your font settings. If Emacs still can't find your font, it likely
 ;; wasn't installed correctly. Font issues are rarely Doom issues!
 
-(setq! doom-font (font-spec :family "MonoLisa Nerd Font" :size 12.0 :weight 'normal :width 'normal))
+(setq! doom-font (font-spec :family "Maple Mono NF" :size 12.0 :weight 'normal :width 'normal))
+;; Undo doom hardcoding nerd fonts icons to "Symbols Nerd Font Mono"
+;; in doom-ui.el for powerline symbols so they line up.
+(add-hook! 'after-setting-font-hook (dolist (character '(#xe0b6 #xe0b4))
+        (set-fontset-font t character "Maple Mono NF")))
 (setq! doom-variable-pitch-font (font-spec :family "Source Serif 4" :size 20))
 (setq! doom-symbols-font doom-font)
 ;; Use native unicode emoji rendering
 (setq! emojify-display-style 'unicode)
-;; Override all emoji unicode block to Noto Color Emoji
+
+;; Enable as many Maple Mono ligatures as possible!!
+;; Generated with claude fable, but i mostly understand it
+(let ((run "[][=<>|~:!#/+*?.{}_&;@(-]+")      ; any run of operator characters
+      (hex "[0-9A-Fa-fx]*x[0-9A-Fa-f]+"))      ; 0xFF, 1920x1080
+  ;; (set-font-ligatures! 'prog-mode nil)         ; drop Doom's default list
+  (apply #'set-font-ligatures! 't
+         `(,@(mapcar (lambda (c) (list (string c) run)) "-=<>|~:!#/+*?.{}_&;[]")
+           ,@(mapcar (lambda (c) (list (string c) hex)) "0123456789")
+           ("\\" "[]\\^$\"'`.*+()[{}|/?]")       ; thin backslash in escapes
+           (" " ,(concat ">>" (substring run 0 -1) "*")) ; " >>" needs its leading space
+           ("[" "[A-Z]+]")                       ; [TODO], [INFO], ...
+           ("t" "odo))") ("f" "ixme))") ("T" "ODO))") ("F" "IXME))")
+           ("C" "l+") ("a" "l+") ("c" "l+") ("e" "l+") ("i" "l+")
+           ("u" "l+") ("x" "l+") ("l" "l+") ("f" "f+") ("t" "[tl]+"))))
+
+;; Version that enables more selectively
+;; (let* ((run "[][=<>|~:!#/+*?.{}_&;@(-]+")      ; any run of operator characters
+;;        (hex "[0-9A-Fa-fx]*x[0-9A-Fa-f]+")       ; 0xFF, 1920x1080
+;;        (tag '("[" "[A-Z]+]")))                  ; [TODO], [INFO], ...
+;;   ;; Symbols, code buffers only. Replaces Doom's default list.
+;;   (set-font-ligatures! 'prog-mode nil)
+;;   (apply #'set-font-ligatures! 'prog-mode
+;;          `(,@(mapcar (lambda (c) (list (string c) run)) "-=<>|~:!#/+*?.{}_&;[]")
+;;            ,@(mapcar (lambda (c) (list (string c) hex)) "0123456789")
+;;            ("\\" "[]\\^$\"'`.*+()[{}|/?]")       ; thin backslash in escapes
+;;            (" " ,(concat ">>" (substring run 0 -1) "*")) ; " >>" needs its leading space
+;;            ,tag))
+;;   ;; Cursive letters and tags, everywhere.
+;;   (apply #'set-font-ligatures! 't
+;;          `(("C" "l+") ("a" "l+") ("c" "l+") ("e" "l+") ("i" "l+")
+;;            ("u" "l+") ("x" "l+") ("l" "l+") ("f" "f+") ("t" "[tl]+")
+;;            ("t" "odo))") ("f" "ixme))") ("T" "ODO))") ("F" "IXME))")  ; todo)) fixme))
+;;            ("[" ,run) ,tag)))
+
+;; Override all emoji unicode block to Noto Color Emoji detail
 (after! unicode-fonts
   (dolist (unicode-block '("Emoticons"
                            "Dingbats"
@@ -364,10 +403,6 @@
 (use-package! atomic-chrome
   :init (atomic-chrome-start-server))
 
-;; Undo doom hardcoding nerd fonts icons to "Symbols Nerd Font Mono"
-;; in doom-ui.el for powerline symbols so they line up.
-(add-hook! 'after-setting-font-hook (dolist (character '(#xe0b6 #xe0b4))
-        (set-fontset-font t character "MonoLisa Nerd Font")))
 
 (use-package! company-posframe
   :config
