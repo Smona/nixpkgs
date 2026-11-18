@@ -120,37 +120,40 @@
                           top_k = 64;
                         };
                       };
-                      qwenFilters = { thinkingTemp ? 0.6 }: {
-                        stripParams = "temperature, top_k, top_p, repeat_penalty, min_p, presence_penalty";
-                        setParams = {
-                          top_k = 20;
-                          min_p = 0;
-                          repetition_penalty = 1;
-                        };
-                        setParamsByID."\${MODEL_ID}" = {
-                          chat_template_kwargs = {
-                            preserve_thinking = true;
-                            reasoning_effort = "medium";
+                      qwenFilters =
+                        {
+                          thinkingTemp ? 0.6,
+                        }:
+                        {
+                          stripParams = "temperature, top_k, top_p, repeat_penalty, min_p, presence_penalty";
+                          setParams = {
+                            top_k = 20;
+                            min_p = 0;
+                            repetition_penalty = 1;
                           };
-                          top_p = 0.95;
-                          temperature = thinkingTemp;
-                          presence_penalty = 0.0;
-                        };
-                        setParamsByID."\${MODEL_ID}:instruct" = {
-                          chat_template_kwargs = {
-                            enable_thinking = false;
+                          setParamsByID."\${MODEL_ID}" = {
+                            chat_template_kwargs = {
+                              preserve_thinking = true;
+                            };
+                            top_p = 0.95;
+                            temperature = thinkingTemp;
+                            presence_penalty = 0.0;
                           };
-                          temperature = 0.7;
-                          top_p = 0.8;
-                          presence_penalty = 1.5;
+                          setParamsByID."\${MODEL_ID}:instruct" = {
+                            chat_template_kwargs = {
+                              enable_thinking = false;
+                            };
+                            temperature = 0.7;
+                            top_p = 0.8;
+                            presence_penalty = 1.5;
+                          };
                         };
-                      };
                     in
                     {
                       # This model spills out of VRAM a bit, but seems to be able to tolerate <1GB of overflow without slowdown.
                       "Qwen3.6-35B-A3B" = {
                         cmd = "${llama-cpp-with-repo} unsloth/Qwen3.6-35B-A3B-GGUF:UD-Q4_K_XL --ctx-size 32000 ${nonMtpArgs} ${qwenArgs} ${moeArgs}";
-                        filters = qwenFilters {};
+                        filters = qwenFilters { };
                       };
                       "Qwen3.8-27B" = {
                         cmd = "${llama-cpp-with-repo} unsloth/Qwen3.8-27B-GGUF:UD-Q4_K_XL --ctx-size 100000 ${mtpArgs} ${qwenArgs} ${denseArgs}";
