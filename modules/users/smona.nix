@@ -82,12 +82,12 @@ let
           prettier
         ];
 
+        # Set vim as default editor for quick stuff
         home.sessionVariables =
           let
             editor = "vim";
           in
           {
-            RIPGREP_CONFIG_PATH = "${../../dotfiles/rg.conf}";
             VISUAL = editor;
             EDITOR = editor;
             GIT_EDITOR = editor;

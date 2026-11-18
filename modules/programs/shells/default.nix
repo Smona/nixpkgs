@@ -53,6 +53,10 @@
         blahaj
       ];
 
+      home.sessionVariables = {
+        RIPGREP_CONFIG_PATH = "${./rg.conf}";
+      };
+
       home.shellAliases = {
         # Natural language commands
         backup =
