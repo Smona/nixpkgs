@@ -57,6 +57,15 @@
         RIPGREP_CONFIG_PATH = "${./rg.conf}";
       };
 
+      # Dotfiles
+      xdg = {
+        enable = true;
+        configFile = {
+          ".curlrc".source = ./curlrc;
+        };
+      };
+      home.file.".inputrc".source = ./inputrc;
+
       home.shellAliases = {
         # Natural language commands
         backup =

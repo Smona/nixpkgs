@@ -99,15 +99,6 @@ let
           flake = "$HOME/.config/nixpkgs";
         };
 
-        # Dotfiles
-        xdg = {
-          enable = true;
-          configFile = {
-            ".curlrc".source = ../../dotfiles/curlrc;
-          };
-        };
-        home.file.".inputrc".source = ../../dotfiles/inputrc;
-
         programs.ssh = {
           enable = true;
           includes = [ "~/.ssh/config.local" ];
