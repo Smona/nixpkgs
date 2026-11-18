@@ -23,15 +23,15 @@
       # it's nice to have one less folder.
       # Darwin: The path must not conflict with the default Firefox install directory due to new
       # security restrictions in MacOS Golden Gate.
-      configPath = if pkgs.stdenv.isLinux then ".mozilla/firefox" else appDataDir;
+      configPath = if pkgs.stdenv.hostPlatform.isLinux then ".mozilla/firefox" else appDataDir;
       package =
-        if pkgs.stdenv.isLinux then
+        if pkgs.stdenv.hostPlatform.isLinux then
           (config.lib.nixGL.wrap config.pkgsCompat.firefox)
         else
           config.pkgsCompat.firefox.override {
             appDataDir = "${config.home.homeDirectory}/${appDataDir}";
           };
-      nativeMessagingHosts = if pkgs.stdenv.isLinux then [ pkgs.fx-cast-bridge ] else [ ];
+      nativeMessagingHosts = if pkgs.stdenv.hostPlatform.isLinux then [ pkgs.fx-cast-bridge ] else [ ];
       profiles = {
         Smona = {
           settings = {

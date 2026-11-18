@@ -20,7 +20,7 @@
       };
 
       programs.emacs = {
-        enable = pkgs.stdenv.isLinux;
+        enable = pkgs.stdenv.hostPlatform.isLinux;
         package = config.lib.nixGL.wrap (
           # TODO: replace with programs.emacs.extraPackages?
           (pkgs.emacsPackagesFor pkgs.emacs-pgtk).emacsWithPackages (epkgs: [
@@ -119,6 +119,8 @@
         ]
         # TODO: fix ERR_PNPM_PNPM_ENGINE_IDENTITY_UNVERIFIABLE error on linux build so we
         # can use likec4 package on linux
-        ++ (lib.optional pkgs.stdenv.isDarwin self.packages.${pkgs.stdenv.hostPlatform.system}.likec4);
+        ++ (lib.optional pkgs.stdenv.hostPlatform.isDarwin
+          self.packages.${pkgs.stdenv.hostPlatform.system}.likec4
+        );
     };
 }
