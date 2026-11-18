@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 """Listen for earlyoom notifications on the system D-Bus and forward them as Noctalia toasts."""
+
 import subprocess
 
 import dbus
@@ -13,12 +14,10 @@ def on_signal(*args):
     pid, pname = kill_message_parts[-2:]
     subprocess.run(
         [
-            "noctalia-shell",
-            "ipc",
-            "call",
-            "toast",
-            "send",
-            f'{{ "title": "RAM critically low!", "body": "Killed process “{pname}” ({pid}) to prevent OOM", "type": "error" }}',
+            "noctalia",
+            "msg",
+            "notification-show",
+            f'{{ "title": "RAM critically low!", "body": "Killed process “{pname}” ({pid}) to prevent OOM", "urgency": "critical" }}',
         ]
     )
 
