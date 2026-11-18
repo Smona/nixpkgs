@@ -7,6 +7,8 @@
     {
       # Package my own customized version of Maple Mono with preferred features & stylistic sets,
       # to support editors like emacs that don't support toggling them.
+      # To update the customizations, generate a new custom build here: https://font.subf.dev/en/playground/
+      # then replace the ZIP.
       # baseline: ss03, ss10, ss11, calt
       packages.maple-mono-patched = pkgs.stdenvNoCC.mkDerivation {
         pname = "maple-mono-unhinted-patched";
