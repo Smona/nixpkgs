@@ -94,7 +94,6 @@
           python3Packages.grip # Required by grip-mode (markdown +grip)
           glslang # glsl-mode intellisense
           tailwindcss-language-server
-          self.packages.${pkgs.stdenv.hostPlatform.system}.likec4
 
           # Dirvish stuff
           ffmpegthumbnailer
@@ -117,6 +116,9 @@
           texliveMedium # needed for latex inline previews & export in org mode
           # TODO: figure out minimal necessary set
           # (texlive.combine { inherit (texlive) scheme-small wrapfig capt-of; }) # pdflatex
-        ];
+        ]
+        # TODO: fix ERR_PNPM_PNPM_ENGINE_IDENTITY_UNVERIFIABLE error on linux build so we
+        # can use likec4 package on linux
+        ++ (lib.optional pkgs.stdenv.isDarwin self.packages.${pkgs.stdenv.hostPlatform.system}.likec4);
     };
 }
