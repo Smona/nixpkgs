@@ -64,8 +64,8 @@
         fonts = "fc-list";
         bios = "sudo dmidecode -t bios";
         fucking = "sudo";
-        # Count lines in a git repo
-        lines = "git ls-files | xargs wc -l | tail -n1";
+        # Count lines in a git repo by language
+        lines = "eza --code";
 
         # Shortcuts
         c = "bat";
