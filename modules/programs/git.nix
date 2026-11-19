@@ -70,6 +70,7 @@
           ".idea"
           ".log"
           ".agent-shell"
+          ".claude"
         ];
       };
       # Fancier git diffs
