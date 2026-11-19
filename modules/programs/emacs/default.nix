@@ -50,21 +50,6 @@
 
       home.packages =
         with pkgs;
-        let
-          claude-agent-acp = pkgs.buildNpmPackage (finalAttrs: {
-            pname = "@zed-industries/claude-agent-acp";
-            version = "0.108.1";
-
-            src = pkgs.fetchFromGitHub {
-              owner = "zed-industries";
-              repo = "claude-agent-acp";
-              tag = "v${finalAttrs.version}";
-              hash = "sha256-yU4ywM4YQQfI1DK/DQ1cr9zERMaOOfFeF2JBtyz8xbg=";
-            };
-
-            npmDepsHash = "sha256-Cee29bOKbENsj7VnjIFQLT5M/yISbMOMYZkBkGDlVWw=";
-          });
-        in
         [
           # Python
           python3Packages.debugpy # Required by dap-mode
@@ -111,7 +96,7 @@
           # Assorted Emacs dependencies
           jq # Used by restclient.el
           awscli2 # Used by s3ed
-          claude-agent-acp # Used by agent-shell
+          self.packages.${pkgs.stdenv.hostPlatform.system}.claude-agent-acp # Used by agent-shell
 
           texliveMedium # needed for latex inline previews & export in org mode
           # TODO: figure out minimal necessary set
