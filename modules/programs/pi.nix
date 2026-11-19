@@ -1,37 +1,21 @@
-# Package little-coder and pi-acp, expose via home-manager.
+# Configuration for the Pi coding agent harness
+
 { self, ... }:
 {
-  perSystem =
-    { pkgs, self', ... }:
-    {
-      # TODO: re-evaluate if it's fixed
-      # packages.little-coder = pkgs.buildNpmPackage rec {
-      #   pname = "little-coder";
-      #   version = "1.8.1";
+  # TODO: re-evaluate if it's fixed
+  # packages.little-coder = pkgs.buildNpmPackage rec {
+  #   pname = "little-coder";
+  #   version = "1.8.1";
 
-      #   src = pkgs.fetchFromGitHub {
-      #     owner = "itayinbarr";
-      #     repo = pname;
-      #     tag = "v${version}";
-      #     hash = "sha256-8MY8BLimdZTFjPcXIdeAF484g1T0FVvjehrRtd+PuYM=";
-      #   };
-      #   npmDepsHash = "sha256-TmjIE/Iifj3rt/oVgfDxvIKoeVaOhfrlczQNA6UprA8=";
-      #   dontNpmBuild = true;
-      # };
-
-      packages.pi-acp = pkgs.buildNpmPackage rec {
-        pname = "pi-acp";
-        version = "0.0.34";
-
-        src = pkgs.fetchFromGitHub {
-          owner = "svkozak";
-          repo = "pi-acp";
-          tag = "v${version}";
-          hash = "sha256-QRwxOtTZOY+Np3PkAoy2o2PrUzEqjItM/372sCPlSMo=";
-        };
-        npmDepsHash = "sha256-BvLNtFfp1cMVjzWcMRSdhTqiJrTfbFoUbWkkPW9200o=";
-      };
-    };
+  #   src = pkgs.fetchFromGitHub {
+  #     owner = "itayinbarr";
+  #     repo = pname;
+  #     tag = "v${version}";
+  #     hash = "sha256-8MY8BLimdZTFjPcXIdeAF484g1T0FVvjehrRtd+PuYM=";
+  #   };
+  #   npmDepsHash = "sha256-TmjIE/Iifj3rt/oVgfDxvIKoeVaOhfrlczQNA6UprA8=";
+  #   dontNpmBuild = true;
+  # };
 
   # TODO: add keybind for vterm-send-escape in vterm buffers
   flake.homeModules.pi =
