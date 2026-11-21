@@ -80,14 +80,20 @@
   };
 
   den.aspects.mel = {
-    includes = [ den.aspects.gaming ];
+    includes = [
+      den.aspects.gaming
+      den.aspects.realtime-audio
+    ];
   };
   # alias username
-  den.aspects.smona = {
-    includes = [ den.aspects.mel ];
-  };
+  den.aspects.smona.includes = [ den.aspects.mel ];
 
   den.aspects.luma = {
+    includes = [
+      den.aspects.amdgpu
+      den.aspects.amdcpu
+      den.aspects.dualboot
+    ];
     nixos = { pkgs, ... }: {
       imports = [
         self.nixosModules.luma
@@ -95,10 +101,6 @@
         self.nixosModules.luma-hardware
         self.nixosModules.llm-server
         self.nixosModules.pc
-        self.nixosModules.dualboot
-        self.nixosModules.amdgpu
-        self.nixosModules.amd-cpu
-        self.nixosModules.realtime-audio
       ];
     };
   };
@@ -111,7 +113,6 @@
         inputs.hardware.nixosModules.dell-xps-13-7390
         self.nixosModules.xps-nixos
         self.nixosModules.pc
-        self.nixosModules.realtime-audio
       ];
     };
   };

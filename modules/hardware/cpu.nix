@@ -1,7 +1,7 @@
 # NixOS modules for systems by CPU vendor.
 { ... }:
 {
-  flake.nixosModules.amd-cpu =
+  den.aspects.amdcpu.nixos =
     { ... }:
     {
       # Enable CPU frequency governors

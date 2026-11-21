@@ -1,10 +1,11 @@
 # Modules for music & audio production computers
 { inputs, ... }:
 {
-  flake.nixosModules.realtime-audio =
+  den.aspects.realtime-audio.nixos =
     {
       config,
       pkgs,
+      user,
       ...
     }:
     {
@@ -12,7 +13,7 @@
 
       # https://github.com/musnix/musnix#base-options
       musnix.enable = true;
-      users.users.${config.smona.username}.extraGroups = [ "audio" ];
+      users.users.${user.userName}.extraGroups = [ "audio" ];
 
       # Not currently working on my nixpkgs version
       # error: attribute 'linuxPackages_5_4_rt' missing

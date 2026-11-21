@@ -10,7 +10,7 @@ let
   };
 in
 {
-  flake.nixosModules.amdgpu =
+  den.aspects.amdgpu.nixos = 
     { pkgs, ... }:
     {
       imports = [ common ];
