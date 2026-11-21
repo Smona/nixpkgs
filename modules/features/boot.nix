@@ -1,7 +1,7 @@
 # Bootloader, kernel, and silent boot configuration
 { ... }:
 {
-  flake.nixosModules.boot =
+  den.aspects.boot.nixos =
     { pkgs, ... }:
     {
       # Use latest kernel for more stable WiFi connection

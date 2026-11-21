@@ -4,15 +4,7 @@
 # so it's gotten a bit out of date with my current best practices.
 { inputs, self, ... }:
 {
-  flake.nixosConfigurations."luma-nixos" = inputs.nixpkgs.lib.nixosSystem {
-    modules = [
-      inputs.nixos-wsl.nixosModules.wsl
-      inputs.home-manager.nixosModules.home-manager
-      self.nixosModules.luma-nixos
-    ];
-  };
-
-  flake.nixosModules.luma-nixos =
+  den.aspects.luma-nixos.nixos =
     {
       config,
       lib,
@@ -20,27 +12,10 @@
       ...
     }:
     {
-      wsl.enable = true;
       wsl.defaultUser = "smona";
 
-      nix = {
-        # This will add each flake input as a registry
-        # To make nix3 commands consistent with your flake
-        registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
-
-        # This will additionally add your inputs to the system's legacy channels
-        # Making legacy nix commands consistent as well, awesome!
-        nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
-        extraOptions = ''
-          experimental-features = nix-command flakes
-        '';
-      };
-      nixpkgs = {
-        hostPlatform = "x86_64-linux";
-        config.allowUnfree = true;
-      };
-
-      networking.hostName = "luma-nixos";
+      # TODO: remove option once using user argument everywhere
+      smona.username = "smona";
 
       environment.systemPackages = with pkgs; [
         git
@@ -56,8 +31,6 @@
       };
 
       users.users.smona = {
-        isNormalUser = true;
-        description = "Mel Bourgeois";
         extraGroups = [ "wheel" ];
         uid = 1000;
       };
@@ -65,10 +38,6 @@
         { pkgs, config, ... }:
         {
           imports = [ self.homeModules.linux-pc ];
-
-          home.username = "smona";
-          home.homeDirectory = "/home/smona";
-          home.stateVersion = "22.05";
 
           dconf.enable = true;
 
@@ -83,13 +52,5 @@
         inherit inputs;
         system = "x86_64-linux";
       };
-
-      # This value determines the NixOS release from which the default
-      # settings for stateful data, like file locations and database versions
-      # on your system were taken. It's perfectly fine and recommended to leave
-      # this value at the release version of the first install of this system.
-      # Before changing this value read the documentation for this option
-      # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-      system.stateVersion = "23.05"; # Did you read the comment?
     };
 }

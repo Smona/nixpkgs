@@ -1,4 +1,4 @@
-# My standard Home Manager configurations
+# My standard user configurations
 { inputs, self, ... }:
 let
   # Home Manager configuration shared between Linux & Darwin.

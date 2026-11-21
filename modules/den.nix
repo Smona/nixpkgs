@@ -1,6 +1,5 @@
 {
   inputs,
-  self,
   den,
   lib,
   ...
@@ -70,6 +69,22 @@
         }
       );
   };
+  den.hosts.x86_64-linux.luma-nixos = {
+    users.smona = { };
+    wsl.enable = true;
+
+    # temporary workaround until i finish migrating non-flake-parts modules
+    instantiate =
+      args:
+      inputs.nixpkgs.lib.nixosSystem (
+        args
+        // {
+          specialArgs = (args.specialArgs or { }) // {
+            inherit inputs;
+          };
+        }
+      );
+  };
 
   den.default = {
     includes = [
@@ -101,6 +116,10 @@
       keychron
       lilnasx
     ];
+
+    user = {
+      description = "Mel Bourgeois";
+    };
   };
   # alternate usernames
   den.aspects.mel.includes = [ den.aspects.smona ];

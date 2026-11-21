@@ -69,6 +69,7 @@ in
       config,
       pkgs,
       lib,
+      user,
       ...
     }:
     {
@@ -78,7 +79,6 @@ in
         self.nixosModules.desktop
         self.nixosModules.oom-handling
         self.nixosModules.printing
-        self.nixosModules.boot
         self.nixosModules.embedded-dev
         self.nixosModules.vicinae
       ];
@@ -194,11 +194,8 @@ in
         # Windows can break bluetooth or other features
         hardware.enableAllFirmware = true;
 
-        services.flatpak.enable = true;
-
         # Define a user account. Don't forget to set a password with ‘passwd’.
-        users.users.${config.smona.username} = {
-          description = "Mel Bourgeois";
+        users.users.${user.userName} = {
           extraGroups = [
             "networkmanager"
             "wheel"

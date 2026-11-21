@@ -8,6 +8,7 @@
   den.aspects.xps-nixos.includes = [
     # Include the results of the hardware scan.
     den.aspects.xps-nixos.hardware
+    den.aspects.baremetal
   ];
 
   den.aspects.xps-nixos.nixos =

@@ -7,6 +7,7 @@
 
     den.aspects.amdgpu
     den.aspects.amdcpu
+    den.aspects.baremetal
     den.aspects.dualboot
 
     # Services
