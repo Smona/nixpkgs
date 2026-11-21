@@ -27,7 +27,7 @@
     (den.batteries.unfree [ "obsidian" ])
     (den.batteries.unfree [ "keymapp" ])
     (den.batteries.unfree [
-      # TODO: where are these coming from?
+      # TODO: where are these coming from? came up on luma specifically
       "broadcom-bt-firmware"
       "b43-firmware"
       "xone-dongle-firmware"
@@ -87,33 +87,4 @@
   };
   # alias username
   den.aspects.smona.includes = [ den.aspects.mel ];
-
-  den.aspects.luma = {
-    includes = [
-      den.aspects.amdgpu
-      den.aspects.amdcpu
-      den.aspects.dualboot
-    ];
-    nixos = { pkgs, ... }: {
-      imports = [
-        self.nixosModules.luma
-        # Include the results of the hardware scan.
-        self.nixosModules.luma-hardware
-        self.nixosModules.llm-server
-        self.nixosModules.pc
-      ];
-    };
-  };
-
-  den.aspects.xps-nixos = {
-    nixos = {
-      imports = [
-        # Include the results of the hardware scan.
-        self.nixosModules.xps-nixos-hardware
-        inputs.hardware.nixosModules.dell-xps-13-7390
-        self.nixosModules.xps-nixos
-        self.nixosModules.pc
-      ];
-    };
-  };
 }
