@@ -195,7 +195,6 @@ in
 
         # Define a user account. Don't forget to set a password with ‘passwd’.
         users.users.${config.smona.username} = {
-          isNormalUser = true;
           description = "Mel Bourgeois";
           extraGroups = [
             "networkmanager"
