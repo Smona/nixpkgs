@@ -140,6 +140,13 @@ in
           # Fixes an issue where luma would randomly disconnect from home wifi
           # by roaming to nowhere.
           settings.Scan.DisableRoamingScan = true;
+
+          settings.General = {
+            EnableNetworkConfiguration=true;
+            # Another option: roam less aggressively
+            # RoamThreshold=-74;
+            # RoamThreshold5G=-79;
+          };
         };
 
         powerManagement.cpuFreqGovernor = lib.mkForce "schedutil";
