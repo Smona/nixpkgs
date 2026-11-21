@@ -2,7 +2,7 @@
 # (llama-swap in a NixOS container with GPU passthrough).
 { ... }:
 {
-  flake.nixosModules.llm-server =
+  den.aspects.llm-server.nixos =
     {
       config,
       lib,

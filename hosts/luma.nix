@@ -8,6 +8,9 @@
     den.aspects.amdgpu
     den.aspects.amdcpu
     den.aspects.dualboot
+
+    # Services
+    den.aspects.llm-server
   ];
 
   den.aspects.luma.nixos =
@@ -18,7 +21,6 @@
     }:
     {
       imports = [
-        self.nixosModules.llm-server
         self.nixosModules.pc
       ];
 
