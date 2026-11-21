@@ -136,6 +136,21 @@
         }
       );
   };
+  den.hosts.aarch64-darwin.Mels-Macbook-Air = {
+    users.mel = { };
+
+    # temporary workaround until i finish migrating non-flake-parts modules
+    instantiate =
+      args:
+      inputs.nix-darwin.lib.darwinSystem (
+        args
+        // {
+          specialArgs = (args.specialArgs or { }) // {
+            inherit inputs;
+          };
+        }
+      );
+  };
 
   den.default = {
     includes = [

@@ -1,27 +1,17 @@
 { inputs, self, ... }:
 {
-  flake.darwinConfigurations.Mels-MacBook-Air = inputs.nix-darwin.lib.darwinSystem {
-    pkgs = self.legacyPackages.aarch64-darwin;
-    specialArgs = {
-      inherit inputs;
-    };
-    modules = [
-      inputs.nix-homebrew.darwinModules.nix-homebrew
-      inputs.home-manager.darwinModules.home-manager
-      self.darwinModules.mels-macbook-air
-    ];
-  };
-
-  flake.darwinModules.mels-macbook-air =
+  den.aspects.Mels-Macbook-Air.darwin =
     {
       pkgs,
       lib,
       config,
-      inputs,
       ...
     }:
     {
-      imports = [ self.darwinModules.pc ];
+      imports = [
+        self.darwinModules.pc
+        inputs.nix-homebrew.darwinModules.nix-homebrew
+      ];
 
       smona.username = "mel";
 
@@ -72,14 +62,6 @@
       # Set Git commit hash for darwin-version.
       system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
 
-      # Used for backwards compatibility, please read the changelog before changing.
-      # $ darwin-rebuild changelog
-      system.stateVersion = 4;
-
-      # The platform the configuration will be used on.
-      nixpkgs.hostPlatform = "aarch64-darwin";
-      nixpkgs.config.allowUnfree = true;
-
       ############################
       # Below: stuff added by me #
       ############################
@@ -124,8 +106,7 @@
             let
               thunderbirdPackage =
                 config.home-manager.users.${config.smona.username}.programs.thunderbird.package;
-              firefoxPackage =
-                config.home-manager.users.${config.smona.username}.programs.firefox.package;
+              firefoxPackage = config.home-manager.users.${config.smona.username}.programs.firefox.package;
             in
             [
               "${firefoxPackage}/Applications/Firefox.app"
@@ -152,11 +133,6 @@
 
       # Enable TouchID sudo authentication
       security.pam.services.sudo_local.touchIdAuth = true;
-
-      users.users.${config.smona.username} = {
-        description = "Mel Bourgeois";
-        home = "/Users/${config.smona.username}";
-      };
 
       nix-homebrew = {
         # Install Homebrew under the default prefix
