@@ -1,7 +1,7 @@
 # Noctalia wlroots shell. https://noctalia.dev/
 { ... }:
 {
-  flake.homeModules.noctalia =
+  den.aspects.noctalia.hmLinux =
     {
       config,
       lib,
@@ -65,7 +65,7 @@
       };
     };
 
-  flake.nixosModules.noctalia =
+  den.aspects.noctalia.nixos =
     {
       config,
       lib,

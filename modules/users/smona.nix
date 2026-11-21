@@ -17,6 +17,7 @@
     includes = with den.aspects; [
       gaming
       realtime-audio
+      desktop
 
       fonts
 
@@ -41,7 +42,6 @@
       {
         imports = [
           inputs.catppuccin.homeModules.catppuccin
-          self.homeModules.desktop
           self.homeModules.git
           self.homeModules.tmux
           self.homeModules.vim

@@ -75,7 +75,6 @@
     {
       imports = [
         inputs.catppuccin.nixosModules.catppuccin
-        self.nixosModules.desktop
         self.nixosModules.printing
         self.nixosModules.embedded-dev
       ];
