@@ -2,7 +2,7 @@
 # (for sudoless WebHID configuration in the browser).
 { ... }:
 {
-  flake.nixosModules.keychron =
+  den.aspects.keychron.nixos =
     { ... }:
     {
       services.udev.extraRules = ''

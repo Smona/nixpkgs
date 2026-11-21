@@ -1,7 +1,7 @@
 # Mount CIFS shares from lilnasx.
 { ... }:
 {
-  flake.nixosModules.lilnasx =
+  den.aspects.lilnasx.nixos =
     { pkgs, ... }:
     let
       lilnasx_mount =

@@ -93,9 +93,13 @@
   };
 
   den.aspects.smona = {
-    includes = [
-      den.aspects.gaming
-      den.aspects.realtime-audio
+    includes = with den.aspects; [
+      gaming
+      realtime-audio
+
+      # peripherals
+      keychron
+      lilnasx
     ];
   };
   # alternate usernames
