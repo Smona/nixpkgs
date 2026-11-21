@@ -6,7 +6,6 @@ let
       config,
       lib,
       pkgs,
-      inputs,
       ...
     }:
     {
@@ -65,7 +64,7 @@ let
     };
 in
 {
-  flake.nixosModules.pc =
+  den.aspects.smona.nixos =
     {
       config,
       pkgs,
@@ -75,7 +74,6 @@ in
     {
       imports = [
         os-independent
-        inputs.home-manager.nixosModules.home-manager
         inputs.catppuccin.nixosModules.catppuccin
         self.nixosModules.desktop
         self.nixosModules.keychron

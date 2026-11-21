@@ -20,10 +20,6 @@
       ...
     }:
     {
-      imports = [
-        self.nixosModules.pc
-      ];
-
       smona.username = "mel";
       smona.primaryMonitor = "DP-1";
       smona.wallpaper = ../../wallpapers/vibrant-paint-streaks.jpg;

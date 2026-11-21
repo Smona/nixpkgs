@@ -92,12 +92,12 @@
     darwin.system.stateVersion = lib.mkDefault 4;
   };
 
-  den.aspects.mel = {
+  den.aspects.smona = {
     includes = [
       den.aspects.gaming
       den.aspects.realtime-audio
     ];
   };
-  # alias username
-  den.aspects.smona.includes = [ den.aspects.mel ];
+  # alternate usernames
+  den.aspects.mel.includes = [ den.aspects.smona ];
 }

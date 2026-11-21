@@ -1,4 +1,9 @@
-{ den, self, inputs, ... }:
+{
+  den,
+  self,
+  inputs,
+  ...
+}:
 {
   den.aspects.xps-nixos.includes = [
     # Include the results of the hardware scan.
@@ -12,10 +17,7 @@
       ...
     }:
     {
-      imports = [
-        inputs.hardware.nixosModules.dell-xps-13-7390
-        self.nixosModules.pc
-      ];
+      imports = [ inputs.hardware.nixosModules.dell-xps-13-7390 ];
 
       smona.username = "smona";
       smona.primaryMonitor = "eDP-1";
