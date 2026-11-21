@@ -1,13 +1,15 @@
-# NixOS & Home Manager modules for hosts with the gaming role.
-{ ... }:
+# NixOS & Home Manager modules for hosts that I play games on.
+{ den, ... }:
 {
-  flake.nixosModules.gaming =
-    {
-      config,
-      lib,
-      pkgs,
-      ...
-    }:
+  den.aspects.gaming = {
+    includes = [
+      (den.batteries.unfree [
+        "steam"
+        "steam-unwrapped"
+      ])
+    ];
+
+    nixos = {...}:
     {
       programs.steam = {
         enable = true;
@@ -21,12 +23,12 @@
       };
     };
 
-  flake.homeModules.gaming =
-    { pkgs, ... }:
+    homeManager = { pkgs, ... }:
     {
       home.packages = with pkgs; [
         prismlauncher
         jdk17
       ];
     };
+  };
 }

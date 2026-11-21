@@ -1,25 +1,6 @@
 # Baremetal installation
-{ inputs, self, ... }:
+{ self, ... }:
 {
-  flake.nixosConfigurations.luma = inputs.nixpkgs.lib.nixosSystem {
-    pkgs = self.legacyPackages.x86_64-linux;
-    specialArgs = {
-      inherit inputs;
-    };
-    modules = [
-      self.nixosModules.luma
-      # Include the results of the hardware scan.
-      self.nixosModules.luma-hardware
-      self.nixosModules.llm-server
-      self.nixosModules.pc
-      self.nixosModules.dualboot
-      self.nixosModules.amdgpu
-      self.nixosModules.amd-cpu
-      self.nixosModules.gaming
-      self.nixosModules.realtime-audio
-    ];
-  };
-
   flake.nixosModules.luma =
     {
       config,
@@ -39,7 +20,6 @@
         {
           imports = [
             self.homeModules.linux-pc
-            self.homeModules.gaming
           ];
 
           home.username = "mel";

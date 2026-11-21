@@ -1,21 +1,5 @@
 { inputs, self, ... }:
 {
-  flake.nixosConfigurations.xps-nixos = inputs.nixpkgs.lib.nixosSystem {
-    pkgs = self.legacyPackages.x86_64-linux;
-    specialArgs = {
-      inherit inputs;
-    };
-    modules = [
-      # Include the results of the hardware scan.
-      self.nixosModules.xps-nixos-hardware
-      inputs.hardware.nixosModules.dell-xps-13-7390
-      self.nixosModules.xps-nixos
-      self.nixosModules.pc
-      self.nixosModules.gaming
-      self.nixosModules.realtime-audio
-    ];
-  };
-
   flake.nixosModules.xps-nixos =
     {
       config,
@@ -38,7 +22,6 @@
         {
           imports = [
             self.homeModules.linux-pc
-            self.homeModules.gaming
           ];
 
           home.username = "smona";

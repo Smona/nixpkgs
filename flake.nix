@@ -34,6 +34,7 @@
     catppuccin.inputs.nixpkgs.follows = "nixpkgs";
 
     vicinae.url = "github:vicinaehq/vicinae";
+    den.url = "github:denful/den";
 
     # nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
 

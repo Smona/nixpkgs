@@ -38,6 +38,21 @@
         "type": "github"
       }
     },
+    "den": {
+      "locked": {
+        "lastModified": 1795224939,
+        "narHash": "sha256-kbhey6X+XXiYGkNAjxKNK7XpQTski/8tStIYaG4nli4=",
+        "owner": "denful",
+        "repo": "den",
+        "rev": "27efd748801b13f86d49ab77e6d658684348c1fb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "denful",
+        "repo": "den",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -405,6 +420,7 @@
     "root": {
       "inputs": {
         "catppuccin": "catppuccin",
+        "den": "den",
         "flake-parts": "flake-parts",
         "hardware": "hardware",
         "home-manager": "home-manager",

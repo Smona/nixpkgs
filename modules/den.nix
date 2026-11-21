@@ -1,0 +1,118 @@
+{
+  inputs,
+  self,
+  den,
+  lib,
+  ...
+}:
+
+{
+  imports = [ inputs.den.flakeModule ];
+
+  den.schema.user.classes = lib.mkDefault [ "homeManager" ];
+  # Allow my own user to configure nixos options across all hosts.
+  den.schema.host.includes = [
+    (den.batteries.user-aspects {
+      users = [
+        "mel"
+        "smona"
+      ];
+    })
+
+    # TODO: move into appropriate aspect definitions
+    (den.batteries.unfree [ "1password" ])
+    (den.batteries.unfree [ "bitwig-studio" ])
+    (den.batteries.unfree [ "slack" ])
+    (den.batteries.unfree [ "pridecat" ])
+    (den.batteries.unfree [ "obsidian" ])
+    (den.batteries.unfree [ "keymapp" ])
+    (den.batteries.unfree [
+      # TODO: where are these coming from?
+      "broadcom-bt-firmware"
+      "b43-firmware"
+      "xone-dongle-firmware"
+      "facetimehd-calibration"
+      "facetimehd-firmware"
+    ])
+    (den.batteries.unfree [
+      "corefonts"
+      "vista-fonts"
+    ])
+  ];
+
+  den.hosts.x86_64-linux.luma = {
+    users.mel = { };
+
+    # temporary workaround until i finish migrating non-flake-parts modules
+    instantiate =
+      args:
+      inputs.nixpkgs.lib.nixosSystem (
+        args
+        // {
+          specialArgs = (args.specialArgs or { }) // {
+            inherit inputs;
+          };
+        }
+      );
+  };
+  den.hosts.x86_64-linux.xps-nixos = {
+    users.smona = { };
+
+    # temporary workaround until i finish migrating non-flake-parts modules
+    instantiate =
+      args:
+      inputs.nixpkgs.lib.nixosSystem (
+        args
+        // {
+          specialArgs = (args.specialArgs or { }) // {
+            inherit inputs;
+          };
+        }
+      );
+  };
+
+  den.default = {
+    # Setting consistent global stateVersion defaults, using the oldest
+    # stateVersion in the repo.
+    nixos.system.stateVersion = lib.mkDefault "22.05";
+    homeManager.home.stateVersion = lib.mkDefault "22.05";
+    darwin.system.stateVersion = lib.mkDefault 4;
+  };
+
+  den.aspects.mel = {
+    includes = [ den.aspects.gaming ];
+  };
+  # alias username
+  den.aspects.smona = {
+    includes = [ den.aspects.mel ];
+  };
+
+  den.aspects.luma = {
+    nixos = { pkgs, ... }: {
+      imports = [
+        self.nixosModules.luma
+        # Include the results of the hardware scan.
+        self.nixosModules.luma-hardware
+        self.nixosModules.llm-server
+        self.nixosModules.pc
+        self.nixosModules.dualboot
+        self.nixosModules.amdgpu
+        self.nixosModules.amd-cpu
+        self.nixosModules.realtime-audio
+      ];
+    };
+  };
+
+  den.aspects.xps-nixos = {
+    nixos = {
+      imports = [
+        # Include the results of the hardware scan.
+        self.nixosModules.xps-nixos-hardware
+        inputs.hardware.nixosModules.dell-xps-13-7390
+        self.nixosModules.xps-nixos
+        self.nixosModules.pc
+        self.nixosModules.realtime-audio
+      ];
+    };
+  };
+}
