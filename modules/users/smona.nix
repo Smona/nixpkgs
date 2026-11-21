@@ -20,6 +20,9 @@
 
       fonts
 
+      # apps
+      vicinae
+
       # peripherals
       keychron
       lilnasx
@@ -44,7 +47,6 @@
           self.homeModules.vim
           self.homeModules.shells
           self.homeModules.emacs
-          self.homeModules.vicinae
         ];
 
         options = with lib; {

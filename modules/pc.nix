@@ -80,7 +80,6 @@ in
         self.nixosModules.oom-handling
         self.nixosModules.printing
         self.nixosModules.embedded-dev
-        self.nixosModules.vicinae
       ];
 
       options.smona = with lib; {
