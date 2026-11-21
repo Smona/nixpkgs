@@ -6,116 +6,6 @@
   lib,
   ...
 }:
-let
-  # Home Manager configuration shared between Linux & Darwin.
-  # As much stuff as possible should go in here, but some things are
-  # necessarily different between the two platforms.
-  common =
-    {
-      pkgs,
-      lib,
-      config,
-      ...
-    }:
-    {
-      imports = [
-        inputs.catppuccin.homeModules.catppuccin
-        self.homeModules.desktop
-        self.homeModules.git
-        self.homeModules.tmux
-        self.homeModules.vim
-        self.homeModules.shells
-        self.homeModules.emacs
-        self.homeModules.vicinae
-      ];
-
-      options = with lib; {
-        pkgsCompat = mkOption {
-          type = types.pkgs;
-          default = pkgs;
-          description = ''
-            A version of nixpkgs which lags behind the main package set, to preserve
-            compatibility with non-NixOS installs on distributions that have slower
-            release cycles (e.g. Ubuntu).
-
-            This is especially necessary for packages which integrate closely with the
-            system-supplied desktop environment (e.g. gnome extensions), but can come
-            up in other cases as well.
-          '';
-        };
-      };
-
-      config = {
-        catppuccin.enable = true;
-        catppuccin.flavor = "mocha";
-
-        # Configuration of the nix CLI
-        # https://nixos.org/manual/nix/stable/command-ref/conf-file.html
-        nix.package = lib.mkDefault pkgs.nix;
-        nix.settings = {
-          # Massively reduce disk usage by hard linking any duplicate files
-          # to a single location on disk.
-          # FIXME: only enable this outside of nix-darwin & nixos.
-          # broken on darwin: https://github.com/NixOS/nix/issues/7273
-          # auto-optimise-store = true;
-          # Enable nix command and nix flakes
-          experimental-features = "nix-command flakes";
-          # Always show failure traces
-          show-trace = true;
-          substituters = [
-            "https://cache.nixos.org"
-            "https://nix-community.cachix.org"
-            "https://vicinae.cachix.org"
-          ];
-          trusted-public-keys = [
-            "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-            "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-            "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
-          ];
-          netrc-file = "${config.home.homeDirectory}/.config/nix/netrc";
-        };
-
-        home.language.base = "en_US.UTF-8";
-
-        home.packages = with pkgs; [
-          cachix
-
-          ## NodeJS
-          nodejs
-          yarn
-          prettier
-        ];
-
-        # Set vim as default editor for quick stuff
-        home.sessionVariables =
-          let
-            editor = "vim";
-          in
-          {
-            VISUAL = editor;
-            EDITOR = editor;
-            GIT_EDITOR = editor;
-          };
-
-        # Enable nix CLI helper
-        programs.nh = {
-          enable = true;
-          flake = "$HOME/.config/nixpkgs";
-        };
-
-        programs.ssh = {
-          enable = true;
-          includes = [ "~/.ssh/config.local" ];
-        };
-
-        # Services
-        services.syncthing.enable = true;
-
-        # Let Home Manager install and manage itself.
-        programs.home-manager.enable = true;
-      };
-    };
-in
 {
   # alternate usernames
   den.aspects.mel.includes = [ den.aspects.smona ];
@@ -135,10 +25,118 @@ in
       lilnasx
     ];
 
+    # Home Manager configuration shared between Linux & Darwin.
+    # As much stuff as possible should go in here, but some things are
+    # necessarily different between the two platforms.
+    homeManager =
+      {
+        pkgs,
+        lib,
+        config,
+        ...
+      }:
+      {
+        imports = [
+          inputs.catppuccin.homeModules.catppuccin
+          self.homeModules.desktop
+          self.homeModules.git
+          self.homeModules.tmux
+          self.homeModules.vim
+          self.homeModules.shells
+          self.homeModules.emacs
+          self.homeModules.vicinae
+        ];
+
+        options = with lib; {
+          pkgsCompat = mkOption {
+            type = types.pkgs;
+            default = pkgs;
+            description = ''
+              A version of nixpkgs which lags behind the main package set, to preserve
+              compatibility with non-NixOS installs on distributions that have slower
+              release cycles (e.g. Ubuntu).
+
+              This is especially necessary for packages which integrate closely with the
+              system-supplied desktop environment (e.g. gnome extensions), but can come
+              up in other cases as well.
+            '';
+          };
+        };
+
+        config = {
+          catppuccin.enable = true;
+          catppuccin.flavor = "mocha";
+
+          # Configuration of the nix CLI
+          # https://nixos.org/manual/nix/stable/command-ref/conf-file.html
+          nix.package = lib.mkDefault pkgs.nix;
+          nix.settings = {
+            # Massively reduce disk usage by hard linking any duplicate files
+            # to a single location on disk.
+            # FIXME: only enable this outside of nix-darwin & nixos.
+            # broken on darwin: https://github.com/NixOS/nix/issues/7273
+            # auto-optimise-store = true;
+            # Enable nix command and nix flakes
+            experimental-features = "nix-command flakes";
+            # Always show failure traces
+            show-trace = true;
+            substituters = [
+              "https://cache.nixos.org"
+              "https://nix-community.cachix.org"
+              "https://vicinae.cachix.org"
+            ];
+            trusted-public-keys = [
+              "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+              "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+              "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
+            ];
+            netrc-file = "${config.home.homeDirectory}/.config/nix/netrc";
+          };
+
+          home.language.base = "en_US.UTF-8";
+
+          home.packages = with pkgs; [
+            cachix
+
+            ## NodeJS
+            nodejs
+            yarn
+            prettier
+          ];
+
+          # Set vim as default editor for quick stuff
+          home.sessionVariables =
+            let
+              editor = "vim";
+            in
+            {
+              VISUAL = editor;
+              EDITOR = editor;
+              GIT_EDITOR = editor;
+            };
+
+          # Enable nix CLI helper
+          programs.nh = {
+            enable = true;
+            flake = "$HOME/.config/nixpkgs";
+          };
+
+          programs.ssh = {
+            enable = true;
+            includes = [ "~/.ssh/config.local" ];
+          };
+
+          # Services
+          services.syncthing.enable = true;
+
+          # Let Home Manager install and manage itself.
+          programs.home-manager.enable = true;
+        };
+      };
+
     # Linux-only home-manager configuration shared across personal computers.
     hmLinux = { config, pkgs, ... }: {
       imports = [
-        common
         self.homeModules.linux-gui
         self.homeModules.pi # Currently unsupported on Darwin because bubblewrap doesn't work there, and our sandboxing mechanism requires it.
       ];
@@ -179,7 +177,6 @@ in
       { pkgs, ... }:
       {
         imports = [
-          common
           self.homeModules.darwin-gui
         ];
 
