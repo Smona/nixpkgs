@@ -1,8 +1,7 @@
 # WSL installation
 #
-# This was my first NixOS machine, and I rarely use Windows these days,
-# so it's gotten a bit out of date with my current best practices.
-{ inputs, self, ... }:
+# This was my first NixOS machine!
+{ ... }:
 {
   den.aspects.luma-nixos.nixos =
     {
@@ -16,14 +15,6 @@
 
       # TODO: remove option once using user argument everywhere
       smona.username = "smona";
-
-      environment.systemPackages = with pkgs; [
-        git
-        vim
-      ];
-
-      programs.zsh.enable = true;
-      users.defaultUserShell = pkgs.zsh;
 
       programs._1password-gui = {
         enable = true;
@@ -44,12 +35,6 @@
           # Let Home Manager install and manage itself.
           programs.home-manager.enable = true;
         };
-
-      home-manager.useGlobalPkgs = true;
-      home-manager.extraSpecialArgs = {
-        inherit inputs;
-        system = "x86_64-linux";
-      };
 
       # This value determines the NixOS release from which the default
       # settings for stateful data, like file locations and database versions

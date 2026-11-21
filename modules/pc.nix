@@ -1,7 +1,8 @@
 # Host configurations shared across all personal computers
 { inputs, self, ... }:
-let
-  os-independent =
+{
+  # Configuration that can be shared between nix-darwin & NixOS.
+  den.aspects.smona.os =
     {
       config,
       lib,
@@ -62,8 +63,7 @@ let
         ];
       };
     };
-in
-{
+
   den.aspects.smona.nixos =
     {
       config,
@@ -74,7 +74,6 @@ in
     }:
     {
       imports = [
-        os-independent
         inputs.catppuccin.nixosModules.catppuccin
         self.nixosModules.desktop
         self.nixosModules.oom-handling
@@ -235,11 +234,5 @@ in
         # Set the system timezone automatically
         services.automatic-timezoned.enable = true;
       };
-    };
-
-  flake.darwinModules.pc =
-    { ... }:
-    {
-      imports = [ os-independent ];
     };
 }

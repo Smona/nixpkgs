@@ -1,4 +1,4 @@
-{ inputs, self, ... }:
+{ inputs, ... }:
 {
   den.aspects.Mels-Macbook-Air.darwin =
     {
@@ -8,10 +8,7 @@
       ...
     }:
     {
-      imports = [
-        self.darwinModules.pc
-        inputs.nix-homebrew.darwinModules.nix-homebrew
-      ];
+      imports = [ inputs.nix-homebrew.darwinModules.nix-homebrew ];
 
       smona.username = "mel";
 
