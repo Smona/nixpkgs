@@ -1,17 +1,8 @@
-{ inputs, self, ... }:
+{ self, ... }:
 {
-  flake.homeConfigurations."smona@DESKTOP-9F9VN3S" =
-    inputs.home-manager.lib.homeManagerConfiguration
-      {
-        pkgs = self.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {
-          inherit inputs;
-        };
-        modules = [
-          self.homeModules.linux-pc
-          {
-            home.username = "smona";
-          }
-        ];
-      };
+  den.aspects."smona@DESKTOP-9F9VN3S".homeManager = {
+    imports = [
+      self.homeModules.linux-pc
+    ];
+  };
 }
