@@ -76,7 +76,6 @@
       imports = [
         inputs.catppuccin.nixosModules.catppuccin
         self.nixosModules.desktop
-        self.nixosModules.oom-handling
         self.nixosModules.printing
         self.nixosModules.embedded-dev
       ];

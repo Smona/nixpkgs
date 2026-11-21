@@ -1,7 +1,7 @@
 # Better behavior under high RAM pressure: zram swap + earlyoom.
 { ... }:
 {
-  flake.nixosModules.oom-handling =
+  den.aspects.oom-handling.nixos =
     { ... }:
     {
       # Use compressed RAM as swap
