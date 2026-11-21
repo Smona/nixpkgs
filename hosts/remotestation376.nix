@@ -1,14 +1,10 @@
-{ inputs, self, den, ... }:
+{ inputs, den, ... }:
 {
   den.aspects."cobalt@remotestation376" = {
     # Inherited username on this machine, bring my home configs in
     includes = [ den.aspects.smona ];
 
     homeManager = { ... }: {
-      imports = [
-        self.homeModules.linux-pc
-      ];
-
       smona.desktop.compositor = "gnome";
       roles = {
         work = true;

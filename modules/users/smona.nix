@@ -1,5 +1,11 @@
 # My standard user configurations
-{ inputs, self, ... }:
+{
+  inputs,
+  den,
+  self,
+  lib,
+  ...
+}:
 let
   # Home Manager configuration shared between Linux & Darwin.
   # As much stuff as possible should go in here, but some things are
@@ -112,23 +118,35 @@ let
     };
 in
 {
+  # alternate usernames
+  den.aspects.mel.includes = [ den.aspects.smona ];
+  den.aspects.smona = { host, ... }: {
+    user = {
+      description = "Mel Bourgeois";
+    };
+
+    includes =
+      with den.aspects;
+      [
+        gaming
+        realtime-audio
+
+        # peripherals
+        keychron
+        lilnasx
+      ]
+      ++ (lib.lists.optional (lib.systems.elaborate host.system).isLinux den.aspects.linux-pc);
+  };
+
   # Linux-only home-manager configuration shared across personal computers.
-  flake.homeModules.linux-pc =
-    {
-      config,
-      pkgs,
-      ...
-    }:
-    {
+  den.aspects.linux-pc = {
+    homeManager = { config, pkgs, ... }: {
       imports = [
         common
         self.homeModules.linux-gui
         self.homeModules.pi # Currently unsupported on Darwin because bubblewrap doesn't work there, and our sandboxing mechanism requires it.
       ];
 
-      # Home Manager needs a bit of information about you and the
-      # paths it should manage.
-      home.homeDirectory = "/home/${config.home.username}";
       fonts.fontconfig.enable = true;
       targets.genericLinux.enable = true;
 
@@ -159,17 +177,8 @@ in
 
       # Automatically start/stop/restart services when their configuration changes
       systemd.user.startServices = "sd-switch";
-
-      # This value determines the Home Manager release that your
-      # configuration is compatible with. This helps avoid breakage
-      # when a new Home Manager release introduces backwards
-      # incompatible changes.
-      #
-      # You can update Home Manager without changing this value. See
-      # the Home Manager release notes for a list of state version
-      # changes in each release.
-      home.stateVersion = "22.05";
     };
+  };
 
   # Darwin-only home-manager configuration shared across personal computers.
   flake.homeModules.darwin-pc =

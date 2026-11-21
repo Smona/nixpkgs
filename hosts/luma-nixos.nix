@@ -37,8 +37,6 @@
       home-manager.users.smona =
         { pkgs, config, ... }:
         {
-          imports = [ self.homeModules.linux-pc ];
-
           dconf.enable = true;
 
           _1passwordBinary = "/mnt/c/Users/mason/AppData/Local/Microsoft/WindowsApps/wslg.exe -d NixOS -- ${pkgs._1password-gui}/bin/1password";

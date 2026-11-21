@@ -29,10 +29,6 @@
       home-manager.users.smona =
         { pkgs, ... }:
         {
-          imports = [
-            self.homeModules.linux-pc
-          ];
-
           home.packages = with pkgs; [
             squeekboard
             rot8

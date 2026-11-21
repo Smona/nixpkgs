@@ -8,7 +8,32 @@
 {
   imports = [ inputs.den.flakeModule ];
 
-  den.schema.user.classes = lib.mkDefault [ "homeManager" ];
+  # TODO: see if i can get this working
+  # An aspect that adds hmLinux, hmDarwin, hmAarch64, and hm64bit classes
+  # for configuring packages installed via home manager that only work
+  # on some platforms.
+  # see: https://den.denful.dev/guides/custom-class-examples/#platform-specific-hm-classes
+  # den.aspects.hmPlatforms =
+  #   { class, user }:
+  #   den.batteries.forward {
+  #     each = [
+  #       "Linux"
+  #       "Darwin"
+  #       "Aarch64"
+  #       "64bit"
+  #     ];
+  #     fromClass = platform: "hm${platform}";
+  #     fromAspect = _: user.aspect;
+  #     intoClass = _: "homeManager";
+  #     intoPath = _: [ ];
+  #     guard = { pkgs, ... }: platform: lib.mkIf pkgs.stdenv."is${platform}";
+  #     # adaptArgs = { config, ... }: { osConfig = config; };
+  #   };
+
+  den.schema.user = {
+    classes = lib.mkDefault [ "homeManager" ];
+  };
+
   # Allow my own user to configure nixos options across all hosts.
   den.schema.host.includes = [
     (den.batteries.user-aspects {
@@ -132,21 +157,4 @@
     homeManager.home.stateVersion = lib.mkDefault "22.05";
     darwin.system.stateVersion = lib.mkDefault 4;
   };
-
-  den.aspects.smona = {
-    includes = with den.aspects; [
-      gaming
-      realtime-audio
-
-      # peripherals
-      keychron
-      lilnasx
-    ];
-
-    user = {
-      description = "Mel Bourgeois";
-    };
-  };
-  # alternate usernames
-  den.aspects.mel.includes = [ den.aspects.smona ];
 }

@@ -30,10 +30,6 @@
       home-manager.users.mel =
         { pkgs, ... }:
         {
-          imports = [
-            self.homeModules.linux-pc
-          ];
-
           smona.wlroots.primaryMonitor = config.smona.primaryMonitor;
           roles = {
             music = true;
