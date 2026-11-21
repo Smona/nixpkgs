@@ -67,7 +67,6 @@
       ############################
 
       system.primaryUser = config.smona.username;
-      home-manager.users.${config.smona.username} = self.homeModules.darwin-pc;
 
       # Set default apps for media types
       system.activationScripts.setDefaultApps = {

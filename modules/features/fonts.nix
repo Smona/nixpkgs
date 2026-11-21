@@ -1,6 +1,6 @@
 # Fonts I like, in order of preference: MonoLisa, Cascadia Code, FiraCode, Dank Mono, JetBrains Mono
 # Fonts to try: FantasqueSansMono, Inconsolata, Victor Mono
-{ self, ... }:
+{ den, self, ... }:
 {
   perSystem =
     { pkgs, ... }:
@@ -29,9 +29,14 @@
       }) { };
     };
 
-  flake.homeModules.fonts =
-    { pkgs, ... }:
-    {
+  den.aspects.fonts = {
+    includes = [
+      (den.batteries.unfree [
+        "corefonts"
+        "vista-fonts"
+      ])
+    ];
+    homeManager = { pkgs, ... }: {
       home.packages =
         (with pkgs; [
           # required by Emacs for monospaced icons
@@ -50,4 +55,10 @@
           maple-mono-patched
         ]);
     };
+
+    hmLinux = { ... }: {
+      # Enable system to discover fonts installed by home-manager
+      fonts.fontconfig.enable = true;
+    };
+  };
 }

@@ -21,7 +21,6 @@ let
       imports = [
         inputs.catppuccin.homeModules.catppuccin
         self.homeModules.desktop
-        self.homeModules.fonts
         self.homeModules.git
         self.homeModules.tmux
         self.homeModules.vim
@@ -120,34 +119,30 @@ in
 {
   # alternate usernames
   den.aspects.mel.includes = [ den.aspects.smona ];
-  den.aspects.smona = { host, ... }: {
+  den.aspects.smona = {
     user = {
       description = "Mel Bourgeois";
     };
 
-    includes =
-      with den.aspects;
-      [
-        gaming
-        realtime-audio
+    includes = with den.aspects; [
+      gaming
+      realtime-audio
 
-        # peripherals
-        keychron
-        lilnasx
-      ]
-      ++ (lib.lists.optional (lib.systems.elaborate host.system).isLinux den.aspects.linux-pc);
-  };
+      fonts
 
-  # Linux-only home-manager configuration shared across personal computers.
-  den.aspects.linux-pc = {
-    homeManager = { config, pkgs, ... }: {
+      # peripherals
+      keychron
+      lilnasx
+    ];
+
+    # Linux-only home-manager configuration shared across personal computers.
+    hmLinux = { config, pkgs, ... }: {
       imports = [
         common
         self.homeModules.linux-gui
         self.homeModules.pi # Currently unsupported on Darwin because bubblewrap doesn't work there, and our sandboxing mechanism requires it.
       ];
 
-      fonts.fontconfig.enable = true;
       targets.genericLinux.enable = true;
 
       home.packages = with pkgs; [
@@ -178,35 +173,35 @@ in
       # Automatically start/stop/restart services when their configuration changes
       systemd.user.startServices = "sd-switch";
     };
-  };
 
-  # Darwin-only home-manager configuration shared across personal computers.
-  flake.homeModules.darwin-pc =
-    { pkgs, ... }:
-    {
-      imports = [
-        common
-        self.homeModules.darwin-gui
-      ];
+    # Darwin-only home-manager configuration shared across personal computers.
+    hmDarwin =
+      { pkgs, ... }:
+      {
+        imports = [
+          common
+          self.homeModules.darwin-gui
+        ];
 
-      graphical = true;
-      roles = {
-        work = true;
+        graphical = true;
+        roles = {
+          work = true;
+        };
+
+        home.packages = with pkgs; [
+          colima
+          vlc-bin
+        ];
+
+        # Set up the 1password SSH agent
+        programs.ssh.extraConfig = ''
+          IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+        '';
+
+        # You should not change this value, even if you update Home Manager. If you do
+        # want to update the value, then make sure to first check the Home Manager
+        # release notes.
+        home.stateVersion = "24.05"; # Please read the comment before changing.
       };
-
-      home.packages = with pkgs; [
-        colima
-        vlc-bin
-      ];
-
-      # Set up the 1password SSH agent
-      programs.ssh.extraConfig = ''
-        IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-      '';
-
-      # You should not change this value, even if you update Home Manager. If you do
-      # want to update the value, then make sure to first check the Home Manager
-      # release notes.
-      home.stateVersion = "24.05"; # Please read the comment before changing.
-    };
+  };
 }

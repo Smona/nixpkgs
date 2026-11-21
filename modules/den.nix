@@ -8,28 +8,6 @@
 {
   imports = [ inputs.den.flakeModule ];
 
-  # TODO: see if i can get this working
-  # An aspect that adds hmLinux, hmDarwin, hmAarch64, and hm64bit classes
-  # for configuring packages installed via home manager that only work
-  # on some platforms.
-  # see: https://den.denful.dev/guides/custom-class-examples/#platform-specific-hm-classes
-  # den.aspects.hmPlatforms =
-  #   { class, user }:
-  #   den.batteries.forward {
-  #     each = [
-  #       "Linux"
-  #       "Darwin"
-  #       "Aarch64"
-  #       "64bit"
-  #     ];
-  #     fromClass = platform: "hm${platform}";
-  #     fromAspect = _: user.aspect;
-  #     intoClass = _: "homeManager";
-  #     intoPath = _: [ ];
-  #     guard = { pkgs, ... }: platform: lib.mkIf pkgs.stdenv."is${platform}";
-  #     # adaptArgs = { config, ... }: { osConfig = config; };
-  #   };
-
   den.schema.user = {
     classes = lib.mkDefault [ "homeManager" ];
   };
@@ -57,10 +35,6 @@
       "xone-dongle-firmware"
       "facetimehd-calibration"
       "facetimehd-firmware"
-    ])
-    (den.batteries.unfree [
-      "corefonts"
-      "vista-fonts"
     ])
   ];
 
