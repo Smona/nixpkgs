@@ -1,6 +1,6 @@
 { ... }:
 {
-  flake.homeModules.tmux =
+  den.aspects.tmux.homeManager =
     { pkgs, ... }:
     {
       home.shellAliases = {

@@ -1,18 +1,15 @@
 # Desktop environment / compositor selection.
-{ den, self, ... }:
+{ den, ... }:
 {
   den.aspects.desktop.includes = [
     den.aspects.noctalia
     den.aspects.custom-shell
+    den.aspects.wlroots
   ];
 
   den.aspects.desktop.nixos =
     { config, lib, ... }:
     {
-      imports = [
-        self.nixosModules.wlroots-system
-      ];
-
       # This uses an enum since having multiple enabled at once can cause
       # issues (e.g. running multiple xdg-desktop portals or PAM agents).
       options.smona.desktop.compositor = lib.mkOption {

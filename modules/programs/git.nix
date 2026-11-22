@@ -1,13 +1,18 @@
 # My personal git config
 { ... }:
 {
-  flake.homeModules.git =
+  den.aspects.git.homeManager =
     {
       config,
       lib,
+      pkgs,
       ...
     }:
     {
+      home.packages = with pkgs; [
+        git-filter-repo
+      ];
+
       programs.git = {
         enable = true;
         signing = {

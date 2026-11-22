@@ -1,7 +1,7 @@
 # My personal vim config
 { ... }:
 {
-  flake.homeModules.vim =
+  den.aspects.vim.homeManager =
     { pkgs, ... }:
     {
       programs.vim = {

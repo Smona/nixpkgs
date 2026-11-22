@@ -3,7 +3,6 @@
   inputs,
   den,
   self,
-  lib,
   ...
 }:
 {
@@ -20,6 +19,12 @@
       desktop
 
       fonts
+
+      # shell config
+      shells
+      git
+      vim
+      tmux
 
       # apps
       vicinae
@@ -43,10 +48,6 @@
       {
         imports = [
           inputs.catppuccin.homeModules.catppuccin
-          self.homeModules.git
-          self.homeModules.tmux
-          self.homeModules.vim
-          self.homeModules.shells
           self.homeModules.emacs
         ];
 

@@ -1,8 +1,8 @@
-# System-level settings for wlroots compositors (Hyprland, Niri, Sway)
+# Shared system-level settings for wlroots compositors (Hyprland, Niri, Sway)
 { ... }:
 
 {
-  flake.nixosModules.wlroots-system =
+  den.aspects.wlroots.nixos =
     {
       config,
       lib,

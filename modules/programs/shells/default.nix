@@ -1,6 +1,6 @@
 { ... }:
 {
-  flake.homeModules.shells =
+  den.aspects.shells.homeManager =
     {
       pkgs,
       config,
@@ -29,8 +29,6 @@
         whois
 
         # Universal dev tools
-        git
-        git-filter-repo
         docker
         docker-compose
         kubectl
