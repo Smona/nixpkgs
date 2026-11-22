@@ -27,6 +27,7 @@
       # peripherals
       keychron
       lilnasx
+      embedded-dev
     ];
 
     # Home Manager configuration shared between Linux & Darwin.

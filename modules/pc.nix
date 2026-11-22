@@ -76,7 +76,6 @@
       imports = [
         inputs.catppuccin.nixosModules.catppuccin
         self.nixosModules.printing
-        self.nixosModules.embedded-dev
       ];
 
       options.smona = with lib; {

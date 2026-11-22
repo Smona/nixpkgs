@@ -2,11 +2,13 @@
 { ... }:
 
 {
-  flake.nixosModules.embedded-dev = { config, ... }: {
+  den.aspects.embedded-dev.nixos = { user, config, ... }: {
     # Set up sudoless access to MCUs
-    users.groups =  { plugdev = {}; };
+    users.groups = {
+      plugdev = { };
+    };
     services.udev.extraRules = builtins.readFile ./69-probe-rs.rules;
-    users.users.${config.smona.username}.extraGroups = [
+    users.users.${user.userName}.extraGroups = [
       "plugdev"
     ];
   };
