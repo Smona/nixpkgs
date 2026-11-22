@@ -4,6 +4,7 @@
     includes = [
       den.aspects.thunderbird
       den.aspects.kitty
+      den.aspects.art
     ];
 
     # Configs shared between graphical linux installs and darwin
