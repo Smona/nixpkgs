@@ -1,5 +1,5 @@
 # Host configurations shared across all personal computers
-{ inputs, self, ... }:
+{ inputs, ... }:
 {
   # Configuration that can be shared between nix-darwin & NixOS.
   den.aspects.smona.os =
@@ -38,7 +38,10 @@
             ];
 
             # Enable using flakes
-            experimental-features = ["nix-command" "flakes"];
+            experimental-features = [
+              "nix-command"
+              "flakes"
+            ];
           };
         };
 
@@ -73,10 +76,7 @@
       ...
     }:
     {
-      imports = [
-        inputs.catppuccin.nixosModules.catppuccin
-        self.nixosModules.printing
-      ];
+      imports = [ inputs.catppuccin.nixosModules.catppuccin ];
 
       options.smona = with lib; {
         primaryMonitor = mkOption {
@@ -133,7 +133,7 @@
           settings.Scan.DisableRoamingScan = true;
 
           settings.General = {
-            EnableNetworkConfiguration=true;
+            EnableNetworkConfiguration = true;
             # Another option: roam less aggressively
             # RoamThreshold=-74;
             # RoamThreshold5G=-79;

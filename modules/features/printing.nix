@@ -1,7 +1,7 @@
-# Enable CUPS to print documents.
+# Enable CUPS to print documents on printers I use.
 { ... }:
 {
-  flake.nixosModules.printing =
+  den.aspects.printing.nixos =
     { pkgs, ... }:
     {
       services.printing = {

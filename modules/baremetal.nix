@@ -7,6 +7,7 @@
     includes = [
       den.aspects.boot
       den.aspects.oom-handling
+      den.aspects.printing # Don't need to print from WSL
     ];
 
     nixos = { ... }: {
