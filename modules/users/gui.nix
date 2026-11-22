@@ -1,7 +1,10 @@
-{ ... }:
+{ den, ... }:
 {
   den.aspects.gui = {
-    includes = [ den.aspects.thunderbird ];
+    includes = [
+      den.aspects.thunderbird
+      den.aspects.kitty
+    ];
 
     # Configs shared between graphical linux installs and darwin
     homeManager =
@@ -19,7 +22,6 @@
       {
         imports = [
           ../../applications/firefox.nix
-          ../../applications/terminal.nix
         ];
 
         options = with lib; {
