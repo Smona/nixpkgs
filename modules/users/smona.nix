@@ -36,6 +36,7 @@
 
       # peripherals
       keychron
+      zsa
       lilnasx
       embedded-dev
     ];

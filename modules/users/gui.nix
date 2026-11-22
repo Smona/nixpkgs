@@ -5,6 +5,8 @@
       den.aspects.thunderbird
       den.aspects.kitty
       den.aspects.art
+      (den.batteries.unfree [ "slack" ])
+      (den.batteries.unfree [ "obsidian" ])
     ];
 
     # Configs shared between graphical linux installs and darwin

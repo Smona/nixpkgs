@@ -18,10 +18,9 @@
       users.users.smona.uid = 1000;
 
       home-manager.users.smona =
-        { pkgs, config, ... }:
+        { pkgs, ... }:
         {
           dconf.enable = true;
-
           _1passwordBinary = "/mnt/c/Users/mason/AppData/Local/Microsoft/WindowsApps/wslg.exe -d NixOS -- ${pkgs._1password-gui}/bin/1password";
         };
 

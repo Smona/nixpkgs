@@ -180,7 +180,6 @@
           "middleclick"
           "keybase"
           "steam"
-          "keymapp" # ZSA companion UI, e.g. for flashing
           "proxy-audio-device" # enable using system volume controls w/ external audio interfaces
           "raycast"
           "dozer"

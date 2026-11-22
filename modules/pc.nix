@@ -174,13 +174,9 @@
         # Packages installed in the system profile
         environment.systemPackages = with pkgs; [
           nautilus
-          keymapp
         ];
         # Enable file previews for nautilus with spacebar.
         services.gnome.sushi.enable = true;
-
-        # Enable flashing ZSA keyboards.
-        hardware.keyboard.zsa.enable = true;
 
         # Firmware
         services.fwupd.enable = true; # Firmware update manager

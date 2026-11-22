@@ -1,5 +1,9 @@
 { ... }:
 {
+  den.aspects.shells.includes = [
+    (den.batteries.unfree [ "pridecat" ])
+  ];
+
   den.aspects.shells.homeManager =
     {
       pkgs,
