@@ -1,10 +1,13 @@
 # Desktop environment / compositor selection.
+#
+# TODO: refactor to use den host schema + conditional imports.
 { den, ... }:
 {
-  den.aspects.desktop.includes = [
-    den.aspects.noctalia
-    den.aspects.custom-shell
-    den.aspects.wlroots
+  den.aspects.desktop.includes = with den.aspects; [
+    noctalia
+    gnome
+    custom-shell
+    wlroots
   ];
 
   den.aspects.desktop.nixos =
@@ -54,7 +57,6 @@
     { lib, ... }:
     {
       imports = [
-        ../../desktops/gnome
         ../../desktops/wlroots
       ];
 
