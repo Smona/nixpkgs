@@ -1,11 +1,12 @@
 { den, ... }:
 {
   den.aspects.gui = {
-    includes = [
-      den.aspects.thunderbird
-      den.aspects.kitty
-      den.aspects.art
-      den.aspects.music-production
+    includes = with den.aspects; [
+      thunderbird
+      firefox
+      kitty
+      art
+      music-production
       (den.batteries.unfree [ "slack" ])
       (den.batteries.unfree [ "obsidian" ])
     ];
@@ -24,10 +25,6 @@
         my-slack = (config.lib.nixGL.wrap pkgs.slack);
       in
       {
-        imports = [
-          ../../applications/firefox.nix
-        ];
-
         options = with lib; {
           graphical = mkEnableOption "installing and configuring graphical applications";
 
