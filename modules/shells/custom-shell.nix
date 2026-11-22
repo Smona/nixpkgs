@@ -2,7 +2,7 @@
 
 { ... }:
 {
-  flake.homeModules.custom-shell =
+  den.aspects.custom-shell.hmLinux =
     {
       config,
       lib,
@@ -111,7 +111,7 @@
       };
     };
 
-  flake.nixosModules.custom-shell =
+  den.aspects.custom-shell.nixos =
     { config, lib, ... }:
     {
       config = lib.mkIf (config.smona.desktop.shell == "custom") {

@@ -1,14 +1,16 @@
 # Desktop environment / compositor selection.
 { den, self, ... }:
 {
-  den.aspects.desktop.includes = [ den.aspects.noctalia ];
+  den.aspects.desktop.includes = [
+    den.aspects.noctalia
+    den.aspects.custom-shell
+  ];
 
   den.aspects.desktop.nixos =
     { config, lib, ... }:
     {
       imports = [
         self.nixosModules.wlroots-system
-        self.nixosModules.custom-shell
       ];
 
       # This uses an enum since having multiple enabled at once can cause
@@ -57,7 +59,6 @@
       imports = [
         ../../desktops/gnome
         ../../desktops/wlroots
-        self.homeModules.custom-shell
       ];
 
       options.smona.desktop.compositor = lib.mkOption {
