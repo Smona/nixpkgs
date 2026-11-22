@@ -124,11 +124,7 @@
 
   den.default = {
     includes = [
-      # TODO: finish removing duplicated definitions already defined by this battery once
-      # all hosts are migrated.
       den.batteries.define-user
-      # TODO: finish removing duplicated definitions already defined by this battery once
-      # all hosts are migrated.
       den.batteries.hostname
     ];
 
