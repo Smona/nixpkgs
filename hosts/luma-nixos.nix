@@ -11,8 +11,6 @@
       ...
     }:
     {
-      wsl.defaultUser = "smona";
-
       # TODO: remove option once using user argument everywhere
       smona.username = "smona";
 
@@ -21,10 +19,9 @@
         polkitPolicyOwners = [ "smona" ];
       };
 
-      users.users.smona = {
-        extraGroups = [ "wheel" ];
-        uid = 1000;
-      };
+      # Not sure why this is here
+      users.users.smona.uid = 1000;
+
       home-manager.users.smona =
         { pkgs, config, ... }:
         {

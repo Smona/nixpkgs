@@ -14,6 +14,8 @@
     };
 
     includes = with den.aspects; [
+      den.batteries.primary-user
+
       gaming
       realtime-audio
       desktop

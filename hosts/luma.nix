@@ -1,5 +1,5 @@
 # Baremetal installation
-{ self, den, ... }:
+{ den, ... }:
 {
   den.aspects.luma.includes = [
     # Include the results of the hardware scan.

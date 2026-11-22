@@ -63,8 +63,6 @@
       # Below: stuff added by me #
       ############################
 
-      system.primaryUser = config.smona.username;
-
       # Set default apps for media types
       system.activationScripts.setDefaultApps = {
         text = ''
