@@ -37,7 +37,7 @@ in
       ];
     };
 
-  flake.nixosModules.nvidia =
+  den.aspects.nvidia.nixos =
     { config, ... }:
     {
       imports = [ common ];
