@@ -1,11 +1,68 @@
+{ ... }:
 {
-  self,
-  ...
-}:
+  den.aspects.gui = {
+    # Configs shared between graphical linux installs and darwin
+    homeManager =
 
-{
+      {
+        config,
+        lib,
+        pkgs,
+        ...
+      }:
+
+      let
+        my-slack = (config.lib.nixGL.wrap pkgs.slack);
+      in
+      {
+        imports = [
+          ../../applications/firefox.nix
+          ../../applications/terminal.nix
+          ../../applications/thunderbird
+        ];
+
+        options = with lib; {
+          graphical = mkEnableOption "installing and configuring graphical applications";
+
+          # High-level toggles for different tasks i want to do on each computer.
+          # They're all defined here for ease of discoverability
+          roles = {
+            art = mkEnableOption "set up computer for visual art creation";
+            work = mkEnableOption "set up computer for work";
+            music = mkEnableOption "set up computer for music production";
+          };
+        };
+
+        config = lib.mkIf config.graphical {
+          programs.kitty.enable = true;
+          programs.firefox.enable = true;
+          # programs.alacritty.enable = true;
+
+          home.packages = with pkgs; [
+            # Messaging apps
+            vesktop
+            my-slack
+
+            # Media apps
+            music-assistant-desktop
+          ];
+
+          # I like to have slack installed everywhere, but only auto-start it on work machines
+          systemd.user.services.slack = lib.mkIf config.roles.work {
+            Unit.Description = "Slack desktop application";
+            Install.WantedBy = [ "graphical-session.target" ];
+            Service = {
+              ExecStart = "${my-slack}/bin/slack";
+              Restart = "on-failure";
+              RestartSec = 2;
+            };
+          };
+        };
+      };
+  };
+
   # Baseline configs specific to graphical linux systems
-  flake.homeModules.linux-gui =
+  den.aspects.gui.hmLinux =
     {
       config,
       lib,
@@ -18,7 +75,6 @@
     in
     {
       imports = [
-        ../../applications/common_gui.nix
         ../../applications/art.nix
         ../../applications/music.nix
       ];
@@ -197,17 +253,5 @@
             };
         };
       };
-    };
-
-  # Baseline configs specific to graphical darwin systems
-  flake.homeModules.darwin-gui =
-    {
-      config,
-      lib,
-      pkgs,
-      ...
-    }:
-    {
-      imports = [ ../../applications/common_gui.nix ];
     };
 }

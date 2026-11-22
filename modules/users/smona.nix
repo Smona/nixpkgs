@@ -19,6 +19,7 @@
       gaming
       realtime-audio
       desktop
+      gui
 
       fonts
 
@@ -139,10 +140,6 @@
 
     # Linux-only home-manager configuration shared across personal computers.
     hmLinux = { config, pkgs, ... }: {
-      imports = [
-        self.homeModules.linux-gui
-      ];
-
       targets.genericLinux.enable = true;
 
       home.packages = with pkgs; [
@@ -178,10 +175,6 @@
     hmDarwin =
       { pkgs, ... }:
       {
-        imports = [
-          self.homeModules.darwin-gui
-        ];
-
         graphical = true;
         roles = {
           work = true;
