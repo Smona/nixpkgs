@@ -145,7 +145,6 @@
           "homebrew/homebrew-core" = inputs.homebrew-core;
           "homebrew/homebrew-cask" = inputs.homebrew-cask;
           "homebrew/homebrew-bundle" = inputs.homebrew-bundle;
-          "d12frosted/homebrew-emacs-plus" = inputs.homebrew-emacs-plus;
         };
 
         # Optional: Enable fully-declarative tap management
@@ -174,26 +173,6 @@
 
         # Stop being annoyed by Apple "protecting" me
         caskArgs.no_quarantine = true;
-
-        brews = [
-          "gcc" # Implicit dependency of emacs-plus --with-native-comp
-          {
-            # TODO: emacs has to be manually aliased to /Applications for now:
-            # osascript -e 'tell application "Finder" to make alias file to posix file "/opt/homebrew/opt/emacs-plus@29/Emacs.app" at POSIX file "/Applications"'
-            name = "emacs-plus@31";
-            args = [
-              "with-xwidgets"
-              "with-imagemagick"
-              "with-native-comp"
-              "with-poll"
-              "with-modern-doom3-icon"
-            ];
-          }
-          # Emacs dependencies that aren't getting referenced by emacs-plus
-          "gnupg"
-          "cmake" # Needed to compile vterm
-          "libtool" # Needed to compile vterm
-        ];
 
         casks = [
           "caffeine"

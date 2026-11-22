@@ -28,6 +28,7 @@
 
       # apps
       vicinae
+      emacs
 
       # peripherals
       keychron
@@ -46,10 +47,7 @@
         ...
       }:
       {
-        imports = [
-          inputs.catppuccin.homeModules.catppuccin
-          self.homeModules.emacs
-        ];
+        imports = [ inputs.catppuccin.homeModules.catppuccin ];
 
         options = with lib; {
           pkgsCompat = mkOption {

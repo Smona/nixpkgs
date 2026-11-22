@@ -1,10 +1,9 @@
-{ self, ... }:
+{ self, inputs, ... }:
 {
-  flake.homeModules.emacs =
+  den.aspects.emacs.homeManager =
     {
       config,
       pkgs,
-      inputs,
       ...
     }:
     {
@@ -17,17 +16,6 @@
             command = [ "~/.emacs.d/bin/org-capture" ];
           }
         ];
-      };
-
-      programs.emacs = {
-        enable = pkgs.stdenv.hostPlatform.isLinux;
-        package = config.lib.nixGL.wrap (
-          # TODO: replace with programs.emacs.extraPackages?
-          (pkgs.emacsPackagesFor pkgs.emacs-pgtk).emacsWithPackages (epkgs: [
-            epkgs.vterm
-            epkgs.pdf-tools
-          ])
-        );
       };
 
       xdg = {
@@ -108,4 +96,45 @@
           self.packages.${pkgs.stdenv.hostPlatform.system}.likec4
         );
     };
+
+  # Emacs is installed from nixpkgs on Linux.
+  den.aspects.emacs.hmLinux = { pkgs, ... }: {
+    programs.emacs = {
+      enable = true;
+      # TODO: this used to be wrapped with nixgl, next time i use a non-nixos
+      # linux i should try using the new method to provide libGL to it.
+      package = pkgs.emacs-pgtk;
+      extraPackages = epkgs: [
+        epkgs.vterm
+        epkgs.pdf-tools
+      ];
+    };
+  };
+
+  # Emacs is installed from homebrew on Darwin.
+  den.aspects.emacs.darwin = { ... }: {
+    nix-homebrew.taps = {
+      "d12frosted/homebrew-emacs-plus" = inputs.homebrew-emacs-plus;
+    };
+
+    homebrew.brews = [
+      "gcc" # Implicit dependency of emacs-plus --with-native-comp
+      {
+        # TODO: emacs has to be manually aliased to /Applications for now:
+        # osascript -e 'tell application "Finder" to make alias file to posix file "/opt/homebrew/opt/emacs-plus@29/Emacs.app" at POSIX file "/Applications"'
+        name = "emacs-plus@31";
+        args = [
+          "with-xwidgets"
+          "with-imagemagick"
+          "with-native-comp"
+          "with-poll"
+          "with-modern-doom3-icon"
+        ];
+      }
+      # Emacs dependencies that aren't getting referenced by emacs-plus
+      "gnupg"
+      "cmake" # Needed to compile vterm
+      "libtool" # Needed to compile vterm
+    ];
+  };
 }
