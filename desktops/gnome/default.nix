@@ -9,9 +9,10 @@ let
   commonOptions = import ../common.nix;
   theme = import ../../theme.nix { inherit pkgs; };
   extensions = with config.pkgsCompat.gnomeExtensions; [
+    # TODO: replace commented out, removed extensions next time i use gnome
     # Gnome goodness
     always-indicator
-    sound-output-device-chooser
+    # sound-output-device-chooser
     autohide-battery
     blur-my-shell
     burn-my-windows
@@ -21,13 +22,13 @@ let
     # coverflow-alt-tab
     dash-to-dock
     desktop-icons-ng-ding
-    espresso # Requires gnome 40 (Ubuntu >= jammy jellyfish)
-    gesture-improvements
+    # espresso # Requires gnome 40 (Ubuntu >= jammy jellyfish)
+    # gesture-improvements
     hide-keyboard-layout
     middle-click-to-close-in-overview
-    mouse-follows-focus
-    noannoyance-fork
-    openweather
+    # mouse-follows-focus
+    # noannoyance-fork
+    # openweather
     pip-on-top # Fix firefox PIP pinning on wayland
     # TODO: find a replacement
     # remove-alttab-delay-v2
@@ -36,7 +37,7 @@ let
     unite
     user-themes
     windownavigator
-    quake-mode
+    # quake-mode
   ];
 in
 {
