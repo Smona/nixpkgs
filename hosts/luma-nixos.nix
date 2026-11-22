@@ -14,11 +14,6 @@
       # TODO: remove option once using user argument everywhere
       smona.username = "smona";
 
-      programs._1password-gui = {
-        enable = true;
-        polkitPolicyOwners = [ "smona" ];
-      };
-
       # Not sure why this is here
       users.users.smona.uid = 1000;
 
@@ -28,9 +23,6 @@
           dconf.enable = true;
 
           _1passwordBinary = "/mnt/c/Users/mason/AppData/Local/Microsoft/WindowsApps/wslg.exe -d NixOS -- ${pkgs._1password-gui}/bin/1password";
-
-          # Let Home Manager install and manage itself.
-          programs.home-manager.enable = true;
         };
 
       # This value determines the NixOS release from which the default
