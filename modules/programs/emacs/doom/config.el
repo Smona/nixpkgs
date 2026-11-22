@@ -328,9 +328,7 @@
 (setq lsp-rust-analyzer-cargo-watch-command "clippy")
 
 ;; Nix support
-(after! nix-mode
-  (add-hook! 'nix-mode-hook 'nix-format-on-save-mode)
-  (add-hook! 'nix-ts-mode-hook 'nix-format-on-save-mode))
+(add-hook! 'nix-ts-mode-hook 'nix-format-on-save-mode)
 
 ;; Terraform support
 (after! terraform-mode
