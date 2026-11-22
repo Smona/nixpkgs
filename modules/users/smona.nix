@@ -17,7 +17,6 @@
       den.batteries.primary-user
 
       gaming
-      realtime-audio
       desktop
       gui
 

@@ -5,6 +5,7 @@
       den.aspects.thunderbird
       den.aspects.kitty
       den.aspects.art
+      den.aspects.music-production
       (den.batteries.unfree [ "slack" ])
       (den.batteries.unfree [ "obsidian" ])
     ];
@@ -80,11 +81,6 @@
       theme = import ../../theme.nix { inherit pkgs; };
     in
     {
-      imports = [
-        ../../applications/art.nix
-        ../../applications/music.nix
-      ];
-
       options._1passwordBinary = lib.mkOption {
         type = lib.types.str;
         default = "/usr/bin/env 1password";
