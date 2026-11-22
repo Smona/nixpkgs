@@ -18,7 +18,9 @@
   # };
 
   # TODO: add keybind for vterm-send-escape in vterm buffers
-  flake.homeModules.pi =
+  # TODO: Currently unsupported on Darwin because bubblewrap doesn't
+  # work there, and our sandboxing mechanism requires it.
+  den.aspects.pi.hmLinux =
     { pkgs, config, ... }:
     let
       # TODO: install extensions declaratively

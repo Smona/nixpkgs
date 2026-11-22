@@ -27,6 +27,7 @@
       git
       vim
       tmux
+      pi
 
       # apps
       vicinae
@@ -140,7 +141,6 @@
     hmLinux = { config, pkgs, ... }: {
       imports = [
         self.homeModules.linux-gui
-        self.homeModules.pi # Currently unsupported on Darwin because bubblewrap doesn't work there, and our sandboxing mechanism requires it.
       ];
 
       targets.genericLinux.enable = true;
