@@ -1,5 +1,7 @@
 { inputs, ... }:
 {
+  den.hosts.aarch64-darwin.Mels-Macbook-Air.users.mel = { }; 
+
   den.aspects.Mels-Macbook-Air.darwin =
     {
       pkgs,

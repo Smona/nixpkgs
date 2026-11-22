@@ -39,8 +39,8 @@
     # nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
 
     # Darwin stuff:
-    nix-darwin.url = "github:LnL7/nix-darwin";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    darwin.url = "github:LnL7/nix-darwin";
+    darwin.inputs.nixpkgs.follows = "nixpkgs";
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
     # Optional: Declarative tap management
     homebrew-core = {
@@ -78,7 +78,7 @@
         # Support specifying homeConfigurations & homeModules in flake modules.
         home-manager.flakeModules.home-manager
         # Support specifying darwinConfigurations & darwinModules in flake modules.
-        inputs.nix-darwin.flakeModules.default
+        inputs.darwin.flakeModules.default
         (import-tree ./hosts)
         (import-tree ./modules)
         (import-tree ./packages)
