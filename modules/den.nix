@@ -34,52 +34,6 @@
     ])
   ];
 
-  den.hosts.x86_64-linux.luma = {
-    users.mel = { };
-
-    # temporary workaround until i finish migrating non-flake-parts modules
-    instantiate =
-      args:
-      inputs.nixpkgs.lib.nixosSystem (
-        args
-        // {
-          specialArgs = (args.specialArgs or { }) // {
-            inherit inputs;
-          };
-        }
-      );
-  };
-  den.hosts.x86_64-linux.xps-nixos = {
-    users.smona = { };
-
-    # temporary workaround until i finish migrating non-flake-parts modules
-    instantiate =
-      args:
-      inputs.nixpkgs.lib.nixosSystem (
-        args
-        // {
-          specialArgs = (args.specialArgs or { }) // {
-            inherit inputs;
-          };
-        }
-      );
-  };
-  den.hosts.x86_64-linux.luma-nixos = {
-    users.smona = { };
-    wsl.enable = true;
-
-    # temporary workaround until i finish migrating non-flake-parts modules
-    instantiate =
-      args:
-      inputs.nixpkgs.lib.nixosSystem (
-        args
-        // {
-          specialArgs = (args.specialArgs or { }) // {
-            inherit inputs;
-          };
-        }
-      );
-  };
   den.homes.x86_64-linux."cobalt@remotestation376" = {
     # temporary workaround until i finish migrating non-flake-parts modules
     instantiate =

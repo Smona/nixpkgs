@@ -1,6 +1,10 @@
 # Baremetal installation
 { den, ... }:
 {
+  den.hosts.x86_64-linux.luma = {
+    users.mel = { };
+  };
+
   den.aspects.luma.includes = [
     # Include the results of the hardware scan.
     den.aspects.luma.hardware

@@ -5,6 +5,10 @@
   ...
 }:
 {
+  den.hosts.x86_64-linux.xps-nixos = {
+    users.smona = { };
+  };
+
   den.aspects.xps-nixos.includes = [
     # Include the results of the hardware scan.
     den.aspects.xps-nixos.hardware

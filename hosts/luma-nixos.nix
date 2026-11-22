@@ -3,6 +3,11 @@
 # This was my first NixOS machine!
 { ... }:
 {
+  den.hosts.x86_64-linux.luma-nixos = {
+    users.smona = { };
+    wsl.enable = true;
+  };
+
   den.aspects.luma-nixos.nixos =
     {
       config,
