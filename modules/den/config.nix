@@ -78,12 +78,10 @@ in
       { host, config, ... }:
       (
         {
-          config = {
-            # Linux needs a compositor, darwin is always graphical.
-            config.isGraphical = lib.mkDefault (
-              if (lib.systems.elaborate host.system).isLinux then host.desktop.compositor != "none" else true
-            );
-          };
+          # Linux needs a compositor, darwin is always graphical.
+          config.isGraphical = lib.mkDefault (
+            if (lib.systems.elaborate host.system).isLinux then host.desktop.compositor != "none" else true
+          );
         }
         // systemOptions
       );
