@@ -5,17 +5,17 @@
     users.mel = { };
   };
 
-  den.aspects.luma.includes = [
+  den.aspects.luma.includes = with den.aspects; [
     # Include the results of the hardware scan.
-    den.aspects.luma.hardware
+    luma.hardware
 
-    den.aspects.amdgpu
-    den.aspects.amdcpu
-    den.aspects.baremetal
-    den.aspects.dualboot
+    amdgpu
+    amdcpu
+    baremetal
+    dualboot
 
     # Services
-    den.aspects.llm-server
+    llm-server
   ];
 
   den.aspects.luma.nixos =

@@ -56,10 +56,6 @@
   den.aspects.desktop.hmLinux =
     { lib, ... }:
     {
-      imports = [
-        ../../desktops/wlroots
-      ];
-
       options.smona.desktop.compositor = lib.mkOption {
         description = "Which desktop environment / compositor this user is running.";
         type = lib.types.enum [

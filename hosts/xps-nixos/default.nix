@@ -36,7 +36,7 @@
           home.packages = with pkgs; [
             squeekboard
             rot8
-            (import ../../desktops/wlroots/tablet_mode_switch { inherit pkgs; })
+            self.packages.${pkgs.stdenv.hostPlatform.system}.tablet_mode_switch
           ];
           smona.wlroots = {
             primaryMonitor = config.smona.primaryMonitor;

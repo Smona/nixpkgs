@@ -9,8 +9,8 @@
 }:
 
 let
-  commonOptions = (import ../common.nix);
-  cmd = import ./system-commands { inherit pkgs inputs; };
+  commonOptions = (import ../_common.nix);
+  cmd = import ./_system-commands { inherit pkgs inputs; };
   cfg = config.smona.wlroots;
   # Media should stay playing when the screen locks, otherwise the idle timeout
   # can pause remotely playing media controlled from this device.

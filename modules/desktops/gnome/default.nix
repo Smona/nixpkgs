@@ -8,7 +8,7 @@
     }:
 
     let
-      commonOptions = import ../../../desktops/common.nix;
+      commonOptions = import ../_common.nix;
       theme = import ../../../theme.nix { inherit pkgs; };
       extensions = with config.pkgsCompat.gnomeExtensions; [
         # TODO: replace commented out, removed extensions next time i use gnome
