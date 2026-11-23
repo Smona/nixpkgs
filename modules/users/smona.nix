@@ -328,7 +328,6 @@
               "input"
               "docker"
             ];
-            packages = with pkgs; [ firefox ];
           };
 
           # Some programs need SUID wrappers, can be configured further or are
