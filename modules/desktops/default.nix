@@ -11,7 +11,7 @@
         ]
         ++ (lib.lists.optional (host.desktop.shell == "noctalia") noctalia)
         ++ (lib.lists.optional (host.desktop.shell == "custom") custom-shell)
-        ++ (lib.lists.optional (host.desktop.shell == "gnome") gnome)
+        ++ (lib.lists.optional (host.desktop.compositor == "gnome") gnome)
       );
 
     nixos =

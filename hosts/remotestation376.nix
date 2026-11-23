@@ -2,10 +2,7 @@
 {
   den.homes.x86_64-linux."cobalt@remotestation376" = { };
   den.hosts.x86_64-linux.remotestation376 = {
-    desktop = {
-      compositor = "gnome";
-      shell = "gnome";
-    };
+    desktop.compositor = "gnome";
   };
 
   den.aspects."cobalt@remotestation376" = {

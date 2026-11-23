@@ -25,7 +25,6 @@ let
         "none"
         "custom"
         "noctalia"
-        "gnome"
       ];
       default = "none";
     };
