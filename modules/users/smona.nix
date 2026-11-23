@@ -69,13 +69,6 @@
         config = {
           home.language.base = "en_US.UTF-8";
 
-          home.packages = with pkgs; [
-            ## NodeJS
-            nodejs
-            yarn
-            prettier
-          ];
-
           # Set vim as default editor for quick stuff
           home.sessionVariables =
             let
