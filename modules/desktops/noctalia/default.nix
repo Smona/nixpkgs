@@ -2,13 +2,7 @@
 { ... }:
 {
   den.aspects.noctalia.hmLinux =
-    {
-      host,
-      config,
-      lib,
-      pkgs,
-      ...
-    }:
+    { pkgs, ... }:
     let
       systembus-notify =
         (import ./_systembus-notify.nix { inherit pkgs; }).packages.noctalia-systembus-notify;
@@ -26,77 +20,66 @@
       );
     in
     {
-      config = lib.mkIf (host.desktop.shell == "noctalia") {
-        programs.noctalia = {
-          enable = true;
-          systemd.enable = true;
-        };
+      programs.noctalia = {
+        enable = true;
+        systemd.enable = true;
+      };
 
-        home.packages = with pkgs; [
-          fd # required for file search plugin: https://noctalia.dev/plugins/file-search
+      home.packages = with pkgs; [
+        fd # required for file search plugin: https://noctalia.dev/plugins/file-search
 
-          # TODO: declaratively add to firefox native extensions
-          pywalfox-native # support firefox & thunderbird themes
+        # TODO: declaratively add to firefox native extensions
+        pywalfox-native # support firefox & thunderbird themes
 
-          # gdbus required for Phone Connect plugin
-          glib
-          # meant to be used in noctalia's "on colors changed" hook, to help out some apps that don't properly
-          # update colors on their own.
-          (pkgs.writeShellScriptBin "reload_noctalia_theme" (builtins.readFile ./reload_noctalia_theme.sh))
+
+        # gdbus required for Phone Connect plugin
+        glib
+        # meant to be used in noctalia's "on colors changed" hook, to help out some apps that don't properly
+        # update colors on their own.
+        (pkgs.writeShellScriptBin "reload_noctalia_theme" (builtins.readFile ./reload_noctalia_theme.sh))
+      ];
+
+      # Ensure firefox & thunderbird native messaging host manifest stays updated with latest
+      # pywalfox-native version. this is normally done imperatively with `pywalfox install`.
+      programs.firefox.nativeMessagingHosts = [ pywalfoxNativeMessagingHost ];
+      programs.thunderbird.nativeMessagingHosts = [ pywalfoxNativeMessagingHost ];
+
+      smona.wlroots = {
+        execStart = [
+          "${systembus-notify}/bin/noctalia-systembus-notify"
         ];
-
-        # Ensure firefox & thunderbird native messaging host manifest stays updated with latest
-        # pywalfox-native version. this is normally done imperatively with `pywalfox install`.
-        programs.firefox.nativeMessagingHosts = [ pywalfoxNativeMessagingHost ];
-        programs.thunderbird.nativeMessagingHosts = [ pywalfoxNativeMessagingHost ];
-
-        smona.wlroots = {
-          execStart = [
-            "${systembus-notify}/bin/noctalia-systembus-notify"
-          ];
-          sessionMenuCommand = [
-            "noctalia"
-            "msg"
-            "panel-toggle"
-            "session"
-          ];
-          notificationsCommand = [
-            "noctalia-shell"
-            "ipc"
-            "call"
-            "notifications"
-            "toggleHistory"
-          ];
-          lockCommand = "noctalia msg session lock";
-          keyBinds = [
-            {
-              primaryMod = true;
-              key = "s";
-              command = [
-                "noctalia-shell"
-                "ipc"
-                "call"
-                "settings"
-                "toggle"
-              ];
-            }
-          ];
-        };
+        sessionMenuCommand = [
+          "noctalia"
+          "msg"
+          "panel-toggle"
+          "session"
+        ];
+        notificationsCommand = [
+          "noctalia-shell"
+          "ipc"
+          "call"
+          "notifications"
+          "toggleHistory"
+        ];
+        lockCommand = "noctalia msg session lock";
+        keyBinds = [
+          {
+            primaryMod = true;
+            key = "s";
+            command = [
+              "noctalia-shell"
+              "ipc"
+              "call"
+              "settings"
+              "toggle"
+            ];
+          }
+        ];
       };
     };
 
-  den.aspects.noctalia.nixos =
-    {
-      host,
-      config,
-      lib,
-      pkgs,
-      ...
-    }:
-    {
-      config = lib.mkIf (host.desktop.shell == "noctalia") {
-        # Support for calendar events in noctalia.
-        services.gnome.evolution-data-server.enable = true;
-      };
-    };
+  den.aspects.noctalia.nixos = {
+    # Support for calendar events in noctalia.
+    services.gnome.evolution-data-server.enable = true;
+  };
 }

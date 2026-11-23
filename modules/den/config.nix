@@ -55,7 +55,9 @@ in
         {
           config = {
             desktop.compositor = lib.mkDefault "none";
-            desktop.shell = lib.mkDefault (if config.compositor == "gnome" then "gnome" else "noctalia");
+            desktop.shell = lib.mkDefault (
+              if config.desktop.compositor == "gnome" then "gnome" else "noctalia"
+            );
             # Linux needs a compositor, darwin is always graphical.
             isGraphical = lib.mkDefault (
               if (lib.systems.elaborate host.system).isLinux then host.desktop.compositor != "none" else true
@@ -82,7 +84,7 @@ in
         {
           config = {
             desktop.compositor = lib.mkDefault "none";
-            desktop.shell = lib.mkDefault (if config.compositor == "gnome" then "gnome" else "none");
+            desktop.shell = lib.mkDefault (if config.desktop.compositor == "gnome" then "gnome" else "none");
             # Linux needs a compositor, darwin is always graphical.
             config.isGraphical = lib.mkDefault (
               if (lib.systems.elaborate host.system).isLinux then host.desktop.compositor != "none" else true

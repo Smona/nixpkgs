@@ -41,8 +41,6 @@
       smona.username = "mel";
       smona.primaryMonitor = "DP-1";
       smona.wallpaper = ../../wallpapers/vibrant-paint-streaks.jpg;
-      smona.desktop.compositor = "niri";
-      smona.desktop.shell = "noctalia";
 
       home-manager.users.mel =
         { pkgs, ... }:

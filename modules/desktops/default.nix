@@ -1,27 +1,32 @@
 # Desktop environment / compositor selection.
-#
-# TODO: refactor to use den host schema + conditional imports.
-{ den, ... }:
-{
-  den.aspects.desktop.includes = with den.aspects; [
-    noctalia
-    gnome
-    custom-shell
-    wlroots
-  ];
 
-  den.aspects.desktop.nixos =
-    {
-      host,
-      config,
-      lib,
-      ...
-    }:
-    {
-      config = {
-        programs.hyprland.enable = host.desktop.compositor == "hyprland";
-        programs.niri.enable = host.desktop.compositor == "niri";
-        programs.sway.enable = host.desktop.compositor == "sway";
+{ den, lib, ... }:
+{
+  den.aspects.desktop = { host, ... }: {
+    includes =
+      with den.aspects;
+      (
+        [
+          wlroots
+        ]
+        ++ (lib.lists.optional (host.desktop.shell == "noctalia") noctalia)
+        ++ (lib.lists.optional (host.desktop.shell == "custom") custom-shell)
+        ++ (lib.lists.optional (host.desktop.shell == "gnome") gnome)
+      );
+
+    nixos =
+      {
+        host,
+        config,
+        lib,
+        ...
+      }:
+      {
+        config = {
+          programs.hyprland.enable = host.desktop.compositor == "hyprland";
+          programs.niri.enable = host.desktop.compositor == "niri";
+          programs.sway.enable = host.desktop.compositor == "sway";
+        };
       };
-    };
+  };
 }
