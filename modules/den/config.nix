@@ -7,6 +7,8 @@
 
 let
   systemOptions = {
+    # This uses an enum since having multiple enabled at once can cause
+    # issues (e.g. running multiple xdg-desktop portals or PAM agents).
     options.desktop.compositor = lib.mkOption {
       description = "Which desktop environment / compositor to enable for this host.";
       type = lib.types.enum [

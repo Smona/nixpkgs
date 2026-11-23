@@ -1,8 +1,8 @@
 { inputs, ... }: {
   den.aspects.hyprland = {
     hmLinux =
-
       {
+        host,
         config,
         lib,
         pkgs,
@@ -15,7 +15,7 @@
         wallpaperPath = "~/.config/wallpaper";
       in
       {
-        config = lib.mkIf (config.smona.desktop.compositor == "hyprland") {
+        config = lib.mkIf (host.desktop.compositor == "hyprland") {
           smona.wlroots = {
             screenOnCommand = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
             screenOffCommand = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off";

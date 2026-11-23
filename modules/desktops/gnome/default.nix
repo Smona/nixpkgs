@@ -1,6 +1,7 @@
 { ... }: {
   den.aspects.gnome.hmLinux =
     {
+      host,
       config,
       lib,
       pkgs,
@@ -43,7 +44,7 @@
       ];
     in
     {
-      config = lib.mkIf (config.smona.desktop.compositor == "gnome") {
+      config = lib.mkIf (host.desktop.compositor == "gnome") {
         # Gnome requires gnome-shell.
         smona.desktop.shell = "gnome";
         home.packages = extensions ++ [ theme.gnome.package ];

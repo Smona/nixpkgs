@@ -30,7 +30,6 @@
       smona.username = "smona";
       smona.primaryMonitor = "eDP-1";
       smona.wallpaper = ../../wallpapers/neon-highway-wallpaper.jpg;
-      smona.desktop.compositor = "niri";
       smona.desktop.shell = "noctalia";
 
       home-manager.users.smona =

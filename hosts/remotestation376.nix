@@ -1,14 +1,17 @@
 { inputs, den, ... }:
 {
   den.homes.x86_64-linux."cobalt@remotestation376" = { };
-  den.hosts.x86_64-linux.remotestation376 = { };
+  den.hosts.x86_64-linux.remotestation376 = {
+    desktop = {
+      compositor = "gnome";
+    };
+  };
 
   den.aspects."cobalt@remotestation376" = {
     # Inherited username on this machine, bring my home configs in
     includes = [ den.aspects.smona ];
 
     homeManager = { ... }: {
-      smona.desktop.compositor = "gnome";
       roles = {
         work = true;
       };

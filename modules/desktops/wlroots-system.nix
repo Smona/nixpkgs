@@ -4,6 +4,7 @@
 {
   den.aspects.wlroots.nixos =
     {
+      host,
       config,
       lib,
       pkgs,
@@ -11,7 +12,7 @@
     }:
 
     let
-      inWlroots = builtins.elem config.smona.desktop.compositor [
+      inWlroots = builtins.elem host.desktop.compositor [
         "hyprland"
         "niri"
         "sway"

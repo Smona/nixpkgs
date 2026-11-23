@@ -2,6 +2,7 @@
 {
   den.aspects.sway.hmLinux =
     {
+      host,
       config,
       lib,
       pkgs,
@@ -37,7 +38,7 @@
         '';
     in
     {
-      config = lib.mkIf (config.smona.desktop.compositor == "sway") {
+      config = lib.mkIf (host.desktop.compositor == "sway") {
         smona.wlroots = {
           screenOnCommand = ''${pkgs.sway}/bin/swaymsg "output * dpms on"'';
           screenOffCommand = ''${pkgs.sway}/bin/swaymsg "output * dpms off"'';

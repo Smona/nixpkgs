@@ -1,6 +1,7 @@
 { inputs, ... }: {
   den.aspects.niri.hmLinux =
     {
+      host,
       config,
       lib,
       pkgs,
@@ -15,7 +16,7 @@
       right = "n";
     in
     {
-      config = lib.mkIf (config.smona.desktop.compositor == "niri") {
+      config = lib.mkIf (host.desktop.compositor == "niri") {
         smona.wlroots = {
           screenOnCommand = "niri msg action power-on-monitors";
           screenOffCommand = "niri msg action power-off-monitors";

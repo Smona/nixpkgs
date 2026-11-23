@@ -10,6 +10,7 @@
 
     hmLinux =
       {
+        host,
         config,
         lib,
         pkgs,
@@ -20,7 +21,7 @@
         cmd = import ./_system-commands { inherit pkgs inputs; };
         commonOptions = import ./_common.nix { inherit pkgs inputs config; };
         cfg = config.smona.wlroots;
-        inWlroots = builtins.elem config.smona.desktop.compositor [
+        inWlroots = builtins.elem host.desktop.compositor [
           "hyprland"
           "niri"
           "sway"
