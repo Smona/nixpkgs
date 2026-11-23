@@ -104,14 +104,15 @@ in
     # recently active one.
     services.playerctld.enable = true;
 
-    # inhibit idle lock when playing media
+    # inhibit idle lock when playing media, regardless of source
     # NOTE: this will inhibit locking when music is playing. This is a quick fix, but it
     # would be better to continue locking & screen blanking when music is playing, but provide
     # music controls on the lock screen and disable suspend instead. locking should still be fully
     # disabled when videos are playing.
+    # TODO: move to custom-shell if confirmed unnecessary on noctalia
     services.wayland-pipewire-idle-inhibit = {
       enable = true;
-      systemdTarget = "hyprland-session.target";
+      systemdTarget = "graphical.target";
       settings = {
         verbosity = "INFO";
         idle_inhibitor = "wayland";
