@@ -34,33 +34,6 @@
     ])
   ];
 
-  den.homes.x86_64-linux."cobalt@remotestation376" = {
-    # temporary workaround until i finish migrating non-flake-parts modules
-    instantiate =
-      args:
-      inputs.home-manager.lib.homeManagerConfiguration (
-        args
-        // {
-          extraSpecialArgs = (args.extraSpecialArgs or { }) // {
-            inherit inputs;
-          };
-        }
-      );
-  };
-  den.homes.x86_64-linux."smona@DESKTOP-9F9VN3S" = {
-    # temporary workaround until i finish migrating non-flake-parts modules
-    instantiate =
-      args:
-      inputs.home-manager.lib.homeManagerConfiguration (
-        args
-        // {
-          extraSpecialArgs = (args.extraSpecialArgs or { }) // {
-            inherit inputs;
-          };
-        }
-      );
-  };
-
   den.default = {
     includes = [
       den.batteries.define-user

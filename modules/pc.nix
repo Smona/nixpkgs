@@ -49,10 +49,6 @@
         home-manager.useUserPackages = true;
         # Automatically backup existing files
         home-manager.backupFileExtension = "bk";
-        # Pass additional arguments to home manager modules
-        home-manager.extraSpecialArgs = {
-          inherit inputs;
-        };
 
         # Configure the system-wide /etc/zshrc, and install zsh for root on linux.
         # Note that this is required on darwin, since it loads the nix-darwin environment in the default shell on macos.

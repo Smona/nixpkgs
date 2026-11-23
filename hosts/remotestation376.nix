@@ -1,5 +1,7 @@
 { inputs, den, ... }:
 {
+  den.homes.x86_64-linux."cobalt@remotestation376" = { };
+
   den.aspects."cobalt@remotestation376" = {
     # Inherited username on this machine, bring my home configs in
     includes = [ den.aspects.smona ];
