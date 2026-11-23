@@ -52,7 +52,6 @@
         smona.wlroots = {
           execStart = [
             "${systembus-notify}/bin/noctalia-systembus-notify"
-            "noctalia-shell"
           ];
           sessionMenuCommand = [
             "noctalia"
