@@ -128,64 +128,45 @@
     };
 
     # Darwin-only home-manager configuration shared across personal computers.
-    hmDarwin =
-      { pkgs, ... }:
-      {
-        graphical = true;
-        roles = {
-          work = true;
-        };
-
-        home.packages = with pkgs; [
-          colima
-          vlc-bin
-        ];
-
-        # You should not change this value, even if you update Home Manager. If you do
-        # want to update the value, then make sure to first check the Home Manager
-        # release notes.
-        home.stateVersion = "24.05"; # Please read the comment before changing.
+    hmDarwin = { pkgs, ... }: {
+      graphical = true;
+      roles = {
+        work = true;
       };
+
+      home.packages = with pkgs; [
+        colima
+        vlc-bin
+      ];
+
+      # You should not change this value, even if you update Home Manager. If you do
+      # want to update the value, then make sure to first check the Home Manager
+      # release notes.
+      home.stateVersion = "24.05"; # Please read the comment before changing.
+    };
 
     # System configuration that can be shared between nix-darwin & NixOS.
-    os =
-      {
-        config,
-        lib,
-        pkgs,
-        ...
-      }:
-      {
-        options.smona = with lib; {
-          username = mkOption {
-            type = types.str;
-            description = "smona's username on this system.";
-          };
-        };
+    os = { pkgs, ... }: {
+      home-manager.useGlobalPkgs = true;
+      home-manager.useUserPackages = true;
+      # Automatically backup existing files
+      home-manager.backupFileExtension = "bk";
 
-        config = {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          # Automatically backup existing files
-          home-manager.backupFileExtension = "bk";
+      # Configure the system-wide /etc/zshrc, and install zsh for root on linux.
+      # Note that this is required on darwin, since it loads the nix-darwin environment in the default shell on macos.
+      programs.zsh.enable = true;
 
-          # Configure the system-wide /etc/zshrc, and install zsh for root on linux.
-          # Note that this is required on darwin, since it loads the nix-darwin environment in the default shell on macos.
-          programs.zsh.enable = true;
+      time.timeZone = lib.mkDefault "America/Denver";
 
-          time.timeZone = lib.mkDefault "America/Denver";
-
-          # Bare minimum toolkit at the system level
-          environment.systemPackages = with pkgs; [
-            git
-            vim
-          ];
-        };
-      };
+      # Bare minimum toolkit at the system level
+      environment.systemPackages = with pkgs; [
+        git
+        vim
+      ];
+    };
 
     nixos =
       {
-        config,
         pkgs,
         lib,
         user,

@@ -18,9 +18,6 @@
       ...
     }:
     {
-      # TODO: remove option once using user argument everywhere
-      smona.username = "smona";
-
       # Not sure why this is here
       users.users.smona.uid = 1000;
 

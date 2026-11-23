@@ -28,7 +28,6 @@
     {
       imports = [ inputs.hardware.nixosModules.dell-xps-13-7390 ];
 
-      smona.username = "smona";
       smona.primaryMonitor = "eDP-1";
       smona.wallpaper = ../../wallpapers/neon-highway-wallpaper.jpg;
 

@@ -4,6 +4,7 @@
 
   den.aspects.Mels-Macbook-Air.darwin =
     {
+      user,
       pkgs,
       lib,
       config,
@@ -11,8 +12,6 @@
     }:
     {
       imports = [ inputs.nix-homebrew.darwinModules.nix-homebrew ];
-
-      smona.username = "mel";
 
       # Enable building linux packages with matching CPU architecture automatically on darwin.
       nix = {
@@ -100,9 +99,8 @@
           show-recents = false;
           persistent-apps =
             let
-              thunderbirdPackage =
-                config.home-manager.users.${config.smona.username}.programs.thunderbird.package;
-              firefoxPackage = config.home-manager.users.${config.smona.username}.programs.firefox.package;
+              thunderbirdPackage = config.home-manager.users.${user.userName}.programs.thunderbird.package;
+              firefoxPackage = config.home-manager.users.${user.userName}.programs.firefox.package;
             in
             [
               "${firefoxPackage}/Applications/Firefox.app"
@@ -138,7 +136,7 @@
         enableRosetta = true;
 
         # User owning the Homebrew prefix
-        user = config.smona.username;
+        user = user.userName;
 
         # Optional: Declarative tap management
         taps = {
