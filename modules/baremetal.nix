@@ -14,6 +14,16 @@
       # Enable users to install flatpaks.
       # Doesn't work on WSL where xdg.portal.enable = false;
       services.flatpak.enable = true;
+
+      # Use GDM as a display manager
+      services.displayManager.gdm.enable = true;
+
+      # Firmware
+      services.fwupd.enable = true; # Firmware update manager
+      # Make sure we have the best firmware available.
+      # This is especially important for dual-booting, since firmware installed in
+      # Windows can break bluetooth or other features
+      hardware.enableAllFirmware = true;
     };
   };
 }

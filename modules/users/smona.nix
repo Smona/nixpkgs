@@ -175,6 +175,7 @@
 
           time.timeZone = lib.mkDefault "America/Denver";
 
+          # Bare minimum toolkit at the system level
           environment.systemPackages = with pkgs; [
             git
             vim
@@ -215,7 +216,6 @@
           };
 
           # Enable the GNOME Desktop Environment.
-          services.displayManager.gdm.enable = true;
           # TODO: ensure that gnome is not enabled at the same time as wlroots.
           # This should probably just be an enum configuration option to guarantee that.
           # services.xserver.desktopManager.gnome.enable = true;
@@ -287,13 +287,6 @@
           ];
           # Enable file previews for nautilus with spacebar.
           services.gnome.sushi.enable = true;
-
-          # Firmware
-          services.fwupd.enable = true; # Firmware update manager
-          # Make sure we have the best firmware available.
-          # This is especially important for dual-booting, since firmware installed in
-          # Windows can break bluetooth or other features
-          hardware.enableAllFirmware = true;
 
           # Define a user account. Don't forget to set a password with ‘passwd’.
           users.users.${user.userName} = {
