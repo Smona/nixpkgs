@@ -26,6 +26,7 @@
             art = mkEnableOption "set up computer for visual art creation";
             work = mkEnableOption "set up computer for work";
             music = mkEnableOption "set up computer for music production";
+            gaming = mkEnableOption "set up computer for gaming";
           };
         };
 

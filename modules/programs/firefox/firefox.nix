@@ -2,17 +2,6 @@
   den.aspects.firefox.homeManager =
     { config, pkgs, ... }:
     {
-      smona.wlroots = {
-        execStart = [ "firefox" ];
-        keyBinds = [
-          {
-            primaryMod = true;
-            key = "b";
-            command = [ "firefox" ];
-          }
-        ];
-      };
-
       # This requires declarative extensions, and i already found a theme i like.
       catppuccin.firefox.enable = false;
       programs.firefox =
@@ -136,4 +125,17 @@
           };
         };
     };
+
+  den.aspects.firefox.hmLinux = {
+    smona.wlroots = {
+      execStart = [ "firefox" ];
+      keyBinds = [
+        {
+          primaryMod = true;
+          key = "b";
+          command = [ "firefox" ];
+        }
+      ];
+    };
+  };
 }

@@ -8,8 +8,6 @@
       ...
     }:
     {
-      smona.wlroots.execStart = [ "thunderbird" ];
-
       programs.thunderbird = {
         enable = true;
         package = pkgs.thunderbird.override {
@@ -197,4 +195,8 @@
         };
       };
     };
+
+  den.aspects.thunderbird.hmLinux = {
+    smona.wlroots.execStart = [ "thunderbird" ];
+  };
 }

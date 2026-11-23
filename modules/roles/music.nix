@@ -3,7 +3,6 @@
 {
   den.aspects.music-production = {
     includes = [ (den.batteries.unfree [ "bitwig-studio" ]) ];
-    user.extraGroups = [ "audio" ];
 
     hmLinux =
       {
@@ -31,6 +30,8 @@
       {
         imports = [ inputs.musnix.nixosModules.musnix ];
 
+        users.users.${user.userName}.extraGroups = [ "audio" ];
+
         # https://github.com/musnix/musnix#base-options
         musnix.enable = true;
 
@@ -42,6 +43,4 @@
         environment.systemPackages = with pkgs; [ qjackctl ];
       };
   };
-
-    };
 }

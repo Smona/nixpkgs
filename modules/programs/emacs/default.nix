@@ -7,17 +7,6 @@
       ...
     }:
     {
-      smona.wlroots = {
-        execStart = [ "emacs" ];
-        keyBinds = [
-          {
-            primaryMod = true;
-            key = "c";
-            command = [ "~/.emacs.d/bin/org-capture" ];
-          }
-        ];
-      };
-
       xdg = {
         enable = true;
         configFile."doom" = {
@@ -107,6 +96,17 @@
       extraPackages = epkgs: [
         epkgs.vterm
         epkgs.pdf-tools
+      ];
+    };
+
+    smona.wlroots = {
+      execStart = [ "emacs" ];
+      keyBinds = [
+        {
+          primaryMod = true;
+          key = "c";
+          command = [ "~/.emacs.d/bin/org-capture" ];
+        }
       ];
     };
   };

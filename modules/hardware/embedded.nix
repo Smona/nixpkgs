@@ -3,11 +3,10 @@
 
 {
   den.aspects.embedded-dev = {
-    user.extraGroups = [ "plugdev" ];
-
-    nixos = {
+    nixos = {user, ...}: {
       # Set up sudoless access to MCUs
       users.groups.plugdev = { };
+      users.users.${user.userName}.extraGroups = [ "plugdev" ];
       services.udev.extraRules = builtins.readFile ./69-probe-rs.rules;
     };
   };

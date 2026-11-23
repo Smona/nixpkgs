@@ -129,7 +129,6 @@
 
     # Darwin-only home-manager configuration shared across personal computers.
     hmDarwin = { pkgs, ... }: {
-      graphical = true;
       roles = {
         work = true;
       };
