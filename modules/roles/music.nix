@@ -1,7 +1,8 @@
 # Modules for music & audio production computers
-{ inputs, ... }:
+{ den, inputs, ... }:
 {
   den.aspects.music-production = {
+    includes = [ (den.batteries.unfree [ "bitwig-studio" ]) ];
     user.extraGroups = [ "audio" ];
 
     hmLinux =

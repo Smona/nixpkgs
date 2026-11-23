@@ -20,18 +20,6 @@
         "smona"
       ];
     })
-
-    # TODO: move into appropriate aspect definitions
-    (den.batteries.unfree [ "1password" ])
-    (den.batteries.unfree [ "bitwig-studio" ])
-    (den.batteries.unfree [
-      # TODO: where are these coming from? came up on luma specifically
-      "broadcom-bt-firmware"
-      "b43-firmware"
-      "xone-dongle-firmware"
-      "facetimehd-calibration"
-      "facetimehd-firmware"
-    ])
   ];
 
   den.default = {

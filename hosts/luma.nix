@@ -16,6 +16,15 @@
 
     # Services
     llm-server
+
+    (den.batteries.unfree [
+      # TODO: where are these coming from?
+      "broadcom-bt-firmware"
+      "b43-firmware"
+      "xone-dongle-firmware"
+      "facetimehd-calibration"
+      "facetimehd-firmware"
+    ])
   ];
 
   den.aspects.luma.nixos =

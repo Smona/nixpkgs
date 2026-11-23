@@ -2,7 +2,6 @@
 {
   inputs,
   den,
-  self,
   ...
 }:
 {
@@ -38,6 +37,8 @@
       zsa
       lilnasx
       embedded-dev
+
+      (den.batteries.unfree [ "1password" ])
     ];
 
     # Home Manager configuration shared between Linux & Darwin.
