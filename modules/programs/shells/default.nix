@@ -6,6 +6,7 @@
 
   den.aspects.shells.homeManager =
     {
+      host,
       pkgs,
       config,
       lib,
@@ -141,11 +142,11 @@
       # System monitor
       programs.btop = {
         enable = true;
-        settings = lib.mkIf (config.smona.desktop.shell == "noctalia") {
+        settings = lib.mkIf (host.desktop.shell == "noctalia") {
           color_theme = "noctalia";
         };
       };
-      catppuccin.btop.enable = config.smona.desktop.shell != "noctalia";
+      catppuccin.btop.enable = host.desktop.shell != "noctalia";
 
       programs.direnv.enable = true;
       # https://github.com/nix-community/nix-direnv

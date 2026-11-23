@@ -5,6 +5,7 @@
     users.mel = { };
     desktop = {
       compositor = "niri";
+      shell = "noctalia";
     };
   };
 

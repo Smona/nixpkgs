@@ -5,13 +5,14 @@
   den.aspects.vicinae = {
     homeManager =
       {
+        host,
         config,
         lib,
         pkgs,
         ...
       }:
       let
-        isNoctalia = config.smona.desktop.shell == "noctalia";
+        isNoctalia = host.desktop.shell == "noctalia";
       in
       {
         imports = [ inputs.vicinae.homeManagerModules.default ];

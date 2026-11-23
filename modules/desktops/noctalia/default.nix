@@ -3,6 +3,7 @@
 {
   den.aspects.noctalia.hmLinux =
     {
+      host,
       config,
       lib,
       pkgs,
@@ -25,7 +26,7 @@
       );
     in
     {
-      config = lib.mkIf (config.smona.desktop.shell == "noctalia") {
+      config = lib.mkIf (host.desktop.shell == "noctalia") {
         programs.noctalia = {
           enable = true;
           systemd.enable = true;
@@ -86,13 +87,14 @@
 
   den.aspects.noctalia.nixos =
     {
+      host,
       config,
       lib,
       pkgs,
       ...
     }:
     {
-      config = lib.mkIf (config.smona.desktop.shell == "noctalia") {
+      config = lib.mkIf (host.desktop.shell == "noctalia") {
         # Support for calendar events in noctalia.
         services.gnome.evolution-data-server.enable = true;
       };

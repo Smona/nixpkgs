@@ -7,6 +7,7 @@
 
     hmLinux =
       {
+        host,
         config,
         lib,
         pkgs,
@@ -16,7 +17,7 @@
         my_rofi = pkgs.rofi.override { plugins = with pkgs; [ rofi-calc ]; };
       in
       {
-        config = lib.mkIf (config.smona.desktop.shell == "custom") {
+        config = lib.mkIf (host.desktop.shell == "custom") {
           home.packages = with pkgs; [
             gammastep
             swaynotificationcenter
@@ -112,9 +113,14 @@
       };
 
     den.aspects.custom-shell.nixos =
-      { config, lib, ... }:
       {
-        config = lib.mkIf (config.smona.desktop.shell == "custom") {
+        host,
+        config,
+        lib,
+        ...
+      }:
+      {
+        config = lib.mkIf (host.desktop.shell == "custom") {
           programs.nm-applet.enable = true; # GUI WiFi tool for WMs
           services.blueman.enable = true;
         };

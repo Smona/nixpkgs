@@ -2,6 +2,7 @@
 {
   den.aspects.kitty.homeManager =
     {
+      host,
       config,
       lib,
       pkgs,
@@ -9,7 +10,7 @@
     }:
 
     let
-      isNoctalia = config.smona.desktop.shell == "noctalia";
+      isNoctalia = host.desktop.shell == "noctalia";
     in
     {
       home.shellAliases = {

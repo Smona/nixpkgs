@@ -9,6 +9,7 @@
     users.smona = { };
     desktop = {
       compositor = "niri";
+      shell = "noctalia";
     };
   };
 
@@ -30,7 +31,6 @@
       smona.username = "smona";
       smona.primaryMonitor = "eDP-1";
       smona.wallpaper = ../../wallpapers/neon-highway-wallpaper.jpg;
-      smona.desktop.shell = "noctalia";
 
       home-manager.users.smona =
         { pkgs, ... }:
