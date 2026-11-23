@@ -1,9 +1,5 @@
 # My standard user & system configurations
-{
-  inputs,
-  den,
-  ...
-}:
+{ den, ... }:
 {
   # alternate usernames
   den.aspects.mel.includes = [ den.aspects.smona ];
@@ -20,6 +16,7 @@
       gui
 
       fonts
+      catppuccin
 
       # shell config
       shells
@@ -53,8 +50,6 @@
         ...
       }:
       {
-        imports = [ inputs.catppuccin.homeModules.catppuccin ];
-
         options = with lib; {
           pkgsCompat = mkOption {
             type = types.pkgs;
@@ -72,14 +67,9 @@
         };
 
         config = {
-          catppuccin.enable = true;
-          catppuccin.flavor = "mocha";
-
           home.language.base = "en_US.UTF-8";
 
           home.packages = with pkgs; [
-            cachix
-
             ## NodeJS
             nodejs
             yarn
@@ -212,8 +202,6 @@
         ...
       }:
       {
-        imports = [ inputs.catppuccin.nixosModules.catppuccin ];
-
         options.smona = with lib; {
           primaryMonitor = mkOption {
             description = "Which monitor ID represents the 'primary' monitor.";
@@ -226,9 +214,6 @@
         };
 
         config = {
-          catppuccin.enable = true;
-          catppuccin.flavor = "mocha";
-
           # Select internationalisation properties.
           i18n.defaultLocale = "en_US.UTF-8";
 

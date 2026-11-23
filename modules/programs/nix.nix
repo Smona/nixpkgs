@@ -42,7 +42,9 @@
 
         # other programs and scripts for working with nix & nix system configs
         home.packages = with pkgs; [
+          cachix
           nix-tree
+
           (writeShellScriptBin "upgrade" (
             if pkgs.stdenv.hostPlatform.isDarwin then
               ''
