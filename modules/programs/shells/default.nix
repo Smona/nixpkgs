@@ -1,4 +1,4 @@
-{ ... }:
+{ den, ... }:
 {
   den.aspects.shells.includes = [
     (den.batteries.unfree [ "pridecat" ])
@@ -42,77 +42,6 @@
         ripgrep # Better grep
         eza # Better ls
         dua # disk usage analyzer
-
-        # nix-specific utilities
-        nix-tree
-        (pkgs.writeShellScriptBin "upgrade" (
-          if pkgs.stdenv.hostPlatform.isDarwin then
-            ''
-              nh darwin switch --ask "$@"
-            ''
-          else
-            ''
-              set -euo pipefail
-
-              # 1. Build the configuration without activating it (creates ./result)
-              nh os build --diff=never "$@"
-              echo
-
-              # 2. Compare booted initrd (and kernel/modules) with the newly built derivation
-              booted_boot_files="$(readlink -f /run/booted-system/{initrd,kernel,kernel-modules})"
-              built_boot_files="$(readlink -f ./result/{initrd,kernel,kernel-modules})"
-
-              # 3. Choose 'boot' if early-boot components changed, otherwise 'switch'
-              # Capture the exit code so a rejected change (exit 1) doesn't abort
-              # under `set -e` before cleanup, and is preserved when the script ends.
-              status=0
-              needs_reboot=0
-              if [ "$booted_boot_files" != "$built_boot_files" ]; then
-                echo "Kernel or initrd changed; setting as next boot target..."
-                echo
-                nh os boot --ask --quiet --no-rom || status=$?
-                if [ "$status" -eq 0 ]; then
-                  needs_reboot=1
-                fi
-              else
-                echo "No kernel or initrd changes detected. Switching to the new configuration..."
-                echo
-                nh os switch --ask --quiet --no-rom || status=$?
-              fi
-
-              # Clean up the temporary result symlink
-              rm -f ./result
-
-              # Offer to reboot now that the new boot target is set and cleanup is done.
-              # Default is yes (Y/n); falls back to no on EOF/non-interactive input.
-              if [ "$needs_reboot" -eq 1 ]; then
-                echo
-                read -r -p "Reboot now to apply the new configuration? [Y/n] " reply || reply="n"
-                # Only an explicit y/yes (or Enter) reboots, so stray input never
-                # reboots by accident. Strip whitespace, match case-insensitively.
-                reply="''${reply//[[:space:]]/}"
-                shopt -s nocasematch
-                case "$reply" in
-                  "" | y | yes)
-                    echo "Rebooting..."
-                    sudo reboot
-                    ;;
-                  *)
-                    echo "Not rebooting. Please reboot soon!"
-                    ;;
-                esac
-                shopt -u nocasematch
-              fi
-
-              exit "$status"
-            ''
-        ))
-        (pkgs.writeShellScriptBin "update" ''
-          upgrade --update
-        '')
-        (pkgs.writeShellScriptBin "clean" ''
-          nh clean all --keep 20 --keep-since 4w --ask --no-direnv
-        '')
 
         # Fun
         cowsay

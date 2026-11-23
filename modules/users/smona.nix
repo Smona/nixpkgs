@@ -27,6 +27,7 @@
       vim
       tmux
       pi
+      nix
 
       # apps
       vicinae
@@ -74,30 +75,6 @@
           catppuccin.enable = true;
           catppuccin.flavor = "mocha";
 
-          # Configuration of the nix CLI
-          # https://nixos.org/manual/nix/stable/command-ref/conf-file.html
-          nix.package = lib.mkDefault pkgs.nix;
-          nix.settings = {
-            # Massively reduce disk usage by hard linking any duplicate files
-            # to a single location on disk.
-            # FIXME: only enable this outside of nix-darwin & nixos.
-            # broken on darwin: https://github.com/NixOS/nix/issues/7273
-            # auto-optimise-store = true;
-            # Enable nix command and nix flakes
-            experimental-features = "nix-command flakes";
-            # Always show failure traces
-            show-trace = true;
-            substituters = [
-              "https://cache.nixos.org"
-              "https://nix-community.cachix.org"
-            ];
-            trusted-public-keys = [
-              "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-              "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-            ];
-            netrc-file = "${config.home.homeDirectory}/.config/nix/netrc";
-          };
-
           home.language.base = "en_US.UTF-8";
 
           home.packages = with pkgs; [
@@ -119,12 +96,6 @@
               EDITOR = editor;
               GIT_EDITOR = editor;
             };
-
-          # Enable nix CLI helper
-          programs.nh = {
-            enable = true;
-            flake = "$HOME/.config/nixpkgs";
-          };
 
           programs.ssh = {
             enable = true;
@@ -214,33 +185,6 @@
         };
 
         config = {
-          nix = {
-            # This will add each flake input as a registry
-            # To make nix3 commands consistent with your flake
-            registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
-
-            # This will additionally add your inputs to the system's legacy channels
-            # Making legacy nix commands consistent as well, awesome!
-            nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
-
-            # Periodically optimise the store
-            optimise.automatic = true;
-
-            settings = {
-              # Users allowed to use additional binary caches and unsigned NARs.
-              trusted-users = [
-                "root"
-                config.smona.username
-              ];
-
-              # Enable using flakes
-              experimental-features = [
-                "nix-command"
-                "flakes"
-              ];
-            };
-          };
-
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           # Automatically backup existing files
