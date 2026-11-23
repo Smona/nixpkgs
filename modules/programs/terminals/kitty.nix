@@ -19,6 +19,7 @@
 
       # My current preferred terminal
       programs.kitty = {
+        enable = true;
         package = (config.lib.nixGL.wrap pkgs.kitty);
         settings = {
           font_family = "Maple Mono NF";

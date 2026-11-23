@@ -3,6 +3,9 @@
 {
   den.hosts.x86_64-linux.luma = {
     users.mel = { };
+    desktop = {
+      compositor = "niri";
+    };
   };
 
   den.aspects.luma.includes = with den.aspects; [

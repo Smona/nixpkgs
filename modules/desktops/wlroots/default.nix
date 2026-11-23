@@ -87,8 +87,6 @@
         };
 
         config = lib.mkIf inWlroots {
-          graphical = true;
-
           home.packages = with pkgs; [
             inotify-tools
             wofi

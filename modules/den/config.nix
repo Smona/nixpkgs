@@ -5,22 +5,74 @@
   ...
 }:
 
+let
+  systemOptions = {
+    options.desktop.compositor = lib.mkOption {
+      description = "Which desktop environment / compositor to enable for this host.";
+      type = lib.types.enum [
+        "none"
+        "gnome"
+        "hyprland"
+        "niri"
+        "sway"
+      ];
+    };
+
+    options.isGraphical = lib.mkOption {
+      description = "Whether this system supports GUI functionality";
+      type = lib.types.bool;
+    };
+  };
+in
 {
   imports = [ inputs.den.flakeModule ];
 
-  den.schema.user = {
-    classes = lib.mkDefault [ "homeManager" ];
-  };
+  den.schema = {
+    user = {
+      classes = lib.mkDefault [ "homeManager" ];
+    };
 
-  # Allow my own user to configure nixos options across all hosts.
-  den.schema.host.includes = [
-    (den.batteries.user-aspects {
-      users = [
-        "mel"
-        "smona"
-      ];
-    })
-  ];
+    host =
+      { host, lib, ... }:
+      (
+        {
+          config = {
+            desktop.compositor = lib.mkDefault "none";
+            # Linux needs a compositor, darwin is always graphical.
+            isGraphical = lib.mkDefault (
+              if (lib.systems.elaborate host.system).isLinux then host.desktop.compositor != "none" else true
+            );
+
+            includes = [
+              # Allow my own user to configure nixos options across all hosts.
+              (den.batteries.user-aspects {
+                users = [
+                  "mel"
+                  "smona"
+                ];
+              })
+            ];
+          };
+
+        }
+        // systemOptions
+      );
+
+    home =
+      { host, ... }:
+      (
+        {
+          config = {
+            desktop.compositor = lib.mkDefault "none";
+            # Linux needs a compositor, darwin is always graphical.
+            config.isGraphical = lib.mkDefault (
+              if (lib.systems.elaborate host.system).isLinux then host.desktop.compositor != "none" else true
+            );
+          };
+        }
+        // systemOptions
+      );
+  };
 
   den.default = {
     includes = [

@@ -1,42 +1,48 @@
 # My standard user & system configurations
-{ den, ... }:
+{ den, lib, ... }:
 {
   # alternate usernames
   den.aspects.mel.includes = [ den.aspects.smona ];
-  den.aspects.smona = {
+  den.aspects.smona = { host, ... }: {
     user = {
       description = "Mel Bourgeois";
     };
 
-    includes = with den.aspects; [
-      den.batteries.primary-user
+    includes =
+      with den.aspects;
+      [
+        den.batteries.primary-user
 
-      gaming
-      desktop
-      gui
+        # shell config
+        shells
+        git
+        vim
+        emacs
+        tmux
+        pi
+        nix
 
-      fonts
-      catppuccin
+        # peripherals
+        keychron
+        zsa
+        lilnasx
+        embedded-dev
+      ]
+      ++ (lib.lists.optionals host.isGraphical [
+        catppuccin
+        fonts
+        gaming
+        desktop
+        gui
+        music-production
 
-      # shell config
-      shells
-      git
-      vim
-      tmux
-      pi
-      nix
-
-      # apps
-      vicinae
-      emacs
-      _1password
-
-      # peripherals
-      keychron
-      zsa
-      lilnasx
-      embedded-dev
-    ];
+        # GUI apps
+        vicinae
+        _1password
+        thunderbird
+        firefox
+        kitty
+      ]);
 
     # Home Manager configuration shared between Linux & Darwin.
     # As much stuff as possible should go in here, but some things are

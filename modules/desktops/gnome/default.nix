@@ -44,7 +44,6 @@
     in
     {
       config = lib.mkIf (config.smona.desktop.compositor == "gnome") {
-        graphical = true;
         # Gnome requires gnome-shell.
         smona.desktop.shell = "gnome";
         home.packages = extensions ++ [ theme.gnome.package ];

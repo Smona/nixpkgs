@@ -2,32 +2,24 @@
 {
   den.aspects.gui = {
     includes = with den.aspects; [
-      thunderbird
-      firefox
-      kitty
       art
-      music-production
       (den.batteries.unfree [ "slack" ])
       (den.batteries.unfree [ "obsidian" ])
     ];
 
     # Configs shared between graphical linux installs and darwin
     homeManager =
-
       {
         config,
         lib,
         pkgs,
         ...
       }:
-
       let
         my-slack = (config.lib.nixGL.wrap pkgs.slack);
       in
       {
         options = with lib; {
-          graphical = mkEnableOption "installing and configuring graphical applications";
-
           # High-level toggles for different tasks i want to do on each computer.
           # They're all defined here for ease of discoverability
           roles = {
@@ -37,11 +29,7 @@
           };
         };
 
-        config = lib.mkIf config.graphical {
-          programs.kitty.enable = true;
-          programs.firefox.enable = true;
-          # programs.alacritty.enable = true;
-
+        config = {
           home.packages = with pkgs; [
             # Messaging apps
             vesktop
@@ -78,144 +66,151 @@
       theme = import ../../theme.nix { inherit pkgs; };
     in
     {
-      config = lib.mkIf config.graphical {
-        home.sessionVariables = {
-          # Automatically set ozone platform flags in all the places where it matters
-          NIXOS_OZONE_WL = 1;
-        };
+      home.sessionVariables = {
+        # Automatically set ozone platform flags in all the places where it matters
+        NIXOS_OZONE_WL = 1;
+      };
 
-        # Graphical applications
-        home.packages = with pkgs; [
-          theme.uiFont.package
-          dconf-editor
-          obsidian
+      # Graphical applications
+      home.packages = with pkgs; [
+        theme.uiFont.package
+        dconf-editor
+        obsidian
 
-          # System utilities
-          gparted
-          gthumb
-          shotwell
-          file-roller
-          gcolor3
-          font-manager
+        # System utilities
+        gparted
+        gthumb
+        shotwell
+        file-roller
+        gcolor3
+        font-manager
 
-          electricsheep
+        electricsheep
 
-          # Messaging apps not supported on darwin
-          (config.lib.nixGL.wrap signal-desktop)
+        # Messaging apps not supported on darwin
+        (config.lib.nixGL.wrap signal-desktop)
 
-          # Creative apps
-          (config.lib.nixGL.wrap gimp)
-          kdePackages.kdenlive
-          prusa-slicer
+        # Creative apps
+        (config.lib.nixGL.wrap gimp)
+        kdePackages.kdenlive
+        prusa-slicer
 
-          # Media apps
-          newsflash # RSS feed reader
-          (config.lib.nixGL.wrap libreoffice-stable)
-          (config.lib.nixGL.wrap vlc)
-          xournalpp
-        ];
+        # Media apps
+        newsflash # RSS feed reader
+        (config.lib.nixGL.wrap libreoffice-stable)
+        (config.lib.nixGL.wrap vlc)
+        xournalpp
+        koreader
+        (calibre.overrideAttrs (
+          finalAttrs: prevAttrs: {
+            # TODO: this probably doesn't work, might just need to launch with ssl in nix shell
+            buildInputs = prevAttrs.buildInputs ++ [ openssl ];
+          }
+        ))
+      ];
 
-        gtk.enable = true;
-        catppuccin.gtk.icon.enable = true;
-        gtk.cursorTheme = (theme.cursor // { size = theme.cursorSize; });
-        # de-deprecate catppuccin.gtk.enable 😁
-        gtk.theme = {
-          name = "adw-gtk3";
-          package = pkgs.adw-gtk3;
-        };
-        # hack noctalia theme to work with gtk4
-        gtk.gtk4.enable = false;
-        xdg.configFile = {
-          "gtk-4.0/gtk.css".text = "@import url('noctalia.css')";
-          "gtk-4.0/gtk-dark.css".text = "@import url('noctalia.css')";
-        };
+      gtk.enable = true;
+      # catppuccin.gtk.icon.enable = true;
+      gtk.cursorTheme = (theme.cursor // { size = theme.cursorSize; });
+      # de-deprecate catppuccin.gtk.enable 😁
+      gtk.theme = {
+        name = "adw-gtk3";
+        package = pkgs.adw-gtk3;
+      };
+      # hack noctalia theme to work with gtk4
+      gtk.gtk4.enable = false;
+      xdg.configFile = {
+        "gtk-4.0/gtk.css".text = "@import url('noctalia.css')";
+        "gtk-4.0/gtk-dark.css".text = "@import url('noctalia.css')";
+      };
 
-        # gtk.theme = theme.gtk;
-        # gtk.iconTheme = theme.icons;
-        qt.enable = true;
-        qt.style.name = "kvantum";
-        qt.platformTheme.name = "kvantum";
+      # gtk.theme = theme.gtk;
+      # gtk.iconTheme = theme.icons;
+      qt.enable = true;
+      qt.style.name = "kvantum";
+      qt.platformTheme.name = "kvantum";
 
-        # TODO: install browsers with nix on darwin, maybe with
-        programs.chromium = {
-          enable = true;
-          package = (config.lib.nixGL.wrap config.pkgsCompat.chromium);
-        };
+      # TODO: install browsers with nix on darwin, maybe with
+      programs.chromium = {
+        enable = true;
+        package = (config.lib.nixGL.wrap config.pkgsCompat.chromium);
+      };
 
-        xdg.mimeApps = {
-          enable = true;
-          defaultApplications =
-            let
-              browser = "firefox.desktop";
-              imageViewer = "gthumb.desktop";
-            in
-            {
-              "application/pdf" = "com.github.xournalpp.xournalpp.desktop";
-              "application/x-gzip" = "org.gnome.FileRoller.desktop";
-              "x-scheme-handler/http" = browser;
-              "text/html" = browser;
-              "application/xhtml+xml" = browser;
-              "x-scheme-handler/https" = browser;
-              "x-scheme-handler/mailto" = "thunderbird.desktop";
-              "image/png" = imageViewer;
-              "image/jpeg" = imageViewer;
-              "inode/directory" = "org.gnome.Nautilus.desktop";
+      xdg.mimeApps = {
+        enable = true;
+        defaultApplications =
+          let
+            browser = "firefox.desktop";
+            imageViewer = "gthumb.desktop";
+          in
+          {
+            "application/pdf" = "com.github.xournalpp.xournalpp.desktop";
+            "application/x-gzip" = "org.gnome.FileRoller.desktop";
+            "x-scheme-handler/http" = browser;
+            "text/html" = browser;
+            "application/xhtml+xml" = browser;
+            "x-scheme-handler/https" = browser;
+            "x-scheme-handler/mailto" = "thunderbird.desktop";
+            "x-scheme-handler/native-access" = "Native Access.desktop";
+            "image/png" = imageViewer;
+            "image/jpeg" = imageViewer;
+            "inode/directory" = "org.gnome.Nautilus.desktop";
+            "application/vnd.microsoft.portable-executable" = "wine.desktop";
+          };
+        associations.added =
+          let
+            browsers = [
+              "firefox.desktop"
+              "chromium-browser.desktop"
+            ];
+            imageViewers = [
+              "org.gnome.eog.desktop"
+              "org.gnome.gThumb.desktop"
+            ];
+          in
+          {
+            "application/pdf" = [ "com.github.xournalpp.xournalpp.desktop" ];
+            "application/x-gzip" = [ "org.gnome.FileRoller.desktop" ];
+            "image/jpeg" = imageViewers;
+            "image/png" = imageViewers;
+            "x-scheme-handler/http" = browsers;
+            "text/html" = browsers;
+            "application/xhtml+xml" = browsers;
+            "x-scheme-handler/https" = browsers;
+          };
+      };
+
+      dconf = {
+        enable = true;
+        # Setup global GTK settings
+        settings =
+          let
+            fileChooserPrefs = {
+              # Sort folders first in nautilus
+              sort-directories-first = true;
             };
-          associations.added =
-            let
-              browsers = [
-                "firefox.desktop"
-                "chromium-browser.desktop"
-              ];
-              imageViewers = [
-                "org.gnome.eog.desktop"
-                "org.gnome.gThumb.desktop"
-              ];
-            in
-            {
-              "application/pdf" = [ "com.github.xournalpp.xournalpp.desktop" ];
-              "application/x-gzip" = [ "org.gnome.FileRoller.desktop" ];
-              "image/jpeg" = imageViewers;
-              "image/png" = imageViewers;
-              "x-scheme-handler/http" = browsers;
-              "text/html" = browsers;
-              "application/xhtml+xml" = browsers;
-              "x-scheme-handler/https" = browsers;
+          in
+          {
+            # Don't show a warning when opening dconf-editor
+            "ca/desrt/dconf-editor" = {
+              show-warning = false;
             };
-        };
-
-        dconf = {
-          enable = true;
-          # Setup global GTK settings
-          settings =
-            let
-              fileChooserPrefs = {
-                # Sort folders first in nautilus
-                sort-directories-first = true;
-              };
-            in
-            {
-              # Don't show a warning when opening dconf-editor
-              "ca/desrt/dconf-editor" = {
-                show-warning = false;
-              };
-              "org/gnome/desktop/interface" = {
-                color-scheme = "prefer-dark";
-              };
-              "org/gnome/nautilus/preferences" = {
-                # Show image thumbnails for remote file storage
-                show-image-thumbnails = "always";
-              };
-              "org/gtk/settings/debug" = {
-                enable-inspector-keybinding = true;
-              };
-              "org/gtk/settings/file-chooser" = fileChooserPrefs;
-              "org/gtk/gtk4/settings/file-chooser" = fileChooserPrefs;
-              "org/gnome/desktop/interface" = {
-                font-name = "${theme.uiFont.name} ${builtins.toString theme.uiFont.size}";
-              };
+            "org/gnome/desktop/interface" = {
+              color-scheme = "prefer-dark";
             };
-        };
+            "org/gnome/nautilus/preferences" = {
+              # Show image thumbnails for remote file storage
+              show-image-thumbnails = "always";
+            };
+            "org/gtk/settings/debug" = {
+              enable-inspector-keybinding = true;
+            };
+            "org/gtk/settings/file-chooser" = fileChooserPrefs;
+            "org/gtk/gtk4/settings/file-chooser" = fileChooserPrefs;
+            "org/gnome/desktop/interface" = {
+              font-name = "${theme.uiFont.name} ${builtins.toString theme.uiFont.size}";
+            };
+          };
       };
     };
 }

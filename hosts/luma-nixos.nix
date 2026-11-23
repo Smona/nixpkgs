@@ -6,6 +6,8 @@
   den.hosts.x86_64-linux.luma-nixos = {
     users.smona = { };
     wsl.enable = true;
+    # WSLG is set up here
+    isGraphical = true;
   };
 
   den.aspects.luma-nixos.nixos =

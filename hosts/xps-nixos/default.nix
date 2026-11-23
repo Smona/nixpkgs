@@ -7,6 +7,9 @@
 {
   den.hosts.x86_64-linux.xps-nixos = {
     users.smona = { };
+    desktop = {
+      compositor = "niri";
+    };
   };
 
   den.aspects.xps-nixos.includes = [

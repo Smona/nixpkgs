@@ -21,6 +21,7 @@
           isLinux = pkgs.stdenv.hostPlatform.isLinux;
         in
         {
+          enable = true;
           # Linux: I like the old default, since the .mozilla directory has to exist anyways
           # it's nice to have one less folder.
           # Darwin: The path must not conflict with the default Firefox install directory due to new
