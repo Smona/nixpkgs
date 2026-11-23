@@ -29,14 +29,13 @@
       # apps
       vicinae
       emacs
+      _1password
 
       # peripherals
       keychron
       zsa
       lilnasx
       embedded-dev
-
-      (den.batteries.unfree [ "1password" ])
     ];
 
     # Home Manager configuration shared between Linux & Darwin.
@@ -109,10 +108,6 @@
         pciutils
       ];
 
-      # Set up the 1password SSH agent
-      # TODO: fix
-      # programs.ssh.extraConfig = "IdentityAgent ~/.1password/agent.sock";
-
       # Services
       services.keybase.enable = true;
 
@@ -139,11 +134,6 @@
           colima
           vlc-bin
         ];
-
-        # Set up the 1password SSH agent
-        programs.ssh.extraConfig = ''
-          IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-        '';
 
         # You should not change this value, even if you update Home Manager. If you do
         # want to update the value, then make sure to first check the Home Manager
@@ -315,11 +305,6 @@
           #   enable = true;
           #   enableSSHSupport = true;
           # };
-
-          programs._1password-gui = {
-            enable = true;
-            polkitPolicyOwners = [ config.smona.username ];
-          };
 
           programs.kdeconnect.enable = true;
 

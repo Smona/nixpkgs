@@ -78,11 +78,6 @@
       theme = import ../../theme.nix { inherit pkgs; };
     in
     {
-      options._1passwordBinary = lib.mkOption {
-        type = lib.types.str;
-        default = "/usr/bin/env 1password";
-      };
-
       config = lib.mkIf config.graphical {
         home.sessionVariables = {
           # Automatically set ozone platform flags in all the places where it matters
@@ -146,36 +141,6 @@
           enable = true;
           package = (config.lib.nixGL.wrap config.pkgsCompat.chromium);
         };
-
-        # 1password has to be installed at the system level to integrate with polkit
-        # and support system authentication / ssh agent / browser extension integration.
-        systemd.user.services."1password" = {
-          Unit.Description = "1password manager GUI application.";
-          Install.WantedBy = [
-            "graphical-session.target"
-            "hyprland-session.target"
-            "sway-session.target"
-          ];
-          Service = {
-            ExecStart = "${config._1passwordBinary} --silent";
-            Restart = "on-failure";
-            RestartSec = 2;
-          };
-        };
-        # TODO: get this working on darwin
-        # FIXME: this is breaking 1password settings currently
-        # xdg.configFile."1password-settings" = {
-        #   target = "1Password/settings/settings.json";
-        #   text = ''
-        #     {
-        #       "app.double": false,
-        #       "security.authenticatedUnlock.enabled": true,
-        #       "sshAgent.enabled": true,
-        #       "sshAgent.storeKeyTitles": true,
-        #       "sshAgent.sshAuthorizatonModel": "application"
-        #     }
-        #   '';
-        # };
 
         xdg.mimeApps = {
           enable = true;

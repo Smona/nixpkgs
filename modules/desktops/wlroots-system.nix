@@ -22,8 +22,6 @@
         environment.sessionVariables = {
           # Force electron apps to run in wayland natively. This is required for
           # them to display on scaled monitors without getting blurry.
-          # NB: This breaks copying from the 1password app. It should still work
-          # in the browser.
           ELECTRON_OZONE_PLATFORM_HINT = "wayland";
         };
 

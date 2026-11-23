@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  den.hosts.aarch64-darwin.Mels-Macbook-Air.users.mel = { }; 
+  den.hosts.aarch64-darwin.Mels-Macbook-Air.users.mel = { };
 
   den.aspects.Mels-Macbook-Air.darwin =
     {
@@ -178,7 +178,6 @@
           "caffeine"
           "chromium"
           "floorp"
-          "1password"
           "middleclick"
           "keybase"
           "steam"
