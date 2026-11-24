@@ -1,8 +1,11 @@
 { ... }:
 {
+  den.aspects.sway.nixos = {
+    programs.sway.enable = true;
+  };
+
   den.aspects.sway.hmLinux =
     {
-      host,
       config,
       lib,
       pkgs,
@@ -38,115 +41,113 @@
         '';
     in
     {
-      config = lib.mkIf (host.desktop.compositor == "sway") {
-        smona.wlroots = {
-          screenOnCommand = ''${pkgs.sway}/bin/swaymsg "output * dpms on"'';
-          screenOffCommand = ''${pkgs.sway}/bin/swaymsg "output * dpms off"'';
-        };
+      smona.wlroots = {
+        screenOnCommand = ''${pkgs.sway}/bin/swaymsg "output * dpms on"'';
+        screenOffCommand = ''${pkgs.sway}/bin/swaymsg "output * dpms off"'';
+      };
 
-        wayland.windowManager.sway = {
-          enable = true;
-          config = {
-            terminal = "kitty";
-            # Let's let waybar handle the bars...
-            bars = [ ];
-            colors = {
-              focused = {
-                background = "#285577";
-                border = "#8130d988";
-                childBorder = "#8130d988";
-                indicator = "#2e9ef4";
-                text = "#ffffff";
-              };
+      wayland.windowManager.sway = {
+        enable = true;
+        config = {
+          terminal = "kitty";
+          # Let's let waybar handle the bars...
+          bars = [ ];
+          colors = {
+            focused = {
+              background = "#285577";
+              border = "#8130d988";
+              childBorder = "#8130d988";
+              indicator = "#2e9ef4";
+              text = "#ffffff";
             };
-            gaps = {
-              # Doubling inner gaps gives windows the same space on each side
-              inner = 10;
-              outer = 5;
-              smartBorders = "on";
-            };
-            input = {
-              "*" = {
-                natural_scroll = "enabled";
-              };
-              "type:keyboard" = {
-                xkb_layout = "us(dvorak),us";
-                xkb_options = builtins.concatStringsSep "," commonOptions.xkbOptions;
-              };
-              "type:pointer" = {
-                pointer_accel = "0.8";
-              };
-              "type:touchpad" = {
-                tap = "enabled";
-                click_method = "clickfinger";
-                drag = "enabled";
-                accel_profile = "adaptive";
-                pointer_accel = "0.4";
-              };
-            };
-            focus = {
-              # move the mouse to the center of windows when changing focus
-              mouseWarping = "container";
-              # allow windows to steal focus and switch to their workspace
-              newWindow = "focus";
-            };
-            startup = [
-              { command = "${dbus-sway-environment}"; }
-              { command = "${configure-gtk}"; }
-              {
-                # Enable dynamic tiling
-                command = "${pkgs.autotiling}/bin/autotiling";
-                always = true;
-              }
-            ]
-            ++ (builtins.map (cmd: { command = cmd; }) commonOptions.execStart)
-            ++ (builtins.map (cmd: {
-              command = cmd;
-              always = true;
-            }) commonOptions.execAlways);
-
-            modifier = "Mod4";
-            keybindings =
-              let
-                modifier = config.wayland.windowManager.sway.config.modifier;
-                secondaryMod = "Mod1";
-              in
-              lib.mkOptionDefault (
-                {
-                  # Allow org-mode to use this hotkey
-                  "${modifier}+Return" = null;
-                  Print = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot --notify savecopy area";
-                  # "${secondarymod}+h" = "workspace prev";
-                  # "${secondaryMod}+l" = "workspace next";
-                }
-                // (builtins.listToAttrs (
-                  builtins.map (hk: {
-                    name = (
-                      builtins.concatStringsSep "+" (
-                        (lib.lists.optional hk.ctrl or false "Ctrl")
-                        ++ (lib.lists.optional hk.shift or false "Shift")
-                        ++ (lib.lists.optional hk.primaryMod or false modifier)
-                        ++ (lib.lists.optional hk.secondaryMod or false secondaryMod)
-                        ++ [ hk.key ]
-                      )
-                    );
-                    value = "exec ${builtins.concatStringsSep " " hk.command}";
-                  }) commonOptions.keyBinds
-                ))
-              );
           };
-          extraConfig = ''
-            ################
-            # Window rules #
-            ################
+          gaps = {
+            # Doubling inner gaps gives windows the same space on each side
+            inner = 10;
+            outer = 5;
+            smartBorders = "on";
+          };
+          input = {
+            "*" = {
+              natural_scroll = "enabled";
+            };
+            "type:keyboard" = {
+              xkb_layout = "us(dvorak),us";
+              xkb_options = builtins.concatStringsSep "," commonOptions.xkbOptions;
+            };
+            "type:pointer" = {
+              pointer_accel = "0.8";
+            };
+            "type:touchpad" = {
+              tap = "enabled";
+              click_method = "clickfinger";
+              drag = "enabled";
+              accel_profile = "adaptive";
+              pointer_accel = "0.4";
+            };
+          };
+          focus = {
+            # move the mouse to the center of windows when changing focus
+            mouseWarping = "container";
+            # allow windows to steal focus and switch to their workspace
+            newWindow = "focus";
+          };
+          startup = [
+            { command = "${dbus-sway-environment}"; }
+            { command = "${configure-gtk}"; }
+            {
+              # Enable dynamic tiling
+              command = "${pkgs.autotiling}/bin/autotiling";
+              always = true;
+            }
+          ]
+          ++ (builtins.map (cmd: { command = cmd; }) commonOptions.execStart)
+          ++ (builtins.map (cmd: {
+            command = cmd;
+            always = true;
+          }) commonOptions.execAlways);
 
-            # Firefox PIP floating window
-            for_window [title="^Picture-in-Picture$"] floating enable, sticky enable, move position 72 ppt 74 ppt, resize set 27 ppt 25 ppt
-
-            output HDMI-A-2 pos 3840 0 transform 270
-            output HDMI-A-1 pos 3840 0 transform 270
-          '';
+          modifier = "Mod4";
+          keybindings =
+            let
+              modifier = config.wayland.windowManager.sway.config.modifier;
+              secondaryMod = "Mod1";
+            in
+            lib.mkOptionDefault (
+              {
+                # Allow org-mode to use this hotkey
+                "${modifier}+Return" = null;
+                Print = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot --notify savecopy area";
+                # "${secondarymod}+h" = "workspace prev";
+                # "${secondaryMod}+l" = "workspace next";
+              }
+              // (builtins.listToAttrs (
+                builtins.map (hk: {
+                  name = (
+                    builtins.concatStringsSep "+" (
+                      (lib.lists.optional hk.ctrl or false "Ctrl")
+                      ++ (lib.lists.optional hk.shift or false "Shift")
+                      ++ (lib.lists.optional hk.primaryMod or false modifier)
+                      ++ (lib.lists.optional hk.secondaryMod or false secondaryMod)
+                      ++ [ hk.key ]
+                    )
+                  );
+                  value = "exec ${builtins.concatStringsSep " " hk.command}";
+                }) commonOptions.keyBinds
+              ))
+            );
         };
+        extraConfig = ''
+          ################
+          # Window rules #
+          ################
+
+          # Firefox PIP floating window
+          for_window [title="^Picture-in-Picture$"] floating enable, sticky enable, move position 72 ppt 74 ppt, resize set 27 ppt 25 ppt
+
+          output HDMI-A-2 pos 3840 0 transform 270
+          output HDMI-A-1 pos 3840 0 transform 270
+        '';
       };
     };
 }

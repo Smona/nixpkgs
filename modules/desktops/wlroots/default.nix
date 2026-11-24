@@ -1,12 +1,6 @@
 { den, inputs, ... }: {
   den.aspects.wlroots = {
-    includes = with den.aspects; [
-      niri
-      hyprland
-      sway
-
-      waybar
-    ];
+    includes = with den.aspects; [ waybar ];
 
     hmLinux =
       {
