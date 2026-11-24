@@ -138,6 +138,11 @@
         vlc-bin
       ];
 
+      # Copy nix-installed applications to the Applications directory rather than linking them,
+      # since this apparently works more reliably
+      targets.darwin.copyApps.enable = true;
+      targets.darwin.linkApps.enable = false;
+
       # You should not change this value, even if you update Home Manager. If you do
       # want to update the value, then make sure to first check the Home Manager
       # release notes.
