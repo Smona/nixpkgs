@@ -166,9 +166,6 @@
           trusted = true;
         }) (builtins.attrNames config.nix-homebrew.taps);
 
-        # Stop being annoyed by Apple "protecting" me
-        caskArgs.no_quarantine = true;
-
         casks = [
           "caffeine"
           "chromium"
