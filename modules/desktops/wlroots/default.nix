@@ -1,8 +1,23 @@
-# Shared configs included by all wlroots compositors (Hyprland, Niri, Sway)
+# Shared configs included by all wlroots compositors (Hyprland, Niri, Sway),
+# including desktop shell selection.
 
-{ den, inputs, ... }: {
-  den.aspects.wlroots = {
-    includes = with den.aspects; [ waybar ];
+{
+  den,
+  inputs,
+  lib,
+  ...
+}:
+{
+  den.aspects.wlroots = { host, ... }: {
+    includes =
+      with den.aspects;
+      (
+        [ waybar ]
+        # Desktop shells are only relevant for wlroots compositors since gnome
+        # provides its own.
+        ++ (lib.lists.optional (host.desktop.shell == "noctalia") noctalia)
+        ++ (lib.lists.optional (host.desktop.shell == "custom") custom-shell)
+      );
 
     hmLinux =
       {
