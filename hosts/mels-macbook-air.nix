@@ -174,7 +174,6 @@
           "keybase"
           "steam"
           "proxy-audio-device" # enable using system volume controls w/ external audio interfaces
-          "raycast"
           "dozer"
           # API clients for work
           "insomnia"
