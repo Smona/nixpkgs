@@ -169,7 +169,6 @@
         casks = [
           "caffeine"
           "chromium"
-          "floorp"
           "middleclick"
           "keybase"
           "steam"
