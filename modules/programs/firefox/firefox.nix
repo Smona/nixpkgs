@@ -1,29 +1,12 @@
 { ... }: {
-  den.aspects.firefox.homeManager =
-    { config, pkgs, ... }:
-    {
-      # This requires declarative extensions, and i already found a theme i like.
-      catppuccin.firefox.enable = false;
-      programs.firefox =
-        let
-          appDataDir = "Library/Application Support/org.nixos.firefox";
-          isLinux = pkgs.stdenv.hostPlatform.isLinux;
-        in
-        {
+  den.aspects.firefox = {
+    homeManager =
+      { config, pkgs, ... }:
+      {
+        # This requires declarative extensions, and i already found a theme i like.
+        catppuccin.firefox.enable = false;
+        programs.firefox = {
           enable = true;
-          # Linux: I like the old default, since the .mozilla directory has to exist anyways
-          # it's nice to have one less folder.
-          # Darwin: The path must not conflict with the default Firefox install directory due to new
-          # security restrictions in MacOS Golden Gate.
-          configPath = if isLinux then ".mozilla/firefox" else appDataDir;
-          package =
-            if isLinux then
-              (config.lib.nixGL.wrap config.pkgsCompat.firefox)
-            else
-              config.pkgsCompat.firefox.override {
-                appDataDir = "${config.home.homeDirectory}/${appDataDir}";
-              };
-          nativeMessagingHosts = if isLinux then [ pkgs.fx-cast-bridge ] else [ ];
           profiles = {
             Smona = {
               settings = {
@@ -124,18 +107,64 @@
             };
           };
         };
+      };
+
+    hmDarwin = { config, ... }: {
+      programs.firefox = {
+        # The path must not conflict with the default Firefox install directory due to new
+        # security restrictions in MacOS Golden Gate.
+        configPath = "Library/Application Support/org.nixos.firefox";
+        # Installed with homebrew on darwin, see below
+        package = null;
+        # Declarative nativeMessagingHosts seem to require the wrapper, which breaks
+        # application signing.
+        nativeMessagingHosts = [ ];
+      };
+
+      # Point homebrew firefox at nix-managed profiles directory
+      launchd.agents.firefox-env = {
+        enable = true;
+        config = {
+          ProgramArguments = [
+            "/bin/sh"
+            "-c"
+            ''
+              /bin/launchctl setenv MOZ_APP_DATA "${config.home.homeDirectory}/${config.programs.firefox.configPath}"
+              /bin/launchctl setenv MOZ_LEGACY_PROFILES 1
+            ''
+          ];
+          RunAtLoad = true;
+        };
+      };
     };
 
-  den.aspects.firefox.hmLinux = {
-    smona.wlroots = {
-      execStart = [ "firefox" ];
-      keyBinds = [
-        {
-          primaryMod = true;
-          key = "b";
-          command = [ "firefox" ];
-        }
-      ];
+    darwin = {
+      # Firefox must be installed via homebrew on Darwin so that the binary is properly
+      # signed and 1password desktop will allow us to integrate with it.
+      homebrew.casks = [ "firefox" ];
+      # Pin to dock
+      system.defaults.dock.persistent-apps = [ "/Applications/Firefox.app" ];
+    };
+
+    hmLinux = { pkgs, config, ... }: {
+      programs.firefox = {
+        # I like the old default, since the .mozilla directory has to exist anyways
+        # it's nice to have one less folder.
+        configPath = ".mozilla/firefox";
+        package = (config.lib.nixGL.wrap config.pkgsCompat.firefox);
+        nativeMessagingHosts = [ pkgs.fx-cast-bridge ];
+      };
+
+      smona.wlroots = {
+        execStart = [ "firefox" ];
+        keyBinds = [
+          {
+            primaryMod = true;
+            key = "b";
+            command = [ "firefox" ];
+          }
+        ];
+      };
     };
   };
 }

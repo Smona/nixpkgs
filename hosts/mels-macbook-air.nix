@@ -100,10 +100,8 @@
           persistent-apps =
             let
               thunderbirdPackage = config.home-manager.users.${user.userName}.programs.thunderbird.package;
-              firefoxPackage = config.home-manager.users.${user.userName}.programs.firefox.package;
             in
             [
-              "${firefoxPackage}/Applications/Firefox.app"
               "${thunderbirdPackage}/Applications/Thunderbird.app"
               "${pkgs.slack}/Applications/Slack.app"
               "${pkgs.kitty}/Applications/kitty.app"
