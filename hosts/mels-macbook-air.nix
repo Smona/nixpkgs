@@ -106,7 +106,6 @@
               "${pkgs.slack}/Applications/Slack.app"
               "${pkgs.kitty}/Applications/kitty.app"
               "${pkgs.music-assistant-desktop}/Applications/Music Assistant.app"
-              "/opt/homebrew/opt/emacs-plus/Emacs.app"
             ];
         };
 

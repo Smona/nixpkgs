@@ -112,29 +112,45 @@
   };
 
   # Emacs is installed from homebrew on Darwin.
-  den.aspects.emacs.darwin = { ... }: {
-    nix-homebrew.taps = {
-      "d12frosted/homebrew-emacs-plus" = inputs.homebrew-emacs-plus;
-    };
+  den.aspects.emacs.darwin =
+    { ... }:
+    let
+      formulaName = "emacs-plus@31";
+    in
+    {
+      nix-homebrew.taps = {
+        "d12frosted/homebrew-emacs-plus" = inputs.homebrew-emacs-plus;
+      };
 
-    homebrew.brews = [
-      "gcc" # Implicit dependency of emacs-plus --with-native-comp
-      {
-        # TODO: emacs has to be manually aliased to /Applications for now:
-        # osascript -e 'tell application "Finder" to make alias file to posix file "/opt/homebrew/opt/emacs-plus@29/Emacs.app" at POSIX file "/Applications"'
-        name = "emacs-plus@31";
-        args = [
-          "with-xwidgets"
-          "with-imagemagick"
-          "with-native-comp"
-          "with-poll"
-          "with-modern-doom3-icon"
-        ];
-      }
-      # Emacs dependencies that aren't getting referenced by emacs-plus
-      "gnupg"
-      "cmake" # Needed to compile vterm
-      "libtool" # Needed to compile vterm
-    ];
-  };
+      homebrew.brews = [
+        "gcc" # Implicit dependency of emacs-plus --with-native-comp
+        {
+          name = formulaName;
+          args = [
+            "with-xwidgets"
+            "with-imagemagick"
+            # "with-modern-doom3-icon"
+          ];
+        }
+        # Emacs dependencies that aren't getting referenced by emacs-plus
+        "gnupg"
+        "cmake" # Needed to compile vterm
+        "libtool" # Needed to compile vterm
+      ];
+
+      # In order for Spotlight & Vicinae to find Emacs, it has to be copied to the /Applications dir.
+      system.activationScripts.postActivation.text = ''
+        src="/opt/homebrew/opt/${formulaName}/Emacs.app"
+        if [ -d "$src" ]; then
+          echo "syncing Emacs.app to /Applications..." >&2
+          /usr/bin/rsync -a --delete "$src/" /Applications/Emacs.app/
+        else
+          echo "Could not find homebrew Emacs.app to sync to /Applications"
+          exit 1
+        fi
+      '';
+
+      # Pin to dock
+      system.defaults.dock.persistent-apps = [ "/Applications/Emacs.app" ];
+    };
 }
