@@ -3,7 +3,10 @@
 { den, ... }:
 {
   den.aspects.custom-shell = {
-    includes = [ den.aspects.eww ];
+    includes = with den.aspects; [
+      eww
+      waybar
+    ];
 
     hmLinux =
       {
@@ -58,7 +61,6 @@
         };
 
         # smona.eww.enable = true;
-        smona.waybar.enable = true;
 
         services.swaync = {
           enable = true;

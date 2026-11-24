@@ -11,13 +11,10 @@
   den.aspects.wlroots = { host, ... }: {
     includes =
       with den.aspects;
-      (
-        [ waybar ]
-        # Desktop shells are only relevant for wlroots compositors since gnome
-        # provides its own.
-        ++ (lib.lists.optional (host.desktop.shell == "noctalia") noctalia)
-        ++ (lib.lists.optional (host.desktop.shell == "custom") custom-shell)
-      );
+      # Desktop shells are only relevant for wlroots compositors since gnome
+      # provides its own.
+      (lib.lists.optional (host.desktop.shell == "noctalia") noctalia)
+      ++ (lib.lists.optional (host.desktop.shell == "custom") custom-shell);
 
     hmLinux =
       {

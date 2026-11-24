@@ -9,16 +9,11 @@
       }:
 
       let
-        cfg = config.smona.waybar;
         cmd = import ./_system-commands { inherit pkgs; };
         waybar = pkgs.waybar.override { withMediaPlayer = true; };
       in
       {
-        options.smona.waybar = {
-          enable = lib.mkEnableOption "waybar status bar";
-        };
-
-        config = lib.mkIf cfg.enable {
+        config = {
           programs.waybar = {
             enable = true;
             systemd = {
