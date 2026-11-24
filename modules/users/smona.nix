@@ -195,11 +195,6 @@
             variant = "dvorak";
           };
 
-          # Enable the GNOME Desktop Environment.
-          # TODO: ensure that gnome is not enabled at the same time as wlroots.
-          # This should probably just be an enum configuration option to guarantee that.
-          # services.xserver.desktopManager.gnome.enable = true;
-
           # Configure console keymap
           console.keyMap = "dvorak";
 
