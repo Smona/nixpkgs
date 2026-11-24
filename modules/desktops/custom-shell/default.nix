@@ -4,7 +4,7 @@
 {
   den.aspects.custom-shell = {
     includes = with den.aspects; [
-      eww
+      # eww
       waybar
     ];
 
@@ -59,8 +59,6 @@
         programs.wlogout = {
           enable = true;
         };
-
-        # smona.eww.enable = true;
 
         services.swaync = {
           enable = true;
