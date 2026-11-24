@@ -155,7 +155,7 @@
         onActivation = {
           # TODO: errors from homebrew on uninstall, programs aren't actually cleaned up.
           # This can likely be fixed by using nixpkgs emacs
-          cleanup = "uninstall";
+          # cleanup = "uninstall";
           autoUpdate = true;
           upgrade = true;
         };
