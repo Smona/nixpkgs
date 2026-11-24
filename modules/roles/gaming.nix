@@ -24,6 +24,8 @@
         };
       };
 
+    darwin.homebrew.casks = [ "steam" ];
+
     homeManager =
       {
         pkgs,

@@ -171,7 +171,6 @@
           "chromium"
           "middleclick"
           "keybase"
-          "steam"
           "proxy-audio-device" # enable using system volume controls w/ external audio interfaces
           "dozer"
           # API clients for work
