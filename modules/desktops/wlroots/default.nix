@@ -1,4 +1,4 @@
-# Shared configs for all wlroots compositors (Hyprland, Niri, Sway)
+# Shared configs included by all wlroots compositors (Hyprland, Niri, Sway)
 
 { den, inputs, ... }: {
   den.aspects.wlroots = {
@@ -6,7 +6,6 @@
 
     hmLinux =
       {
-        host,
         config,
         lib,
         pkgs,
@@ -17,11 +16,6 @@
         cmd = import ./_system-commands { inherit pkgs inputs; };
         commonOptions = import ./_common.nix { inherit pkgs inputs config; };
         cfg = config.smona.wlroots;
-        inWlroots = builtins.elem host.desktop.compositor [
-          "hyprland"
-          "niri"
-          "sway"
-        ];
       in
       {
         imports = [ inputs.wayland-pipewire-idle-inhibit.homeModules.default ];
@@ -83,7 +77,7 @@
           };
         };
 
-        config = lib.mkIf inWlroots {
+        config = {
           home.packages = with pkgs; [
             inotify-tools
             wofi
@@ -148,22 +142,13 @@
 
     nixos =
       {
-        host,
         config,
         lib,
         pkgs,
         ...
       }:
-
-      let
-        inWlroots = builtins.elem host.desktop.compositor [
-          "hyprland"
-          "niri"
-          "sway"
-        ];
-      in
       {
-        config = lib.mkIf inWlroots {
+        config = {
           environment.sessionVariables = {
             # Force electron apps to run in wayland natively. This is required for
             # them to display on scaled monitors without getting blurry.

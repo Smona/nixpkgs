@@ -1,5 +1,7 @@
-{ ... }:
+{ den, ... }:
 {
+  den.aspects.sway.includes = [ den.aspects.wlroots ];
+
   den.aspects.sway.nixos = {
     programs.sway.enable = true;
   };

@@ -1,4 +1,6 @@
-{ inputs, ... }: {
+{ den, inputs, ... }: {
+  den.aspects.niri.includes = [ den.aspects.wlroots ];
+
   den.aspects.niri.nixos = {
     programs.niri.enable = true;
   };

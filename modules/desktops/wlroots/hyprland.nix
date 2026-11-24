@@ -1,5 +1,7 @@
-{ inputs, ... }: {
+{ den, inputs, ... }: {
   den.aspects.hyprland = {
+    includes = [ den.aspects.wlroots ];
+
     nixos = {
       programs.hyprland.enable = true;
     };
